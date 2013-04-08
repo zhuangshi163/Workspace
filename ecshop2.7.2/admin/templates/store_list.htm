@@ -1,0 +1,77 @@
+<!-- $Id: store_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page} {include file="pageheader.htm"} {insert_scripts files="../js/utils.js,listtable.js"}
+
+<div class="list-div" id="listDiv">
+	{/if}
+
+	<table cellpadding="3" cellspacing="1">
+		<tr>
+			<th><a href="javascript:listTable.sort('store_id'); ">{$lang.store_id}</a>{$sort_store_id}
+			</th>
+			<th><a href="javascript:listTable.sort('store_name'); ">{$lang.store_name}</a>{$sort_store_name}</th>
+			<th>{$lang.store_note}</th>
+			<th>{$lang.call_goods}</th>
+			<th>{$lang.reg_time}</th>
+			<th><a href="javascript:listTable.sort('time_last'); ">{$lang.last_login_time}</a>{$sort_time_last}</th>
+			<th><a href="javascript:listTable.sort('ip_last'); ">{$lang.last_login_ip}</a>{$sort_ip_last}</th>
+			<th><a href="javascript:listTable.sort('visit_count'); ">{$lang.visit_count}</a>{$sort_visit_count}</th>
+			<th><a href="javascript:listTable.sort('restraint'); ">{$lang.restraint_use}</a>{$sort_restraint}</th>
+			<th>{$lang.handler}</th>
+		</tr>
+		{foreach from=$store_list item=store}
+		<tr>
+			<td>{$store.store_id}</td>
+			<td>{$store.store_name|escape:html}</td>
+			<td>{$store.store_remark|escape:html}</td>
+			<td align="center">{$store.store_cat|escape:html}</td>
+			<td align="center">{$store.time_reg}</td>
+			<td align="center">{$store.time_last}</td>
+			<td align="center">{$store.ip_last}</td>
+			<td align="center">{$store.visit_count}</td>
+			<td align="center"><img
+				src="images/{if $store.restraint}yes{else}no{/if}.gif"
+				onclick="listTable.toggle(this, 'toggle_store_restraint', {$store.store_id})" /></td>
+			<td align="center">
+				<!-- 
+        <a href="store.php?act=clerk&id={$store.store_id}">管理店员</a> |
+       --> <a href="store.php?act=edit&id={$store.store_id}"
+				title="{$lang.edit}">{$lang.edit}</a> | <a href="javascript:;"
+				onclick="listTable.remove({$store.store_id}, '{$lang.drop_confirm}')"
+				title="{$lang.remove}">{$lang.remove}</a>
+			</td>
+		</tr>
+		{foreachelse}
+		<tr>
+			<td class="no-records" colspan="10">{$lang.no_records}</td>
+		</tr>
+		{/foreach}
+	</table>
+	<table id="page-table" cellspacing="0">
+		<tr>
+			<td align="right" nowrap="true">{include file="page.htm"}</td>
+		</tr>
+	</table>
+
+	{if $full_page}
+</div>
+
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+      // 开始检查订单
+      startCheckOrder();
+  }
+  {/literal}
+  //-->
+</script>
+{include file="pagefooter.htm"} {/if}

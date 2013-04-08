@@ -1,0 +1,89 @@
+{include file="pageheader.html"}
+
+<!--
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<div class="main-div" style="height:300px">
+	<input type="hidden" value='check'  id='check'>
+	<input type="button" onclick='check()' value="{$lang.check}" id='button_check'>
+	<div id='suc' style='display:none'>{$lang.check_success}</div>
+	<form action="install.php" method="post" id="theForm" name="theForm" accept-charset='utf-8'>
+		<input type="hidden" value="right" name='right'>
+		<input type="submit"  value="{$lang.next}" id="next" style="display:none">
+		<input type="hidden" value="{$lang.continues}" id="continues" style="display:none">
+		<input type="hidden" value="{$lang.nowrite}" id="j_write" style="display:none">
+	<form>
+</div>
+-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<div class="list-div" >
+	<table>
+		<tr>
+			<th style="width:38%">{$lang.check_option}</th><th style="width:30%">{$lang.require_status}</th><th style="width:30%">{$lang.check_result}</th>
+		</tr>
+		<tr>
+			<td  style="padding:0px 10px;">{$lang.version}</td><td align="center">v2.7.2</td><td align="center">{$lang.$current_version_is_use}</td>
+		</tr>
+		<tr>
+			<td style="padding:0px 10px;">{$lang.plugins_is_write}</td><td align="center">{$lang.can_write}</td><td align="center">{$lang.$plugins_is_write}</td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center" style="padding:5px 0px;">
+				{if $is_continue eq 'yes'}
+				<form action="install.php" method="post" id="theForm" name="theForm" accept-charset='utf-8'>
+					<input type="hidden" value="right" name='right'>
+					<input type="submit"  value="{$lang.next}" id="next">
+				</form>
+				{else}
+					{$lang.check_not_ok}
+				{/if}
+			</td>
+		</tr>
+	</table>
+</div>
+
+{include file="pagefooter.html"}
+
+<!--
+{literal}
+<script type="text/javascript">
+function check()
+{
+	var name = $('#check').val();
+	$.get('check.php?name='+name,function(result){
+		result = eval("("+result+")");
+		if(result.error == 0)
+		{
+			$('#button_check').hide();
+			$('#next').show();
+			$('#suc').show();
+		}
+		else if(result.error == 2)
+		{
+			var nowrite = $('#j_write').val();
+			alert(nowrite);
+			return false;
+		}
+		else if(result.error == 1)
+		{
+			var continues = $('#continues').val();
+			var visible = confirm(continues);
+			if(visible == true)
+			{
+				document.theForm.submit();
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			alert('Please log in management after the background and try again!');
+			return false;
+		}
+	});
+}
+</script>
+{/literal}
+-->

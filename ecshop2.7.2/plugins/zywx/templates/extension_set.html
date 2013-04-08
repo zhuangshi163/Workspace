@@ -1,0 +1,32 @@
+<!-- $Id: extension_set.html 15409 2012-1-13 09:33:22Z lilixing $ -->
+
+{include file="pageheader.html"}
+
+<div class="main-div">
+	<form action="index.php" method="post" name="theForm">
+	<div style="padding-top:20px;">
+		<div class="app_box">
+			<div class="radio_t">
+			 <div class="r_title">
+					<b style="color:#000">{$lang.open_right_corner}</b>
+					<span>({$lang.extensionDescription})</span>
+			</div>
+			 <div style="margin-top:5px;">
+				<input type="radio"  name="silent" value="1"  id="silent"       {if $ad_flag == 1}checked="checked"{/if}  /><label for="silent">{$lang.radio_yes}</label>
+				<input type="radio"  name="silent" value="0"  id="no_silent" {if $ad_flag == 0}checked="checked"{/if} /><label for="no_silent">{$lang.radio_no}</label>
+				</div>
+		  </div>
+		</div>
+		<div style="width:630px; margin:10px auto 0px; line-height:25px; padding-left:20px; color:#8f8f8f;">{$lang.set_tips}</div>
+		<input type='hidden' id='copyright'   value='{$lang.copyright}'>
+		<input type='hidden' id='fire_catch' value='{$lang.fire_catch}'>
+		<input type="hidden" name="act" value="extension_set_update" />
+		<input type="submit" class="next_btn" style="margin:30px auto 20px;border:0px;"  value="{$lang.button_submit}" />
+	</div>
+	</form>
+</div>
+
+<div style="border:1px solid rgb(204, 0, 0);margin-top:10px;padding:4px;background-color:rgb(255, 255, 206);color:rgb(206, 0, 0);display:none;"></div>
+<div id='copyerror' value='{$lang.copyerror}'style="display:none;"></div>
+
+{include file="pagefooter.html"}

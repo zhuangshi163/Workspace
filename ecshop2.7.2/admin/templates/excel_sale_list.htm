@@ -1,0 +1,70 @@
+<table style="width:100%;" border="1" cellspacing="1" cellpadding="1">
+	<tr>
+		<td colspan="{if $is_suppliers_admin eq 0}12{else}11{/if}" align="center">
+			<h1 align='center'><b>{$lang.sales_list}</b></h1>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="{if $is_suppliers_admin eq 0}12{else}11{/if}" align="left">
+			<div>
+				<h5>
+					<b>时间段: {$start_date}{$lang.to}{$end_date}</b>
+				</h5>
+			</div>
+		</td>
+	</tr>
+	<tr align="center" bgcolor="#eeeeee">
+		<td><b>商品货号</b></td>
+		<td><b>商品名称</b></td>
+		<td><b>商品分类</b></td>
+		<!-- {if $is_suppliers_admin eq 0} -->
+		<td><b>供货商</b></td>
+		<!-- {/if} -->
+		<td><b>门店</b></td>
+		<td><b>规格</b></td>
+		<td><b>库存量</b></td>
+		<td><b>批发价</b></td>
+		<td><b>零售价</b></td>
+		<td><b>数量</b></td>
+		<td><b>批发价小结</b></td>
+		<td><b>零售价小结</b></td>
+	</tr>
+	<!-- {foreach from=$goods_sales_list item=goods} -->
+	<tr>
+		<td>{$goods.goods_sn}</td>
+		<td>{$goods.goods_name}</td>
+		<td align="center">{$goods.cat_name}</td>
+		<!-- {if $is_suppliers_admin eq 0} -->
+		<td align="center">{$goods.suppliers_name}</td>
+		<!-- {/if} -->
+        <td align="center">{$goods.store_remark}</td>
+		<td align="right">{$goods.goods_specification}</td>
+		<td align="center">{$goods.goods_number}</td>
+		<td align="right">{$goods.wholesale_price}</td>
+		<td align="right">{$goods.sale_price}</td>
+		<td align="right">{$goods.goods_num}</td>
+		<td align="right">{$goods.wholesale_turnover}</td>
+		<td align="right">{$goods.turnover}</td>
+	</tr>
+	<!-- {/foreach} -->
+	<tr bgcolor="#eeeeee">
+		<td colspan="{if $is_suppliers_admin eq 0}9{else}8{/if}">
+			<div align="right"><strong>合计:</strong></div>
+		</td>
+		<td>
+			<div align="right">
+				<b style="color:#F00">{$total_number}</b>
+			</div>
+		</td>
+    	<td>
+    		<div align="right">
+    			<b style="color:#F00">{$total_wholesale_price}</b>
+    		</div>
+    	</td>
+		<td>
+			<div align="right">
+				<b style="color:#F00">{$total_price}</b>
+			</div>
+		</td>
+	</tr>
+</table>

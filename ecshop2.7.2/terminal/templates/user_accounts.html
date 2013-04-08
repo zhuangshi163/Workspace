@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>商品总页</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">	
+		.pagebox_total{
+		 background-image: url("img/user_account.gif");
+		}
+	.pagebox {
+      clear: none;
+      height: 87px;
+      margin: 100px 0 0 70px;
+      width: 824px;
+}
+   .pagebox img, .pagebox div {
+      display: block;
+      float: left;
+      height: 83px;
+      margin: 0 0 0 30px;
+      width: 130px;
+}
+.carttable{float: none;}
+.cartbox{height:1000px;}
+</style>
+
+</head>
+<body>
+<div class="head">
+</div>
+
+<div class="mainline"></div>
+<div class="cartbox" id='cartbox'>
+
+	<table cellspacing="0" cellpadding="0" class="carttable">
+	<tr>
+		<th width="120">{$lang.process_time}</th>
+		<th width="140">{$lang.surplus_pro_type}</th>
+		<th width="140">{$lang.money}</th>
+		<th width="120">{$lang.process_notic}</th>
+		<th align="center">{$lang.admin_notic}</th>
+		<th align="center">{$lang.is_paid}</th>
+	</tr>
+       <!--{foreach from=$account_log item=item}-->
+	<tr align="center">
+		<td>{$item.add_time}</td>
+		<td>{$item.type}</td>
+		<td>{$item.amount}</td>
+		<td>{$item.short_user_note}</td>
+		<td>{$item.short_admin_note}</td>
+		<td>{$item.pay_status}</td>
+	</tr>
+	<!-- {/foreach} -->
+	</table>
+    <div class="pagebox_total">{$surplus_amount}</div>
+    
+    <div id="pageBox" class="pagebox">
+		{if $pager.page>1}<a href="shop_user.php?act=get_accounts&card_no={$card_no}&page=1"><img src="images/page_one.gif"/></a>{else}<img src="img/page_one.gif"/>{/if}
+		{if $pager.page_prev neq ""}<a href="shop_user.php?act=get_accounts&card_no={$card_no}&page={$pager.pre}"><img src="images/page_before.gif"/></a>{else}<img src="img/page_before.gif"/>{/if}
+        <div>{$pager.page} / {$pager.page_count}</div>
+		{if $pager.page_next neq ""}<a href="shop_user.php?act=get_accounts&card_no={$card_no}&page={$pager.next}"><img src="img/page_after.gif"/></a>{else}<img src="img/page_after.gif"/>{/if}
+		{if $pager.page!=$pager.page_count}<a href="shop_user.php?act=get_accounts&card_no={$card_no}&page={$pager.page_count}"><img src="images/page_end.gif"/></a>{else}<img src="img/page_end.gif"/>{/if}
+</div>
+    
+</div>
+</body>
+</html>

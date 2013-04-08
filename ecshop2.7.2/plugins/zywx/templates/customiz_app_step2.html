@@ -1,0 +1,169 @@
+<!-- $Id: customiz_app_step2.html 15409 2012-1-17 11:20:00Z lilixing $ -->
+
+{include file="pageheader.html"}
+
+<!-- {if $repeatCreateApp eq 'false'} -->
+<div class="main-div">
+<!-- {/if} -->
+
+	<form action="index.php?act=step3" method="post" name="theForm" onsubmit="return check()">
+
+		{$lang.navigation_set}
+
+		<table cellspacing="1" cellpadding="3" width="100%" border=0>
+
+			<tr>
+				<td align="center" width="10%">{$lang.navigation_id}</td>
+				<td align="center">{$lang.navigation_default_name}</td>
+				<td align="center">{$lang.navigation_name}</td>
+				<td align="center">{$lang.navigation_order}</td>
+			</tr>
+
+			<!--{foreach from=$zywx_navigation item=nav}-->
+				<tr>
+					<td align="center">{$nav.id}</td>
+					<td align="center">{$nav.default_name}</td>
+					<td align="center"><input type="text" name="nav_name_{$nav.id}"  value="{$nav.name}"></td>
+					<td align="center"><input type="text" name="nav_order_{$nav.id}" value="{$nav.sort_order}"></td>
+				</tr>
+			<!--{/foreach}-->
+		
+		</table>
+
+		{$lang.hiding_module}
+
+		<p>{$lang.index_ad_set}
+
+		<table cellspacing="1" cellpadding="3" width="100%" border=0>
+
+			<tr>
+				<td>
+					<label for="j_jingpintuijian">
+						<input type="checkbox" name="jingpintuijian" id="j_jingpintuijian" {if $zywx_index_set['jingpintuijian'] == 1} checked {/if} value="1">{$lang.jingpintuijian}
+					</label>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<label for="j_remaishangpin">
+						<input type="checkbox" name="remaishangpin" id="j_remaishangpin" {if $zywx_index_set['remaishangpin'] == 1} checked {/if} value="1">{$lang.remaishangpin}
+					</label>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<label for="j_xinpinshangshi">
+						<input type="checkbox" name="xinpinshangshi" id="j_xinpinshangshi" {if $zywx_index_set['xinpinshangshi'] == 1} checked {/if} 
+						value="1">{$lang.xinpinshangshi}
+					</label>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<label for="j_pinpaizhuanqu">
+						<input type="checkbox" name="pinpaizhuanqu" id="j_pinpaizhuanqu" {if $zywx_index_set['pinpaizhuanqu'] == 1} checked {/if}  
+						value="1">{$lang.pinpaizhuanqu}
+					</label>
+				</td>
+			</tr>
+
+		</table>
+
+		<table cellspacing="1" cellpadding="3" width="100%" border=0>
+
+			<tr>
+				<td align="center">
+					<input type="hidden" value="{$repeatCreateApp}" name="repeatCreateApp">
+					<input type="hidden" name='template' value={$template}>
+					<input type="submit" class="button" value="{$lang.next}" />
+				</td>
+			</tr>
+
+		</table>
+
+	</form>
+
+<!-- {if $repeatCreateApp eq 'false'} -->
+</div>
+<!-- {/if} -->
+
+<div id='j_message' style="border:1px solid rgb(204, 0, 0);margin-top:10px;padding:4px;background-color:rgb(255, 255, 206);color:rgb(206, 0, 0);"></div>
+
+<input type="hidden" id="length_long" value="{$lang.length_long}"></input>
+<input type="hidden" id="repeat" value="{$lang.repeat}"></input>
+<input type="hidden" id="set_flag" value="{$lang.set_flag}"></input>
+
+<script type="Text/Javascript" language="JavaScript">
+
+{literal}
+
+	function check()
+	{
+		var orderStr = '';
+
+		var index_set_flag = false;
+
+		var eles = document.forms['theForm'].elements;
+
+		for (var i=0; i<eles.length; i++)
+		{
+			if (eles[i].tagName == 'INPUT' && eles[i].type == 'text')
+			{
+				var name = eles[i].name; 
+
+				if(name.indexOf('nav_name_') > -1)
+				{
+					if(eles[i].value.length >3)
+					{
+						var text = document.getElementById('length_long').value;
+						alert(text);
+						return false;
+					}
+				}else
+				{
+					orderStr += eles[i].value + ',';
+				}
+			}
+
+			if (eles[i].tagName == 'INPUT' && eles[i].type == 'checkbox' && eles[i].checked && eles[i].value != 'on')
+			{
+				index_set_flag = true;
+			}
+		}
+
+		orderStr = orderStr.substring(0,orderStr.lastIndexOf(','));
+
+		var orderArr = orderStr.split(',');
+
+		//去除重复的字符串  
+		for (var j = 0; j < orderArr.length; j++)  
+		{  
+			for (var k = j +1; k < orderArr.length; k++)  
+			{
+				if(orderArr[j] == orderArr[k])
+				{  
+					var text = document.getElementById('repeat').value;
+					alert(text);
+					return false;
+				}
+			}
+		}
+
+		if(index_set_flag == false)
+		{
+			var text = document.getElementById('set_flag').value;
+			alert(text);
+			return false;
+		}
+
+		return true;
+	}
+
+{/literal}
+
+</script>
+
+{include file="pagefooter.html"}

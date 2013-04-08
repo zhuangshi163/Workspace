@@ -1,0 +1,169 @@
+<!-- $Id: sale_list.htm 15848 2009-04-24 07:07:13Z liubo $ -->
+{if $full_page}
+{include file="pageheader.htm"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="form-div">
+  <form name="TimeInterval"  action="javascript:getList()" style="margin:0px">
+  {$lang.start_date}&nbsp;
+    <input name="start_date" type="text" id="start_date" size="16" value='{$start_date}' readonly="readonly" /><input name="selbtn1" type="button" id="selbtn1" onclick="return showCalendar('start_date', '%Y-%m-%d %H:%M:%S', '24', false, 'selbtn1');" value="{$lang.btn_select}" class="button"/>&nbsp;&nbsp;
+    {$lang.end_date}&nbsp;
+    <input name="end_date" type="text" id="end_date" size="16" value='{$end_date}' readonly="readonly" /><input name="selbtn2" type="button" id="selbtn2" onclick="return showCalendar('end_date', '%Y-%m-%d %H:%M:%S', '24', false, 'selbtn2');" value="{$lang.btn_select}" class="button"/>&nbsp;&nbsp;
+    {$lang.store_id}&nbsp;
+    <select name="store_id" id='store_id'>
+      <option value="">{$lang.all_store}</option>
+      {html_options options=$store_list selected=$filter.store_id}
+    </select>&nbsp;&nbsp;</br>
+   
+    {$lang.order_type}&nbsp;
+    <select name="order_type" id='order_type'>
+      
+      {html_options options=$order_type selected=$filter.order_type}
+    </select>&nbsp;&nbsp;
+    
+   {$lang.goods_cat}
+    <select name="cat_id"><option value="0">{$lang.select_cat}</option>{$cat_list}</select>
+    
+    <!--<select name="brand_id"><option value="0">{$lang.goods_brand}</option>{html_options options=$brand_list}</select>
+   
+    <select name="intro_type"><option value="0">{$lang.intro_type}</option>{html_options options=$intro_list selected=$smarty.get.intro_type}</select> -->
+     {if $is_suppliers_admin eq 0}
+     &nbsp;&nbsp;{$lang.suppliers}
+     <select name="suppliers_id">
+      	<option value="0">{$lang.all_suppliers}</option>
+      	{html_options options=$suppliers_list_name selected=$smarty.get.suppliers_id}
+      </select>
+     {/if}
+    
+      <!--<select name="is_on_sale"><option value=''>{$lang.intro_type}</option><option value="1">{$lang.on_sale}</option><option value="0">{$lang.not_on_sale}</option></select>-->
+    
+   &nbsp;&nbsp;{$lang.keyword}<input type="text" name="keyword" size="15" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" name="submit" value="{$lang.query}" class="button" />
+    <input type="reset" name="submit" value="{$lang.reset}" class="button" />
+  </form>
+</div>
+<form method="POST" action="" name="listForm">
+<div class="list-div" id="listDiv">
+{/if}
+  <table width="100%" cellspacing="1" cellpadding="3">
+     <tr>
+     <th><a href="javascript:listTable.sort_ex('og.goods_sn'); ">{$lang.goods_sn}</a></th>
+      <th><a href="javascript:listTable.sort_ex('og.goods_name'); ">{$lang.goods_name}</a></th>
+      {if $is_suppliers_admin eq 0}<th><a href="javascript:listTable.sort_ex('su.suppliers_name'); ">{$lang.suppliers}</a></th>{/if}
+      <th><a href="javascript:listTable.sort_ex('store.store_remark'); ">{$lang.store}</a></th>
+     <th><a href="javascript:listTable.sort_ex('cat.cat_name'); ">{$lang.cat_name}</a></th>
+      <th><a href="javascript:listTable.sort_ex('g.goods_specification'); ">{$lang.goods_specification}</a></th>
+      <th><a href="javascript:listTable.sort_ex('g.goods_number'); ">{$lang.goods_number}</a></th>
+      <th><a href="javascript:listTable.sort_ex('og.wholesale_price'); ">{$lang.wholesale_price}</a></th>
+      <th><a href="javascript:listTable.sort_ex('sale_price'); ">{$lang.sell_price}</a></th>
+      <th><a href="javascript:listTable.sort_ex('goods_num'); ">{$lang.amount}</a></th>
+      <th><a href="javascript:listTable.sort_ex('market_turnover'); ">{$lang.wholesale_price_turnover}</a></th>
+      <th><a href="javascript:listTable.sort_ex('turnover'); ">{$lang.sum_price}</a></th>
+  	</tr>
+  {foreach from=$goods_sales_list item=list}
+    <tr align="center">
+    	<td>{$list.goods_sn}</td>
+      <td align="left">{$list.goods_name}</td>
+      <!--<td><a href="order.php?act=info&order_id={$list.order_id}">{$list.order_sn}</a></td>
+      <td align="right">{$list.goods_num}</td>
+      -->
+      {if $is_suppliers_admin eq 0}<td>{$list.suppliers_name}</td>{/if}
+      <td>{$list.store_remark}
+      <td>{$list.cat_name}</td>
+      <td>{$list.goods_specification}</td>
+      <td>{$list.goods_number}</td>
+      <td>{$list.wholesale_price}</td>
+      <td align="right">{$list.sale_price}</td>
+      <td>{$list.goods_num}</td>
+      <td>{$list.wholesale_turnover}</td>
+      <td align="right">{$list.turnover}</td>
+      <!--<td>{$list.sales_time}</td>
+    --></tr>
+  {foreachelse}
+    <tr><td class="no-records" colspan="{if $is_suppliers_admin eq 0}12{else}11{/if}">{$lang.no_records}</td></tr>
+  {/foreach}
+  	<tr>
+    	<td colspan="{if $is_suppliers_admin eq 0}9{else}8{/if}"><div align="right"><strong>{$lang.total}</strong></div></td>
+    	<td><div align="right"><b style='color:#F00'>{$total_number}</b></div></td>
+    	<td><div align="right"><b style='color:#F00'>{$total_wholesale_price}</b></div></td>
+    	<td><div align="right"><b style='color:#F00'>{$total_price}</b></div></td>
+  	</tr>
+  </table>
+  <table id="page-table" cellspacing="0">
+  <tr>
+    <td>&nbsp;</td>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+  </table>
+{if $full_page}
+</div>
+</form>
+
+<script type="Text/Javascript" language="JavaScript">
+{if $record_count}
+listTable.recordCount = {$record_count};
+{/if}
+listTable.pageCount = {$page_count};
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+{literal}
+<!--
+onload = function()
+{
+  // 开始检查订单
+  startCheckOrder();
+  getDownUrl();
+}
+
+function getList()
+{
+	var frm =  document.forms['TimeInterval'];
+    listTable.filter['start_date'] = frm.elements['start_date'].value;
+    listTable.filter['end_date'] = frm.elements['end_date'].value;
+    
+    //var order_type=frm.elements['order_type'];
+    //listTable.filter['order_type'] = order_type.options[order_type.selectedIndex].value;
+    listTable.filter['order_type'] = frm.elements['order_type'].value;
+    listTable.filter['store_id'] = frm.elements['store_id'].value;
+    
+    listTable.filter['cat_id'] = frm.elements['cat_id'].value;
+    //listTable.filter['brand_id'] = frm.elements['brand_id'].value;
+    //listTable.filter['intro_type'] = frm.elements['intro_type'].value;
+      {if $is_suppliers_admin eq 0}
+      listTable.filter['suppliers_id'] = frm.elements['suppliers_id'].value;
+      {/if}
+    //listTable.filter['is_on_sale'] = frm.elements['is_on_sale'].value;
+    listTable.filter['keyword'] = Utils.trim(frm.elements['keyword'].value);
+    
+    listTable.filter['page'] = 1;
+    listTable.loadList();
+    getDownUrl();
+}
+
+function getDownUrl()
+{
+  var aTags = document.getElementsByTagName('A');
+  for (var i = 0; i < aTags.length; i++)
+  { 
+    if (aTags[i].href.indexOf('download') >= 0)
+    {
+      if (listTable.filter['start_date'] == "")
+      {
+        var frm =  document.forms['TimeInterval'];
+        listTable.filter['start_date'] = frm.elements['start_date'].value;
+        listTable.filter['end_date'] = frm.elements['end_date'].value;
+      }
+      aTags[i].href = "sale_list.php?act=download&start_date=" + listTable.filter['start_date'] + "&end_date=" + listTable.filter['end_date'];
+    }
+  }
+}
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}
+{/if}

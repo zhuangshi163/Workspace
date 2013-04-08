@@ -1,0 +1,29 @@
+<!-- $Id: account_manage.html 15409 2012-1-16 11:49:00Z lilixing $ -->
+
+{include file="pageheader.html"}
+
+<div class="main-div">
+
+	<form action="index.php" method="post" name="theForm">
+
+		<table cellspacing="1" cellpadding="3" width="200px">
+
+			<tr><td>{$lang.account_user}{$user.app_username}</td></tr>
+
+			<tr><td>{$lang.account_pass}******</td></tr>
+			
+			<!--
+			<tr>
+				<td align="center">
+					<a href="index.php?act=account_password_edit">{$lang.button_password_edit}</a>
+				</td>
+			</tr>
+			-->
+
+		</table>
+
+	</form>
+
+</div>
+
+{include file="pagefooter.html"}

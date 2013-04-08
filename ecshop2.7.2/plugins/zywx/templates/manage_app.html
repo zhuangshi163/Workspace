@@ -1,0 +1,19 @@
+<!-- $Id: manage_app.html 15409 2012-1-16 13:51:00Z lilixing $ -->
+
+{include file="pageheader.html"}
+
+<!-- {if $repeatCreateApp eq 'false'} -->
+<div class="main-div" style="height:500px;">
+<!-- {/if} -->
+
+	<iframe id='showFrame'  frameborder='0' border='0' marginwidth='0' name='mainFrame' allowTransparency='true' src="{$manage_app_url}"></iframe>
+
+<!-- {if $repeatCreateApp eq 'false'} -->
+</div>
+<!-- {/if} -->
+
+{include file="pagefooter.html"}
+
+<style>
+#showFrame{margin-top:15px;margin-left:20px;margin-right:20px;margin-bottom:10px;border:0px solid red;width:98%;height:98%;clear:both;}
+</style>

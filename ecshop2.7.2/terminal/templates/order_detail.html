@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>订单详情</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">	
+		
+</style>
+
+</head>
+<body>
+<div class="head">
+
+</div>
+
+<div class="mainline"></div>
+<div class="cartbox" id='cartbox'>
+    <div class="pagebox_cat">
+        {if $total.page>1}<a href="shop_cart.php?act=order_detail&page={$total.page_before}&order_id={$order_id}&from_page={$from_page}&card_no={$card_number}"><img src="img/pagebox_cat_up.gif"/></a>{else}<img src="img/pagebox_cat_up.gif"/>{/if}
+		<!-- {foreach from=$goods_list item=goods} -->
+        <div>{$goods.page_number}</div>
+        <!-- {/foreach} -->
+        {if $total.page_after>0}<a href="shop_cart.php?act=order_detail&page={$total.page_after}&order_id={$order_id}&from_page={$from_page}&card_no={$card_number}"><img src="img/pagebox_cat_down.gif"/></a>{else}<img src="img/pagebox_cat_down.gif"/>{/if}
+    </div>
+	<table cellspacing="0" cellpadding="0" class="carttable">
+	<tr align="center">
+		<th width="88" align="center">图片</th>
+		<th width="350" align="center">商品</th>
+		<th width="88" align="center">单价</th>
+		<th width="88" align="center">数量</th>
+		<th align="center">金额</th>
+	</tr>
+	<!-- {foreach from=$goods_list item=goods} -->
+	<tr align="center">
+		<td><img src="{$goods.goods_thumb}" class="thumb"/></td>
+		<td>{$goods.goods_style_name}</td>
+		<td>{$goods.goods_price}</td>
+		<td>{$goods.goods_number}</td>
+		<td>{$goods.goods_sum}</td>
+	</tr>
+	<!-- {/foreach} -->
+	</table>
+	<div>{$message.content}</div>
+	<a href="shop_cart.php?act=order_find&page={$from_page}&card_no={$card_number}"><img src="img/cart_back.gif" /></a>
+    </div>
+</div>
+</body>
+</html>

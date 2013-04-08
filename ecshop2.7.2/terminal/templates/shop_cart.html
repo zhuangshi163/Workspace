@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>商品总页</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">	
+    	.shuru{
+    		width: 100%;
+    		height: 60px;
+    		font-size: 38px;
+    		font-family: '微软雅黑';
+    		line-height: 60px;
+			vertical-align:middle;
+			border: 1px solid #000000;
+    	}
+ 	.readonly {
+		background-color: #CCC;
+	}
+#card_submit {
+	padding-top: 100px;
+}      	
+</style>
+<script type="text/javascript">
+		function init(){
+//			var printer = new ActiveXObject("HsPayControl.CardReader");
+//			printer.ReadTrackData23(2);
+//			var data = printer.Track2Data;
+
+			//var printer = new ActiveXObject("HsPayControl.CardReader");
+			//printer.ReadTrackData23(2);
+			var data = "0vq93c1t6f00";
+
+			document.getElementById('card_no').value=data;
+			if(data.length !=0){
+				document.getElementById('myContext').className = 'none';
+				document.forms['order_confirm'].submit();
+			}else {
+				//alert('刷卡失败或超时，请再试一次');
+				//window.location = "/";
+				document.getElementById("card_submit").innerHTML='<div><div>&nbsp;</div><div>&nbsp;</div><p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">刷卡出现错误或超时</span></p><br/><br/><img src="../img/re_card.png" onclick ="window.history.go(0);" /><img src="../img/forget_card.png" onmousedown="toConvenient()" /></div>';						}
+				document.getElementById('myId').className = 'none';
+		}
+</script>
+
+<script type="text/javascript">
+	function submit_form(){
+		document.getElementById('ordertable1').className = 'none';
+		document.getElementById('cartbox').className = 'none';	
+		showswf();
+		document.getElementById('myContext').className = '';
+		document.getElementById("myId").style.visibility="visible"
+		setTimeout(function(){init();},0);
+	}
+	
+	function submit_form_code(){
+		document.getElementById('ordertable1').className = 'none';
+		document.getElementById('cartbox').className = 'none';
+		document.getElementById('message_submit').className = '';
+		document.getElementById('card_no').value='';
+		document.getElementById("card_no").focus();
+	}
+	function submit_form_card(){
+		document.getElementById('ordertable1').className = 'none';
+		document.getElementById('cartbox').className = 'none';
+		document.getElementById('message_submit').className = '';
+		document.getElementById('card_no').value='';
+		//document.getElementById("card_no").focus();
+		init();		
+	}
+	function EnterPress(event){ //传入 event
+		var e = e || window.event;
+		//var e = event ? event : (window.event ? window.event : null);
+		if(e.keyCode == 13){
+			var data = document.getElementById('card_no').value
+			if(data.length !=0){
+				document.forms['order_confirm'].submit();
+			}
+		}
+	}
+	
+function sale_num(num,rec_id){
+	window.location.href= 'shop_cart.php?act=edit_num&rec_id='+rec_id+'&num='+num+'&page={$total.page}';
+	
+}	
+</script>
+
+<!--   <script type="text/javascript" src="/js/swfobject.js"></script>   -->
+{* 包含脚本文件 *}
+{insert_scripts files='swfobject.js'}
+
+<script type="text/javascript">
+  function showswf(){
+   swfobject.registerObject("myId", "9.0.0", "expressInstall.swf");
+  }
+  function toConvenient(){
+  	window.location.href='shop_convenient.php';
+  }
+</script>
+</head>
+<body>
+<div class="head">
+    <a href="shop_cart.php?act=empty_goods" class="right"><img src="img/list_nobuy.gif"/></a>
+</div>
+<div class="mainline"></div>
+<div class="cartbox" id='cartbox'>
+    <div class="pagebox_cat">
+        {if $total.page>1}<a href="shop_cart.php?page={$total.page_before}"><img src="img/pagebox_cat_up.gif"/></a>{else}<img src="img/pagebox_cat_up.gif"/>{/if}
+		<!-- {foreach from=$goods_list item=goods  name=goods} -->
+        <div>{$goods.page_number}</div>
+        <!-- {/foreach} -->
+        {if $total.page_after>0}<a href="shop_cart.php?page={$total.page_after}"><img src="img/pagebox_cat_down.gif"/></a>{else}<img src="img/pagebox_cat_down.gif"/>{/if}
+    </div>
+	<table cellspacing="0" cellpadding="0" class="carttable">
+	<tr>
+		<th width="88">图片</th>
+		<th>商品名称</th>
+		<th width="70">库存</th>
+		<th width="70">单价</th>
+		<th width="182">数量</th>
+		<th width="70">合计</th>
+		<th width="60">操作</th>
+	</tr>
+	<!-- {foreach from=$goods_list item=goods  name=goods} -->
+	<tr align="center">
+		<td><a href="shop_goods.php?goods_id={$goods.goods_id}"><img src="../../{$goods.goods_thumb}" class="thumb"/></a></td>
+		<td align="center"><a href="shop_goods.php?goods_id={$goods.goods_id}">{$goods.goods_style_name}</a></td>
+		<td>{$goods.g_number}</td>
+		<td>{$goods.goods_price}</td>
+		<td class="sale_num"><img src="img/num_minus.gif"{if $goods.goods_number gt 1} onmousedown="sale_num({$goods.goods_numbera},{$goods.rec_id})"{/if}/><span>{$goods.goods_number}</span><img src="img/num_plus.gif"{if $goods.goods_number lt 99} onmousedown="sale_num({$goods.goods_numberb},{$goods.rec_id})"{/if}/></td>
+		<td>{$goods.sub}</td>
+		<td><a href="shop_cart.php?act=del&rec_id={$goods.rec_id}&page={$total.page}" class="del">删除</a></td>
+	</tr>
+	<!-- {/foreach} -->
+	</table>
+    <div class="pagebox_total">{$total.total}元</div>
+</div>
+
+	<div id="myContext" class="none" >
+	<div id="card_submit" align="center"> 
+	<div>
+		<p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">温馨提示</span></p>
+		<p style="line-height:50px;><span id="card_times2" style="color:#FF0000;font-size:38px;font-weight:700">请刷您的会员卡，请在30秒内完成刷卡</span></p>
+	</div>
+	
+	<div>
+	<object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="300">
+	<param name="movie" value="swf/card.swf" />
+	<!--[if !IE]>-->
+	<object type="application/x-shockwave-flash" data="swf/card.swf" width="800" height="300">
+	<!--<![endif]-->
+	<div>
+		<h1>Alternative content</h1>
+		<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/img/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+	</div>
+	<!--[if !IE]>-->
+	</object>
+	<!--<![endif]-->
+	</object>
+	</div>
+	
+	<div><p style="line-height:150px;><span id="card_times3" style="color:#FF0000;font-size:38px;font-weight:700">刷卡期间，请勿点击其他按键，否则可能导致刷卡失败</span></p></div>
+ </div>
+ </div>
+<form action="shop_cart.php?act=order_confirm_card" method="post" name="order_confirm">
+	<table cellspacing="0" cellpadding="0" class="ordertable1 ordertable" id="ordertable1">
+	<tr>
+		<td height="100" valign="bottom" colspan="6" align="center">
+        <img src="img/order_confirm.gif" onmousedown="submit_form()" class="order_confirm"/>
+        <a href="{$back_url}"><img src="img/cart_back.gif"/></a>
+        </td>
+	</tr>
+	</table>
+	<input name="card_no" type="hidden" class="shuru readonly" id="card_no"  onBlur="this.focus()" autocomplete="off"/>
+
+
+</form>
+</body>
+</html>

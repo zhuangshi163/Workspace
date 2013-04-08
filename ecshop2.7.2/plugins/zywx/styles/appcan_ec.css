@@ -1,0 +1,165 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* Elements */
+body,p,div,ul,ol,li,dl,dt,dd,span,var,em,a,img,strong,table,td,tr,h2,h3,h4,h5,input{font-family: Arial, Helvetica, sans-serif;font-family:;margin:0;padding:0;font-size:12px;}
+ul,li{list-style:none;}
+img{border:none;}
+em{font-style:normal;}
+a{text-decoration:none;}
+
+.clear{clear: both; font-size:0; height:0; overflow: hidden;}
+
+html,body { height: 100%;}
+body { background: #f0f0f0; position:relative;}
+
+.header_box { width: 960px; margin: 0 auto;}
+.content { width: 960px; margin: 0 auto;}
+
+/* client */
+.client_header{
+	height: 85px; 
+	width: 100%; 
+	background: url(../images/client_top_bg.jpg) repeat-x;
+	paddings-top: 30px;
+}
+.client_header_logo {
+	width: 170px;
+	height: 55px;
+	overflow: hidden;
+	padding-top: 30px;
+	background: url(../images/logo.png) no-repeat -161px center !important;
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/logo.png) no-repeat;
+	_margin-left: -161px;
+	_margin-top: 30px;
+}
+.content_left, .content_right {
+	float: left;
+	margin: 55px auto 20px;
+}
+.content_left {
+	width: 476px;
+	height: 538px;
+	background:url(../images/client_img.png) no-repeat !important;
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/client_img.png) no-repeat;
+}
+.content_right {
+	width: 444px;
+	padding-left: 40px;
+	text-align: center;
+}
+.content_right_top {
+	margin-top: 75px;
+}
+.content_right_bottom_btn {
+	text-align: center;
+	margin-top: 45px;
+	
+}
+.content_right_bottom_btn a {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.footer {
+	background: #cbcbcb;
+	color: #545454;
+	width: 960px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;	
+	margin: 0 auto;
+}
+
+/* 提示框 */
+.tip_matte {
+	background: #000;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+	position: fixed;
+	_position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.tip_box {
+	width: 566px;
+	height: 384px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -192px 0 0 -283px;
+}
+.tip_top {
+	width: 566px;
+	height: 33px;
+	background:url(../images/tip_top.png) no-repeat !important;
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/tip_top.png) no-repeat;
+}
+.tip_center {
+	width: 566px;
+	background: url(../images/tip_center.jpg) repeat-y;
+}
+.tip_bottom {
+	width: 566px;
+	height: 7px;
+	font-size: 0;
+	background:url(../images/tip_bottom.png) no-repeat !important;
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=images/tip_bottom.png) no-repeat;
+}
+.tip_top strong {
+	font-weight: normal;
+	color: #fff;
+	line-height: 33px;
+	padding-left: 15px;
+	float: left;
+}
+.tip_top span {
+	float: right;
+	margin: 11px 12px 0 0;
+	cursor: pointer;
+	position: relative;
+	z-index:999;
+}
+
+.tip_center .tip_bottom_btn {
+	text-align: center;
+	padding-bottom: 10px;
+}
+.tip_center .tip_font {
+	width: 486px;
+	padding: 30px 40px 0 40px;
+}
+.tip_center .tip_font p { position: relative; padding: 0 0 40px 0;}
+.tip_center .tip_font p.tip_font_first {
+	height:130px; 
+	border-bottom: 1px #000 dashed;
+}
+.tip_center .tip_font p.tip_font_second {
+	height: 85px;
+	padding: 20px 0 0 0;
+}
+.tip_center .tip_font p strong, .tip_center .tip_font p span {
+	font-size: 14px;
+	display: block;
+	width: 287px;
+	line-height: 24px;
+}
+.tip_center .tip_font p img {
+	position: absolute;
+	top: 30px;
+	right: 40px;
+}
+.iphone_btn_a{background: url(../images/iphone_btn.jpg)  no-repeat; width:174px; height:58px; }
+.andriod_btn_a{background: url(../images/andriod_btn.jpg)  no-repeat; width:174px; height:58px;  }
+.close_img {background: url(../images/close_img.jpg)  no-repeat; width:11px; height:11px;  }
+.img_icon{background: url(../images/img.jpg)  no-repeat; width:371px; height:224px;   }
+.barcode{background: url(../images/barcode_img.jpg)  no-repeat; width:102px; height:102px;   }
+.barcode1{background: url(../images/barcode_img.jpg)  no-repeat; width:102px; height:102px;   }
+.down_btn_an{background: url(../images/andriod_load_btn.jpg)  no-repeat; width:180px; height:63px; display:block ; margin:0px auto; }
+.down_btn_ip{background: url(../images/iphone_load_btn.jpg)  no-repeat; width:180px; height:63px; display:block ; margin:0px auto; }

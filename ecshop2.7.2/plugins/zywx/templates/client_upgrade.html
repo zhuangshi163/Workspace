@@ -1,0 +1,53 @@
+<!-- $Id: client_upgrade.html 15409 2012-06-14 16:15:22Z lilixing $ -->
+
+{include file="pageheader.html"}
+
+<div class="main-div">
+	<form action="client_upgrade.php?act=save" method="post" name="theForm" onSubmit="return checkForm();">
+	<div style="padding-top:20px;">
+		  <div style=" padding-left:260px;">
+			<div class="ec_pbox"  style="margin-bottom:15px;">
+				<label  class="reg_label" style="width:110px; margin-right:10px; text-align:right">{$lang.iphone_path}</label>
+				<input type='text' name="iphone_name" id="j_iphone_name" value='{$iphone_name}' class="reg_input" style="width:400px;">
+				<span style="color:red;display:none;"  id="j_iphone_name_tips">{$lang.path_empty_tips}</span>
+			</div>
+			<div class="ec_pbox" style="margin-bottom:15px;">
+				<label  class="reg_label" style="width:110px; margin-right:10px; text-align:right">{$lang.android_path}</label>
+				<input type='text' name="android_name" id="j_android_name" value='{$android_name}'  class="reg_input"  style="width:400px;">
+			</div>
+			<div class="ec_pbox" style="margin-bottom:15px;">
+				<label  class="reg_label" style="width:110px; margin-right:10px; text-align:right">{$lang.app_version}</label>
+				<input type='text' name="app_version" id="j_app_version" value='{$app_version}'  class="reg_input"  style="width:400px;">
+				<span style="color:red;display:none;" id="j_app_version_tips">{$lang.version_empty_tips}</span>
+			</div>
+		</div>
+		<div style="width:650px; margin:0px auto 0px; line-height:25px; color:#8f8f8f;">{$lang.app_desc}</div>
+		<input type="submit" class="next_btn" style="margin:30px auto 20px;border:0px;"  value="{$lang.app_submit}" />
+	</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+
+function checkForm()
+{
+	var iphone_name  = $("#j_iphone_name").val();
+	var android_name = $("#j_android_name").val();
+	var app_version    = $("#j_app_version").val();
+	if(!(iphone_name || android_name))
+	{
+		$("#j_iphone_name_tips").show();
+		return false;
+	}
+	if(!app_version)
+	{
+		$("#j_iphone_name_tips").hide();
+		$("#j_app_version_tips").show();
+		return false;
+	}
+	return true;
+}
+
+</script>
+
+{include file="pagefooter.html"}

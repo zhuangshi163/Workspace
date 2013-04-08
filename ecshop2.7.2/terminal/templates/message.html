@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>信息提示</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+	window.onload = function (){
+		var message = '{$message.content}';
+		var speak_info = '{$speak_info}';
+		if(speak_info.length>0){
+			message = speak_info;
+		}
+		window.clipboardData.setData("Text", message);	
+	}
+</script>
+
+</head>
+<body>
+<div class="message">
+	<div class="message_list"><span>信息提示</span></div>
+	<img src="img/store_tablebox_top.gif"/>
+    <div class="message_info">
+	<div style="padding:20px 0 50px;">{$message_info}{$message.content}</div>
+	<!--{foreach from=$message.url_info key=info item=url}-->
+	<a href="{$url}">{$info}</a>
+	<!--{/foreach}-->
+    </div>
+    <img src="img/store_tablebox_bottom.gif"/>
+</div>
+</body>
+</html>

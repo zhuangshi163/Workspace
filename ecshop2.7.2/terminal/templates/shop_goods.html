@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>商品详情页</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		var keyboard_input = typeof(popupNumbericKeypad) === 'object' ? false : true;
+		keyboard_input = false;
+		var zoneId;		//全局变量，操作区域的id号，手写版区域id或者数字键盘区域id
+		var editId;		//全局变量，要输入部分的input标签的id号
+		var isPassword;	//全局变量，input标签是否为密码输入框
+		var inputObject="";	//全局变量，用手写版或者数字键盘的input对象
+		var inputvalue="";	//全局变量，用手写版或者数字键盘的input的值
+		/**
+		 * 弹出数字键盘的方法
+		 * @param {Object} eId	相关input标签的id号
+		 * @param {Object} tipName	提示的文字，显示在数字键盘的上面，如tipName为”手机号“，将显示”请输入您的手机号“
+		 */
+		function showNumZone(eId, tipName){
+			if(keyboard_input) return ;
+			zoneId = "numzone";
+			editId = eId;
+			inputObject = document.getElementById(editId);
+			inputvalue = inputObject.value;
+			showZone();
+			popupNumbericKeypad.Content = "";
+			if(document.getElementById(eId).type == "password"){
+				isPassword = true;
+				for(var i=0; i<inputObject.value.length; i++){
+					popupNumbericKeypad.Content += "●";
+				}
+			}else{
+				isPassword = false;
+				popupNumbericKeypad.Content = inputObject.value;	//将已输入的内容显示在数字键盘上
+			}
+			document.getElementById("showNumTitle").innerHTML = "请输入您的"+tipName+"：";
+		}
+		/**
+		 * 弹出手写版的方法
+		 * @param {Object} eId	相关input标签的id号
+		 * @param {Object} tipName	提示的文字，显示在数字键盘的上面，如tipName为”姓名“，将显示”请输入您的姓名“
+		 */
+		function showHandZone(eId, tipName){
+			if(keyboard_input) return ;
+			zoneId = "handzone";
+			editId = eId;
+			inputObject = document.getElementById(editId);
+			showZone();
+			document.getElementById("showAlreadyInput").innerHTML = "";
+			if(document.getElementById(eId).type == "password"){
+				isPassword = true;
+				for(var i=0; i<inputObject.value.length; i++){
+					document.getElementById("showAlreadyInput").innerHTML += "●";
+				}
+			}else{
+				isPassword = false;
+				document.getElementById("showAlreadyInput").innerHTML = inputObject.value;	//将已输入的内容显示在手写版上
+			}
+			document.getElementById("showHandTitle").innerHTML = "请输入您的"+tipName+"：";
+		}
+		/**
+		 * 显示数字键盘或者手写版区域
+		 */
+		function showZone(){
+			document.getElementById("mark").style.display = "block";	//显示遮罩层
+			//隐藏手写版和数字键盘区域
+			document.getElementById("handzone").style.display = "none";
+			document.getElementById("numzone").style.display = "none";
+			
+			var myobj = document.getElementById(zoneId);
+			myobj.style.display = "block";		//显示id为zoneId的区域
+			var bodyhh = document.documentElement.clientHeight;
+			var bodyww = document.documentElement.clientWidth;
+			var objhh = myobj.clientHeight;
+			var objww = myobj.clientWidth;
+			myobj.style.top = (bodyhh - objhh) / 2;		//将zoneId的区域居中显示
+			myobj.style.left = (bodyww - objww) / 2;
+		}
+		/**
+		 * 隐藏数字键盘或者手写版区域
+		 */
+		function hideZone(){
+			document.getElementById("mark").style.display = "none";		//隐藏遮罩层
+			document.getElementById(zoneId).style.display = "none";		//隐藏手写版区域
+		}
+	</script>
+	
+	<!-- 手写版输入单个字事件 -->
+	<script for="staticTablet" type="text/javascript" event="FontSelected(data);">
+    	inputObject.value += data;				//输入data到指定input中
+    	if(isPassword){
+    		document.getElementById("showAlreadyInput").innerHTML += "●";
+    	}else{
+    		document.getElementById("showAlreadyInput").innerHTML += data;
+    	}
+	</script>
+	<!-- 手写板确认和回退事件 -->
+	<script for="staticTablet" type="text/javascript" event="ButtonDown(type);">
+    	if(type == "confirm"){		//确认事件
+			hideZone();
+    		//alert(inputObject.value);
+    	}else if(type == "back"){	//回退事件
+    		var value = inputObject.value;
+    		var showObject = document.getElementById("showAlreadyInput");
+    		inputObject.value = value.substring(0,value.length-1);
+    		showObject.innerHTML = showObject.innerHTML.substring(0,showObject.innerHTML.length-1);
+    	}
+	</script>
+	<!-- 数字键盘事件 -->
+	<script for="popupNumbericKeypad" type="text/javascript" event="ButtonDown(data);">
+		switch(data){
+			case 'clear':	//清空
+				popupNumbericKeypad.Content = "";
+				inputObject.value = "";
+				break;
+			case 'back':	//回退
+				var num = popupNumbericKeypad.Content;
+				popupNumbericKeypad.Content = num.substring(0,num.length-1);
+				inputObject.value = inputObject.value.substring(0,inputObject.value.length-1);
+				break;
+			case 'cancel':	//取消
+				hideZone();
+				inputObject.value = inputvalue;
+				break;
+			case 'confirm':	//确认
+				hideZone();
+				//alert(inputObject.value);
+				break;
+			default:		//输入数字
+				inputObject.value += data;
+		    	if(isPassword){
+		    		popupNumbericKeypad.Content += "●";
+		    	}else{
+		    		popupNumbericKeypad.Content += data;
+		    	}
+		}
+	</script>
+</head>
+<body>
+	<!-- 遮罩层区域start-->
+	<div id="mark"></div>
+	<!-- 遮罩层区域end -->
+	
+	<!-- 手写版区域start -->
+	<div id="handzone">
+		<div id="hzTip"><span id="showHandTitle">请输入您的姓名</span><span id="showAlreadyInput"></span></div>
+		<object id="staticTablet" classid="clsid:00AE8CF9-5F57-4FFC-A481-2125991A77CC" width="730px" height="430px"></object>
+	</div>
+	<!-- 手写版区域end -->
+	
+	<!-- 数字键盘区域start -->
+	<div id="numzone">
+		<div id="nzTip"><span id="showNumTitle">请输入您的姓名</span></div>
+		<object id="popupNumbericKeypad" classid="clsid:3E4CDDC3-E7DB-47AF-9DB8-6372FB600415"  width="332px" height="466px">
+			<param name="BackgroundColor" value="00bbff" />
+		</object>
+	</div>
+	<!-- 数字键盘区域end -->
+    
+<div class="head">
+    <a href="shop_cart.php" class="right"><img src="img/list_buy.gif"/></a>
+    <a href="javascript:detail_look(1)" id="detail_list_1" class="cur">购买商品</a>
+    <a href="javascript:detail_look(2)" id="detail_list_2">商品详情</a>
+    <a href="javascript:detail_look(3)" id="detail_list_3">厂家简介</a>
+    <!-- {foreach from=$article item=article} -->
+    <a href="javascript:detail_look({$article.index})" id="detail_list_{$article.index}">{$article.title|escape:html}</a>
+    <!-- {/foreach} -->
+</div>
+<div class="mainline"></div>
+
+<div class="detail_info" id="detail_info_1">
+	<div class="product_img">
+    	<img src="./../{$goods_gallery.0.img_original}" id="product_img_big" class="product_img_big"/>
+    	<img src="img/product_img_big.png" class="product_img_big_png"/>
+		<!-- {foreach from=$goods_gallery item=img name=img_foreach} -->
+    	<img src="img/product_img_min.png" class="product_img_min_png{$smarty.foreach.img_foreach.index}" onmousedown="product_img('{$img.img_original}')"/>
+		<img src="./../{$img.img_original}" class="product_img_min"/>
+		<!-- {/foreach} -->
+	</div>
+	<div class="product_info">
+		<h1>{$goods.goods_name|escape:html}</h1>
+		<dl>
+			<!-- {if $is_promote eq 1} -->
+			<dt>特&nbsp;&nbsp;价：</dt>
+			<dd><span class="sale_price">{$goods.promote_price}</span></dd>
+			<!-- {else} -->
+			<dt>会员价：</dt>
+			<dd><span class="sale_price">{$goods.sale_price}</span></dd>
+			<!-- {/if} -->
+			<dt>原&nbsp;&nbsp;价：</dt>
+			<dd><span class="market_price">{$goods.market_price}</span></dd>
+			<dt>节　省：</dt>
+			<dd><span class="sale_price">{$goods.save_price}</span></dd>
+			<dt>库　存：</dt>
+			<dd>{$goods.goods_number}</dd>
+			<dt>购买数量：</dt>
+			<dd class="sale_num"><img src="img/num_minus.gif" onmousedown="sale_num(-1)"/><input name="goods_count" type="text" maxlength="10" class="input" id="goods_count" onfocus="showNumZone('goods_count', '购买数量')" value="1" onblur="sale_num_value(this.value)"/><img src="img/num_plus.gif" onmousedown="sale_num(1)"/>个</dd>
+		</dl>
+		<div class="addcart">
+			<img src="img/goods_detail.gif" onmousedown="detail_look(2)"/><br />
+			<img src="img/goods_buy.gif" onmousedown="addcart()"/>
+		</div>
+	</div>
+</div>
+
+<div class="none" id="detail_info_2">
+	<div class="goods_buy_back"><img src="img/goods_buy_back.gif" onmousedown="detail_look(1)"/></div>
+    <div class="detail_txt_box" id="detail_txt_box2">
+    <div class="detail_txt" id="detail_txt2" style="top:0px;">{$goods.goods_desc}</div>
+    <img src="img/detail_up.gif" onmousedown="detail_txt(2,1)" class="detail_up"/>
+    <img src="img/detail_down.gif" onmousedown="detail_txt(2,-1)" class="detail_down"/>
+    </div>
+	<div class="detail_line"></div>
+</div>
+<div class="none" id="detail_info_3">
+	<div class="goods_buy_back"><img src="img/goods_buy_back.gif" onmousedown="detail_look(1)"/></div>
+    <div class="detail_txt_box" id="detail_txt_box3">
+    <div class="detail_txt" id="detail_txt3" style="top:0px;">{$goods.brand_detail}</div>
+    <img src="img/detail_up.gif" onmousedown="detail_txt(3,1)" class="detail_up"/>
+    <img src="img/detail_down.gif" onmousedown="detail_txt(3,-1)" class="detail_down"/>
+    </div>
+	<div class="detail_line"></div>
+</div>
+
+<!-- {foreach from=$article item=article} -->
+<div class="none" id="detail_info_{$article.index}">
+	<div class="goods_buy_back"><img src="img/goods_buy_back.gif" onmousedown="detail_look(1)"/></div>
+    <div class="detail_txt_box" id="detail_txt_box{$article.index}">
+    <div class="detail_txt" id="detail_txt{$article.index}" style="top:0px;">{$article.content}</div>
+    <img src="img/detail_up.gif" onmousedown="detail_txt({$article.index},1)" class="detail_up"/>
+    <img src="img/detail_down.gif" onmousedown="detail_txt({$article.index},-1)" class="detail_down"/>
+    </div>
+	<div class="detail_line"></div>
+</div>
+<!-- {/foreach} -->
+
+<div class="pagebox">
+		<img src="img/page_one.gif" onmousedown="history.go(-1)" class="cursor"/>
+		<img src="img/page_before.gif" id="page_before" onmousedown="detail_look(-1)" class=""/>
+        <div><span id="page_on">1</span> / {$detail_look_count}</div>
+		<img src="img/page_after.gif" id="page_after" onmousedown="detail_look(-2)" class="cursor"/>
+		<a href="shop_cart.php"><img src="img/page_buy.gif"/></a>
+</div>
+
+</body>
+<script type="text/javascript">
+function detail_txt(id,s){
+	var gettop = 220;
+	var list = document.getElementById('detail_txt'+id);
+	var list_height = list.offsetHeight;
+	var top = parseInt(list.style.top);
+	var top_s = Math.floor(top / gettop);
+	var top_new = top + s*gettop;
+	if(top_new>0 || 0-top_new+gettop>list_height){
+		return ;
+	}
+	list.style.top = top_new+'px';
+}
+function product_img(str){
+	document.getElementById('product_img_big').src = './../'+str;
+}
+var detail_look_count = {$detail_look_count};
+var detail_look_cur = 1;
+var goods_count = 1;
+function detail_look(id){
+	if(id==-1){
+		if(detail_look_cur<2) return ;
+		else id = detail_look_cur-1;
+	}
+	if(id==-2){
+		if(detail_look_cur>detail_look_count-1) return ;
+		else id = detail_look_cur+1;
+	}
+	for(var i=1;i<detail_look_count+1;i++){
+		document.getElementById('detail_list_'+i).className = '';
+		document.getElementById('detail_info_'+i).className = 'none';
+	}
+	detail_look_cur = id;
+	document.getElementById('page_on').innerHTML = id;
+	document.getElementById('detail_list_'+id).className = 'cur';
+	document.getElementById('detail_info_'+id).className = 'detail_info';
+	
+	document.getElementById('page_before').className = detail_look_cur==1?'':'cursor';
+	document.getElementById('page_after').className = detail_look_cur==detail_look_count?'':'cursor';
+}
+function sale_num(s){
+	goods_count = document.getElementById('goods_count').value;
+	if (isNaN(goods_count) || goods_count <1) goods_count = 1;
+	goods_count = Math.floor(goods_count);
+	if(goods_count<2 && s==-1) return;
+	goods_count += s;
+	document.getElementById('goods_count').value = goods_count;
+}
+function sale_num_value(s){
+	if (isNaN(s) || s<1) goods_count = '';
+	else goods_count = Math.floor(s);
+	document.getElementById('goods_count').value = goods_count;
+}
+function addcart(){
+	goods_count = document.getElementById('goods_count').value;
+	if (isNaN(goods_count) || goods_count <1) goods_count = 1;
+	goods_count = Math.floor(goods_count);
+	window.location.href= 'shop_cart.php?act=add&goods_id={$goods.goods_id}&count='+goods_count;
+	
+}
+</script>
+</html>

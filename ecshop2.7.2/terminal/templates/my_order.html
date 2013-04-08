@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>商品总页</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">	
+		
+</style>
+
+</head>
+<body>
+<div class="head">
+
+</div>
+
+<div class="mainline"></div>
+<div class="cartbox" id='cartbox'>
+    <div class="pagebox_cat">
+        {if $total.page>1}<a href="shop_cart.php?act=order_find&page={$total.page_before}&card_no={$card_number}"><img src="img/pagebox_cat_up.gif"/></a>{else}<img src="img/pagebox_cat_up.gif"/>{/if}
+		<!-- {foreach from=$order_list item=order  name=order} -->
+        <div>{$order.page_number}</div>
+        <!-- {/foreach} -->
+        {if $total.page_after>0}<a href="shop_cart.php?act=order_find&page={$total.page_after}&card_no={$card_number}"><img src="img/pagebox_cat_down.gif"/></a>{else}<img src="img/pagebox_cat_down.gif"/>{/if}
+    </div>
+	<table cellspacing="0" cellpadding="0" class="carttable">
+	<tr>
+		<th width="88">订单号</th>
+		<th width="200">下单时间</th>
+		<th width="88">取货人</th>
+		<th width="88">金额</th>
+		<th align="center">查看</th>
+		<th align="center">打印付款</th>
+	</tr>
+	<!-- {foreach from=$order_list item=order  name=order} -->
+	<tr align="center">
+		<td><a href="shop_cart.php?act=order_detail&order_id={$order.order_id}&card_no={$card_number}&from_page={$total.page}">{$order.order_sn}</td>
+		<td>{$order.add_time}</td>
+		<td>{$order.consignee}</td>
+		<td>{$order.order_amount}</td>
+		<td><a href="shop_cart.php?act=order_detail&order_id={$order.order_id}&card_no={$card_number}&from_page={$total.page}" ><img src="img/blue_bt.png"></a></td>
+		<td><a href="shop_cart.php?act=print_order&order_id={$order.order_id}&card_no={$card_number}"><img src="img/red_bt.png"></a></td>
+	</tr>
+	<!-- {/foreach} -->
+	</table>
+    <div class="pagebox_total">{$total.total}元</div>
+</div>
+</body>
+</html>

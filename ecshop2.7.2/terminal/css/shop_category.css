@@ -1,0 +1,94 @@
+.footer {
+	clear: both;
+}
+#category {
+	float: left;
+	height: 750px;
+	padding: 10px 0 0 10px;
+    width: 140px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-bottom-right-radius: 15px;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-bottom-right-radius: 15px;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+    border-bottom-left-radius: 15px;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+    border-top-right-radius: 15px;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+    border-top-left-radius: 15px;
+ }
+
+.ui-accordion .ui-accordion-content {
+	background: none repeat scroll 0 0 #A91319;
+	padding: 0;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+.ui-widget-content{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+#category ul {
+	list-style: none outside none;
+	margin: 0 0 10px;
+	padding:0;
+}
+#category li.selected {
+	background: none repeat scroll 0 0 #333;
+}
+.ui-state-default, .ui-widget-content , .ui-widget-header  {
+    background: none repeat scroll 0 0 #464646;
+}
+.ui-state-active, .ui-widget-content , .ui-widget-header  {
+    background: none repeat scroll 0 0 #A91319;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    font-weight: bold;
+}
+.ui-accordion .ui-accordion-icons {
+    padding-left: 0.5em;
+}
+#category h3 {
+	border-bottom: 1px solid #ECECEC;
+	border-top: 1px solid #FFFFFF;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 19pt;
+    line-height: 50px;
+    text-align: center;
+}
+#category li {
+	background: none repeat scroll 0 0 #6B6B6B;
+	border-bottom: 1px solid #A71F37;
+	border-top: 1px solid #6B6B6B;
+	text-align: center;
+	cursor: pointer;
+	font-size: 17pt;
+	padding: 0.4em 0;
+}
+
+.pagebox {
+	clear:none;
+    float:left;
+    height: 87px;
+    margin: 10px 0 0 72px;
+    overflow: hidden;
+    width: 800px;
+}
+.pagebox img, .pagebox div {
+    display: block;
+    float: left;
+    height: 83px;
+    margin: 0 0 0 30px;
+    width: 130px;
+}
+.brand_product {
+    margin: 0;
+}

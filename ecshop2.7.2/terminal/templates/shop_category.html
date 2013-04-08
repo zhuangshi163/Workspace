@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>商品总页</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+<link href="css/shop_category.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.product_list {overflow: visible;}
+#category {height: 620px;padding: 40px 0 0 20px;width: 178px;}
+#category ul {list-style: none outside none;padding:0 0 15px;}
+#category h3 {font-size: 24pt;line-height: 75px;}
+#category li {font-size: 23pt;padding: 0.4em 0;}
+.pagebox {margin: 30px 0 0 0;width: 824px;}
+.head div{padding-left: 190px;}
+</style>
+{insert_scripts files="../jquery-1.8.3.js"}
+{insert_scripts files="../jquery.ui.core.js"}
+{insert_scripts files="../jquery.ui.widget.js"}
+{insert_scripts files="../jquery.ui.accordion.js"}
+<script>
+	var cur_art_cat_id = 0;		//当前选中的文章分类id
+	var art_cat_lenght = 0;		//文章分类个数
+	var first_art_cat_id = 0;	//第一个文章分类id
+	var cur_goods_cat_id = 0;	//当前选中的一级分类id
+	{$cat_article}
+	
+	var goods_list = new Array();
+	
+	$(function() {
+		$("#goods_").hide();
+		$("#category").accordion({
+			active:0,
+			heightStyle:"auto",
+			beforeActivate: function( event, ui ) {
+				$("#info_").show(ui.newHeader[0].id);
+				$("#goods_").hide();
+				$("#pageBox").hide();
+			}
+		});
+		if(intro.length>0){
+			first_art_cat_id = cur_art_cat_id = $("#first_art_cat_id").val();
+			cur_goods_cat_id = $("#first_goods_cat_id").val();
+			art_cat_lenght = $("#art_cat_lenght").val();
+			show_article_content(cur_art_cat_id, cur_goods_cat_id);
+		}
+	});
+	//显示分类文章内容
+	function show_article_content(article_id, goods_cat_id){
+		$("#content").html("");
+		if(intro.length != 0){
+			for(var i=0; i<intro.length; i++){
+				var info = intro[i];
+				if(info.cat_id==article_id && info.terminal_cat_id==goods_cat_id){
+					$("#content").html(info.content);
+				}
+			}
+		}
+	}
+	//点击一级菜单事件
+	function showInfo(cat_id){
+		$("#info_").show();
+		$("#pageBox").hide();
+		$("#goods_").hide();
+		$("#content").empty();
+		$("#detailFlag").val(cat_id);
+		cur_goods_cat_id = cat_id;
+		click_article_cat_event(first_art_cat_id, 'detail_list_1');
+	}
+	//点击文章分类事件
+	function click_article_cat_event(article_cat_id, id){
+		cur_art_cat_id = article_cat_id;
+		for(var i=1; i<=art_cat_lenght; i++){
+			$("#detail_list_"+i).removeClass("cur");
+		}
+		$("#"+id).addClass("cur");
+		show_article_content(cur_art_cat_id, cur_goods_cat_id);
+	}
+	//点击子菜单事件，查找商品列表
+	function click_child_cat_event(cat_id, query_page){
+		$("#goods_").show();
+		$("#info_").hide();
+		$("#cat_list li").removeClass("selected");
+		$("#child_cat"+cat_id).addClass("selected");
+		
+		var is_need_query = true;
+		var curr_goods_index = -1;
+		for(var i=0; i<goods_list.length; i++){
+			var goods = goods_list[i];
+			if(goods.cat_id==cat_id){
+				curr_goods_index = i;
+				if(goods.is_finish_query || query_page<=goods.can_query_max_page){
+					is_need_query = false;
+				}
+			}
+		}
+		if(!is_need_query){
+			return show_goods_list(curr_goods_index, query_page);
+		}
+		$.get(
+			"shop_category.php?act=goods_list&cat_id="+cat_id+"&page="+query_page,
+			function(data){
+				var page_info = data.page_info;
+				var o = {"cat_id": cat_id, "count":page_info.count, "total_page":page_info.total_page, "page_size":page_info.page_size};
+				var list = data.goods_list;
+				var arr = new Array();
+				for(var i=0; i<list.length; i++){
+					var goods = list[i];
+					var g = {"goods_id": goods.goods_id, "goods_thumb":goods.goods_thumb, "goods_style_name":goods.goods_style_name, 
+							"is_promote_ex":goods.is_promote_ex, "promote_price":goods.promote_price, "market_price":goods.market_price,
+							"sale_price":goods.sale_price};
+					arr.push(g);
+				}
+				if(curr_goods_index == -1){
+					o.goods_list = arr;
+					o.is_finish_query = false;
+					o.can_query_max_page = o.count==0?1:Math.ceil(o.goods_list.length/o.page_size);
+					goods_list.push(o);
+					curr_goods_index = goods_list.length-1;
+				}else{
+					for(var i=0; i<arr.length; i++){
+						goods_list[curr_goods_index].goods_list.push(arr[i]);
+					}
+					o.goods_list = goods_list[curr_goods_index].goods_list;
+					if(goods_list[curr_goods_index].count == o.goods_list.length){
+						o.is_finish_query = true;
+					}else{
+						o.is_finish_query = false;
+					}
+					o.can_query_max_page = o.count==0?1:Math.ceil(o.goods_list.length/o.page_size);
+					goods_list[curr_goods_index] = o;
+				}
+				//alert(goods_list.length);
+				return show_goods_list(curr_goods_index, query_page);
+			},
+			"json"
+		);
+	}
+	//显示商品列表
+	function show_goods_list(curr_goods_index, query_page){
+		var goods_info = goods_list[curr_goods_index];
+		var start_index = goods_info.page_size*(query_page-1);
+		var end_index = goods_info.total_page==query_page?goods_info.count:goods_info.page_size*query_page;
+		var str = "";
+		for(var i=start_index; i<end_index; i++){
+			var goods = goods_info.goods_list[i];
+			str += '<a href="shop_goods.php?goods_id='+goods.goods_id+'">';
+			str += '<img src="'+goods.goods_thumb+'" class="thumb"/>';
+			str += '<span class="name">'+goods.goods_style_name+'</span>';
+			if(goods.is_promote_ex == 1){
+				str += '<span class="sale_price">'+goods.promote_price+'</span>';
+				str += '<span class="market_price">'+goods.market_price+'</span>';
+				str += '<img src="../images/product_list_specials.png" class="button_specials"/></a>';
+			}else{
+				str += '<span class="sale_price">'+goods.sale_price+'</span>';
+				str += '<span class="market_price">'+goods.market_price+'</span>';
+			}
+			str += '</a>';
+		}
+		$("#content").html(str);
+		str = "";
+		if(query_page > 1){
+			str += '<a href="javascript:click_child_cat_event('+goods_info.cat_id+', 1)"><img src="img/page_one.gif"/></a>';		//第一页
+			str += '<a href="javascript:click_child_cat_event('+goods_info.cat_id+', '+(query_page-1)+')"><img src="img/page_before.gif"/></a>';	//上一页	
+		}else{
+			str += '<img src="img/page_one.gif"/>';		//第一页
+			str += '<img src="img/page_before.gif"/>';	//上一页
+		}
+		str += '<div>'+query_page+' / '+goods_info.total_page+'</div>';		//页码
+		if(query_page < goods_info.total_page){
+			str += '<a href="javascript:click_child_cat_event('+goods_info.cat_id+', '+(query_page+1)+')"><img src="img/page_after.gif"/></a>';
+			str += '<a href="javascript:click_child_cat_event('+goods_info.cat_id+', '+(goods_info.total_page)+')"><img src="img/page_end.gif"/></a>';
+		}else{
+			str += '<img src="img/page_after.gif"/>';	//下一页
+			str += '<img src="img/page_end.gif"/>';		//最后一页
+		}
+		$("#pageBox").html(str);
+		$("#pageBox").show();
+	}
+</script>
+</head>
+<body>
+<div class="head">
+    <a href="shop_cart.php" class="right"><img src="img/list_buy.gif"/></a>
+    <div id="goods_"><a href="javascript:" class="cur" id="detail_list_0" >全部商品</a></div>
+    <div id="info_">
+    <!-- {foreach from=$article_cat_list name=arrayname item=cat} -->
+    <a href="javascript:click_article_cat_event({$cat.cat_id}, 'detail_list_{$smarty.foreach.arrayname.iteration}');" id="detail_list_{$smarty.foreach.arrayname.iteration}" 
+     {if $smarty.foreach.arrayname.iteration==1}class="cur"{/if}>{$cat.cat_name}</a>
+    <!-- {/foreach} -->
+    <input type="hidden" id="detailFlag" value="{$default_selected_cat_id}"/>
+    </div>
+</div>
+<div class="mainline"></div>
+<!-- 商品分类 -->
+<div id="category">
+  <!-- {foreach from=$cat_list item=cat name="cat"} -->
+  <h3 id="{$cat.cat_id}" onclick="showInfo({$cat.cat_id});">{$cat.cat_name|escape:html}</h3>
+  {if $cat.child}
+  <div>
+    <ul id="cat_list">
+    	<!-- {foreach from=$cat.child item=child} -->
+      <li id="child_cat{$child.cat_id}" onclick="click_child_cat_event({$child.cat_id}, 1)">{$child.cat_name|escape:html}
+      </li>
+      <!-- {/foreach} -->
+    </ul>
+  </div>
+  {else}
+  <div>
+  	 <ul>
+      <li onclick="window.location='shop_category.php?act=goods_list&cat_id={$cat.cat_id}&top_cat_id={$top_cat_id}'">所有商品</li>
+    </ul>
+  </div>
+  {/if}
+ <!-- {/foreach} -->
+</div>
+
+<!-- 商品列表 -->
+<div id="content" class="product_list brand_product"></div>
+<!-- 分页信息 -->
+<div id="pageBox" class="pagebox"></div>
+
+	<!-- {foreach from=$article_cat_list name=arrayname item=cat} -->
+     <!-- {if $smarty.foreach.arrayname.iteration==1} -->
+     <input type="hidden" value="{$cat.cat_id}" id="first_art_cat_id" />
+     <input type="hidden" value="{$smarty.foreach.arrayname.total}" id="art_cat_lenght" />
+     <!-- {/if} -->
+    <!-- {/foreach} -->
+  <!-- {foreach from=$cat_list item=cat name="cat"} -->
+   	{if $smarty.foreach.cat.iteration==1}
+  	<input type="hidden" id="first_goods_cat_id" value="{$cat.cat_id}"/>
+   	{/if}
+   	<!-- {/foreach} -->
+</body>
+</html>

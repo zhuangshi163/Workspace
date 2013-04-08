@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>会员余额查询</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<style>
+body{
+    font: 18px "黑体","宋体",Arial,Verdana;
+    color:#000;
+    }
+</style>
+
+<script type="text/javascript">
+		function init(){
+//			var printer = new ActiveXObject("HsPayControl.CardReader");
+//			printer.ReadTrackData23(2);
+//			var data = printer.Track2Data;
+
+			//var printer = new ActiveXObject("HsPayControl.CardReader");
+			//printer.ReadTrackData23(2);
+			var data = "0vq93c1t6f00";
+
+			//data = data.substring(2, data.indexOf("="));
+			document.getElementById('card_no').value=data;
+			if(data.length !=0){
+				//document.getElementById('card_submit').className = 'none';
+				document.forms[0].submit();
+			}else {
+				//alert('刷卡失败或超时，请再试一次');
+				//window.location = "/";
+				document.getElementById("card_submit").innerHTML='<div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">刷卡出现错误或超时</span></p><br/><br/><img src="../images/re_card.png" onclick ="window.history.go(0);" /><img src="../images/forget_card2.png" onmousedown="forget_su()" /></div>';				
+
+				
+			}
+		}
+		
+		function setInit(){
+			setTimeout(function(){init();},0);
+		}
+		
+</script>
+
+<script type="text/javascript">
+  function showswf(){
+   swfobject.registerObject("myId", "9.0.0", "expressInstall.swf");
+  }
+  function toConvenient(){
+  	window.location.href='shop_convenient.php';
+  }
+</script>
+
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,user.js'}
+</head>
+<body onload="setInit();">
+
+<!-- 数字键盘区域end -->
+<form action="shop_user.php?act=get_accounts" method="post" name="form1" id="form1">
+	 <input name="card_no" type="hidden" class="shuru readonly" id="card_no" />
+	<div id='card_submit'  align="center">
+		<div>
+		  <p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">温馨提示</span></p>
+		  <p style="line-height:50px;><span id="card_times2" style="color:#FF0000;font-size:38px;font-weight:700">请刷您的会员卡，请在30秒内完成刷卡</span></p>
+		</div>
+		
+		<div>
+		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="300" id="card_flash">
+			<param name="movie" value="swf/card.swf" />
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="swf/card.swf" width="800" height="300">
+			<!--<![endif]-->
+			<div>
+				<h1>Alternative content</h1>
+				<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+			</div>
+			<!--[if !IE]>-->
+			</object>
+			<!--<![endif]-->
+		</object>
+		</div>
+		<div><p style="line-height:200px;><span id="card_times3" style="color:#FF0000;font-size:38px;font-weight:700">刷卡期间，请勿点击其他按键，否则可能导致刷卡失败</span></p></div>
+    </div>
+    
+</form>    
+</body>
+</html>

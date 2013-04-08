@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商品总页</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="head">
+    <a href="shop_cart.php" class="right"><img src="img/list_buy.gif"/></a>
+	<!-- {foreach from=$cat_list item=cat} -->
+	<a href="shop_specials.php?cat_id={$cat.cat_id}"{$cat.class}>{$cat.cat_name|escape:html}</a>
+	<!-- {/foreach} -->
+</div>
+<div class="mainline"></div>
+
+<div class="product_list">
+	<!-- {foreach from=$goods_list item=goods  name=goods} -->
+	<a href="shop_goods.php?goods_id={$goods.goods_id}">
+	<img src="./../{$goods.goods_thumb}" class="thumb"/>
+	<span class="name">{$goods.goods_style_name}</span>
+	<span class="sale_price">{$goods.promote_price}</span>
+	<span class="market_price">{$goods.market_price}</span>
+	<img src="img/product_list_specials.png" class="button_specials"/>	</a>
+	<!-- {/foreach} -->
+</div>
+
+<div class="pagebox">
+		{if $total.page>1}<a href="shop_specials.php?cat_id={$total.cat_id}"><img src="img/page_one.gif"/></a>{else}<img src="img/page_one.gif"/>{/if}
+		{if $total.page>1}<a href="shop_specials.php?cat_id={$total.cat_id}&page={$total.page_before}"><img src="img/page_before.gif"/></a>{else}<img src="img/page_before.gif"/>{/if}
+        <div>{$total.page} / {if $total.page_big==0}1{else}{$total.page_big}{/if}</div>
+		{if $total.page_after>0}<a href="shop_specials.php?cat_id={$total.cat_id}&page={$total.page_after}"><img src="img/page_after.gif"/></a>{else}<img src="img/page_after.gif"/>{/if}
+		{if $total.page!=$total.page_big}<a href="shop_specials.php?cat_id={$total.cat_id}&page={$total.page_big}"><img src="img/page_end.gif"/></a>{else}<img src="img/page_end.gif"/>{/if}
+</div>
+</body>
+</html>

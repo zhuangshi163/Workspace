@@ -1,0 +1,15 @@
+body {margin:5px 0 0 0;padding:0;background:#fff;}
+div,table {margin:0 auto;}
+
+body,td,th,input,textarea {font: 12px Arial,Verdana;color:#555;}
+#mainBtnDiv{margin-top: 1px;}
+.mainbutton{float: left;cursor:pointer;}
+.contentDiv{position: absolute;width: 146px; height: 130px;font-family: 'ºÚÌå ';
+	font-style: normal; font-weight: bold; font-size: 30px; font-stretch: normal;
+	font-variant: normal; color: #ffffff;font-style:normal; letter-spacing: 3px;}
+.bgStyle{width:146px; height:130px; border:0px}
+
+#wrap {display:table; width:146px; height:130px; position:relative; overflow:hidden;}
+#subwrap {vertical-align:middle;display:table-cell;_position:absolute;_top:50%;}
+#content {line-height:50px; _position:relative; _top:-50%; width: 146px; text-align: center;}
+*{margin: 0px; padding: 0px;}

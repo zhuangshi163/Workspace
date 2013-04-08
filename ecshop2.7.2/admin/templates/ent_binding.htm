@@ -1,0 +1,66 @@
+<!-- $Id: privilege_info.htm 16616 2009-08-27 01:56:35Z liuhui $ -->
+{include file="pageheader.htm"}
+<div class="main-div">
+<form name="theForm" method="post" onsubmit="return validate();">
+<table width="100%">
+  <tr>
+    <td class="label">{$lang.ent_id}</td>
+    <td>
+      <input type="text" name="ent_id" maxlength="20" value="{$ent_id|escape}" size="34"/>{$lang.require_field}</td>
+  </tr>
+  <tr>
+    <td class="label">{$lang.ent_pwd}</td>
+    <td>
+      <input type="password" name="ent_pwd" maxlength="32" size="34" />{$lang.require_field}</td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" value="{$lang.button_submit}" class="button" />&nbsp;&nbsp;&nbsp;
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+      <input type="hidden" name="act" value="sms_login_act" />
+  </tr>
+</table>
+</form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js"}
+<script language="JavaScript">
+var action = "{$action}";
+<!--
+{literal}
+document.forms['theForm'].elements['ent_id'].focus();
+onload = function()
+{
+    // 开始检查订单
+    startCheckOrder();
+}
+
+/**
+* 检查表单输入的数据
+*/
+function validate()
+{
+
+  validator = new Validator("theForm");
+  validator.password = function (controlId, msg)
+  {
+    var obj = document.forms[this.formName].elements[controlId];
+    obj.value = Utils.trim(obj.value);
+    if (!(obj.value.length >= 6 && /\d+/.test(obj.value) && /[a-zA-Z]+/.test(obj.value)))
+    {
+      this.addErrorMsg(msg);
+    }
+
+  }
+  validator.required("ent_id", entid_empty);
+  if (document.forms['theForm'].elements['ent_pwd'])
+    {
+      validator.password("ent_pwd", password_invaild);
+    }
+ 
+  return validator.passed();
+}
+
+//-->
+{/literal}
+</script>
+{include file="pagefooter.htm"}

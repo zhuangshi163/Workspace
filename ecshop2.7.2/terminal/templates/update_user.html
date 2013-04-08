@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+{insert_scripts files='transport.js,utils.js'}
+<link href="style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    	table{
+    		margin-top: 100px;
+    	}
+    	table tr td{
+			padding:10px;
+    		font-family:'黑体';
+    		font-weight:bold;
+    		font-size: 35px;
+    	}
+		
+    	.shuru{
+    		width: 100%;
+    		height: 60px;
+    		font-size: 38px;
+    		font-family: '微软雅黑';
+    		line-height: 60px;
+			vertical-align:middle;
+			border: 1px solid #000000;
+    	}
+    	.error{
+    		font-size: 28px;
+    		color: #ff0000;
+    		width:600px;
+    	}
+    	
+    	#title{
+			font-family: '黑体';
+			font-size: 50px;
+			color: #ff0000;
+			font-weight: bold;
+			margin-top: 50px;
+		}
+		
+		.nbutton{
+			margin-left:100px;
+			width: 200px;
+			height: 80px;
+			font-size: 32px;
+			font-family: '黑体';
+			float: left;
+		}
+	.but {
+	    border: 0 none;
+	    cursor: pointer;
+	    height: 74px;
+	    width: 179px;
+	}
+	.submit {
+	    background: url("img/A1.png") repeat scroll 0 0 transparent;
+	}
+	.button {
+	    background: url("img/A2.png") repeat scroll 0 0 transparent;
+	}
+	
+	.readonly {
+		background-color: #CCC;
+	}
+	.radio { width:300px; height: 300px; }
+	.title{color: red; font-size: 50px; line-height: 100px; height: 50px;}
+	.details{visibility: hidden;}
+	#error2, #errorInfo{color: red; font-size:30px;}
+</style>
+  	
+	<script type="text/javascript">
+		var keyboard_input = typeof(popupNumbericKeypad) === 'object' ? false : true;
+		keyboard_input = false;
+		var zoneId;		//全局变量，操作区域的id号，手写版区域id或者数字键盘区域id
+		var editId;		//全局变量，要输入部分的input标签的id号
+		var isPassword;	//全局变量，input标签是否为密码输入框
+		var inputObject="";	//全局变量，用手写版或者数字键盘的input对象
+		var inputvalue="";	//全局变量，用手写版或者数字键盘的input的值
+		/**
+		 * 弹出数字键盘的方法
+		 * @param {Object} eId	相关input标签的id号
+		 * @param {Object} tipName	提示的文字，显示在数字键盘的上面，如tipName为”手机号“，将显示”请输入您的手机号“
+		 */
+		function showNumZone(eId, tipName){
+			if(keyboard_input) return ;
+			zoneId = "numzone";
+			editId = eId;
+			inputObject = document.getElementById(editId);
+			inputvalue = inputObject.value;
+			showZone();
+			popupNumbericKeypad.Content = "";
+			if(document.getElementById(eId).type == "password"){
+				isPassword = true;
+				for(var i=0; i<inputObject.value.length; i++){
+					popupNumbericKeypad.Content += "●";
+				}
+			}else{
+				isPassword = false;
+				popupNumbericKeypad.Content = inputObject.value;	//将已输入的内容显示在数字键盘上
+			}
+			document.getElementById("showNumTitle").innerHTML = "请输入您的"+tipName+"：";
+		}
+		/**
+		 * 弹出手写版的方法
+		 * @param {Object} eId	相关input标签的id号
+		 * @param {Object} tipName	提示的文字，显示在数字键盘的上面，如tipName为”姓名“，将显示”请输入您的姓名“
+		 */
+		function showHandZone(eId, tipName){
+			if(keyboard_input) return ;
+			zoneId = "handzone";
+			editId = eId;
+			inputObject = document.getElementById(editId);
+			showZone();
+			document.getElementById("showAlreadyInput").innerHTML = "";
+			if(document.getElementById(eId).type == "password"){
+				isPassword = true;
+				for(var i=0; i<inputObject.value.length; i++){
+					document.getElementById("showAlreadyInput").innerHTML += "●";
+				}
+			}else{
+				isPassword = false;
+				document.getElementById("showAlreadyInput").innerHTML = inputObject.value;	//将已输入的内容显示在手写版上
+			}
+			document.getElementById("showHandTitle").innerHTML = "请输入您的"+tipName+"：";
+		}
+		/**
+		 * 显示数字键盘或者手写版区域
+		 */
+		function showZone(){
+			document.getElementById("mark").style.display = "block";	//显示遮罩层
+			//隐藏手写版和数字键盘区域
+			document.getElementById("handzone").style.display = "none";
+			document.getElementById("numzone").style.display = "none";
+			
+			var myobj = document.getElementById(zoneId);
+			myobj.style.display = "block";		//显示id为zoneId的区域
+			var bodyhh = document.documentElement.clientHeight;
+			var bodyww = document.documentElement.clientWidth;
+			var objhh = myobj.clientHeight;
+			var objww = myobj.clientWidth;
+			myobj.style.top = (bodyhh - objhh) / 2;		//将zoneId的区域居中显示
+			myobj.style.left = (bodyww - objww) / 2;
+		}
+		/**
+		 * 隐藏数字键盘或者手写版区域
+		 */
+		function hideZone(){
+			document.getElementById("mark").style.display = "none";		//隐藏遮罩层
+			document.getElementById(zoneId).style.display = "none";		//隐藏手写版区域
+		}
+		
+		var user_id;
+		var formStatus = 0;
+		var errorTips = ["会员卡号格式不正确！", "此会员卡尚未注册！", "电话格式不正确，请重新输入！", 
+			"此电话已被注册，请重新输入！", "此会员卡号已冻结！", "请使用本店已激活的会员卡！", "资料填写不完整！"];
+		/**
+		*	检查表单
+		*/
+		function submitForm(){
+			var cardNo = document.getElementById("card_id").value;
+			if(cardNo.length<12){
+				document.getElementById("error2").innerHTML = errorTips[0];
+				document.getElementById("card_id").value = "";
+				return;
+			}
+			if(formStatus == 0){
+				Ajax.call('shop_user.php?act=query_user_info&card_id='+cardNo, '', card_Response, 'GET', 'JSON');
+			}else if(formStatus == 1){
+				if(!isFilloutComplete()){
+					document.getElementById("error2").innerHTML = errorTips[6];
+					return;
+				}
+				var mobile = document.getElementById("phoneId").value;
+				if(mobile != ""){
+					var reg = /(^((0[1,2]{1}\d{1}-?\d{8})|(0[3-9]{1}\d{2}-?\d{7,8}))$)|(^0?(13[0-9]|15[0-9]|18[0-9]|14[0-9])[0-9]{8}$)/;
+					if(reg.test(mobile)){
+						Ajax.call('shop_user.php?act=check_mobile&user_id='+user_id+'&mobile='+mobile, '', check_mobile_Response, 'GET', 'JSON');
+					}else{
+						document.getElementById("error2").innerHTML=errorTips[2];
+						return;
+					}
+				}else{
+					document.forms[0].action = "shop_user.php?act=update_user_submit&user_id="+user_id;
+					formStatus == 0;
+					document.forms[0].submit();
+				}
+			}
+		}
+		/**
+		*	检查电话号码是否唯一的回调函数
+		*/
+		function check_mobile_Response(data){
+			if(data!=null && data!=""){
+				document.getElementById("error2").innerHTML = errorTips[3];
+				return;
+			}
+			document.forms[0].action = "shop_user.php?act=update_user_submit&user_id="+user_id;
+			formStatus == 0;
+			document.forms[0].submit();
+		}
+		/**
+		*	查询会员卡号的回调函数
+		*/
+		function card_Response(data){
+			if(data.code == 0){
+				document.getElementById('myContext').className = '';
+				document.getElementById("error2").innerHTML = errorTips[1];
+				formStatus = 0;
+				document.getElementById("card_id").value = "";
+			}else if(data.code == 2){
+				document.getElementById('myContext').className = '';
+				document.getElementById("error2").innerHTML = errorTips[4];
+				formStatus = 0;
+				document.getElementById("card_id").value = "";
+			}else if(data.code == 3){
+				document.getElementById("message").style.display="block";
+				document.getElementById("myContext").style.display="none";
+			}else{
+				document.getElementById('myContext').className = '';
+				document.getElementById("error2").innerHTML = "";
+				formStatus = 1;
+				document.getElementById("nameTr").style.visibility = "visible";
+				document.getElementById("sexTr").style.visibility = "visible";
+				document.getElementById("mobileTr").style.visibility = "visible";
+				//document.getElementById("errorTip").style.display = "none";
+				document.getElementById("consigneeId").value = data.real_name;
+				if(data.sex==0){
+					document.getElementById("women").checked = true;
+				}else if(data.sex==1){
+					document.getElementById("man").checked = true;
+				}
+				document.getElementById("phoneId").value = data.mobile_phone!=""?data.mobile_phone:data.office_phone;
+				document.getElementById("card_id").readOnly = true;
+				document.getElementById("card_id").onkeydown = function (){return false;}
+				user_id = data.user_id;
+			}
+		}
+		
+		function cleartext(){
+			if(formStatus==0){
+				document.getElementById("card_id").value = "";
+			}else{
+				document.getElementById("phoneId").value = "";
+				document.getElementById("consigneeId").value = "";
+				document.getElementById("women").checked = false;
+				document.getElementById("man").checked = true;
+			}
+		}
+		
+		function EnterPress(e){ //传入 event
+			var e = e || window.event;
+			if(e.keyCode == 13){
+				document.getElementById("consigneeId").focus();
+			}
+		}
+		
+		/**
+		*	检查资料是否填写完整
+		*/
+		function isFilloutComplete(){
+			var name = (document.getElementById("consigneeId").value.length>0);
+			var women = document.getElementById("women").checked;
+			var man = document.getElementById("man").checked;
+			var sex = (women || man);
+			var phone = (document.getElementById("phoneId").value.length>0);
+			return name && sex && phone;
+		}
+	</script>
+	
+	<!-- 手写版输入单个字事件 -->
+	<script for="staticTablet" type="text/javascript" event="FontSelected(data);">
+    	inputObject.value += data;				//输入data到指定input中
+    	if(isPassword){
+    		document.getElementById("showAlreadyInput").innerHTML += "●";
+    	}else{
+    		document.getElementById("showAlreadyInput").innerHTML += data;
+    	}
+	</script>
+	<!-- 手写板确认和回退事件 -->
+	<script for="staticTablet" type="text/javascript" event="ButtonDown(type);">
+    	if(type == "confirm"){		//确认事件
+			hideZone();
+    		//alert(inputObject.value);
+    	}else if(type == "back"){	//回退事件
+    		var value = inputObject.value;
+    		var showObject = document.getElementById("showAlreadyInput");
+    		inputObject.value = value.substring(0,value.length-1);
+    		showObject.innerHTML = showObject.innerHTML.substring(0,showObject.innerHTML.length-1);
+    	}
+	</script>
+	<!-- 数字键盘事件 -->
+	<script for="popupNumbericKeypad" type="text/javascript" event="ButtonDown(data);">
+		switch(data){
+			case 'clear':	//清空
+				popupNumbericKeypad.Content = "";
+				inputObject.value = "";
+				break;
+			case 'back':	//回退
+				var num = popupNumbericKeypad.Content;
+				popupNumbericKeypad.Content = num.substring(0,num.length-1);
+				inputObject.value = inputObject.value.substring(0,inputObject.value.length-1);
+				break;
+			case 'cancel':	//取消
+				hideZone();
+				inputObject.value = inputvalue;
+				break;
+			case 'confirm':	//确认
+				hideZone();
+				//alert(inputObject.value);
+				break;
+			default:		//输入数字
+				inputObject.value += data;
+		    	if(isPassword){
+		    		popupNumbericKeypad.Content += "●";
+		    	}else{
+		    		popupNumbericKeypad.Content += data;
+		    	}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function init(){
+//			var printer = new ActiveXObject("HsPayControl.CardReader");
+//			printer.ReadTrackData23(2);
+//			var data = printer.Track2Data;
+
+			var data = "0vq93c1t6f00";
+		
+			//data = data.substring(2, data.indexOf("="));
+			if(data.length !=0){
+				document.getElementById('card_id').value=data;
+				submitForm();
+				document.getElementById('card_message').className = 'none';
+			}else {		
+				document.getElementById("card_message").innerHTML='<div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">刷卡出现错误或超时</span></p><br/><br/><img src="img/re_card.png" onclick ="window.history.go(0);" /><img src="img/forget_card.png" onmousedown="toConvenient()" /></div>';				
+				
+			}
+		}
+		
+		function setInit(){
+			setTimeout(function(){init();},0);
+		}
+	</script>
+	<!--  <script type="text/javascript" src="/js/swfobject.js"></script>  -->
+	{insert_scripts files='swfobject.js'}
+	<script type="text/javascript">
+	  function showswf(){
+	   swfobject.registerObject("myId", "9.0.0", "expressInstall.swf");
+	  }
+	  function toConvenient(){
+  	window.location.href='shop_convenient.php';
+  }
+	</script>
+</head>
+
+<body onload="setInit();">
+
+	<!-- 遮罩层区域start-->
+	<div id="mark"></div>
+	<!-- 遮罩层区域end -->
+	
+	<!-- 手写版区域start -->
+	<div id="handzone">
+		<div id="hzTip"><span id="showHandTitle">请输入您的姓名</span><span id="showAlreadyInput"></span></div>
+		<object id="staticTablet" classid="clsid:00AE8CF9-5F57-4FFC-A481-2125991A77CC" width="730px" height="430px"></object>
+	</div>
+	<!-- 手写版区域end -->
+	
+	<!-- 数字键盘区域start -->
+	<div id="numzone">
+		<div id="nzTip"><span id="showNumTitle">请输入您的姓名</span></div>
+		<object id="popupNumbericKeypad" classid="clsid:3E4CDDC3-E7DB-47AF-9DB8-6372FB600415"  width="332px" height="466px">
+			<param name="BackgroundColor" value="00bbff" />
+		</object>
+	</div>
+	
+	<!-- 数字键盘区域end -->
+	<div id="card_message" align="center">	
+	<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+	<div>
+		  <p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">温馨提示</span></p>
+		  <p style="line-height:50px;><span id="card_times2" style="color:#FF0000;font-size:38px;font-weight:700">请刷您的会员卡，请在30秒内完成刷卡</span></p>
+	</div>
+	
+	<div>
+	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="300" id="card_flash">
+	<param name="movie" value="swf/card.swf" />
+	<!--[if !IE]>-->
+	<object type="application/x-shockwave-flash" data="swf/card.swf" width="800" height="300">
+	<!--<![endif]-->
+	<div>
+		<h1>Alternative content</h1>
+		<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+	</div>
+	<!--[if !IE]>-->
+	</object>
+	<!--<![endif]-->
+	</object>
+	</div>	
+		<div><p style="line-height:200px;><span id="card_times3" style="color:#FF0000;font-size:38px;font-weight:700">刷卡期间，请勿点击其他按键，否则可能导致刷卡失败</span></p></div>
+    </div>
+
+	<div class="message" id="message" style="display:none;">
+		<div class="message_list"><span>信息提示</span></div>
+			<img src="img/store_tablebox_top.gif"/>
+    		<div class="message_info">
+			<div>请使用本店已激活的会员卡</div>
+			<a href="shop_user.php">返回会员空间</a>
+		
+   		</div>
+    	<img src="img/store_tablebox_bottom.gif"/>
+	</div>
+<div align="center" id="myContext" class="none">
+<div class="title">资料修改</div>
+<form id="form1" name="form1" method="post">
+  <table width="709" border="0">
+    <tr>
+      <td width="41">&nbsp;</td>
+      <td width="121">会员卡号:</td>
+      <td colspan="2"><label for="card_id"></label>
+      <!--
+       onkeypress="EnterPress(event)" onkeydown="EnterPress()"
+      -->
+      <input name="card_id" type="text" class="shuru readonly" id="card_id" maxlength="16" onkeydown="if(event.keyCode==13||event.which==13)submitForm();"/></td>
+      <td width="64">&nbsp;</td>
+    </tr>
+    <tr class="details" id="nameTr">
+      <td>&nbsp;</td>
+      <td>姓名:</td>
+      <td colspan="2"><label for="name"></label>
+      <input name="name" type="text" class="shuru" id="consigneeId" onfocus="showHandZone('consigneeId', '姓名')" /></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr class="details" id="sexTr">
+      <td>&nbsp;</td>
+      <td>性别:</td>
+      <td colspan="2"><input type="radio" name="sex" id="man" value="1" />
+        <label for="man">男</label>
+        <input type="radio" name="sex" id="women" value="0" /><label for="women">女</label>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr class="details" id="mobileTr">
+      <td>&nbsp;</td>
+      <td>电话:</td>
+      <td colspan="2"><label for="phone"></label>
+      <input name="phone" type="text" class="shuru" id="phoneId" onfocus="showNumZone('phoneId', '手机号')" /></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td colspan="2" id="error2"></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td width="227" align="left">
+      <input type="button" class="but submit" value=""  onclick="submitForm()"></td>
+      <td width="234" align="right">
+      <input type="button" class="but button" value="" name="clear" onClick="cleartext()"></td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</form>
+</div>
+</body>
+</html>

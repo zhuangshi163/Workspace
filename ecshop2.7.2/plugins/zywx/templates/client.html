@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Appcan-Ec-Plugin</title>
+	<link rel="stylesheet" href="styles/appcan_ec.css" type="text/css" />
+</head>
+
+<body>
+
+	<div id="tip_" class="tip_matte" style="display: none;"></div>
+	<div class="client_header">
+		<div class="header_box">
+			<div class="client_header_logo"></div>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="content_left"></div>
+		<div class="content_right">
+			<div  class="content_right_top  img_icon"></div>
+			<div  class="content_right_bottom_btn">
+				<a href="#" onclick="iphone_show();" class="iphone_btn_a"></a>
+				<a href="#" onclick="andriod_show();" class="andriod_btn_a"></a>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+	<div class="footer">{$lang.copyright}</div>
+
+	<!--iPhone提示框-->
+	<div id="iphone_tip" class="tip_box" style="display: none;">
+		<div class="tip_top">
+			<strong>{$lang.iphone_down_name}</strong>
+			<span id="iphone_close_"  class="close_img" ></span>
+		</div>
+		<div class="tip_center">
+			<div class="tip_font">
+				<p class="tip_font_first">
+					<strong>1. {$lang.mobile_install}</strong>
+					<span>&nbsp;&nbsp;{$lang.mobile_install_tips1}<br /><br />&nbsp;&nbsp;{$lang.mobile_install_tips2}({$lang.mobile_install_tips3}):<br/>{$wap_down_url}</span>
+					<img src="{$two_dimensional_code_url}" width="102" height="102" align="absmiddle" />
+				</p>
+				<p class="tip_font_second">
+					<strong>2. {$lang.pc_install}</strong>
+					<span>&nbsp;&nbsp;{$lang.pc_install_tips}</span>
+				</p>
+			</div>
+			<!-- {if $iphone_download_url neq ''} -->
+			<p class="tip_bottom_btn"><a href="{$iphone_download_url}" class="down_btn_ip"></a></p>
+			<!--{/if}-->
+		</div>
+		<div class="tip_bottom"></div>
+	</div>
+
+	<!--Andriod提示框-->
+	<div id="andriod_tip" class="tip_box" style="display: none;">
+		<div class="tip_top">
+			<strong>{$lang.andriod_down_name}</strong>
+			<span id="andriod_close_"   class="close_img" ></span>
+		</div>
+		<div class="tip_center">
+			<div class="tip_font">
+			 
+				<p class="tip_font_first" >
+					<strong>1. {$lang.mobile_install}</strong>
+					<span>&nbsp;&nbsp;{$lang.mobile_install_tips1}<br /><br />&nbsp;&nbsp;{$lang.mobile_install_tips2}:<br />{$wap_down_url}</span>
+					<img src="{$two_dimensional_code_url}" width="102" height="102" align="absmiddle" />
+				</p>
+			
+				<p class="tip_font_second">
+					<strong>2. {$lang.pc_install}</strong>
+					<span>&nbsp;&nbsp;{$lang.pc_install_tips}</span>
+				</p>
+			</div>
+			<!-- {if $android_download_url neq ''} -->
+			<p class="tip_bottom_btn"><a href="{$android_download_url}" class="down_btn_an"></a></p>
+			<!--{/if}-->
+		</div>
+		<div class="tip_bottom"></div> 
+	</div>
+
+	<script type="text/javascript">
+		function iphone_show()
+		{
+			document.getElementById('tip_').style.display = 'block'; 
+			document.getElementById('iphone_tip').style.display = 'block'; 
+		}
+		document.getElementById("iphone_close_").onclick = function()
+		{
+			document.getElementById('tip_').style.display = 'none'; 
+			document.getElementById('iphone_tip').style.display = 'none'; 
+		}
+		
+		function andriod_show()
+		{ 
+			document.getElementById('tip_').style.display = 'block'; 
+			document.getElementById('andriod_tip').style.display = 'block'; 
+		}
+		document.getElementById("andriod_close_").onclick = function()
+		{
+			document.getElementById('tip_').style.display = 'none'; 
+			document.getElementById('andriod_tip').style.display = 'none'; 
+		}
+	</script>
+
+</body>
+</html>

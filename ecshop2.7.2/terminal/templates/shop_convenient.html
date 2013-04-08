@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<title>商品总页</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<link href="css/shop_category.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	#category h3 {
+    font-size: 22pt;
+    line-height: 75px;
+     padding: 0;
+    
+}
+#category li {
+    font-size: 20pt;
+    line-height: 40px;
+}
+</style>
+
+{insert_scripts files="../jquery-1.8.3.js"}
+{insert_scripts files="../jquery.ui.core.js"}
+{insert_scripts files="../jquery.ui.widget.js"}
+{insert_scripts files="../jquery.ui.accordion.js"}
+<script type="text/javascript">
+	$(function(){
+		$("#category").accordion({
+			active:0,
+			heightStyle:"auto"
+		});
+	});
+	function getGoods_list(cat_id,page){
+		var d = new Date();
+		$.getJSON("shop_convenient.php?time="+d.getTime(),{
+			act:"goods_list",
+			cat_id:cat_id,
+			page:page
+		},
+		function(data){
+			$("#category li.selected").removeClass("selected");
+			$("#category #"+cat_id).addClass("selected");
+			$("#goods_content").empty()
+				.html(data.total.goods_list);
+			if(data.total.page_before==0){
+				$("#pre_page").attr("href","javascript:void(0)");
+			}else{
+				$("#pre_page").attr("href","javascript:getGoods_list("+data.total.cat_id+","+data.total.page_before+")");
+			}
+			
+			$("#page_info").empty().html(data.total.page+" / "+data.total.page_big);
+			
+			if(data.total.page_after==0){
+				$("#next_page").attr("href","javascript:void(0)");
+			}else{
+				$("#next_page").attr("href","javascript:getGoods_list("+data.total.cat_id+","+data.total.page_after+")");
+			}
+		});
+	}
+	function add2cart(event,goods_id){
+		var d = new Date();
+		$.getJSON("shop_cart.php?time="+d.getTime(),{
+			act:"convenient_cart",
+			goods_id:goods_id
+		},
+		function(data){
+			if(data.success==1){
+				$(event).toggleClass("cur");
+			}else{
+				alert(data.message);
+			}
+		});
+	}
+</script>
+</head>
+<body>
+    <div id="wrapper">
+  <div id="category">
+    <!-- {foreach from=$cat_list item=cat name="cat"} -->
+  <h3 onclick="getGoods_list({$cat.parent_cat_id},1)">{$cat.parent_cat_name|escape:html}</h3>
+  {if $cat.children_cat}
+  <div>
+    <ul>
+    	<!-- {foreach from=$cat.children_cat  item=children_cat} -->
+      <li id="{$children_cat.cat_id}" onclick="getGoods_list({$children_cat.cat_id},1)">{$children_cat.cat_name|escape:html}
+      </li>
+      <!-- {/foreach} -->
+    </ul>
+  </div>
+  {else}
+  <div>
+  	 <ul>
+      <li>所有商品</li>
+    </ul>
+  </div>
+  {/if}
+ <!-- {/foreach} -->
+  </div>
+ </div>
+
+
+
+<div id="goods_content">
+<div class="product_convenient">
+    <!-- {foreach from=$goods_list item=goods  name=goods} -->
+    {if $goods.txt_status}
+    	<div id="product{$goods.goods_id}" class="{if $goods.rec_id gt 0}cur{/if}">
+    {else}
+    	<div id="product{$goods.goods_id}" class="{if $goods.rec_id gt 0}cur{/if}" onclick="add2cart(this,{$goods.goods_id})">
+    {/if}
+    	<span class="name">{$goods.goods_style_name}</span>
+    	<!-- {if $goods.is_promote_ex eq 1} -->
+    	<span class="sale_price">{$goods.promote_price}</span>
+    	<!-- {else} -->
+    	<span class="sale_price">{$goods.sale_price}</span>
+    	<!-- {/if} -->
+    	<span class="goods_specification">{$goods.goods_specification|escape}</span>
+        {if $goods.txt_status}
+    	<span class="txt" id="txt{$goods.goods_id}"><span class="txt_bg"></span><span>库存为零</span></span>
+        {else}
+    	<span class="none" id="txt{$goods.goods_id}"></span>
+        {/if}
+    </div>
+    <!-- {/foreach} -->
+    </div>
+</div>
+
+<div id="pagebox" class="pagebox">
+		<a id="pre_page" href="javascript:void(0);"><img src="img/page_before.gif"/></a>
+        <div id="page_info">{$total.page} / {if $total.page_big==0}1{else}{$total.page_big}{/if}</div>
+		{if $total.page_after neq 0}
+			<a id="next_page" href="javascript:getGoods_list({$default_cat_id},{$total.page_after});"><img src="img/page_after.gif"/></a>
+		{else}
+			<a id="next_page" href="javascript:void(0)"><img src="img/page_after.gif"/></a>
+		{/if}
+		<a href="shop_cart.php"><img src="img/page_checkout.gif"/></a>
+</div>
+</body>
+</html>

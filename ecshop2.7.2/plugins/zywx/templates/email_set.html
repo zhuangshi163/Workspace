@@ -1,0 +1,106 @@
+<!-- $Id: email_set.html 15409 2012-2-1 16:41:00Z lilixing $ -->
+
+{include file="pageheader.html"}
+
+<div class="main-div">
+		<!--注册、登录修改中START-->
+		<div style="padding-top:0px;">
+			<div class=" login_con">
+				<div class="ec_reg">
+					<div class="login_nav">
+						<a href="#" onclick="toggleTab('j_register');return false;" class="a_active"  id="j_register_tab">{$lang.ec_account_register}</a>
+						<a href="#" onclick="toggleTab('j_login');return false;"  id="j_login_tab">{$lang.appcan_account_login}</a>
+						<div class="clear"></div>
+					</div> 
+				</div>
+				<!--注册-->
+				<div style="display:block" id="j_register">
+					<form action="index.php?act=email_submit" method="post" name="theForm">
+					<div class="login_box" >
+						<div class="login_in">
+							<label class="reg_label">{$lang.email}</label>
+							<input  type="text" class="reg_input"  id="email" name="email" value=""/>
+							<div class="clear"></div>
+						</div>
+						<div class="login_in">
+							<label class="reg_label">{$lang.nickname}</label>
+							<input type="text" class="reg_input" id="nickname" name="nickname"  value="" />
+							<div class="clear"></div>
+						</div>       
+						<div class="login_in">
+							<label class="reg_label">{$lang.password}</label>
+							<input type="password" class="reg_input" id="password" name="password" value="" />
+							<div class="clear"></div>
+						</div>
+					</div>
+					<input name="" type="submit" class="next_btn" style="margin:40px auto 20px; border:0px; font-weight:bold"  value="{$lang.email_submit}" />
+					</form>
+				</div>
+				<!--注册end-->
+
+				<!--登录-->
+				<div  style="display:none"  id="j_login">
+					<iframe name="ssoLoginFrame" id="ssoLoginFrame" src="{$iframe_url}" width="377" height="300"  frameborder="0" scrolling="no"></iframe>
+					<!--
+					<script type="text/javascript" src="js/sso.js"></script>
+					<form action="http://sso.tx100.com/login" method="post" onsubmit="return loginValidate();" target="ssoLoginFrame" name="theLoginForm" id="theLoginForm">
+					<div  class="login_box">
+						<div class="login_in">
+							<label class="reg_label">{$lang.account_user}</label>
+							<input type="text" name="username" id="j_username"  class="reg_input" />
+							<div class="clear"></div>
+						 </div>
+						 <div class="login_in">
+							<label class="reg_label">{$lang.account_pass}</label>
+							<input type="password" name="password" id="j_password" class="reg_input" />
+							<div class="clear"></div>
+						</div>
+						<span style="color:red; line-height:18px; display:block; padding-right:40px; text-align:center;" id="J_ErrorMsg"></span>
+					</div>
+					<input type="hidden" name="service"    id="loginServiceId"  value="{$current_url}success.php" />
+					<input type="hidden" name="errorUrl"   id="errorUrlId"  value="{$current_url}error.php" />
+					<input type="hidden" name="callback"  id="callbackId"  value="parent.loginStatusCallback" />
+					<input type="hidden" name="isAjax"      value="true" />
+					<input type="hidden" name="lt"             id="J_LoginTicket" value=""/>
+					<input type="hidden" name="_eventId" value="submit" />
+					<input name="" type="submit" class="next_btn" style="margin:40px auto 20px; border:0px; font-weight:bold"  value="{$lang.sso_login}" />
+					</form>
+					-->
+				</div>
+				<!--登录end-->
+			</div>
+		</div>
+		<!--注册、登录修改中END-->
+</div>
+
+{literal}
+<script type="text/javascript" charset="utf-8">
+	function show_made_app(email)
+	{
+		var email = email || "";
+		window.location.href="index.php?act=email_submit&login_email="+email;
+	}
+	function toggleTab(id) 
+	{
+		var id = id || 'j_register';
+		if ('j_register' == id)
+		{
+			$("#j_register_tab").addClass('a_active');
+			$("#j_register").show();
+			$("#j_login_tab").removeClass('a_active');
+			$("#j_login").hide();
+		}
+		else
+		{
+			//doAjaxLogin('loginStatusCallback','');
+			$("#j_login_tab").addClass('a_active');
+			$("#j_login").show();
+			$("#j_register_tab").removeClass('a_active');
+			$("#j_register").hide();
+		}
+		$(".next_btn").val(submit_name);
+	}
+</script>
+{/literal}
+
+{include file="pagefooter.html"}

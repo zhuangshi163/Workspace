@@ -1,0 +1,15 @@
+<!-- $Id: customiz_app_step3.html 15409 2012-1-17 17:14:00Z lilixing $ -->
+
+{include file="pageheader.html"}
+
+<div class="main-div" style="height:500px;">
+
+	<iframe id='showFrame'  frameborder='0' border='0' marginwidth='0' name='mainFrame' allowTransparency='true' src="{$iframe_url}?app_key={$appkey}&pluginName={$pluginName}&pluginVersion={$pluginVersion}" style="overflow-x:hidden;height:450px;width:1180px;"></iframe>
+
+</div>
+
+{include file="pagefooter.html"}
+
+<style>
+#showFrame{margin-top:15px;margin-left:20px;margin-right:20px;margin-bottom:10px;border:0px solid red;width:98%;height:98%;clear:both;}
+</style>

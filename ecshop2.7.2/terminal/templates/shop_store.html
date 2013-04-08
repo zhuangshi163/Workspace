@@ -1,0 +1,510 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>店家界面</title>
+<link href="style_store.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		var keyboard_input = typeof(popupNumbericKeypad) === 'object' ? false : true;
+		keyboard_input = false;
+		var zoneId;		//全局变量，操作区域的id号，手写版区域id或者数字键盘区域id
+		var editId;		//全局变量，要输入部分的input标签的id号
+		var isPassword;	//全局变量，input标签是否为密码输入框
+		var inputObject="";	//全局变量，用手写版或者数字键盘的input对象
+		var inputvalue="";	//全局变量，用手写版或者数字键盘的input的值
+		/**
+		 * 弹出数字键盘的方法
+		 * @param {Object} eId	相关input标签的id号
+		 * @param {Object} tipName	提示的文字，显示在数字键盘的上面，如tipName为”手机号“，将显示”请输入您的手机号“
+		 */
+		function showNumZone(eId, tipName){
+			if(keyboard_input) return ;
+			zoneId = "numzone";
+			editId = eId;
+			inputObject = document.getElementById(editId);
+			inputvalue = inputObject.value;
+			showZone();
+			popupNumbericKeypad.Content = "";
+			if(document.getElementById(eId).type == "password"){
+				isPassword = true;
+				for(var i=0; i<inputObject.value.length; i++){
+					popupNumbericKeypad.Content += "●";
+				}
+			}else{
+				isPassword = false;
+				popupNumbericKeypad.Content = inputObject.value;	//将已输入的内容显示在数字键盘上
+			}
+			document.getElementById("showNumTitle").innerHTML = "请输入您的"+tipName+"：";
+		}
+		/**
+		 * 弹出手写版的方法
+		 * @param {Object} eId	相关input标签的id号
+		 * @param {Object} tipName	提示的文字，显示在数字键盘的上面，如tipName为”姓名“，将显示”请输入您的姓名“
+		 */
+		function showHandZone(eId, tipName){
+			if(keyboard_input) return ;
+			zoneId = "handzone";
+			editId = eId;
+			inputObject = document.getElementById(editId);
+			showZone();
+			document.getElementById("showAlreadyInput").innerHTML = "";
+			if(document.getElementById(eId).type == "password"){
+				isPassword = true;
+				for(var i=0; i<inputObject.value.length; i++){
+					document.getElementById("showAlreadyInput").innerHTML += "●";
+				}
+			}else{
+				isPassword = false;
+				document.getElementById("showAlreadyInput").innerHTML = inputObject.value;	//将已输入的内容显示在手写版上
+			}
+			document.getElementById("showHandTitle").innerHTML = "请输入您的"+tipName+"：";
+		}
+		/**
+		 * 显示数字键盘或者手写版区域
+		 */
+		function showZone(){
+			document.getElementById("mark").style.display = "block";	//显示遮罩层
+			//隐藏手写版和数字键盘区域
+			document.getElementById("handzone").style.display = "none";
+			document.getElementById("numzone").style.display = "none";
+			
+			var myobj = document.getElementById(zoneId);
+			myobj.style.display = "block";		//显示id为zoneId的区域
+			var bodyhh = document.documentElement.clientHeight;
+			var bodyww = document.documentElement.clientWidth;
+			var objhh = myobj.clientHeight;
+			var objww = myobj.clientWidth;
+			myobj.style.top = (bodyhh - objhh) / 2;		//将zoneId的区域居中显示
+			myobj.style.left = (bodyww - objww) / 2;
+		}
+		/**
+		 * 隐藏数字键盘或者手写版区域
+		 */
+		function hideZone(){
+			document.getElementById("mark").style.display = "none";		//隐藏遮罩层
+			document.getElementById(zoneId).style.display = "none";		//隐藏手写版区域
+		}
+	</script>
+	
+	<!-- 手写版输入单个字事件 -->
+	<script for="staticTablet" type="text/javascript" event="FontSelected(data);">
+    	inputObject.value += data;				//输入data到指定input中
+    	if(isPassword){
+    		document.getElementById("showAlreadyInput").innerHTML += "●";
+    	}else{
+    		document.getElementById("showAlreadyInput").innerHTML += data;
+    	}
+	</script>
+	<!-- 手写板确认和回退事件 -->
+	<script for="staticTablet" type="text/javascript" event="ButtonDown(type);">
+    	if(type == "confirm"){		//确认事件
+			hideZone();
+    		//alert(inputObject.value);
+    	}else if(type == "back"){	//回退事件
+    		var value = inputObject.value;
+    		var showObject = document.getElementById("showAlreadyInput");
+    		inputObject.value = value.substring(0,value.length-1);
+    		showObject.innerHTML = showObject.innerHTML.substring(0,showObject.innerHTML.length-1);
+    	}
+	</script>
+	<!-- 数字键盘事件 -->
+	<script for="popupNumbericKeypad" type="text/javascript" event="ButtonDown(data);">
+		switch(data){
+			case 'clear':	//清空
+				popupNumbericKeypad.Content = "";
+				inputObject.value = "";
+				break;
+			case 'back':	//回退
+				var num = popupNumbericKeypad.Content;
+				popupNumbericKeypad.Content = num.substring(0,num.length-1);
+				inputObject.value = inputObject.value.substring(0,inputObject.value.length-1);
+				break;
+			case 'cancel':	//取消
+				hideZone();
+				inputObject.value = inputvalue;
+				break;
+			case 'confirm':	//确认
+				hideZone();
+				//alert(inputObject.value);
+				break;
+			default:		//输入数字
+				inputObject.value += data;
+		    	if(isPassword){
+		    		popupNumbericKeypad.Content += "●";
+		    	}else{
+		    		popupNumbericKeypad.Content += data;
+		    	}
+		}
+	</script>
+</head>
+<body>
+	<!-- 遮罩层区域start-->
+	<div id="mark"></div>
+	<!-- 遮罩层区域end -->
+	
+	<!-- 手写版区域start -->
+	<div id="handzone">
+		<div id="hzTip"><span id="showHandTitle">请输入您的姓名</span><span id="showAlreadyInput"></span></div>
+		<object id="staticTablet" classid="clsid:00AE8CF9-5F57-4FFC-A481-2125991A77CC" width="730px" height="430px"></object>
+	</div>
+	<!-- 手写版区域end -->
+	
+	<!-- 数字键盘区域start -->
+	<div id="numzone">
+		<div id="nzTip"><span id="showNumTitle">请输入您的姓名</span></div>
+		<object id="popupNumbericKeypad" classid="clsid:3E4CDDC3-E7DB-47AF-9DB8-6372FB600415"  width="332px" height="466px">
+			<param name="BackgroundColor" value="00bbff" />
+		</object>
+	</div>
+	<!-- 数字键盘区域end -->
+
+<div class="mainbox_left">
+	<a href="shop_store.php">订单列表</a>
+	<a href="shop_store.php?act=goods">商品列表</a>
+	<a href="shop_store.php?act=user">会员列表</a>
+	<a href="shop_store.php?act=points">积分查询</a>
+	<a href="shop_store.php?act=clerk">店员列表</a>
+	<a href="shop_store.php?act=getout">退出离开</a>
+</div>
+<div class="mainbox_right">
+	{if $act == 'order'}
+	<div class="list"><span>订单列表</span><div class="txt">{$total.count}个订单</div></div>
+    <div class="tablebox">
+    <img src="images/store_tablebox_top.gif"/>
+	<table cellpadding="0" cellspacing="0" class="tablelist">
+	  <tr>
+		<th>订单号</th>
+		<th>会员 手机</th>
+		<th>店员 下单时间</th>
+		<th>总金额</th>
+		<th>应付款</th>
+		<th>订单状态</th>
+		<th width="60">操作</th>
+	  <tr>
+	  {foreach from=$order_list item=order key=okey}
+	  <tr>
+		<td>{$order.order_sn}</td>
+		<td>{$order.consignee|escape}<br />{$order.mobile|escape}</td>
+		<td>{$order.clerk|escape}<br />{$order.short_order_time}</td>
+		<td align="right">{$order.total_fee}</td>
+		<td align="right">{$order.order_amount}</td>
+		<td align="center">{$lang.os[$order.order_status]},{$lang.ps[$order.pay_status]},{$lang.ss[$order.shipping_status]}</td>
+		<td><a href="shop_store.php?act=order_info&order_id={$order.order_id}" class="button_look">查看</a></td>
+	  </tr>
+	  {/foreach}
+	</table>
+    <img src="images/store_tablebox_bottom.gif"/>
+    </div>
+    <div class="pagebox">
+            {if $total.page>1}<a href="shop_store.php?act=order&page={$total.page_before}"><img src="images/page_before.gif"/></a>{else}<img src="images/page_before.gif"/>{/if}
+            <div>{$total.page} / {if $total.page_big==0}1{else}{$total.page_big}{/if}</div>
+            {if $total.page_after>0}<a href="shop_store.php?act=order&page={$total.page_after}"><img src="images/page_after.gif"/></a>{else}<img src="images/page_after.gif"/>{/if}
+    </div>
+	
+	{elseif $act == 'order_info'}
+	<div class="list"><span class="right cursor" onmousedown="window.location='shop_store.php?act=order'">返回列表</span><span>订单详情</span><div class="txt">{$order.order_sn}</div></div>
+    <div class="tablebox">
+    <img src="images/store_tablebox_top.gif"/>
+	<table cellpadding="0" cellspacing="0" class="tableinfo">
+	  <tr>
+		<th width="12%">订单号：</th>
+		<td width="38%">{$order.order_sn}</td>
+		<th width="12%">订单状态：</th>
+		<td width="38%">{$lang.os[$order.order_status]},{$lang.ps[$order.pay_status]},{$lang.ss[$order.shipping_status]}</td>
+	  <tr>
+		<th>购货人：</th>
+		<td>{$order.consignee|escape}</td>
+		<th>下单时间：</th>
+		<td>{$order.short_order_time}</td>
+	  <tr>
+		<th>联系手机：</th>
+		<td>{$order.mobile|escape}</td>
+		<th>付款时间：</th>
+		<td>{$order.short_pay_time}</td>
+	  <tr>
+		<th>店员：</th>
+		<td>{$order.clerk|escape}</td>
+		<th>发货时间：</th>
+		<td>{$order.short_shipping_time}</td>
+	  <tr>
+		<th>总金额：</th>
+		<td>{$order.total_fee} 元</td>
+		<th rowspan="3">操作：</th>
+		<td rowspan="3">
+		{if $order.handler}
+		<label class="order_handler_label"><input type="checkbox" id="order_handler_check"/>客户已付款并收货</label>
+		<span class="order_handler_span" onmousedown="order_handler()">确定提交</span>
+		<script type="text/javascript">
+		function order_handler(){
+			var handler = 0;
+			if(document.getElementById('order_handler_check').checked) handler = 1
+			window.location.href= 'shop_store.php?act=order_info&order_id={$order.order_id}&handler_check=1&handler='+handler;
+		}
+		</script>
+		{else}
+		不可操作
+		{/if}
+		</td>
+	  <tr>
+		<th>应付金额：</th>
+		<td>{$order.order_amount} 元</td>
+      </tr>
+	  <tr>
+		<th>开启发票：</th>
+		<td>{if $order.inv_payee==''}<span style="color:#666666">不需要</span>{else}<span style="color:#ff0000">{$order.inv_payee|escape}</span>{/if}</td>
+      </tr>
+    </table>
+	<table cellpadding="0" cellspacing="0" class="tablelist">
+	  <tr>
+		<th>商品名称</th>
+		<th width="120">商品货号</td>
+		<th width="60">销售价</td>
+		<th width="60">批发价</td>
+		<th width="60">数量</td>
+		<th width="60">小计</td>
+	  </tr>
+	  {foreach from=$goods_list item=goods}
+	  <tr align="center">
+		<td align="left">
+		{if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'}
+		{$goods.goods_name} 
+		{if $goods.is_gift}{if $goods.goods_price > 0}{$lang.remark_favourable}{else}{$lang.remark_gift}{/if}{/if}
+		{if $goods.parent_id > 0}{$lang.remark_fittings}{/if}
+		{elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'}
+		<a href="javascript:void(0)" onmousedown="setSuitShow({$goods.goods_id})">{$goods.goods_name|escape}<span style="color:#FF0000;">{$lang.remark_package}</span></a>
+		<div id="suit_{$goods.goods_id}" style="display:none">
+			{foreach from=$goods.package_goods_list item=package_goods_list}
+			  <a href="../goods.php?id={$package_goods_list.goods_id}" target="_blank">{$package_goods_list.goods_name}</a><br />
+			{/foreach}
+		</div>
+		{/if}
+		</td>
+		<td>{$goods.goods_sn}</td>
+		<td>{$goods.goods_price}</td>
+		<td>{$goods.wholesale_price}</td>
+		<td>{$goods.goods_number}</td>
+		<td>{$goods.formated_subtotal}</td>
+	  </tr>
+	  {/foreach}
+	  <tr>
+		<td colspan="6" align="right">{$lang.label_goods_amount}<strong>{$order.goods_amount} 元</strong>
+	- 批发总金额：<strong>{$wholesale.total} 元</strong> = 毛利：<strong>{$wholesale.profit} 元</strong> （利率：{$wholesale.rate}）</td>
+	  </tr>
+	</table>
+    <img src="images/store_tablebox_bottom.gif"/>
+    </div>
+	
+	{elseif $act == 'goods'}
+	<div class="list"><span>商品列表</span><div class="txt">共{$total.count}个商品</div></div>
+    <div class="tablebox">
+    <img src="images/store_tablebox_top.gif"/>
+	<table cellpadding="0" cellspacing="0" class="tablelist" id="store_goods_list">
+	  <tr>
+		<th width="50">ID</th>
+		<th>商品名称</th>
+		<th width="100">货号</th>
+		<th width="80">批发价</th>
+		<th width="80">建议售价</th>
+		<th width="140">本店售价</th>
+	  <tr>
+	  {foreach from=$goods_list item=goods}
+	  <tr align="center">
+		<td>{$goods.goods_id}</td>
+		<td align="center">{$goods.goods_name|escape}</td>
+		<td align="center">{$goods.goods_sn}</td>
+		<td>{$goods.wholesale_price}</td>
+		<td>{$goods.shop_price}</td>
+		<td class="edit_sale_price"><input type="text" value="{if $goods.sale_price>0}{$goods.sale_price}{/if}" id="priceId_{$goods.goods_id}" onfocus="showNumZone('priceId_{$goods.goods_id}', '价格')"/>
+        <span onmousedown="edit_sale_price({$goods.goods_id})">修改</span></td>
+	  </tr>
+	  {/foreach}
+	</table>
+    <img src="images/store_tablebox_bottom.gif"/>
+    </div>
+    <div class="pagebox">
+            {if $total.page>1}<a href="shop_store.php?act=goods&cat_id={$total.cat_id}&page={$total.page_before}"><img src="images/page_before.gif"/></a>{else}<img src="images/page_before.gif"/>{/if}
+            <div>{$total.page} / {if $total.page_big==0}1{else}{$total.page_big}{/if}</div>
+            {if $total.page_after>0}<a href="shop_store.php?act=goods&cat_id={$total.cat_id}&page={$total.page_after}"><img src="images/page_after.gif"/></a>{else}<img src="images/page_after.gif"/>{/if}
+    </div>
+<script type="text/javascript">
+
+function edit_sale_price(id){
+	var price = document.getElementById('priceId_'+id).value;
+	window.location.href= 'shop_store.php?act=edit_sale_price&goods_id='+id+'&price='+price+'&page={$total.page}';
+}
+</script>
+
+	{elseif $act == 'user'}
+	<div class="list"><span>会员列表</span><div class="txt">共{$total.count}个会员</div></div>
+    <div class="tablebox">
+    <img src="images/store_tablebox_top.gif"/>
+	<table cellpadding="0" cellspacing="0" class="tablelist">
+	  <tr>
+		<th>编号</th>
+		<th>会员名称/手机</th>
+		<th>积分</th>
+		<th>注册时间</th>
+		<th>最后登录</th>
+		<th>购买次数</th>
+	  <tr>
+	  {foreach from=$user_list item=user}
+	  <tr align="center">
+		<td>{$user.user_id}</td>
+		<td>{$user.user_name|escape}</td>
+		<td>{$user.pay_points}</td>
+		<td>{$user.reg_time}</td>
+		<td>{$user.last_login}</td>
+		<td>{$user.order_count}</td>
+	  </tr>
+	  {/foreach}
+	</table>
+    <img src="images/store_tablebox_bottom.gif"/>
+    </div>
+    <div class="pagebox">
+            {if $total.page>1}<a href="shop_store.php?act=user&page={$total.page_before}"><img src="images/page_before.gif"/></a>{else}<img src="images/page_before.gif"/>{/if}
+            <div>{$total.page} / {if $total.page_big==0}1{else}{$total.page_big}{/if}</div>
+            {if $total.page_after>0}<a href="shop_store.php?act=user&page={$total.page_after}"><img src="images/page_after.gif"/></a>{else}<img src="images/page_after.gif"/>{/if}
+    </div>
+
+	{elseif $act == 'points'}
+	<div class="list"><span>积分查询</span></div>
+    <div class="tablebox">
+    <img src="images/store_tablebox_top.gif"/>
+	<table cellpadding="0" cellspacing="0" width="760">
+      <form action="shop_store.php?act=points_submit" method="post" name="theform">
+	  <tr>
+		<td width="220" align="right" height="300">请输入会员手机号：</td>
+		<td><input name="phone" type="text" value="" id="phone" onfocus="showNumZone('phone', '会员手机号')" class="input"/> <input name="submit" type="submit" value="提交" class="button"/></td>
+	  </tr>
+      </form>
+	</table>
+    <img src="images/store_tablebox_bottom.gif"/>
+    </div>
+
+	{elseif $act == 'points_submit'}
+	<div class="list"><span class="right cursor" onmousedown="window.location='shop_store.php?act=points'">重新查询</span><span>积分查询</span></div>
+    <div class="tablebox">
+    <img src="images/store_tablebox_top.gif"/>
+	<table cellpadding="0" cellspacing="0" class="tablelist" style="margin:100px auto">
+	  <tr>
+		<th>编号</th>
+		<th>会员名称/手机</th>
+		<th>积分</th>
+		<th>注册时间</th>
+		<th>最后登录</th>
+		<th>购买次数</th>
+	  <tr>
+	  <tr align="center">
+		<td>{$user.user_id}</td>
+		<td>{$user.user_name|escape}</td>
+		<td>{$user.pay_points}</td>
+		<td>{$user.reg_time}</td>
+		<td>{$user.last_login}</td>
+		<td>{$user.order_count}</td>
+	  </tr>
+	</table>
+    <img src="images/store_tablebox_bottom.gif"/>
+    </div>
+
+	{elseif $act == 'clerk'}
+	<div class="list"><span class="right cursor" onmousedown="window.location='shop_store.php?act=add_clerk'">新增店员</span><span>店员列表</span><div class="txt">共{$total.count}个店员</div></div>
+    <div class="tablebox">
+    <img src="images/store_tablebox_top.gif"/>
+	<table cellpadding="0" cellspacing="0" class="tablelist">
+	  <tr>
+      <th>店员ID</th>
+      <th>店员备注</th>
+      <th>注册时间</th>
+      <th>最后使用</th>
+      <th>使用次数</th>
+      <th>限制使用</th>
+      <th width="110">操作</th>
+	  <tr>
+	  {foreach from=$clerk_list item=clerk}
+	  <tr align="center">
+      <td>{$clerk.clerk_id}</td>
+      <td align="left">{$clerk.clerk_remark|escape:html}</td>
+      <td>{$clerk.time_reg}</td>
+      <td>{$clerk.time_last}</td>
+      <td>{$clerk.visit_count}</td>
+      <td>{if $clerk.restraint}<span>是</span>{else}--{/if}</td>
+      <td>
+        <a href="shop_store.php?act=edit_clerk&clerk_id={$clerk.clerk_id}" class="button_look button_edit">编辑</a>
+        <a href="shop_store.php?act=del_clerk&clerk_id={$clerk.clerk_id}" class="button_look button_del">删除</a>      </td>
+	  </tr>
+	  {/foreach}
+	</table>
+    <img src="images/store_tablebox_bottom.gif"/>
+    </div>
+    <div class="pagebox">
+            {if $total.page>1}<a href="shop_store.php?act=clerk&page={$total.page_before}"><img src="images/page_before.gif"/></a>{else}<img src="images/page_before.gif"/>{/if}
+            <div>{$total.page} / {if $total.page_big==0}1{else}{$total.page_big}{/if}</div>
+            {if $total.page_after>0}<a href="shop_store.php?act=clerk&page={$total.page_after}"><img src="images/page_after.gif"/></a>{else}<img src="images/page_after.gif"/>{/if}
+    </div>
+
+	{elseif $act == 'add_clerk'}
+	<div class="list"><span class="right cursor" onmousedown="window.location='shop_store.php?act=clerk'">返回店员列表</span><span>新增店员</span></div>
+    <div class="tablebox">
+    <img src="images/store_tablebox_top.gif"/>
+	<table cellpadding="0" cellspacing="0" class="tableinfo">
+		<form action="shop_store.php?act=add_clerk_submit" method="post" name="theform">
+	  <tr>
+      <th width="200">店员密码：</th>
+      <td><input type="password" name="password" maxlength="60" class="input" id="passwordId" onfocus="showNumZone('passwordId', '店员密码')"/> <span class="f_red">*</span></td>
+	  </tr>
+	  <tr>
+      <th>确认店员密码：</th>
+      <td><input type="password" name="password_confirm" maxlength="60" class="input" id="passwordId2" onfocus="showNumZone('passwordId2', '确认店员密码')"/> <span class="f_red">*</span></td>
+	  </tr>
+	  <tr>
+      <th>店员备注：</th>
+      <td><input type="text" name="clerk_remark" maxlength="255" class="input" id="remarkId" onfocus="showHandZone('remarkId', '店员备注')"/></td>
+	  </tr>
+	  <tr>
+      <th></th>
+      <td><input name="submit" type="submit" value="提交" class="button"/></td>
+	  </tr>
+	  <tr>
+      <th>注：</th>
+      <td>为便以管理，请不要添加过多的店员！</td>
+	  </tr>
+	  </form>
+	</table>
+    <img src="images/store_tablebox_bottom.gif"/>
+    </div>
+
+	{elseif $act == 'edit_clerk'}
+	<div class="list"><span class="right cursor" onmousedown="window.location='shop_store.php?act=clerk'">返回店员列表</span><span>编辑店员</span><div class="txt">ID：{$clerk.clerk_id}</div></div>
+    <div class="tablebox">
+    <img src="images/store_tablebox_top.gif"/>
+	<table cellpadding="0" cellspacing="0" class="tableinfo">
+		<form action="shop_store.php?act=edit_clerk_submit&clerk_id={$clerk.clerk_id}" method="post" name="theform">
+	  <tr>
+      <th width="200">店员密码：</th>
+      <td><input type="password" name="password" maxlength="60" class="input"id="passwordId" onfocus="showNumZone('passwordId', '店员密码')"/> 如不修改原密码，则不用填写。</td>
+	  </tr>
+	  <tr>
+      <th>确认店员密码：</th>
+      <td><input type="password" name="password_confirm" maxlength="60" class="input" id="passwordId2" onfocus="showNumZone('passwordId2', '确认店员密码')"/> 如不修改原密码，则不用填写。</td>
+	  </tr>
+	  <tr>
+      <th>店员备注：</th>
+      <td><input type="text" name="clerk_remark" maxlength="255" class="input" value="{$clerk.clerk_remark|escape:html}" id="remarkId" onfocus="showHandZone('remarkId', '店员备注')"/></td>
+	  </tr>
+	  <tr>
+      <th>限制使用：</th>
+      <td><label><input name="restraint" type="radio" value="0" {if $clerk.restraint==0}checked{/if} /> 否</label>
+      <label><input name="restraint" type="radio" value="1" {if $clerk.restraint==1}checked{/if} /> 是</label></td>
+	  </tr>
+	  <tr>
+      <th></th>
+      <td><input name="submit" type="submit" value="提交" class="button"/></td>
+	  </tr>
+	  </form>
+	</table>
+    <img src="images/store_tablebox_bottom.gif"/>
+    </div>
+	{/if}
+</div>
+</body>
+</html>

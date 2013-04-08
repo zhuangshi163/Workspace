@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>店家界面</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+
+
+	<script type="text/javascript">
+		var keyboard_input = typeof(popupNumbericKeypad) === 'object' ? false : true;
+		keyboard_input = false;
+		var zoneId;		//全局变量，操作区域的id号，手写版区域id或者数字键盘区域id
+		var editId;		//全局变量，要输入部分的input标签的id号
+		var isPassword;	//全局变量，input标签是否为密码输入框
+		var inputObject="";	//全局变量，用手写版或者数字键盘的input对象
+		var inputvalue="";	//全局变量，用手写版或者数字键盘的input的值
+		/**
+		 * 弹出数字键盘的方法
+		 * @param {Object} eId	相关input标签的id号
+		 * @param {Object} tipName	提示的文字，显示在数字键盘的上面，如tipName为”手机号“，将显示”请输入您的手机号“
+		 */
+		function showNumZone(eId, tipName){
+			if(keyboard_input) return ;
+			zoneId = "numzone";
+			editId = eId;
+			inputObject = document.getElementById(editId);
+			inputvalue = inputObject.value;
+			showZone();
+			popupNumbericKeypad.Content = "";
+			if(document.getElementById(eId).type == "password"){
+				isPassword = true;
+				for(var i=0; i<inputObject.value.length; i++){
+					popupNumbericKeypad.Content += "●";
+				}
+			}else{
+				isPassword = false;
+				popupNumbericKeypad.Content = inputObject.value;	//将已输入的内容显示在数字键盘上
+			}
+			document.getElementById("showNumTitle").innerHTML = "请输入您的"+tipName+"：";
+		}
+		/**
+		 * 弹出手写版的方法
+		 * @param {Object} eId	相关input标签的id号
+		 * @param {Object} tipName	提示的文字，显示在数字键盘的上面，如tipName为”姓名“，将显示”请输入您的姓名“
+		 */
+		function showHandZone(eId, tipName){
+			if(keyboard_input) return ;
+			zoneId = "handzone";
+			editId = eId;
+			inputObject = document.getElementById(editId);
+			showZone();
+			document.getElementById("showAlreadyInput").innerHTML = "";
+			if(document.getElementById(eId).type == "password"){
+				isPassword = true;
+				for(var i=0; i<inputObject.value.length; i++){
+					document.getElementById("showAlreadyInput").innerHTML += "●";
+				}
+			}else{
+				isPassword = false;
+				document.getElementById("showAlreadyInput").innerHTML = inputObject.value;	//将已输入的内容显示在手写版上
+			}
+			document.getElementById("showHandTitle").innerHTML = "请输入您的"+tipName+"：";
+		}
+		/**
+		 * 显示数字键盘或者手写版区域
+		 */
+		function showZone(){
+			document.getElementById("mark").style.display = "block";	//显示遮罩层
+			//隐藏手写版和数字键盘区域
+			document.getElementById("handzone").style.display = "none";
+			document.getElementById("numzone").style.display = "none";
+			
+			var myobj = document.getElementById(zoneId);
+			myobj.style.display = "block";		//显示id为zoneId的区域
+			var bodyhh = document.documentElement.clientHeight;
+			var bodyww = document.documentElement.clientWidth;
+			var objhh = myobj.clientHeight;
+			var objww = myobj.clientWidth;
+			myobj.style.top = (bodyhh - objhh) / 2;		//将zoneId的区域居中显示
+			myobj.style.left = (bodyww - objww) / 2;
+		}
+		/**
+		 * 隐藏数字键盘或者手写版区域
+		 */
+		function hideZone(){
+			document.getElementById("mark").style.display = "none";		//隐藏遮罩层
+			document.getElementById(zoneId).style.display = "none";		//隐藏手写版区域
+		}
+	</script>
+	
+	<!-- 手写版输入单个字事件 -->
+	<script for="staticTablet" type="text/javascript" event="FontSelected(data);">
+    	inputObject.value += data;				//输入data到指定input中
+    	if(isPassword){
+    		document.getElementById("showAlreadyInput").innerHTML += "●";
+    	}else{
+    		document.getElementById("showAlreadyInput").innerHTML += data;
+    	}
+	</script>
+	<!-- 手写板确认和回退事件 -->
+	<script for="staticTablet" type="text/javascript" event="ButtonDown(type);">
+    	if(type == "confirm"){		//确认事件
+			hideZone();
+    		//alert(inputObject.value);
+    	}else if(type == "back"){	//回退事件
+    		var value = inputObject.value;
+    		var showObject = document.getElementById("showAlreadyInput");
+    		inputObject.value = value.substring(0,value.length-1);
+    		showObject.innerHTML = showObject.innerHTML.substring(0,showObject.innerHTML.length-1);
+    	}
+	</script>
+	<!-- 数字键盘事件 -->
+	<script for="popupNumbericKeypad" type="text/javascript" event="ButtonDown(data);">
+		switch(data){
+			case 'clear':	//清空
+				popupNumbericKeypad.Content = "";
+				inputObject.value = "";
+				break;
+			case 'back':	//回退
+				var num = popupNumbericKeypad.Content;
+				popupNumbericKeypad.Content = num.substring(0,num.length-1);
+				inputObject.value = inputObject.value.substring(0,inputObject.value.length-1);
+				break;
+			case 'cancel':	//取消
+				hideZone();
+				inputObject.value = inputvalue;
+				break;
+			case 'confirm':	//确认
+				hideZone();
+				//alert(inputObject.value);
+				break;
+			default:		//输入数字
+				inputObject.value += data;
+		    	if(isPassword){
+		    		popupNumbericKeypad.Content += "●";
+		    	}else{
+		    		popupNumbericKeypad.Content += data;
+		    	}
+		}
+	</script>
+</head>
+<body>
+	<!-- 遮罩层区域start-->
+	<div id="mark"></div>
+	<!-- 遮罩层区域end -->
+	
+	<!-- 手写版区域start -->
+	<div id="handzone">
+		<div id="hzTip"><span id="showHandTitle">请输入您的姓名</span><span id="showAlreadyInput"></span></div>
+		<object id="staticTablet" classid="clsid:00AE8CF9-5F57-4FFC-A481-2125991A77CC" width="730px" height="430px"></object>
+	</div>
+	<!-- 手写版区域end -->
+	
+	<!-- 数字键盘区域start -->
+	<div id="numzone">
+		<div id="nzTip"><span id="showNumTitle">请输入您的姓名</span></div>
+		<object id="popupNumbericKeypad" classid="clsid:3E4CDDC3-E7DB-47AF-9DB8-6372FB600415"  width="332px" height="466px">
+			<param name="BackgroundColor" value="00bbff" />
+		</object>
+	</div>
+	<!-- 数字键盘区域end -->
+
+<div class="head">
+    <a href="shop_cart.php" class="right"><img src="img/list_buy.gif"/></a>
+    <span>店家登录</span>
+</div>
+<div class="mainline"></div>
+
+	<table cellspacing="0" cellpadding="0" class="store_login">
+	<form action="shop_store.php?act=login_submit" method="post" name="order_confirm">
+	<tr>
+    	<td height="70" colspan="2" valign="top"><img src="img/detail_line.gif" /></td>
+	</tr>
+	<tr>
+		<th height="0"></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th height="60">用户名：</th>
+		<td><input name="store_name" type="text" maxlength="20" class="input" id="store_nameId" onfocus="showHandZone('store_nameId', '用户名')"/></td>
+	</tr>
+	<tr>
+		<th height="60">密　码：</th>
+		<td><input name="password" type="password" maxlength="20" class="input" id="passwordId" onfocus="showNumZone('passwordId', '密码')"/></td>
+	</tr>
+	<tr>
+		<th height="80"></th>
+		<td valign="bottom"><input name="submit" type="submit" value="" class="but_login"/></td>
+	</tr>
+	<tr>
+    	<td height="70" colspan="2" valign="bottom"><img src="img/detail_line.gif" /></td>
+	</tr>
+	</form>
+	</table>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!-- $Id: store_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js,../js/transport.js,../js/region.js"}
+<div class="main-div">
+	<form method="post" action="store.php" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
+		<table cellspacing="1" cellpadding="3" width="100%">
+			<tr>
+				<td class="label">{$lang.label_store_name}</td>
+				<td><input type="text" name="store_name" maxlength="60"
+					value="{$store.store_name|escape:html}" /> {$lang.require_field}
+					{$lang.store_name_prompt}</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.label_store_password}</td>
+				<td><input type="password" name="password" maxlength="60" />
+					{if $store.store_id==0}{$lang.require_field}{else}{$lang.edit_password}{/if}</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.label_confirm_store_password}</td>
+				<td><input type="password" name="password_confirm"
+					maxlength="60" /> {if $store.store_id==0}{$lang.require_field}{else}{$lang.edit_password}{/if}</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.label_store_note}</td>
+				<td><input type="text" name="store_remark" maxlength="255"
+					value="{$store.store_remark|escape:html}" /></td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.label_store_phone}</td>
+				<td><input type="text" name="phone" maxlength="255"
+					value="{$store.phone|escape:html}" /></td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.label_area}</td>
+				<td>
+					<select name="country" id="selCountries"
+						onchange="region.changed(this, 1, 'selProvinces')">
+						<option value="0">{$lang.select_please}</option>
+						<!-- {foreach from=$country_list item=country} -->
+							<option value="{$country.region_id}" {if $store.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+						<!-- {/foreach} -->
+					</select>
+					<select name="province" id="selProvinces"
+						onchange="region.changed(this, 2, 'selCities')">
+							<option value="0">{$lang.select_please}</option>
+							<!-- {foreach from=$province_list item=province} -->
+					        <option value="{$province.region_id}" {if $store.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+					        <!-- {/foreach} -->
+					</select>
+					<select name="city" id="selCities"
+						onchange="region.changed(this, 3, 'selDistricts')">
+							<option value="0">{$lang.select_please}</option>
+							<!-- {foreach from=$city_list item=city} -->
+							<option value="{$city.region_id}" {if $store.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+							<!-- {/foreach} -->
+					</select>
+					<select name="district" id="selDistricts">
+							<option value="0">{$lang.select_please}</option>
+							<!-- {foreach from=$district_list item=district} -->
+							<option value="{$district.region_id}" {if $store.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+							<!-- {/foreach} -->
+					</select>
+					{$lang.require_field}
+				</td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.label_store_address}</td>
+				<td><input type="text" name="address" maxlength="255"
+					value="{$store.address|escape:html}" /></td>
+			</tr>
+			<tr>
+				<td class="label">{$lang.label_call_category}</td>
+				<td><select name="store_cat"><option value="0">{$lang.call_all_goods}</option>{$cat_list}
+				</select></td>
+			</tr>
+			<tr>
+				<td class="label"><a
+					href="javascript:showNotice('noticeAdmins');"
+					title="{$lang.form_notice}"><img src="images/notice.gif"
+						width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.label_store_admin}</td>
+				<td>{foreach from=$user_store.admin_list item=admin} <input
+					type="checkbox" name="admins[]" value="{$admin.user_id}"
+					{if $admin.type eq "this"}checked="checked" {/if} />
+					{$admin.user_name}{if $admin.type eq "other"}(*){/if}&nbsp;&nbsp;
+					{/foreach}<br /> <span class="notice-span"
+					{if $help_open}style="display: block" {else} style="display:none"
+					{/if} id="noticeAdmins">{$lang.notice_admins}</span></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit"
+					class="button" value="{$lang.button_submit}" /> <input
+					type="reset" class="button" value="{$lang.button_reset}" /> <input
+					type="hidden" name="act" value="{$form_action}" /> <input
+					type="hidden" name="id" value="{$store.store_id}" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js,../js/region.js"}
+{literal}
+<script language="JavaScript">
+	region.isAdmin = true;
+	
+	/**
+	 * 检查表单输入的数据
+	 */
+	function validate()
+	{
+		var isAdd = {if $store.store_id==0}true{else}false{/if};
+		validator = new Validator("theForm");
+		//验证用户名
+		var store_name = textToTrim(document.forms["theForm"].elements["store_name"].value);
+		if(store_name.length == 0){
+			validator.addErrorMsg(store_name_empty);
+		}else if(!store_name.match(/^[a-zA-Z0-9]+$/i)){
+			validator.addErrorMsg(store_name_error);
+		}
+		//验证密码
+		var password = textToTrim(document.forms["theForm"].elements["password"].value);
+		var password_confirm = textToTrim(document.forms["theForm"].elements["password_confirm"].value);
+		//如果为添加店家的密码验证
+		if(isAdd){
+			if(password==0 || password_confirm.length==0){
+				validator.addErrorMsg(password_empty);
+			}
+			else if(password != password_confirm){
+				validator.addErrorMsg(password_no_equal);
+			}
+		}else{
+			//编辑店家的密码验证
+			if(password != password_confirm){
+				validator.addErrorMsg(password_no_equal);
+			}
+		}
+		//验证所在地区
+		var country = textToTrim(document.forms["theForm"].elements["country"].value);
+		var province = textToTrim(document.forms["theForm"].elements["province"].value);
+		var city = textToTrim(document.forms["theForm"].elements["city"].value);
+		var district = textToTrim(document.forms["theForm"].elements["district"].value);
+		if(!(isNumber(country) && isNumber(province) && isNumber(city) && isNumber(district))){
+			validator.addErrorMsg(district_empty);
+		}
+		return validator.passed();
+	}
+	//去掉首尾空格
+	function textToTrim(text){
+		return text.replace(/^\s*|\s*$/g, "");
+	}
+	//文本是否大于0
+	function isNumber(text){
+		var flag = text.match(/^[1-9]\d*$/i);
+		if(flag){
+			return true;
+		}
+		return false;
+	}
+</script>
+{/literal}
+{include file="pagefooter.htm"}

@@ -1,0 +1,352 @@
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `new_app_data_ecshop`.`ecs_sessions` WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3'
+
+SELECT SUM(goods_number) AS number, SUM(goods_price * goods_number) AS amount FROM `new_app_data_ecshop`.`ecs_cart` WHERE session_id = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' AND rec_type = '0'
+
+UPDATE `new_app_data_ecshop`.`ecs_sessions` SET expiry = '1364551715', ip = '127.0.0.1', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='1', email='0', data = 'a:3:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:6:\"本站\";s:10:\"login_fail\";i:0;}' WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `new_app_data_ecshop`.`ecs_sessions` WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3'
+
+SELECT SUM(goods_number) AS number, SUM(goods_price * goods_number) AS amount FROM `new_app_data_ecshop`.`ecs_cart` WHERE session_id = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' AND rec_type = '0'
+
+UPDATE `new_app_data_ecshop`.`ecs_sessions` SET expiry = '1364551747', ip = '127.0.0.1', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='1', email='0', data = 'a:3:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:6:\"本站\";s:10:\"login_fail\";i:0;}' WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' LIMIT 1
+
+SELECT code, value FROM `new_app_data_ecshop`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `new_app_data_ecshop`.`ecs_sessions` WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3'
+
+SELECT SUM(goods_number) AS number, SUM(goods_price * goods_number) AS amount FROM `new_app_data_ecshop`.`ecs_cart` WHERE session_id = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' AND rec_type = '0'
+
+UPDATE `new_app_data_ecshop`.`ecs_sessions` SET expiry = '1364551764', ip = '127.0.0.1', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='1', email='0', data = 'a:3:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:6:\"本站\";s:10:\"login_fail\";i:0;}' WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' LIMIT 1
+
+DELETE FROM `new_app_data_ecshop`.`ecs_sessions` WHERE expiry < 1364549964
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `new_app_data_ecshop`.`ecs_sessions` WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3'
+
+SELECT SUM(goods_number) AS number, SUM(goods_price * goods_number) AS amount FROM `new_app_data_ecshop`.`ecs_cart` WHERE session_id = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' AND rec_type = '0'
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `new_app_data_ecshop`.`ecs_sessions` WHERE sesskey = '911a32112345cf79d1d9462d32c8c0c1'
+
+UPDATE `new_app_data_ecshop`.`ecs_sessions` SET expiry = '1364551785', ip = '127.0.0.1', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:6:{s:10:\"last_check\";i:1364551667;s:12:\"captcha_word\";s:16:\"YjFhMjZkYzVjMQ==\";s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:12:\"suppliers_id\";s:1:\"0\";s:8:\"store_id\";s:1:\"0\";}' WHERE sesskey = '911a32112345cf79d1d9462d32c8c0c1' LIMIT 1
+
+SELECT code, value FROM `new_app_data_ecshop`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `new_app_data_ecshop`.`ecs_sessions` WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3'
+
+SELECT c.cat_id, c.cat_name, c.measure_unit, c.parent_id, c.is_show, c.show_in_nav, c.grade, c.sort_order, COUNT(s.cat_id) AS has_children FROM `new_app_data_ecshop`.`ecs_category` AS c LEFT JOIN `new_app_data_ecshop`.`ecs_category` AS s ON s.parent_id=c.cat_id GROUP BY c.cat_id ORDER BY c.parent_id, c.sort_order ASC
+
+SELECT cat_id, COUNT(*) AS goods_num  FROM `new_app_data_ecshop`.`ecs_goods` WHERE is_delete = 0 AND is_on_sale = 1  GROUP BY cat_id
+
+SELECT gc.cat_id, COUNT(*) AS goods_num  FROM `new_app_data_ecshop`.`ecs_goods_cat` AS gc , `new_app_data_ecshop`.`ecs_goods` AS g  WHERE g.goods_id = gc.goods_id AND g.is_delete = 0 AND g.is_on_sale = 1  GROUP BY gc.cat_id
+
+SELECT * FROM `new_app_data_ecshop`.`ecs_nav`
+            WHERE ifshow = '1' ORDER BY type, vieworder
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '0' AND is_show = 1 
+
+SELECT cat_id,cat_name ,parent_id,is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '0' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '200' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '200' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '201' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '201' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '202' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '203' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '204' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '205' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '191' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '191' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '175' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '180' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '177' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '181' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '206' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '206' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '207' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '208' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '209' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '210' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '211' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '211' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '192' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '192' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '190' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '178' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '232' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '233' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '234' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '234' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '235' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '236' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '237' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '238' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '239' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '239' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '240' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '241' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '242' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '243' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '212' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '212' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '199' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '199' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '198' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '245' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '246' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '247' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '244' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '244' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '248' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '249' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '250' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '251' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '252' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '252' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '253' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '254' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '255' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '256' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '213' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '213' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '214' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '214' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '217' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '215' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '216' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '226' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '179' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '179' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '183' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '184' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '188' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '189' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '187' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '186' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '223' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id, is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '223' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '193' AND is_show = 1 
+
+SELECT c.cat_id, c.cat_name, c.sort_order, a.article_id, a.title, a.file_url, a.open_type FROM `new_app_data_ecshop`.`ecs_article` AS a LEFT JOIN `new_app_data_ecshop`.`ecs_article_cat` AS c ON a.cat_id = c.cat_id WHERE c.cat_type = 5 AND a.is_open = 1 ORDER BY c.sort_order ASC, a.article_id
+
+SELECT goods_id FROM `new_app_data_ecshop`.`ecs_goods_cat` AS g WHERE g.cat_id  IN ('200','201','202','203','204','205','191','175','180','177','181','206','207','208','209','210','211','192','190','178','233','232','234','237','238','235','236','239','243','240','241','242','212','199','198','246','247','245','244','249','250','251','248','252','256','253','254','255','213','214','217','215','216','226','179','183','184','188','189','187','186','223','193','227','228','229','230','218','196','219','220','221','222','197','224','225') 
+
+SELECT g.goods_id, g.goods_name, g.shop_price, g.goods_thumb, SUM(og.goods_number) as goods_number FROM `new_app_data_ecshop`.`ecs_goods` AS g, `new_app_data_ecshop`.`ecs_order_info` AS o, `new_app_data_ecshop`.`ecs_order_goods` AS og WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND (g.cat_id  IN ('200','201','202','203','204','205','191','175','180','177','181','206','207','208','209','210','211','192','190','178','233','232','234','237','238','235','236','239','243','240','241','242','212','199','198','246','247','245','244','249','250','251','248','252','256','253','254','255','213','214','217','215','216','226','179','183','184','188','189','187','186','223','193','227','228','229','230','218','196','219','220','221','222','197','224','225')  OR g.goods_id IN ('') )    AND g.goods_number > 0  AND og.order_id = o.order_id AND og.goods_id = g.goods_id AND (o.order_status = '1' OR o.order_status = '5') AND (o.pay_status = '2' OR o.pay_status = '1') AND (o.shipping_status = '1' OR o.shipping_status = '2') GROUP BY g.goods_id ORDER BY goods_number DESC, g.goods_id DESC LIMIT 10
+
+SELECT g.goods_id, g.is_best, g.is_new, g.is_hot, g.is_promote, b.brand_name,g.sort_order  FROM `new_app_data_ecshop`.`ecs_goods` AS g  LEFT JOIN `new_app_data_ecshop`.`ecs_brand` AS b ON b.brand_id = g.brand_id  WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 AND (g.is_best = 1 OR g.is_new =1 OR g.is_hot = 1) ORDER BY g.sort_order, g.last_update DESC
+
+SELECT library, number FROM `new_app_data_ecshop`.`ecs_template` WHERE theme = 'kangtu' AND filename = 'index' AND remarks='' 
+
+SELECT g.goods_id, g.goods_name, g.goods_name_style, g.market_price, g.shop_price AS org_price, g.promote_price, IFNULL(mp.user_price, g.shop_price * '1') AS shop_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, g.goods_img, RAND() AS rnd FROM `new_app_data_ecshop`.`ecs_goods` AS g LEFT JOIN `new_app_data_ecshop`.`ecs_member_price` AS mp ON mp.goods_id = g.goods_id AND mp.user_rank = '0'  WHERE g.goods_id  IN ('803','804','801','802','805','438','439','448','446','461','456','460','444','447','454','741','738','725','726','732')  ORDER BY g.sort_order, g.last_update DESC
+
+SELECT g.goods_id, g.goods_name, g.goods_name_style, g.market_price, g.shop_price AS org_price, g.promote_price, IFNULL(mp.user_price, g.shop_price * '1') AS shop_price, promote_start_date, promote_end_date, g.goods_brief, g.goods_thumb, goods_img, b.brand_name, g.is_best, g.is_new, g.is_hot, g.is_promote, RAND() AS rnd FROM `new_app_data_ecshop`.`ecs_goods` AS g LEFT JOIN `new_app_data_ecshop`.`ecs_brand` AS b ON b.brand_id = g.brand_id LEFT JOIN `new_app_data_ecshop`.`ecs_member_price` AS mp ON mp.goods_id = g.goods_id AND mp.user_rank = '0' WHERE g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0  AND g.is_promote = 1 AND promote_start_date <= '1364551800' AND promote_end_date >= '1364551800'  ORDER BY g.sort_order, g.last_update DESC LIMIT 10 
+
+SELECT b.brand_id, b.brand_name, b.brand_logo, b.brand_desc, COUNT(*) AS goods_num, IF(b.brand_logo > '', '1', '0') AS tag FROM `new_app_data_ecshop`.`ecs_brand`AS b, `new_app_data_ecshop`.`ecs_goods` AS g WHERE g.brand_id = b.brand_id  AND is_show = 1  AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 GROUP BY b.brand_id HAVING goods_num > 0 ORDER BY tag DESC, b.sort_order ASC LIMIT 4 
+
+SELECT act_id, act_name, act_type, start_time, end_time FROM `new_app_data_ecshop`.`ecs_goods_activity` WHERE is_finished=0 AND start_time <= '1364551800' AND end_time >= '1364551800'
+
+SELECT act_id, act_range, act_range_ext, act_name, start_time, end_time FROM `new_app_data_ecshop`.`ecs_favourable_activity` WHERE start_time <= '1364551800' AND end_time >= '1364551800'
+
+SELECT o.order_sn, o.invoice_no, s.shipping_code FROM `new_app_data_ecshop`.`ecs_order_info` AS o LEFT JOIN `new_app_data_ecshop`.`ecs_shipping` AS s ON s.shipping_id = o.shipping_id WHERE invoice_no > '' AND shipping_status = 1 ORDER BY shipping_time DESC LIMIT 10
+
+SELECT a.article_id, a.title, ac.cat_name, a.add_time, a.file_url, a.open_type, ac.cat_id, ac.cat_name  FROM `new_app_data_ecshop`.`ecs_article` AS a, `new_app_data_ecshop`.`ecs_article_cat` AS ac WHERE a.is_open = 1 AND a.cat_id = ac.cat_id AND ac.cat_type = 1 ORDER BY a.article_type DESC, a.add_time DESC LIMIT 8
+
+SELECT gb.act_id AS group_buy_id, gb.goods_id, gb.ext_info, gb.goods_name, g.goods_thumb, g.goods_img FROM `new_app_data_ecshop`.`ecs_goods_activity` AS gb, `new_app_data_ecshop`.`ecs_goods` AS g WHERE gb.act_type = '1' AND g.goods_id = gb.goods_id AND gb.start_time <= '1364551800' AND gb.end_time >= '1364551800' AND g.is_delete = 0 ORDER BY gb.act_id DESC LIMIT 3
+
+SELECT a.act_id, a.goods_id, a.goods_name, a.ext_info, g.goods_thumb FROM `new_app_data_ecshop`.`ecs_goods_activity` AS a,`new_app_data_ecshop`.`ecs_goods` AS g WHERE a.goods_id = g.goods_id AND a.act_type = '2' AND a.is_finished = 0 AND a.start_time <= '1364551800' AND a.end_time >= '1364551800' AND g.is_delete = 0 ORDER BY a.start_time DESC LIMIT 3
+
+SELECT link_logo, link_name, link_url FROM `new_app_data_ecshop`.`ecs_friend_link` ORDER BY show_order
+
+SELECT c.cat_id, c.cat_name, cr.recommend_type FROM `new_app_data_ecshop`.`ecs_cat_recommend` AS cr INNER JOIN `new_app_data_ecshop`.`ecs_category` AS c ON cr.cat_id=c.cat_id
+
+SELECT id, number, type FROM `new_app_data_ecshop`.`ecs_template` WHERE filename = 'index' AND type > 0 AND remarks ='' AND theme='kangtu'
+
+SELECT region, library, sort_order, id, number, type FROM `new_app_data_ecshop`.`ecs_template` WHERE theme = 'kangtu' AND filename = 'index' AND type > 0 AND remarks='' ORDER BY region, library, sort_order
+
+SELECT SUM(goods_number) AS number, SUM(goods_price * goods_number) AS amount FROM `new_app_data_ecshop`.`ecs_cart` WHERE session_id = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' AND rec_type = '0'
+
+UPDATE `new_app_data_ecshop`.`ecs_sessions` SET expiry = '1364551800', ip = '127.0.0.1', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='1', email='0', data = 'a:3:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:6:\"本站\";s:10:\"login_fail\";i:0;}' WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' LIMIT 1
+
+DELETE FROM `new_app_data_ecshop`.`ecs_sessions` WHERE expiry < 1364550000
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `new_app_data_ecshop`.`ecs_sessions` WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3'
+
+SELECT c.cat_id, c.cat_name, c.sort_order, a.article_id, a.title, a.file_url, a.open_type FROM `new_app_data_ecshop`.`ecs_article` AS a LEFT JOIN `new_app_data_ecshop`.`ecs_article_cat` AS c ON a.cat_id = c.cat_id WHERE c.cat_type = 5 AND a.is_open = 1 ORDER BY c.sort_order ASC, a.article_id
+
+SELECT act_id, act_name, act_type, start_time, end_time FROM `new_app_data_ecshop`.`ecs_goods_activity` WHERE is_finished=0 AND start_time <= '1364551873' AND end_time >= '1364551873' AND goods_id = '803'
+
+SELECT act_id, act_range, act_range_ext, act_name, start_time, end_time FROM `new_app_data_ecshop`.`ecs_favourable_activity` WHERE start_time <= '1364551873' AND end_time >= '1364551873' AND CONCAT(',', user_rank, ',') LIKE '%,0,%'
+
+SELECT cat_id, brand_id FROM `new_app_data_ecshop`.`ecs_goods`WHERE goods_id = '803'
+
+SELECT act_id, act_name, act_type, start_time, end_time FROM `new_app_data_ecshop`.`ecs_goods_activity` WHERE is_finished=0 AND start_time <= '1364551873' AND end_time >= '1364551873'
+
+SELECT act_id, act_range, act_range_ext, act_name, start_time, end_time FROM `new_app_data_ecshop`.`ecs_favourable_activity` WHERE start_time <= '1364551873' AND end_time >= '1364551873'
+
+SELECT g.*, c.measure_unit, b.brand_id, b.brand_name AS goods_brand, m.type_money AS bonus_money, IFNULL(AVG(r.comment_rank), 0) AS comment_rank, IFNULL(mp.user_price, g.shop_price * '1') AS rank_price FROM `new_app_data_ecshop`.`ecs_goods` AS g LEFT JOIN `new_app_data_ecshop`.`ecs_category` AS c ON g.cat_id = c.cat_id LEFT JOIN `new_app_data_ecshop`.`ecs_brand` AS b ON g.brand_id = b.brand_id LEFT JOIN `new_app_data_ecshop`.`ecs_comment` AS r ON r.id_value = g.goods_id AND comment_type = 0 AND r.parent_id = 0 AND r.status = 1 LEFT JOIN `new_app_data_ecshop`.`ecs_bonus_type` AS m ON g.bonus_type_id = m.type_id AND m.send_start_date <= '1364551873' AND m.send_end_date >= '1364551873' LEFT JOIN `new_app_data_ecshop`.`ecs_member_price` AS mp ON mp.goods_id = g.goods_id AND mp.user_rank = '0' WHERE g.goods_id = '803' AND g.is_delete = 0 GROUP BY g.goods_id
+
+SELECT g.goods_id, g.goods_name, g.goods_thumb, g.goods_img, g.shop_price AS org_price, IFNULL(mp.user_price, g.shop_price * '1') AS shop_price, g.market_price, g.promote_price, g.promote_start_date, g.promote_end_date FROM `new_app_data_ecshop`.`ecs_link_goods` lg LEFT JOIN `new_app_data_ecshop`.`ecs_goods` AS g ON g.goods_id = lg.link_goods_id LEFT JOIN `new_app_data_ecshop`.`ecs_member_price` AS mp ON mp.goods_id = g.goods_id AND mp.user_rank = '0' WHERE lg.goods_id = '803' AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 LIMIT 4
+
+SELECT parent_id FROM `new_app_data_ecshop`.`ecs_category` WHERE cat_id = '207'
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '206' AND is_show = 1 
+
+SELECT cat_id,cat_name ,parent_id,is_show FROM `new_app_data_ecshop`.`ecs_category`WHERE parent_id = '206' AND is_show = 1 ORDER BY sort_order ASC, cat_id ASC
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '207' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '208' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '209' AND is_show = 1 
+
+SELECT count(*) FROM `new_app_data_ecshop`.`ecs_category` WHERE parent_id = '210' AND is_show = 1 
+
+SELECT cat_id, cat_name, parent_id FROM `new_app_data_ecshop`.`ecs_category`
+
+SELECT * FROM `new_app_data_ecshop`.`ecs_nav`
+            WHERE ifshow = '1' ORDER BY type, vieworder
+
+SELECT goods_id FROM `new_app_data_ecshop`.`ecs_goods` WHERE cat_id=207 AND goods_id > 803 AND is_on_sale = 1 AND is_alone_sale = 1 AND is_delete = 0 LIMIT 1
+
+SELECT max(goods_id) FROM `new_app_data_ecshop`.`ecs_goods` WHERE cat_id=207 AND goods_id < 803 AND is_on_sale = 1 AND is_alone_sale = 1 AND is_delete = 0
+
+SELECT cat_id, cat_name, parent_id FROM `new_app_data_ecshop`.`ecs_category`
+
+SELECT attr_group FROM `new_app_data_ecshop`.`ecs_goods_type` AS gt, `new_app_data_ecshop`.`ecs_goods` AS g WHERE g.goods_id='803' AND gt.cat_id=g.goods_type
+
+SELECT a.attr_id, a.attr_name, a.attr_group, a.is_linked, a.attr_type, g.goods_attr_id, g.attr_value, g.attr_price FROM `new_app_data_ecshop`.`ecs_goods_attr` AS g LEFT JOIN `new_app_data_ecshop`.`ecs_attribute` AS a ON a.attr_id = g.attr_id WHERE g.goods_id = '803' ORDER BY a.sort_order, g.attr_price, g.goods_attr_id
+
+SELECT a.article_id, a.title, a.file_url, a.open_type, a.add_time FROM `new_app_data_ecshop`.`ecs_goods_article` AS g, `new_app_data_ecshop`.`ecs_article` AS a WHERE g.article_id = a.article_id AND g.goods_id = '803' AND a.is_open = 1 ORDER BY a.add_time DESC
+
+SELECT gg.parent_id, ggg.goods_name AS parent_name, gg.goods_id, gg.goods_price, g.goods_name, g.goods_thumb, g.goods_img, g.shop_price AS org_price, IFNULL(mp.user_price, g.shop_price * '1') AS shop_price FROM `new_app_data_ecshop`.`ecs_group_goods` AS gg LEFT JOIN `new_app_data_ecshop`.`ecs_goods`AS g ON g.goods_id = gg.goods_id LEFT JOIN `new_app_data_ecshop`.`ecs_member_price` AS mp ON mp.goods_id = gg.goods_id AND mp.user_rank = '0' LEFT JOIN `new_app_data_ecshop`.`ecs_goods` AS ggg ON ggg.goods_id = gg.parent_id WHERE gg.parent_id  IN ('803')  AND g.is_delete = 0 AND g.is_on_sale = 1 ORDER BY gg.parent_id, gg.goods_id
+
+SELECT rank_id, IFNULL(mp.user_price, r.discount * 2.00 / 100) AS price, r.rank_name, r.discount FROM `new_app_data_ecshop`.`ecs_user_rank` AS r LEFT JOIN `new_app_data_ecshop`.`ecs_member_price` AS mp ON mp.goods_id = '803' AND mp.user_rank = r.rank_id WHERE r.show_price = 1 OR r.rank_id = '0'
+
+SELECT img_id, img_url, thumb_url, img_desc FROM `new_app_data_ecshop`.`ecs_goods_gallery` WHERE goods_id = '803' LIMIT 5
+
+SELECT COUNT(b.goods_id ) AS num, g.goods_id, g.goods_name, g.goods_thumb, g.goods_img, g.shop_price, g.promote_price, g.promote_start_date, g.promote_end_date FROM `new_app_data_ecshop`.`ecs_order_goods` AS a LEFT JOIN `new_app_data_ecshop`.`ecs_order_goods` AS b ON b.order_id = a.order_id LEFT JOIN `new_app_data_ecshop`.`ecs_goods` AS g ON g.goods_id = b.goods_id WHERE a.goods_id = '803' AND b.goods_id <> '803' AND g.is_on_sale = 1 AND g.is_alone_sale = 1 AND g.is_delete = 0 GROUP BY b.goods_id ORDER BY num DESC LIMIT 3
+
+SELECT IFNULL(SUM(g.goods_number), 0) FROM `new_app_data_ecshop`.`ecs_order_info` AS o, `new_app_data_ecshop`.`ecs_order_goods` AS g WHERE o.order_id = g.order_id AND o.order_status = '1' AND o.shipping_status  IN ('1','2')  AND o.pay_status  IN ('2','1')  AND g.goods_id = '803'
+
+SELECT tag_id, user_id, tag_words, COUNT(tag_id) AS tag_count FROM `new_app_data_ecshop`.`ecs_tag` WHERE goods_id = '803' GROUP BY tag_words
+
+SELECT MAX(pg.goods_id), ga.act_id, ga.act_name, ga.act_desc, ga.goods_name, ga.start_time,
+                   ga.end_time, ga.is_finished, ga.ext_info
+            FROM `new_app_data_ecshop`.`ecs_goods_activity` AS ga, `new_app_data_ecshop`.`ecs_package_goods` AS pg
+            WHERE pg.package_id = ga.act_id
+            AND ga.start_time <= '1364551873'
+            AND ga.end_time >= '1364551873'
+            AND pg.goods_id = 803
+            GROUP BY pg.goods_id
+            ORDER BY ga.act_id
+
+SELECT id, number, type FROM `new_app_data_ecshop`.`ecs_template` WHERE filename = 'goods' AND type > 0 AND remarks ='' AND theme='kangtu'
+
+SELECT `volume_number` , `volume_price` FROM `new_app_data_ecshop`.`ecs_volume_price` WHERE `goods_id` = '803' AND `price_type` = '1' ORDER BY `volume_number`
+
+UPDATE `new_app_data_ecshop`.`ecs_goods` SET click_count = click_count + 1 WHERE goods_id = '803'
+
+SELECT region, library, sort_order, id, number, type FROM `new_app_data_ecshop`.`ecs_template` WHERE theme = 'kangtu' AND filename = 'goods' AND type > 0 AND remarks='' ORDER BY region, library, sort_order
+
+SELECT SUM(goods_number) AS number, SUM(goods_price * goods_number) AS amount FROM `new_app_data_ecshop`.`ecs_cart` WHERE session_id = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' AND rec_type = '0'
+
+SELECT goods_id, goods_name, goods_thumb, shop_price FROM `new_app_data_ecshop`.`ecs_goods` WHERE goods_id IN ('804')  AND is_on_sale = 1 AND is_alone_sale = 1 AND is_delete = 0
+
+SELECT COUNT(*) FROM `new_app_data_ecshop`.`ecs_comment` WHERE id_value = '803' AND comment_type = '0' AND status = 1 AND parent_id = 0
+
+SELECT * FROM `new_app_data_ecshop`.`ecs_comment` WHERE id_value = '803' AND comment_type = '0' AND status = 1 AND parent_id = 0 ORDER BY comment_id DESC LIMIT 5
+
+UPDATE `new_app_data_ecshop`.`ecs_sessions` SET expiry = '1364551873', ip = '127.0.0.1', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='1', email='0', data = 'a:3:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:6:\"本站\";s:10:\"login_fail\";i:0;}' WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `new_app_data_ecshop`.`ecs_sessions` WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3'
+
+UPDATE `new_app_data_ecshop`.`ecs_sessions` SET expiry = '1364551873', ip = '127.0.0.1', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='1', email='0', data = 'a:4:{s:7:\"from_ad\";i:0;s:7:\"referer\";s:6:\"本站\";s:10:\"login_fail\";i:0;s:12:\"captcha_word\";s:16:\"YmFmMjA2N2UxMg==\";}' WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3' LIMIT 1
+
+DELETE FROM `new_app_data_ecshop`.`ecs_sessions_data` WHERE expiry < 1364550073
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `new_app_data_ecshop`.`ecs_sessions` WHERE sesskey = 'fb24e0ba75a4d7e6a8d13aa17c3934c3'
+
+SELECT `volume_number` , `volume_price` FROM `new_app_data_ecshop`.`ecs_volume_price` WHERE `goods_id` = '803' AND `price_type` = '1' ORDER BY `volume_number`
+
+SELECT g.promote_price, g.promote_start_date, g.promote_end_date, IFNULL(mp.user_price, g.shop_price * '1') AS shop_price  FROM `new_app_data_ecshop`.`ecs_goods` AS g  LEFT JOIN `new_app_data_ecshop`.`ecs_member_price` AS mp ON mp.goods_id = g.goods_id AND mp.user_rank = '0'  WHERE g.goods_id = '803' AND g.is_delete = 0
+
+SELECT SUM(attr_price) AS attr_price FROM `new_app_data_ecshop`.`ecs_goods_attr` WHERE goods_attr_id IN ('') 
+
+DELETE FROM `new_app_data_ecshop`.`ecs_sessions_data` WHERE expiry < 1364550075
+

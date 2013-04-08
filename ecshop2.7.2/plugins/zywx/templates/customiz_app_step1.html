@@ -1,0 +1,120 @@
+<!-- $Id: customiz_app_step1.html 15409 2012-1-17 10:20:00Z lilixing $ -->
+
+{include file="pageheader.html"}
+
+<!-- {if $repeatCreateApp eq 'false'} -->
+
+<div class="main-div">
+
+<!-- {/if} -->
+
+	<form action="index.php?act=step2" method="post" name="theForm">
+
+		<table cellspacing="1" cellpadding="3" width="200px">
+
+			<tr><td colspan="3">{$lang.template_select}</td></tr>
+
+			<tr><td colspan="3">
+
+				<div class="mb_content">
+
+					<!-- {foreach from=$style_arr item=val} -->
+
+						<!-- {if $val.isopen eq "1"} -->
+
+						<div style="float:left; margin-right:10px;"  onclick="setbigpic({$val.id});">
+							<div class="kj" >
+								<div><img src="{$zywx_proxy}/proxyserver/theme/img/temp_{$val.id}.png"/></div>
+								<div class="ziti">{$val.name}</div>
+							</div>
+							<input id="r{$val.id}" name="style" type="radio" value="{$val.id}_{$val.app_style}" {$checked[$val.id]} />
+						</div>
+
+						<!-- {else} -->
+
+						<div class="radio1">
+							<input id="r{$val.id}" name="style" type="radio" value="{$val.id}_{$val.app_style}" disabled="disabled" {$checked[{$val.id}]} />
+							<div class="kj">
+								<div><img src="{$zywx_proxy}/proxyserver/theme/img/temp_{$val.id}.png"/></div>
+								<div class="ziti">{$lang.developing}</div>
+							</div>
+						</div>
+
+						<!-- {/if} -->
+
+					<!-- {/foreach} -->
+
+					<div style="clear:both; overflow:hidden; height:0px; font-size:0px;"></div>
+
+				</div>
+				
+				<div class="mb_content">
+					<ul class="list_img">
+						<li style="float:left; margin-right:10px;"><img id="i1" src="{$zywx_proxy}/proxyserver/theme/img/temp_{$check_row_id}_1.jpg" /></li>
+						<li style="float:left; margin-right:10px;"><img id="i2" src="{$zywx_proxy}/proxyserver/theme/img/temp_{$check_row_id}_2.jpg" /></li>
+						<li style="float:left; margin-right:10px;"><img id="i3" src="{$zywx_proxy}/proxyserver/theme/img/temp_{$check_row_id}_3.jpg" /></li>
+						<div style="clear:both; overflow:hidden; height:0px; font-size:0px;"></div>
+					</ul>
+				</div>
+
+				<!--
+				<tr>
+					<td><img src="3.jpg" width="100" height="100"/>
+					<td><img src="3.jpg" width="100" height="100"/>
+					<td><img src="3.jpg" width="100" height="100"/>
+				</tr>
+				<tr>
+					<td>
+						<label for="j_pingguofeng">
+							<input type="radio" name="template" value="ping_guo_feng" id="j_pingguofeng" checked/>{$lang.ping_guo_feng}
+						</label>
+					</td>
+					<td>
+						<label for="j_ning_meng">
+							<input type="radio" name="template" value="ning_meng" id="j_ning_meng"/>{$lang.ning_meng}
+						</label>
+					</td>
+					<td>
+						<label for="j_xiao_qing_xin">
+							<input type="radio" name="template" value="xiao_qing_xin" id="j_xiao_qing_xin"/>{$lang.xiao_qing_xin}
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3"><img src="4.jpg"/>
+				</tr>
+				-->
+
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="3" align="center">
+					<input type="hidden" value="{$repeatCreateApp}" name="repeatCreateApp">
+					<input type="submit" class="button" value="{$lang.next}" />
+				</td>
+			</tr>
+
+		</table>
+
+	</form>
+
+<!-- {if $repeatCreateApp eq 'false'} -->
+
+</div>
+
+<!-- {/if} -->
+
+{include file="pagefooter.html"}
+
+<script language="javascript">
+
+	function setbigpic(id) 
+	{
+		document.getElementById('r'+id).checked = true;
+		document.getElementById('i1').src = "{$zywx_proxy}/proxyserver/theme/img/temp_"+id+"_1.jpg";
+		document.getElementById('i2').src = "{$zywx_proxy}/proxyserver/theme/img/temp_"+id+"_2.jpg";
+		document.getElementById('i3').src = "{$zywx_proxy}/proxyserver/theme/img/temp_"+id+"_3.jpg";
+	}
+
+</script>

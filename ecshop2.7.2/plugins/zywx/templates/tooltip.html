@@ -1,0 +1,63 @@
+
+{include file="pageheader.html"}
+
+<div class="main-div" style="height:240px; padding-top:40px; text-align:center;">
+	{if $install == 'install'}
+		<form action="install.php" method="post" name="theForm" target="myiframe"	onsubmit="showloading();return true;" >
+			<div style="padding-top:20px;">
+				<div class="app_box">
+					<div class="xiezai" style="font-size:16px;">{$plugin_install_tips}</div>
+				</div>
+			</div>
+			<span id="j_loading" style="display:none;">loading...</span>
+			<div id="j_result" style="padding:5px 10px; line-height:20px; color:#f00"></div>
+
+			<input type="hidden" name='install' value='install'>
+			<input type="hidden" value="right" name='right'>
+			<input type="submit"  value='{$installname}'  class="next_btn" style="font-weight:bolder; margin:20px auto 0px;" />
+		</form>
+	{/if}
+	{if $uninstall == 'uninstall'}
+		<form action="uninstall.php" method="post" name="theForm" target="myiframe"	onsubmit="showloading();return true;" >
+			<div style="padding-top:20px;">
+				<div class="app_box">
+					<div class="xiezai" style="font-size:16px;">{$plugin_uninstall_tips}</div>
+				</div>
+			</div>
+			<span id="j_loading" style="display:none;">loading...</span>
+			<div id="j_result" style="padding:5px 10px; line-height:20px; color:#f00"></div>
+
+			<input type="hidden" name='uninstall' value='uninstall'>
+			<input type="submit"  value='{$uninstallname}'  class="next_btn" style="font-weight:bolder; margin:20px auto 0px;"/>
+		</form>
+	{/if}
+</div>
+
+<iframe name="myiframe" style="display:none"></iframe>
+{include file="pagefooter.html"}
+
+<script type="text/javascript">
+//安装
+function installcallback(result)
+{
+	document.getElementById('j_result').innerHTML = result;
+	hideloading();
+}
+
+//卸载
+function uncallback(result)
+{
+	document.getElementById('j_result').innerHTML = result;
+	hideloading();
+}
+
+function showloading () 
+{
+	document.getElementById('j_loading').style.display = 'inline';	
+}
+
+function hideloading()
+{
+	document.getElementById('j_loading').style.display = 'none';	
+}
+</script>
