@@ -1,0 +1,74 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/jquery1.4.1.js"></script>
+<script src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/hp1.js"></script>
+
+
+<STYLE type=text/css charset="utf-8">
+.slides  a{ text-decoration:none}
+.slides {
+	OVERFLOW: hidden; WIDTH: 550px; POSITION: relative; HEIGHT: 175px
+}
+.slide-pic {
+	OVERFLOW: hidden; WIDTH: 550px
+}
+.slide-pic LI {
+	DISPLAY: none
+}
+.slide-pic LI.cur {
+	DISPLAY: block
+}
+.slide-li {
+	LEFT: 0px; BOTTOM: 0px; POSITION: absolute
+}
+.slide-li LI {
+	FLOAT: left; WIDTH: 109px; LINE-HEIGHT: 25px; MARGIN-RIGHT: 1px; HEIGHT: 25px; TEXT-ALIGN: center
+}
+.slide-li A {
+	DISPLAY: block; FONT-SIZE: 12px; WIDTH: 109px; COLOR: #fff; HEIGHT: 25px
+}
+.slide-li .cur A {
+	COLOR: #333; TEXT-DECORATION: none
+}
+.slide-li A:hover {
+	COLOR: #333; TEXT-DECORATION: none
+}
+.op LI {
+	BACKGROUND: #666; FILTER: alpha(opacity=90); opacity: 0.9
+}
+.op LI.cur {
+	BACKGROUND: #fff
+}
+.slide-txt SPAN {
+	DISPLAY: none
+}
+</STYLE>
+
+ 
+<UL class="slide-li op">
+  <LI class=cur></LI>
+  <LI class=""></LI>
+  <LI class=""></LI>
+  <LI class=""></LI>
+  <LI class=""></LI></UL>
+<UL class="slide-li slide-txt">
+  <LI class=cur>
+  <A href="#" 
+  target=_blank>食品饮料满额换.. </A></LI>
+  <LI class="">
+  <A href="#" 
+  target=_blank>眼部保养 </A></LI>
+  <LI class="">
+  <A href="#" 
+  target=_blank>电脑全场零利风.. </A></LI>
+  <LI class="">
+  <A href="#" 
+  target=_blank>空调促销 </A></LI>
+  <LI class="">
+  <A href="#" 
+  target=_blank>洗衣液买就送 </A></LI>
+  </UL></DIV>
+  
+  </DIV>
+  
+  <div class="blank"></div>

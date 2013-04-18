@@ -1,0 +1,20 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- 订单提交成功 -->
+<div class="flowBox" style="margin:30px auto 70px auto;">
+<h6 style="text-align:center; height:30px; line-height:30px;">{$lang.remember_order_number}: <font style="color:red">{$order.order_sn}</font></h6>
+<table width="99%" align="center" border="0" cellpadding="15" cellspacing="0" bgcolor="#fff" style="border:1px solid #ddd; margin:20px auto;" >
+	<tr>
+		<td align="center" bgcolor="#FFFFFF">
+		<!--{if $order.shipping_name}-->{$lang.select_shipping}: <strong>{$order.shipping_name}</strong>，<!--{/if}-->{$lang.select_payment}: <strong>{$order.pay_name}</strong>。{$lang.order_amount}: <strong>￥{$total}元</strong>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" bgcolor="#FFFFFF">{$order.pay_desc}</td>
+	</tr>
+	<!-- {if $pay_online} -->
+	<!-- 如果是线上支付则显示支付按钮 -->
+	<tr>
+		<td align="center" bgcolor="#FFFFFF">{$pay_online}</td>
+	</tr>
+	<!-- {/if} -->
+</table>

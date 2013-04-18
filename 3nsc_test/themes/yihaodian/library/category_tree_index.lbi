@@ -1,0 +1,95 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ 
+<div class="globalModule1">
+<div class="my_left_category my_left_category2" style="position:relative; display:block; z-index:999999999; margin-top:-11px;">
+     <!--{foreach from=$categories item=cat name=no}-->
+     <dl>
+     <dt onmouseover="this.className='category_over'" onmouseout="this.className=''">
+     <a class="a1" href="{$cat.url}" target="_blank" > 
+     <div class="biao">
+     <img style="float:left" src="../images/c{$smarty.foreach.no.iteration}.gif">
+     </div>
+     {$cat.name|escape:html}
+     
+     </a>
+       <div class="category_over_box">
+     <ul class="clearfix">
+     <div style="float:left">
+     <!--{foreach from=$cat.cat_id item=child}-->
+     <li>
+     <div style="clear:both"></div>
+      <div class="f_l">
+     <a class="over_2" href="{$child.url}" target="_blank">{$child.name|escape:html}</a>  
+     </div>
+     <div class="f_r">
+     <!--{foreach from=$child.cat_id item=childer}-->
+     <b>
+     | <a class="over_3" href="{$childer.url}" target="_blank">{$childer.name|escape:html}</a>
+     </b> 
+     <!--{/foreach}-->
+      </div>
+      
+       <div style="clear:both"></div>
+     </li>  
+     <!--{/foreach}-->
+      </div>  
+     </ul>
+     <div class="brand_r">
+     
+<dl>
+<dt>推荐品牌</dt>
+<dd>
+<a href="brand.php?id=22" target="_blank" target="_blank">可口可乐</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">立顿</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">雀巢</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">奥利奥</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">康师傅</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">统一</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">光明</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">蒙牛</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">伊利</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">阿明</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">立丰</a>
+<a href="brand.php?id=22" target="_blank" target="_blank">咏萄 Everwines</a>
+ 
+</dd>
+</dl>
+
+<dl>
+<dt>促销专题</dt>
+<dd>
+<a href="search.php" target="_blank">休闲零食特价买赠大酬...</a>
+<a href="search.php" target="_blank">买麦片、蜂蜜满28元送...</a>
+<a href="search.php" target="_blank">买方便面送咖啡</a>
+<a href="search.php" target="_blank">whisper活力薄荷糖买2...</a>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+     
+    
+     
+     </div>
+     </div>
+        <div class="dang" style="position: relative; left:-10px; float:left; background:#fff ; width:10px; height:33px;"></div>
+      </dt>
+    </dl>
+    <!--{/foreach}--> 
+<dl>
+ 
+</dl>
+
+</div>
+
+</div>
+
+<div class="blank"></div>
+
+

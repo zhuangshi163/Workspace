@@ -1,0 +1,56 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $group_buy_goods} -->
+<div class="box_1">
+<h3><span>今日团购</span></h3>
+ 
+<div class="index_group">
+      <!--{foreach from=$group_buy_goods item=goods name="groupgoods"}-->
+  {if $smarty.foreach.groupgoods.index <= 0}
+  <div class="des"><a href="{$goods.url}">{$goods.act_desc}</a>
+  </div>
+  <div class="goodsimg">
+  <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.goods_name|escape:html}" /></a>
+  </div>
+    
+    
+    <div class="price_bg">
+    <div class="t"><del>{$goods.market_price}</del></div>
+    <div class="b">￥<b>{$goods.last_price}</b></div>
+    </div>
+ 
+<div class="bottom">
+<ul> 
+<img src="images/icon_star.jpg">
+已有&nbsp;<b>{$goods.click_count}</b>&nbsp;个人购买
+</ul> 
+<ul> 
+<img src="images/icon_star.jpg">
+   剩余&nbsp;<input type="text" value="" id="_lefttime" style="width:20px;">小时&nbsp;<input type="text" value="" id="_lefttime1" style="width:20px;">分&nbsp;<input type="text" value="" id="_lefttime2" style="width:20px;">秒
+</ul> 
+</div>
+  {/if}
+  <!--{/foreach}-->
+  <SCRIPT LANGUAGE="Javascript">
+function _fresh()
+{
+    var endtime=new Date("October 15, 2011 00:00:00");
+    var nowtime = new Date();
+    var leftsecond=parseInt((endtime.getTime()-nowtime.getTime())/1000);
+    if(leftsecond<0){leftsecond=0;}
+    __d=parseInt(leftsecond/3600/24);
+    __h=parseInt((leftsecond/3600)%24);
+    __m=parseInt((leftsecond/60)%24);
+    __s=parseInt(leftsecond%60);
+    __all =__h+"小时"+__m+"分"+__s+"秒";
+    __all = __all.replace(/([0-9]{1})/g,'$1')
+    document.getElementById("_lefttime").value=__h;
+	document.getElementById("_lefttime1").value=__m;
+	document.getElementById("_lefttime2").value=__s;
+}
+_fresh()
+setInterval(_fresh,1000);
+</SCRIPT>
+ </div>
+</div>
+<div class="blank"></div>
+<!-- {/if} -->

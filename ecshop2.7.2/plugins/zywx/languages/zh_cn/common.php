@@ -167,8 +167,8 @@
 	$_LANG['login_time_past'] = '登录超时，请重新登录！';
 
 	//EC推广描述
-	$_LANG['ec_desc'] = 'AppCan手机电商客户端是AppCan为ECshop开源网店系统提供的一款个性定制iPhone、Android手机电商客户端的产品。';
-	$_LANG['copyright'] = '&copy;2011 - Appcan版权所有';
+	$_LANG['ec_desc'] = '健康盾网店系统提供的一款个性定制iPhone、Android手机电商客户端的产品。';
+	$_LANG['copyright'] = '&copy;2013 - 健康盾版权所有';
 	$_LANG['iphone_down_name']  = 'iPhone版下载';
 	$_LANG['andriod_down_name'] = 'Andriod版下载';
 	$_LANG['mobile_install'] = '手机上网安装';

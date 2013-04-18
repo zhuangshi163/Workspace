@@ -1,0 +1,14 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ 
+ <div class="box_1">
+<h3 class="h3_2">
+  <span><a href="{$articles_cat.url}">{$articles_cat.name|escape:html}</a></span>
+  <a href="{$articles_cat.url}">更多</a>
+  </h3>
+  <div class="boxCenterList RelaArticle" style="padding:10px;">
+  <!--{foreach from=$articles item=article_item}-->
+  <p><a href="{$article_item.url}" title="{$article_item.title|escape:html}">{$article_item.short_title}</a></p>
+  <!--{/foreach}-->
+  </div>
+  </div>
+ 

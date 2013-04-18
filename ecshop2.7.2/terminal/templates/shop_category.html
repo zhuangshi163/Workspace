@@ -1,3 +1,4 @@
+<!-- {if $full_page} -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -24,12 +25,13 @@
 	var art_cat_lenght = 0;		//文章分类个数
 	var first_art_cat_id = 0;	//第一个文章分类id
 	var cur_goods_cat_id = 0;	//当前选中的一级分类id
-	{$cat_article}
+	var intro = [{$cat_article}];
 	
-	var goods_list = new Array();
+	var goods_list = new Array();	//数组的object结构如下：{"cat_id": cat_id, "page":page, "content":content}
 	
 	$(function() {
 		$("#goods_").hide();
+		$("#pageBox").hide();
 		$("#category").accordion({
 			active:0,
 			heightStyle:"auto",
@@ -81,101 +83,44 @@
 	function click_child_cat_event(cat_id, query_page){
 		$("#goods_").show();
 		$("#info_").hide();
-		$("#cat_list li").removeClass("selected");
+		$(".cat_list li").removeClass("selected");
 		$("#child_cat"+cat_id).addClass("selected");
 		
 		var is_need_query = true;
 		var curr_goods_index = -1;
 		for(var i=0; i<goods_list.length; i++){
 			var goods = goods_list[i];
-			if(goods.cat_id==cat_id){
-				curr_goods_index = i;
-				if(goods.is_finish_query || query_page<=goods.can_query_max_page){
-					is_need_query = false;
-				}
+			if(goods.cat_id==cat_id && goods.page==query_page){
+				is_need_query = false;
+				break;
 			}
 		}
+		
 		if(!is_need_query){
-			return show_goods_list(curr_goods_index, query_page);
+			return show_goods_list(cat_id, query_page);
 		}
 		$.get(
 			"shop_category.php?act=goods_list&cat_id="+cat_id+"&page="+query_page,
 			function(data){
-				var page_info = data.page_info;
-				var o = {"cat_id": cat_id, "count":page_info.count, "total_page":page_info.total_page, "page_size":page_info.page_size};
-				var list = data.goods_list;
-				var arr = new Array();
-				for(var i=0; i<list.length; i++){
-					var goods = list[i];
-					var g = {"goods_id": goods.goods_id, "goods_thumb":goods.goods_thumb, "goods_style_name":goods.goods_style_name, 
-							"is_promote_ex":goods.is_promote_ex, "promote_price":goods.promote_price, "market_price":goods.market_price,
-							"sale_price":goods.sale_price};
-					arr.push(g);
-				}
-				if(curr_goods_index == -1){
-					o.goods_list = arr;
-					o.is_finish_query = false;
-					o.can_query_max_page = o.count==0?1:Math.ceil(o.goods_list.length/o.page_size);
-					goods_list.push(o);
-					curr_goods_index = goods_list.length-1;
-				}else{
-					for(var i=0; i<arr.length; i++){
-						goods_list[curr_goods_index].goods_list.push(arr[i]);
-					}
-					o.goods_list = goods_list[curr_goods_index].goods_list;
-					if(goods_list[curr_goods_index].count == o.goods_list.length){
-						o.is_finish_query = true;
-					}else{
-						o.is_finish_query = false;
-					}
-					o.can_query_max_page = o.count==0?1:Math.ceil(o.goods_list.length/o.page_size);
-					goods_list[curr_goods_index] = o;
-				}
-				//alert(goods_list.length);
-				return show_goods_list(curr_goods_index, query_page);
+				var o = {"cat_id": cat_id, "page":query_page, "content":data.content};
+				goods_list.push(o);
+				return show_goods_list(cat_id, query_page);
 			},
 			"json"
 		);
 	}
 	//显示商品列表
-	function show_goods_list(curr_goods_index, query_page){
-		var goods_info = goods_list[curr_goods_index];
-		var start_index = goods_info.page_size*(query_page-1);
-		var end_index = goods_info.total_page==query_page?goods_info.count:goods_info.page_size*query_page;
-		var str = "";
-		for(var i=start_index; i<end_index; i++){
-			var goods = goods_info.goods_list[i];
-			str += '<a href="shop_goods.php?goods_id='+goods.goods_id+'">';
-			str += '<img src="'+goods.goods_thumb+'" class="thumb"/>';
-			str += '<span class="name">'+goods.goods_style_name+'</span>';
-			if(goods.is_promote_ex == 1){
-				str += '<span class="sale_price">'+goods.promote_price+'</span>';
-				str += '<span class="market_price">'+goods.market_price+'</span>';
-				str += '<img src="../images/product_list_specials.png" class="button_specials"/></a>';
-			}else{
-				str += '<span class="sale_price">'+goods.sale_price+'</span>';
-				str += '<span class="market_price">'+goods.market_price+'</span>';
+	function show_goods_list(cat_id, query_page){
+		var content = "";
+		for(var i=0; i<goods_list.length; i++){
+			var goods = goods_list[i];
+			if(goods.cat_id==cat_id && goods.page==query_page){
+				content = goods.content;
+				break;
 			}
-			str += '</a>';
 		}
-		$("#content").html(str);
-		str = "";
-		if(query_page > 1){
-			str += '<a href="javascript:click_child_cat_event('+goods_info.cat_id+', 1)"><img src="img/page_one.gif"/></a>';		//第一页
-			str += '<a href="javascript:click_child_cat_event('+goods_info.cat_id+', '+(query_page-1)+')"><img src="img/page_before.gif"/></a>';	//上一页	
-		}else{
-			str += '<img src="img/page_one.gif"/>';		//第一页
-			str += '<img src="img/page_before.gif"/>';	//上一页
-		}
-		str += '<div>'+query_page+' / '+goods_info.total_page+'</div>';		//页码
-		if(query_page < goods_info.total_page){
-			str += '<a href="javascript:click_child_cat_event('+goods_info.cat_id+', '+(query_page+1)+')"><img src="img/page_after.gif"/></a>';
-			str += '<a href="javascript:click_child_cat_event('+goods_info.cat_id+', '+(goods_info.total_page)+')"><img src="img/page_end.gif"/></a>';
-		}else{
-			str += '<img src="img/page_after.gif"/>';	//下一页
-			str += '<img src="img/page_end.gif"/>';		//最后一页
-		}
-		$("#pageBox").html(str);
+		
+		$("#goods_list_content").html(content);
 		$("#pageBox").show();
 	}
 </script>
@@ -199,7 +144,7 @@
   <h3 id="{$cat.cat_id}" onclick="showInfo({$cat.cat_id});">{$cat.cat_name|escape:html}</h3>
   {if $cat.child}
   <div>
-    <ul id="cat_list">
+    <ul class="cat_list">
     	<!-- {foreach from=$cat.child item=child} -->
       <li id="child_cat{$child.cat_id}" onclick="click_child_cat_event({$child.cat_id}, 1)">{$child.cat_name|escape:html}
       </li>
@@ -215,12 +160,59 @@
   {/if}
  <!-- {/foreach} -->
 </div>
+<!-- {/if} -->
 
-<!-- 商品列表 -->
-<div id="content" class="product_list brand_product"></div>
-<!-- 分页信息 -->
-<div id="pageBox" class="pagebox"></div>
+<!-- {if $full_page} -->
+<!-- 商品列表和分页信息 -->
+<div id="goods_list_content">
+	<!-- 商品列表 -->
+	<div id="content" class="product_list brand_product"></div>
+	<!-- 分页信息 -->
+	<div id="pageBox" class="pagebox"></div>
+</div>
+<!-- {else} -->
+<!-- 商品列表和分页信息 -->
+<div id="goods_list_content">
+	<!-- 商品列表 -->
+	<div id="content" class="product_list brand_product">
+		<!-- {foreach from=$goods_list item=goods} -->
+		<a href="shop_goods.php?goods_id={$goods.goods_id}">
+			<img src="{$goods.goods_thumb}" class="thumb"/>
+			<span class="name">{$goods.goods_style_name}</span>
+			<!-- {if $goods.is_promote_ex eq 1} -->
+			<span class="sale_price">{$goods.promote_price}</span>
+			<span class="market_price">{$goods.market_price}</span>
+			<img src="../img/product_list_specials.png" class="button_specials"/>
+			<!-- {else} -->
+			<span class="sale_price">{$goods.sale_price}</span>
+			<span class="market_price">{$goods.market_price}</span>
+			<!-- {/if} -->
+		</a>
+		<!-- {/foreach} -->
+	</div>
 
+	<!-- 分页信息 -->
+	<div id="pageBox" class="pagebox">
+		<!-- {if $page_info.cur_page gt 1} -->
+		<a href="javascript:click_child_cat_event({$cat_id}, 1)"><img src="img/page_one.gif"/></a>	<!-- 第一页 -->
+		<a href="javascript:click_child_cat_event({$cat_id}, {$page_info.page_before})"><img src="img/page_before.gif"/></a>	<!-- 上一页 -->	
+		<!-- {else} -->
+		<img src="img/page_one.gif"/>		<!-- 第一页 -->
+		<img src="img/page_before.gif"/>	<!-- 上一页 -->
+		<!-- {/if} -->
+		<div>{$page_info.cur_page} / {$page_info.total_page}</div>	<!-- 页码 -->
+		<!-- {if $page_info.cur_page lt $page_info.total_page}  -->
+			<a href="javascript:click_child_cat_event({$cat_id}, {$page_info.page_after})"><img src="img/page_after.gif"/></a>	<!-- 下一页 -->
+			<a href="javascript:click_child_cat_event({$cat_id}, {$page_info.total_page})"><img src="img/page_end.gif"/></a>	<!-- 最后一页 -->
+		<!-- {else} -->
+			<img src="img/page_after.gif"/>	<!-- 下一页 -->
+			<img src="img/page_end.gif"/>	<!-- 最后一页 -->
+		<!-- {/if} -->
+	</div>
+</div>
+<!-- {/if} -->
+
+<!-- {if $full_page} -->
 	<!-- {foreach from=$article_cat_list name=arrayname item=cat} -->
      <!-- {if $smarty.foreach.arrayname.iteration==1} -->
      <input type="hidden" value="{$cat.cat_id}" id="first_art_cat_id" />
@@ -232,5 +224,7 @@
   	<input type="hidden" id="first_goods_cat_id" value="{$cat.cat_id}"/>
    	{/if}
    	<!-- {/foreach} -->
+   	
 </body>
 </html>
+<!-- {/if} -->

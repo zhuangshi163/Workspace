@@ -1,0 +1,33 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div style="border:1px solid #d9d9d9">
+  <DIV class=blk_18>
+  <A onmouseup=ISL_StopUp_1() class=LeftBotton 
+onmousedown=ISL_GoUp_1() onmouseout=ISL_StopUp_1() href="javascript:void(0);" 
+target=_self></A>
+  <DIV class=pcont id=ISL_Cont_1>
+    <DIV class=ScrCont>
+      <DIV id=List1_1>
+ 
+<a href="" class=pl><img src="images/g1.jpg" ></a>
+<a href="" class=pl><img src="images/g2.jpg" ></a>
+<a href="" class=pl><img src="images/g3.jpg" ></a>
+<a href="" class=pl><img src="images/g4.jpg" ></a>
+<a href="" class=pl><img src="images/g5.jpg" ></a>
+<a href="" class=pl><img src="images/g6.jpg" ></a>
+<a href="" class=pl><img src="images/g7.jpg" ></a>
+<a href="" class=pl><img src="images/g8.jpg" ></a>
+<a href="" class=pl><img src="images/g9.jpg" ></a>
+<a href="" class=pl><img src="images/g10.jpg" ></a>
+<a href="" class=pl><img src="images/g11.jpg" ></a>
+<a href="" class=pl><img src="images/g12.jpg" ></a>
+
+      </DIV>
+      <DIV id=List2_1></DIV>
+    </DIV>
+  </DIV>
+  <A onmouseup=ISL_StopDown_1() 
+class=RightBotton onmousedown=ISL_GoDown_1() onmouseout=ISL_StopDown_1() 
+href="javascript:void(0);" target=_self></A></DIV> </DIV>
+<SCRIPT type=text/javascript>picrun_ini()</SCRIPT>
+
+<div class="blank"></div>

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.goods_mode{}
+.goods_mode img { float:left}
+.goods_mode_box{ background:#fff; width:920px; color:#000; margin:0 auto; border:1px solid #ccc;  position:relative}
+.goods_mode_box .tel{ position:absolute; top:30px; right:20px; color:#4c87d6}
+.goods_mode_box form{ padding:40px 30px 30px 130px; background:url(images/goods_mode.gif) 0 0 no-repeat;}
+
+.goods_mode_box .inputBg{ background:#fff; height:17px; border:1px solid #ddd }
+.goods_mode_box  th{ font-weight:normal; text-align: right}
+.goods_mode_box  .textStrong{ color:#FF0000}
+.goods_mode_box  .textStrong2{ color:#000}
+.goods_mode_box  .bnt_blue_2{ width:124px; height:43px; background:url(images/tijiao.gif) no-repeat; vertical-align:middle}
+
+-->
+</style>
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+<script type="text/javascript">
+function $id(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$id(str+"_b").getElementsByTagName("h2");
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onclick=function(){
+      $id(this.subj+"_v").innerHTML=$id(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$id(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$id(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $id(str+"_h").className="none";
+  $id(str+"_v").innerHTML=$id(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start--><!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+<div class="block" style="background:#000">
+
+<div class="goods_mode">
+{$goods.goods_desc}</div>
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/order.lbi" --><!-- #EndLibraryItem -->
+</div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

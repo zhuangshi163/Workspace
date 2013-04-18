@@ -1,0 +1,12 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $new_goods} -->
+  <!--{foreach from=$new_goods item=goods}-->
+  <div class="goodsItem" >
+           <a href="{$goods.url}" target="_blank"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+           <p><a href="{$goods.url}" target="_blank" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+           特价：<font class="f1"><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}
+          <!--{/if}-->
+           </font>
+        </div>
+  <!--{/foreach}-->
+<!-- {/if} -->

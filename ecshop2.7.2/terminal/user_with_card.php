@@ -108,7 +108,7 @@ elseif ($action == 'act_register') {
 	} else {
 		$card_number = isset ( $_POST ['card_id'] ) ? addslashes(trim ( $_POST ['card_id'] )) : '';
 		if(empty($card_number)){
-			show_msg ( "请刷的会员卡!" , "返回注册", "user_with_card.php");
+			show_msg ( "请刷本店的会员卡!" , "返回注册", "user_with_card.php");
 		}else{
 			$card_number = substr($card_number, 0, 12);
 		}
@@ -118,8 +118,8 @@ elseif ($action == 'act_register') {
 			show_msg ( "请使用没激活的会员卡!" , "返回购物", "shop_specials.php");
 		}
 		if(isset($_SESSION['store']['store_id'])&&$_SESSION['store']['store_id'] !=0){
-			$sql="update ". $ecs->table('user_card') . " set store_id=".$_SESSION['store']['store_id']." where card_id='".$card['card_id']."'";
-			$db->query($sql);
+// 			$sql="update ". $ecs->table('user_card') . " set store_id=".$_SESSION['store']['store_id']." where card_id='".$card['card_id']."'";
+// 			$db->query($sql);
 		}else {
 			show_msg('请店家预先登录！','前往登录界面','shop_store.php?act=login');
 		}
@@ -133,38 +133,76 @@ elseif ($action == 'act_register') {
 			$other ['sex'] = intval ( $_POST ['sex'] );
 			$other ['sex'] = in_array ( $other ['sex'], array (0, 1, 2 ) ) ? $other ['sex'] : 0;
 		}
+		if (! is_numeric ( $_POST ['r_style'] ) || strpos ( $_POST ['r_style'], "." ) != false) {
+			show_msg ( "请选择注册类型!" , "请重新填写", "user_with_card.php?act=register");
+		} else {
+			$other ['r_style'] = intval ( $_POST ['r_style'] );
+			$other ['r_style'] = in_array ( $other ['r_style'], array (0, 1, 2 ) ) ? $other ['r_style'] : 0;
+		}
+		
 		$other ['mobile_phone'] = isset ( $_POST ['phone'] ) ? addslashes ( trim ( $_POST ['phone'] ) ) : '';
 		//if (strlen ( $other ['mobile_phone'] ) != 8&&strlen ( $other ['mobile_phone'] ) != 11) {
 		$reg = "/(^((0[1,2]{1}\d{1}-?\d{8})|(0[3-9]{1}\d{2}-?\d{7,8}))$)|(^0?(13[0-9]|15[0-9]|18[0-9]|14[0-9])[0-9]{8}$)/";
 		if(!preg_match($reg, $other ['mobile_phone'])){
 			show_msg ( "请填写正确的手机号码!" , "请重新填写", "user_with_card.php?act=register");
 		}
-		/*注册时间*/
-		$other['reg_time'] = local_strtotime(local_date('Y-m-d H:i:s'));
 		
+		$other ['password'] = isset ( $_POST ['pass'] ) ? md5(addslashes ( trim ( $_POST ['pass'] ) )) : '';
+		if (strlen ( $other ['password'] ) < 6&&strlen ( $other ['password'] ) > 11) {
+			show_msg ( "请填写正确的密码!" , "请重新填写", "user_with_card.php?act=register");
+		}			
+		
+		/*注册时间*/
+		$other['reg_time'] = local_strtotime(local_date('Y-m-d H:i:s'));		
 		$ip = real_ip();
 		$time_now = time();
-		$user_id = intval($db->getOne('SELECT user_id FROM '.$ecs->table('users')." where user_name = '".$other ['mobile_phone']."'"));
-		if($user_id==0){
-			$new_user = array(
-				'store_id'      => $_SESSION['store']['store_id'],
-				'user_name'     => $other ['mobile_phone'],
-				'mobile_phone'  => $other ['mobile_phone'],
-				'reg_time'   	=> $time_now,
-				'last_login'    => $time_now,
-				'last_ip'       => $ip,
-				'visit_count'   => 1
-			);
-			$db->autoExecute($ecs->table('users'), $new_user, 'INSERT');
-			$user_id = $db->insert_id();
-		}else {
-			show_msg ( "手机号码已注册!" , "请重新填写", "user_with_card.php?act=register");
+		
+		if($other ['r_style']=="1"){
+			$user_id = intval($db->getOne('SELECT user_id FROM '.$ecs->table('users')." where user_name = '".$other ['mobile_phone']."' and password = '".$other ['password']."'"));
+			if($user_id==0){
+				$new_user = array(
+						'store_id'      => $_SESSION['store']['store_id'],
+						'user_name'     => $other ['mobile_phone'],
+						'mobile_phone'  => $other ['mobile_phone'],
+						'password'      => $other ['password'],
+						'reg_time'   	=> $time_now,
+						'last_login'    => $time_now,
+						'last_ip'       => $ip,
+						'visit_count'   => 1
+				);
+				$db->autoExecute($ecs->table('users'), $new_user, 'INSERT');
+				$user_id = $db->insert_id();
+			}else {
+				show_msg ( "手机号码已注册!" , "请重新填写", "user_with_card.php?act=register");
+			}
+			$db->autoExecute ( $ecs->table ( 'users' ), $other, 'UPDATE', "user_id = '$user_id'" );
+			$sql = "update " . $GLOBALS ['ecs']->table ( 'user_card' ) . " set user_id='$user_id',card_state=1,reg_time='$time_now'" . " store_id=".$_SESSION['store']['store_id']." where card_number='$card_number'";
+			$db->query ( $sql );
+			
+			$sql = "SELECT country,province,city,district FROM " . $GLOBALS['ecs']->table('store') . " WHERE store_id =".$_SESSION['store']['store_id'];
+			$rows = $GLOBALS['db']->getRow($sql);
+			
+			$sql = "INSERT INTO " .$GLOBALS['ecs']->table('user_address'). " (store_id,user_id,consignee,mobile,country,province,city,district)" .
+					"VALUES (".$_SESSION['store']['store_id'].", '$user_id', '".$other ['real_name']."','".$other ['mobile_phone']."','$rows[country]','$rows[province]','$rows[city]','$rows[district]')";
+			$GLOBALS['db']->query($sql);
+			
+			show_msg ( sprintf ( '会员卡 : %s 姓名:%s 注册成功', $card_number, $other ['real_name'] ), "返回购物", "shop_specials.php");
+		}else if($other ['r_style']=="0"){
+			$user_id = intval($db->getOne('SELECT user_id FROM '.$ecs->table('users')." where user_name = '".$other ['mobile_phone']."' and password = '".$other ['password']."'"));
+			if($user_id!=0){
+				$sql = "delete from " . $GLOBALS ['ecs']->table ( 'user_card' ) . " where card_number='$card_number'";
+				$db->query ( $sql );
+				$sql = "update " . $GLOBALS ['ecs']->table ( 'user_card' ) . " set card_number='$card_number'" . " where user_id='$user_id'";
+				$db->query ( $sql );
+				show_msg ( sprintf ( '会员卡 : %s 姓名:%s 激活成功', $card_number, $other ['real_name'] ), "返回购物", "shop_specials.php");
+			}else {
+				show_msg ( "该用户不能激活!" , "请重新填写", "user_with_card.php?act=register");
+			}
+			
 		}
-		$db->autoExecute ( $ecs->table ( 'users' ), $other, 'UPDATE', "user_id = '$user_id'" );
-		$sql = "update " . $GLOBALS ['ecs']->table ( 'user_card' ) . " set user_id='$user_id',card_state=1,reg_time='$time_now'" . " where card_number='$card_number'";
-		$db->query ( $sql );
+
 		/* 提示信息 */
-		show_msg ( sprintf ( '会员卡 : %s 姓名:%s 注册成功', $card_number, $other ['real_name'] ), "返回购物", "shop_specials.php");
+// 		show_msg ( sprintf ( '会员卡 : %s 姓名:%s 注册成功', $card_number, $other ['real_name'] ), "返回购物", "shop_specials.php");
 	}
 }
 

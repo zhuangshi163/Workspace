@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $promotion_goods} -->
+        <!--{foreach from=$promotion_goods item=goods name="promotion_foreach"}-->
+        {if $smarty.foreach.promotion_foreach.index <= 4}
+	        <DIV class=produce>
+			<DIV class=producepic><A href="{$goods.url}"><IMG border=0 alt="{$goods.name|escape:html}" src="{$goods.thumb}"></A></DIV>
+			<DIV class=producename><A title="{$goods.name|escape:html}" href="{$goods.url}">{$goods.short_name|escape:html}</A></DIV>
+			<DIV class=newprice2>{$lang.promote_price}<SPAN class=red9>{$goods.promote_price}</SPAN></DIV></DIV>		
+         {/if}
+         <!--{/foreach}-->
+<!-- {/if} -->

@@ -13,6 +13,7 @@ class UpgradeAction
 	{
 		$version   = $_GET['ver'];
 		$platform = $_GET['platform'];
+		//echo $version;die;
 		if(empty($version) || !isset($platform)) 
 		{
 			exit;
@@ -21,10 +22,19 @@ class UpgradeAction
 		$widget_upgrade_file = dirname(RPC_ROOT).DIRECTORY_SEPARATOR.'widget.xml';
 		if(file_exists($widget_upgrade_file))
 		{
-			$data = unserialize(file_get_contents($widget_upgrade_file));
+
+			$c = file_get_contents($widget_upgrade_file);
+			preg_match('/<version>(.*?)<\/version>/', $c, $matches);
+			$new_ver = $matches[1];
+			preg_match('/<iphone_filename>(.*?)<\/iphone_filename>/', $c, $matches);
+			$iphone_name = $matches[1];
+			preg_match('/<android_filename>(.*?)<\/android_filename>/', $c, $matches);
+			$android_name = $matches[1];
+
+			/*$data = unserialize(file_get_contents($widget_upgrade_file));　　
 			$new_ver = $data['app_version'];
 			$iphone_name  = $data['iphone_name'];
-			$android_name = $data['android_name'];
+			$android_name = $data['android_name'];*/
 			if($new_ver > $version)
 			{
 				if($platform == '0')//iphone

@@ -1,0 +1,162 @@
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+
+<div class="form-div">
+  <form action="javascript:searchUserCard()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    &nbsp;{$lang.store}: <select name="store_id">
+      <option value="">{$lang.all}</option>
+      {html_options options=$store_list}
+    </select>
+    &nbsp;{$lang.label_state}: <select name="state">
+      <option value=-1>{$lang.all}</option>
+      {html_options options=$lang.state selected=-1}
+    </select>
+    &nbsp;{$lang.label_keyword} &nbsp;<input type="text" name="keyword" id="keyword"/> <input type="submit" value="{$lang.button_search}" />
+  </form>
+</div>
+
+<form method="POST" action="" name="listForm">
+
+<!-- start users list -->
+<div class="list-div" id="listDiv">
+{/if}
+<!--用户列表部分-->
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>
+      <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox">
+      {$lang.label_card_id}
+    </th>
+    <th><a href="javascript:listTable.sort('c.card_number'); ">{$lang.label_card_number}</a></th>
+    <th><a href="javascript:listTable.sort('s.store_remark'); ">{$lang.store}</a></th>
+    <th><a href="javascript:listTable.sort('u.user_name'); ">{$lang.label_user_name}</a></th>
+    <th><a href="javascript:listTable.sort('u.real_name'); ">{$lang.label_real_name}</a></th>
+    <th><a href="javascript:listTable.sort('c.card_state'); ">{$lang.label_state}</a></th>
+    <th>{$lang.handler}</th>
+  <tr>
+  {foreach from=$card_list item=card}
+  <tr>
+    <td><input type="checkbox" name="checkboxes[]" value="{$card.card_id}"/>{$card.card_id}</td>
+    <td class="first-cell">{$card.card_number}</td>
+    <td>{$card.store_remark|escape} </td>
+    <td>{$card.user_name|escape}</td>
+    <td>{$card.real_name|escape}</td>
+    <td>{$lang.state[$card.card_state]}</td>
+    <td align="center">
+      <a href="user_card.php?act=edit&card_id={$card.card_id}" title="{$lang.edit}">{$lang.label_edit}</a>
+      {if $card.card_state eq 1 || $card.card_state eq 3}<a href="javascript:confirm_redirect('{$lang.remove_card}', 'user_card.php?act=freeze&card_id={$card.card_id}')" title="{$lang.remove}">{$lang.label_freeze}</a>{/if}
+      {if $card.card_state eq 2}<a href="javascript:confirm_redirect('{$lang.active_card}', 'user_card.php?act=active&card_id={$card.card_id}')" title="{$lang.label_active}">{$lang.label_active}</a>{/if}
+    </td>
+  </tr>
+  {foreachelse}
+  <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+  {/foreach}
+  
+</table>
+<!-- 分页 -->
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="right" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+</div>
+
+<div>
+  <input type="hidden" name="act" value="batch" />
+  <select name="type" id="selAction" onchange="changeAction()">
+    <option value="">{$lang.select_please}</option>
+    <option value="export_excel">{$lang.export_excel}</option>
+    <option value="active">{$lang.label_active}</option>
+    <option value="freeze">{$lang.label_freeze}</option>
+    <option value="store_move_to">{$lang.store_move_to}</option>   
+  </select>
+  <!--二级主菜单：转移供货商-->
+  <select name="store_id" style="display:none">
+    <option value="-1">{$lang.select_please}</option>
+    {html_options options=$store_list}
+  </select>
+  <!--end!-->
+  <input type="submit" value="{$lang.button_submit}" id="btnSubmit" name="btnSubmit" class="button" disabled="true" />
+</div>
+
+</div>
+<!-- end users list -->
+</form>
+<script type="text/javascript" language="JavaScript">
+<!--
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+
+{literal}
+onload = function()
+{
+    document.forms['searchForm'].elements['keyword'].focus();
+    // 开始检查订单
+    startCheckOrder();
+}
+
+/**
+ * 搜索用户
+ */
+function searchUserCard()
+{
+	var frm=document.forms['searchForm'];
+    listTable.filter['keyword'] = Utils.trim(frm.elements['keyword'].value);
+    listTable.filter['store_id'] = frm.elements['store_id'].value;
+    listTable.filter['state'] = frm.elements['state'].value;
+    listTable.filter['page'] = 1;
+    listTable.loadList();
+}
+/**
+ * @param: bool ext 其他条件：用于转移分类
+ */
+function confirmSubmit(frm, ext)
+{
+    if (frm.elements['type'].value == 'store_move_to')
+    {
+        ext = (ext == undefined) ? true : ext;
+        return ext && frm.elements['store_id'].value != -1;
+    }
+    else if (frm.elements['type'].value == '')
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+function changeAction()
+{
+    var frm = document.forms['listForm'];
+
+			
+    frm.elements['store_id'].style.display = frm.elements['type'].value == 'store_move_to' ? '' : 'none';
+		
+
+    if (!document.getElementById('btnSubmit').disabled &&
+        confirmSubmit(frm, false))
+    {
+    	frm.submit();
+    }
+}
+function confirm_redirect(msg, url){
+	if (confirm(msg)){
+		location.href=url;
+	}
+} 
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}
+{/if}

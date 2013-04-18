@@ -14,7 +14,7 @@ if ($act == 'default' || $act=='info') {
 	if ($cat_id == 0)
 		$cat_id = $_SESSION['store']['site_store_cat'];
 	
-	$cache_id = sprintf ( '%X', crc32 ( $cat_id . '-' . $_SESSION ['user_rank'] . '-' . $_CFG ['lang'] . '-' . $_SESSION['store']['store_id'] ) );
+	$cache_id = sprintf ( '%X', crc32 ( $top_cat_id . '-' . $_SESSION ['user_rank'] . '-' . $_CFG ['lang'] . '-' . $_SESSION['store']['store_id'] ) );
 	if (! $smarty->is_cached ( 'shop_category.dwt', $cache_id )) {
 		$parent_array = array($top_cat_id);
 		$level = 2;
@@ -39,9 +39,10 @@ if ($act == 'default' || $act=='info') {
 				}
 				$parent_array = array_keys($cat_list);
 			}
-			$smarty->assign ( 'cat_list', $cat_list );
-			$smarty->assign("top_cat_id",$top_cat_id);
 		}
+		
+		$smarty->assign ( 'cat_list', $cat_list );
+		$smarty->assign("top_cat_id",$top_cat_id);
 		
 		$sql = "select cat_id, cat_name from ".$GLOBALS['ecs']->table('article_cat')." where parent_id=12 order by sort_order";
 		$res = $GLOBALS['db']->getAll($sql);
@@ -57,15 +58,19 @@ if ($act == 'default' || $act=='info') {
 					.$GLOBALS['ecs']->table('article')." where $terminal_cats and $article_cats " 
 					."order by add_time desc";
 			$cat_article = $GLOBALS['db']->getAll($sql);
-			$intro = "var intro = [";
+			$intro = "";
 			foreach ($cat_article as $key => $val){
 				$intro .= "{'article_id':'$val[article_id]', 'terminal_cat_id':'$val[terminal_cat_id]', 'content':'$val[content]', 'cat_id':'$val[cat_id]'},";
 			}
-			$intro .= "];";
-			$intro = preg_replace("/(,];)$/", "];", $intro);
+			$intro = preg_replace("/(,)$/", "", $intro);
 			$smarty->assign ( 'cat_article', $intro);
 		}
 	}
+	$GLOBALS['smarty']->assign("full_page", 1);
+	$GLOBALS['smarty']->assign('page_info', array());
+	$GLOBALS['smarty']->assign('goods_list', array());
+	$GLOBALS['smarty']->assign('cat_id', $top_cat_id);
+	
 	$smarty->display ( 'shop_category.html', $cache_id );
 }elseif($act=="goods_list"){
 	$cat_id = ! empty ( $_GET ['cat_id'] ) && intval ( $_GET ['cat_id'] ) > 0 ? intval ( $_GET ['cat_id'] ) : 0;
@@ -105,13 +110,16 @@ if ($act == 'default' || $act=='info') {
 				'page_before' => $page - 1,
 				'page_after' => ($total_page > $page ? $page + 1 : 0));
 	}
-	include_once('includes/cls_json.php');
+	$GLOBALS['smarty']->assign('page_info', $page_info);
+	$GLOBALS['smarty']->assign('goods_list', $goods_list);
+	$GLOBALS['smarty']->assign('cat_id', $cat_id);
+	$str = $GLOBALS['smarty']->fetch('shop_category.html');
+	
+	include_once(ROOT_PATH . 'includes/cls_json.php');
 	$json = new JSON;
-	$result = $json->encode(array(
-			"page_info"		=>	$page_info,
-			"goods_list"	=>	$goods_list
-			));
-	die($result);
+	$res = array('error' => '', 'message' => '', 'content' => $str);
+	$val = $json->encode($res);
+	exit($val);
 }
 
 /**
@@ -126,14 +134,16 @@ function get_child_cate($parent_array=array(), $level=1){
 	$sql = "select cat_id, cat_name, parent_id from ".$GLOBALS['ecs']->table('category').
 			" where $parent_id_in and is_show=1 order by sort_order";
 	$res = $GLOBALS['db']->getAll($sql);
-	foreach ($res as $row){
-		$val[$row['cat_id']] = $row;
-	}
-	$result = array_merge($result, $val);
-	if($level > 0){
-		//递归，获取下级分类
-		$child = get_child_cate(array_keys($val), $level);
-		$result = array_merge($result, $child);
+	if(!empty($res)){
+		foreach ($res as $row){
+			$val[$row['cat_id']] = $row;
+		}
+		$result = array_merge($result, $val);
+		if($level > 0){
+			//递归，获取下级分类
+			$child = get_child_cate(array_keys($val), $level);
+			$result = array_merge($result, $child);
+		}
 	}
 	return $result;
 }

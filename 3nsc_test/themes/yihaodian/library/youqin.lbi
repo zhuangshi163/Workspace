@@ -1,0 +1,112 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+function $id(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$id(str+"_b").getElementsByTagName("h2");
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onmousemove=function(){
+      $id(this.subj+"_v").innerHTML=$id(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$id(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$id(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $id(str+"_h").className="none";
+  $id(str+"_v").innerHTML=$id(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+
+</script>
+
+
+
+
+<div class="box_1" style="height:147px">
+
+<h3><span>本店友情推荐</span></h3>
+
+
+
+<div style="padding:0 10px;">
+      <div  class="itemTit">
+        <div id="com2_b" class="clearfix itemTit">
+        <h2>中国银行</h2>
+        <h2 class="h2bg">支付宝</h2>
+      <h2 class="h2bg">平安药网</h2>
+         
+        </div>
+      </div>
+  </div>    
+      
+      
+      
+      <div id="com2_v" style="text-align:center"></div>
+      <div id="com2_h">
+       <blockquote>
+     <a href="#"><img src="../images/leftad1.jpg"></a>
+       </blockquote>
+
+     <blockquote>
+     <a href="#"><img src="../images/leftad2.jpg"></a>
+     </blockquote>
+      
+     <blockquote>
+   <a href="#"><img src="../images/leftad3.jpg"></a>
+     </blockquote>
+    
+ </div>
+ </div>
+
+<div class="blank"></div>
+
+
+
+
+
+
+    <script type="text/javascript">
+    <!--
+    reg("com2");
+    //-->
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

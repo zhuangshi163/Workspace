@@ -1,0 +1,81 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $cat_rec_sign neq 1} zhangyh_100322 -->
+<div class="cat_goods_box">
+<div class="tit"><a href="{$goods_cat.url}" class="fc">{$goods_cat.name|escape:html}</a>   <a class="more" href="{$goods_cat.url}" >更多>> </a>  </DIV>
+<div class="blank5"></div>
+	<div class="clearfix goodsBox" style="border:none; float:left" id="show_cat_area100}">
+      <!--{foreach from=$cat_goods item=goods name=no}-->
+        <!-- {if $smarty.foreach.no.iteration<5}-->
+      <div class="goodsItem">
+      <div class="img_box">
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a>
+      </div>  
+
+
+<font class="market">{$goods.market_price}</font> 
+
+
+
+      
+      
+        <!-- {if $goods.promote_price neq ""} -->
+          <font class="shop_s">{$goods.promote_price}</font>
+          <!-- {else}-->
+          <font class="shop_s">{$goods.shop_price}</font>
+          <!--{/if}-->
+          
+           <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+         
+        </div>
+       <!-- {/if} -->
+      <!--{/foreach}-->
+    </div>
+
+<div class="cat_goods_box_r">
+<div class="tit" style="background:none"><a href="{$goods_cat.url}" class="fc">{$goods_cat.name|escape:html}</a></div>
+  <ul class="cat_goods_ul" id="itemCat{$goods_cat.id}">
+  <!--一级分类标签-->
+  <!--{foreach name=childlist from=$goods_cat.children item=children name=no}-->
+  <!-- {if $smarty.foreach.no.iteration<4}-->
+  <!-- {if $smarty.foreach.no.iteration<2}-->
+    <li><a class="fc" href="category.php?id={$children.cat_id}" onmouseover="change_tab_style('itemCat{$goods_cat.id}', 'li', this);get_cat_recommend(4, {$children.cat_id},{$goods_cat.id})">{$children.cat_name}</a></li>
+   <!-- {else} -->
+   <li class="h2bg"><a  class="fc"  href="category.php?id={$children.cat_id}" onmouseover="change_tab_style('itemCat{$goods_cat.id}', 'li', this);get_cat_recommend(4, {$children.cat_id},{$goods_cat.id})">{$children.cat_name}</a></li>
+   <!-- {/if} -->
+   <!-- {/if} -->
+  <!--{/foreach}-->
+  </ul>
+<div class="blank5"></div>
+    <div style="padding:0" class="boxCenterList clearfix" id="show_cat_area{$goods_cat.id}">
+    <!-- {/if} zhangyh_100322-->
+      <!--{foreach from=$cat_goods item=goods name=no2}-->
+      <!-- {if $smarty.foreach.no2.iteration<2}-->
+       <ul class="clearfix" style="height:74px; padding:0">
+     	 <li class="goodsimg">
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a>
+           </li>
+           <li>  
+           <div class="no1 fc">NO.1</div>  
+           <p style="line-height:16px; height:16px; overflow:hidden"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+           <!-- {if $goods.promote_price neq ""} -->
+          <font class="f1">{$goods.promote_price}</font>
+          <!-- {else}-->
+          <font class="f1">{$goods.shop_price}</font>
+          <!--{/if}-->
+   		</li>
+     </ul>
+     <!--{else}-->
+     <ul class="clearfix" style="height:22px; line-height:22px; overflow:hidden; padding:0">
+           <li style="width:180px;">    
+           <p style=" line-height:22px;"><b class="list fc">{$smarty.foreach.no2.iteration}.</b><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+   		</li>
+     </ul>
+     <!--{/if}-->
+      <!--{/foreach}-->
+    </div>
+    </div>
+ </div>
+<div class="blank5"></div>
+<script type="text/javascript">
+get_cat_recommend(4, {$goods_cat.children[0].cat_id},{$goods_cat.id});
+</script>

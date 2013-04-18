@@ -1,0 +1,751 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0039)http://www.3nsc.com/goods.php -->
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<META name=GENERATOR content="MSHTML 9.00.8112.16455">
+<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+<META name=Keywords content="">
+<META name=Description content="">
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+
+<SCRIPT type=text/javascript>
+function $id(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$id(str+"_b").getElementsByTagName("h2");
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onclick=function(){
+      $id(this.subj+"_v").innerHTML=$id(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$id(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$id(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $id(str+"_h").className="none";
+  $id(str+"_v").innerHTML=$id(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+</SCRIPT>
+</HEAD>
+<BODY>
+
+<STYLE type=text/css>
+.shopbox {
+	Z-INDEX: 9999; BORDER-BOTTOM: #3778e1 1px solid; POSITION: absolute; BORDER-LEFT: #3778e1 1px solid; PADDING-BOTTOM: 10px; WIDTH: 442px; DISPLAY: none; BACKGROUND: #fff; HEIGHT: 337px; FONT-SIZE: 12px; OVERFLOW: hidden; BORDER-TOP: #3778e1 1px solid; BORDER-RIGHT: #3778e1 1px solid
+}
+.shopbox A {
+	FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+.shopbox H2 {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; HEIGHT: 25px; PADDING-TOP: 0px
+}
+.shopbox H2 A {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 10px; FLOAT: right; PADDING-TOP: 5px
+}
+.shopbox H2 A IMG {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 4px; FLOAT: left; PADDING-TOP: 4px
+}
+.shopbox H2 A SPAN {
+	FLOAT: left; COLOR: #3778e1; CURSOR: pointer
+}
+.shopbox .spboxcontent {
+	
+}
+.shopbox .spboxcontent .shopboxdetail {
+	OVERFLOW: hidden
+}
+.shopbox .spboxcontent .shopboxdetail .spboxleft {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 20px; PADDING-RIGHT: 20px; FLOAT: left; PADDING-TOP: 0px
+}
+.shopbox .spboxcontent .shopboxdetail .spboxleft IMG {
+	
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright {
+	FLOAT: left
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright SPAN.spboxtitle {
+	FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright SPAN.blank5 {
+	
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright SPAN.numstyle {
+	COLOR: #3778e1; FONT-WEIGHT: bold
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright SPAN.numstyle2 {
+	COLOR: #3778e1; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright P {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright P.num {
+	PADDING-BOTTOM: 10px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 10px
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright P.spbbtndiv {
+	
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright P.spbbtndiv A.jxgwbtn {
+	LINE-HEIGHT: 27px; MARGIN: 0px 10px 0px 0px; FLOAT: left; COLOR: #3778e1; FONT-SIZE: 14px
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright P.spbbtndiv A.track {
+	
+}
+.shopbox .spboxcontent .shopboxdetail .spboxright P.spbbtndiv A.track IMG {
+	FLOAT: left
+}
+.shopbox .spboxcontent .shopboxdetail SPAN.blank15 {
+	LINE-HEIGHT: 0; DISPLAY: block; HEIGHT: 0px; CLEAR: both; FONT-SIZE: 0px
+}
+.shopbox .spboxcontent .gmlist {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; CLEAR: both; PADDING-TOP: 15px; _padding-top: 10px
+}
+.shopbox .spboxcontent .gmlist H6 {
+	PADDING-BOTTOM: 10px; MARGIN: 0px 10px; PADDING-LEFT: 8px; PADDING-RIGHT: 0px; COLOR: #666; FONT-SIZE: 12px; BORDER-TOP: #c9c9c9 1px dotted; PADDING-TOP: 10px
+}
+.shopbox .spboxcontent .gmlist H6 A {
+	
+}
+.shopbox .spboxcontent .gmlist UL {
+	PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 7px; PADDING-RIGHT: 0px; ZOOM: 1; OVERFLOW: hidden; PADDING-TOP: 0px
+}
+.shopbox .spboxcontent .gmlist UL LI {
+	MARGIN: 0px 5px 0px 6px; WIDTH: 76px; DISPLAY: inline; FLOAT: left
+}
+.shopbox .spboxcontent .gmlist UL LI .ygmPic {
+	
+}
+.shopbox .spboxcontent .gmlist UL LI .ygmPic A {
+	
+}
+.shopbox .spboxcontent .gmlist UL LI .ygmPic A IMG {
+	BORDER-BOTTOM: #b4b4b4 1px solid; BORDER-LEFT: #b4b4b4 1px solid; BORDER-TOP: #b4b4b4 1px solid; BORDER-RIGHT: #b4b4b4 1px solid
+}
+.shopbox .spboxcontent .gmlist UL LI .ygmName {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 16px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; DISPLAY: block; HEIGHT: 51px; COLOR: #333; OVERFLOW: hidden; PADDING-TOP: 3px
+}
+.shopbox .spboxcontent .gmlist UL LI P {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.shopbox .spboxcontent .gmlist UL LI P.ygmPrice SPAN {
+	COLOR: #3778e1
+}
+#shoploading {
+	POSITION: absolute; TEXT-ALIGN: center; LINE-HEIGHT: 337px; WIDTH: 442px; BACKGROUND: #fff; HEIGHT: 337px; TOP: 25px
+}
+#shoploading IMG {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 140px
+}
+</STYLE>
+
+<DIV id=shopbox class=shopbox>
+<DIV class=shopboxcon>
+<DIV style="DISPLAY: block" id=shoploading><IMG alt=loading 
+src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/loading.gif"></DIV>
+<DIV>
+<H2><A class="track close" onclick="closecart('shopbox')" name=item-close-cart 
+rel=关闭><IMG onclick="closecart('shopbox')" 
+src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/dpbox_06.jpg"><SPAN>关闭</SPAN></A></H2>
+<DIV class=spboxcontent>
+<DIV class=shopboxdetail>
+<DIV class=spboxleft><IMG 
+src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/DPshopcarIco.gif"></DIV>
+<DIV class=spboxright><SPAN class=spboxtitle>该商品已成功放入购物车</SPAN> <SPAN 
+class=blank5></SPAN>
+<P class=num>购物车共 <SPAN id=shopboxcount class=numstyle></SPAN>件商品 合计：<SPAN 
+id=shopboxprice class=numstyle2></SPAN> 元</P><SPAN class=blank5></SPAN>
+<P class=spbbtndiv><A class="jxgwbtn track" onclick="closecart('shopbox')" 
+href="javascript:history.go(-1)" name=item-continueshop>&lt;&lt;继续购物</A> <A 
+class=track href="http://www.3nsc.com/flow.php" name=item-Settlement 
+target=_parent><IMG class=qujiesuan 
+src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/qujiesuan.jpg"></A> </P></DIV></DIV>
+<DIV class=gmlist>
+<H6>购买过该商品的人还购买过<A style="COLOR: #3778e1; MARGIN-LEFT: 110px" class=track 
+href="http://www.3nsc.com/search.php" name=item-favourate 
+target=_blank>更多您可能喜欢的商品&gt;&gt;</A></H6>
+<UL>
+  <LI>
+  <DIV class=ygmPic><A class=track 
+  href="http://www.3nsc.com/goods.php?id=117" name=item-shopping-pap 
+  rel=r_item_cat_1_0137636 target=_blank><IMG alt=土豆/500g 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/117_thumb_G_1332771949729.jpg" 
+  width=80 height=80></A></DIV><A class="ygmName track" title=土豆/500g 
+  href="http://www.3nsc.com/goods.php?id=117" name=item-shopping-pap 
+  rel=r_item_cat_1_0137636 target=_blank>土豆/500g</A> 
+  <P class=ygmPrice><SPAN>￥1.98元</SPAN></P></LI>
+  <LI>
+  <DIV class=ygmPic><A class=track href="http://www.3nsc.com/goods.php?id=74" 
+  name=item-shopping-pap rel=r_item_cat_1_0137636 target=_blank><IMG alt=黄瓜/500g 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/74_thumb_G_1332565678519.jpg" 
+  width=80 height=80></A></DIV><A class="ygmName track" title=黄瓜/500g 
+  href="http://www.3nsc.com/goods.php?id=74" name=item-shopping-pap 
+  rel=r_item_cat_1_0137636 target=_blank>黄瓜/500g</A> 
+  <P class=ygmPrice><SPAN>￥2.58元</SPAN></P></LI>
+  <LI>
+  <DIV class=ygmPic><A class=track href="http://www.3nsc.com/goods.php?id=69" 
+  name=item-shopping-pap rel=r_item_cat_1_0137636 target=_blank><IMG 
+  alt=胡萝卜/500g 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/69_thumb_G_1332555072140.jpg" 
+  width=80 height=80></A></DIV><A class="ygmName track" title=胡萝卜/500g 
+  href="http://www.3nsc.com/goods.php?id=69" name=item-shopping-pap 
+  rel=r_item_cat_1_0137636 target=_blank>胡萝卜/500g</A> 
+  <P class=ygmPrice><SPAN>￥2.18元</SPAN></P></LI>
+  <LI>
+  <DIV class=ygmPic><A class=track href="http://www.3nsc.com/goods.php?id=73" 
+  name=item-shopping-pap rel=r_item_cat_1_0137636 target=_blank><IMG alt=冬瓜/500g 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/73_thumb_G_1332565330104.jpg" 
+  width=80 height=80></A></DIV><A class="ygmName track" title=冬瓜/500g 
+  href="http://www.3nsc.com/goods.php?id=73" name=item-shopping-pap 
+  rel=r_item_cat_1_0137636 target=_blank>冬瓜/500g</A> 
+  <P 
+class=ygmPrice><SPAN>￥1.80元</SPAN></P></LI></UL></DIV></DIV></DIV></DIV></DIV>
+<STYLE type=text/css>.STYLE2 {
+	COLOR: #ffffff; FONT-WEIGHT: bold
+}
+</STYLE>
+
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+<DIV class=blank></DIV>
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+
+<DIV class=blank></DIV>
+<DIV class=blank></DIV>
+<DIV class="block clearfix">
+<DIV class=AreaL>
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	
+<DIV class=blank></DIV>
+<DIV id=history_div class=box>
+<DIV class=box_1>
+<H3><SPAN>浏览历史</SPAN></H3>
+<DIV id=history_list class="boxCenterList clearfix">
+<UL class=clearfix>
+  <LI class=goodsimg><A href="http://www.3nsc.com/goods.php?id=113" 
+  target=_blank><IMG class=B_blue alt=荷兰豆/500g 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/113_thumb_G_1332770066199.jpg"></A></LI>
+  <LI><A title=荷兰豆/500g href="http://www.3nsc.com/goods.php?id=113" 
+  target=_blank>荷兰豆/500g</A><BR>本店售价：<FONT class=f1>￥6.98元</FONT><BR></LI></UL>
+<UL class=clearfix>
+  <LI class=goodsimg><A href="http://www.3nsc.com/goods.php?id=351" 
+  target=_blank><IMG class=B_blue alt=草鱼/500g（杀好净重） 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/351_thumb_G_1346303957627.jpg"></A></LI>
+  <LI><A title=草鱼/500g（杀好净重） href="http://www.3nsc.com/goods.php?id=351" 
+  target=_blank>草鱼/500g（杀好净重）</A><BR>本店售价：<FONT 
+class=f1>￥11.88元</FONT><BR></LI></UL>
+<UL class=clearfix>
+  <LI class=goodsimg><A href="http://www.3nsc.com/goods.php?id=1119" 
+  target=_blank><IMG class=B_blue alt=有机瓠瓜 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/1119_thumb_G_1338354171311.jpg"></A></LI>
+  <LI><A title=有机瓠瓜 href="http://www.3nsc.com/goods.php?id=1119" 
+  target=_blank>有机瓠瓜</A><BR>本店售价：<FONT class=f1>￥2.40元</FONT><BR></LI></UL>
+<UL class=clearfix>
+  <LI class=goodsimg><A href="http://www.3nsc.com/goods.php?id=1245" 
+  target=_blank><IMG class=B_blue alt=香丝苗米24KG 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/1245_thumb_G_1346643422406.jpg"></A></LI>
+  <LI><A title=香丝苗米24KG href="http://www.3nsc.com/goods.php?id=1245" 
+  target=_blank>香丝苗米24KG</A><BR>本店售价：<FONT class=f1>￥110.00元</FONT><BR></LI></UL>
+<UL class=clearfix>
+  <LI class=goodsimg><A href="http://www.3nsc.com/goods.php?id=1267" 
+  target=_blank><IMG class=B_blue alt=蜜柚 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/1267_thumb_G_1348733877663.jpg"></A></LI>
+  <LI><A title=蜜柚 href="http://www.3nsc.com/goods.php?id=1267" 
+  target=_blank>蜜柚</A><BR>本店售价：<FONT class=f1>￥3.80元</FONT><BR></LI></UL>
+<UL id=clear_history><A onclick=clear_history()>[清空]</A></UL></DIV></DIV></DIV>
+<DIV class=blank5></DIV>
+<SCRIPT type=text/javascript>
+if (document.getElementById('history_list').innerHTML.replace(/\s/g,'').length<1)
+{
+    document.getElementById('history_div').style.display='none';
+}
+else
+{
+    document.getElementById('history_div').style.display='block';
+}
+function clear_history()
+{
+Ajax.call('user.php', 'act=clear_history',clear_history_Response, 'GET', 'TEXT',1,1);
+}
+function clear_history_Response(res)
+{
+document.getElementById('history_list').innerHTML = '您已清空最近浏览过的商品';
+}
+</SCRIPT>
+</DIV>
+
+
+<DIV class=AreaR>
+	<DIV id=goodsInfo class=clearfix>
+		<DIV class=imgInfo>
+		
+		{* 包含脚本文件 *}
+		{insert_scripts files='magic-packed.js'}
+		<!-- {if $pictures}-->
+		
+		<a href="{$goods.original_img}"  id="zoom1" class="MagicZoom MagicThum" title="{$goods.goods_style_name}" onclick="window.open('gallery.php?id={$goods.goods_id}'); return false;" rel="zoom-width:380px; zoom-height:380px;disable-expand: true">		
+		<img src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}"  width=380 height=380/>		
+		</a>		
+		<!-- {else} -->		
+		<img src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}"  width=380 height=380/>		
+		<!-- {/if}-->
+		<DIV class=blank5></DIV>
+		 <!--相册 START-->
+	     <!-- #BeginLibraryItem "/library/goods_gallery.lbi" --><!-- #EndLibraryItem -->
+	     <!--相册 END-->
+		
+		<DIV class=blank5></DIV></DIV>
+		<DIV class=textInfo>
+		<FORM id=ECS_FORMBUY method=post name=ECS_FORMBUY 
+		action=javascript:addToCart1(113)>
+		<DIV class=clearfix>
+		<P class=f_l>荷兰豆/500g</P>
+		<P class=f_r><A href="http://www.3nsc.com/goods.php?id=114"><IMG alt=prev 
+		src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/up.gif"></A> <A 
+		href="http://www.3nsc.com/goods.php?id=111"><IMG alt=next 
+		src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/down.gif"></A> </P></DIV>
+		<UL>
+		  <LI class=clearfix>
+		  <DD></DD>
+		  <DD class=ddR><STRONG>商品点击数：</STRONG>626 </DD></LI>
+		  <LI class=clearfix>
+		  <DD class=ddR></DD></LI>
+		  <LI class=clearfix>
+		  <DD class=ddR><STRONG>本店售价：</STRONG><FONT id=ECS_SHOPPRICE 
+		  class=shop>￥6.98元</FONT><BR></DD></LI>
+		  <LI class=clearfix>
+		  <DD class=ddR><STRONG>黄金VIP：</STRONG><FONT id=ECS_RANKPRICE_11 
+		  class=shop>￥6.77元</FONT><BR></DD>
+		  <DD style="PADDING-LEFT: 15px; WIDTH: 48%"><STRONG>用户评价：</STRONG> <IMG 
+		  alt="comment rank 5" src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/stars5.gif"> 
+		  </DD></LI>
+		  <LI class=clearfix>
+		  <DD class=ddR></DD></LI>
+		  <LI class=clearfix>
+		  <DD class=ddR><STRONG>购买此商品可使用：</STRONG><FONT class=f4>0 积分</FONT> </DD>
+		  <LI class=padd>
+		  <DIV 
+		  style="BORDER-BOTTOM: #f48d02 1px solid; BORDER-LEFT: #f48d02 1px solid; PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #fffbd5; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; BORDER-TOP: #f48d02 1px solid; BORDER-RIGHT: #f48d02 1px solid; PADDING-TOP: 10px">
+		  <DIV class=mb10>
+		  <DD><STRONG>商品总价：</STRONG><FONT id=ECS_GOODS_AMOUNT class=shop></FONT> </DD>
+		  <DD><STRONG>购买数量：</STRONG> <INPUT onblur=changePrice() 
+		  style="BORDER-BOTTOM: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-RIGHT: #ccc 1px solid" 
+		  id=number name=number value=1 size=4> [500g/份] </DD></DIV>
+		  <DIV><A onclick=getmousepos(event) href="javascript:addToCart1(113)"><IMG 
+		  align=absMiddle 
+		  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/btn_shopcart.gif"></A> <BR><BR><A 
+		  style="MARGIN-LEFT: 10px; FONT-SIZE: 14px" href="javascript:collect(113)"><IMG 
+		  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/icon_arrowdouble.jpg">收藏</A> <A 
+		  style="MARGIN-LEFT: 10px; FONT-SIZE: 14px" 
+		  href="http://www.3nsc.com/user.php?act=affiliate&amp;goodsid=113"><IMG 
+		  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/icon_arrowdouble.jpg">推荐</A> 
+		  </DIV></DIV><BR>有问题？找生活小秘书！ 
+		  <LI class=padd><A 
+		  href="http://wpa.qq.com/msgrd?v=3&amp;uin=1607707187&amp;site=qq&amp;menu=yes" 
+		  target=_blank><IMG title=点击这里给我发消息 border=0 alt=点击这里给我发消息 
+		  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/pa.gif"></A> <A 
+		  href="http://wpa.qq.com/msgrd?v=3&amp;uin=2514716367&amp;site=qq&amp;menu=yes" 
+		  target=_blank><IMG title=点击这里给我发消息 border=0 alt=点击这里给我发消息 
+		  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/pa(1).gif"></A> <A 
+		  href="http://wpa.qq.com/msgrd?v=3&amp;uin=2512124240&amp;site=qq&amp;menu=yes" 
+		  target=_blank><IMG title=点击这里给我发消息 border=0 alt=点击这里给我发消息 
+		  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/pa(2).gif"></A> <A 
+		  href="http://wpa.qq.com/msgrd?v=3&amp;uin=2584004201&amp;site=qq&amp;menu=yes" 
+		  target=_blank><IMG title=点击这里给我发消息 border=0 alt=点击这里给我发消息 
+		  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/pa(3).gif"></A> 
+		</LI></UL></FORM></DIV>
+	</DIV>
+	
+<DIV class=blank></DIV>
+<DIV class=box>
+<DIV class=box_1>
+<DIV class=tab_wrapper>
+<DIV id=com_b class="history clearfix">
+<H2>商品描述：</H2>
+<H2 class=h2bg>商品属性</H2></DIV></DIV>
+<DIV id=com_v class="boxCenterList RelaArticle"></DIV>
+<DIV id=com_h>
+<BLOCKQUOTE>
+  <H1>荷兰豆</H1>
+  <P><STRONG>别名：</STRONG>软荚豌豆、带荚豌豆、甜豆、荷仁豆、回回豆、青斑、麦豆、菜豌豆</P>
+  <P sizcache="26" sizset="163"><STRONG>分类：</STRONG>蔬菜、鲜豆类</P>
+  <P><STRONG>五行属性：</STRONG>金</P>
+  <P class=nopadding><STRONG>【食量建议】：</STRONG>每次约50克</P>
+  <P class=nopadding><STRONG>【适宜人群】：</STRONG>糖尿病患者、产后乳汁不下的妇女食用</P>
+  <P class=nopadding><STRONG class=red>【禁忌人群】：</STRONG>脾胃虚弱者、肾功能不全者忌食</P>
+  <DIV class=nfd_hr sizcache="26" sizset="165">
+  <DIV class=nfd_tool1 sizcache="26" sizset="165">&nbsp;</DIV></DIV>
+  <DIV class="nfd_main_con clearfix" sizcache="58" sizset="8">
+  <DIV class="nfd_con_div  clearfix">
+  <H2 id=nfd_intro>荷兰豆介绍</H2>
+  <DIV style="HEIGHT: auto" 
+  class=shicai_c>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一年生缠绕草本，高90—180厘米，全体无毛。小叶长圆形至卵圆形，长3—5厘米，宽1—2厘米，全缘；托叶叶状，卵形，基部耳状包围叶柄。荚果长椭圆形，长5—10厘米，内有坚纸质衬皮；种子圆形，2—10颗，青绿色，干后变为黄色。花果期4—5月。偶数羽状复叶，顶端卷须，托叶呈卵形。花白色或紫红色、单生或1—3朵排列成总状腋生，花柱内侧有须毛，闭花授粉，花瓣蝴蝶形。荚果长椭圆形或扁形，根据内部有无内层革质膜及其厚度分为软荚及硬荚。 
+  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种子可呈圆形圆柱形、椭圆、扁圆、凹圆形，每荚2—10颗，多为青绿色，也有黄白、红、玫瑰、褐、黑等颜色的品种。可根据表皮分为皱皮及圆粒，干后变为黄色。根上生长着大量侧根，主根、侧根均有根瘤。因其性状多样且为闭花授粉，孟德尔将其作为遗传因子实验的作物。</DIV>
+  <DIV style="DISPLAY: block; COLOR: #8f8f8f" class=nfd_slidelink 
+  jquery16406123540756376562="115">&nbsp;</DIV></DIV>
+  <DIV class="nfd_con_div clearfix">
+  <H2 id=nfd_nutrition>荷兰豆的营养价值</H2>
+  <DIV style="HEIGHT: auto" 
+  class=shicai_c>1.熟的干荷兰豆所提供的固体物、热量、碳水化合物和蛋白质比熟的青荷兰豆多一倍，但是青荷兰豆所含的维生素A和维生素C比干荷兰豆多。<BR>2.每一百克熟荷兰豆可提供蛋白质8.5克，约相当于28克熟瘦猪肉所提供的能量，但按每一克蛋白质计算，荷兰豆所提供的热量比瘦猪肉多一倍。<BR>3.在豆类中荷兰豆所含的钙和磷较低，因此在食用荷兰豆的时候需要用其他食物补充钙。含磷丰富的是动物性蛋白质、豆类和坚果，大量摄取这些食物的同时一定补充足够的钙，因为在钙摄入不足的时候，如果摄取大量的磷，会影响钙的吸收和利用。<BR>4.荷兰豆是铁的上好来源。</DIV>
+  <DIV style="DISPLAY: block; COLOR: #8f8f8f" class=nfd_slidelink 
+  jquery16406123540756376562="116">&nbsp;</DIV></DIV>
+  <DIV class="nfd_con_div clearfix">
+  <H2 id=nfd_effect>荷兰豆的食用效果</H2>
+  <DIV style="HEIGHT: auto" 
+  class=shicai_c>1.提高机体免疫力<BR>提高机体的抗病能力和康复能力。<BR>2.防癌抗癌<BR>防止人体致癌物质的合成，从而减少癌细胞的合成，预防癌症的发生。<BR>3.抗菌消炎<BR>具有抗菌消炎，增强新陈代谢的功效。<BR>4.利肠通便<BR>可以促进胃肠蠕动，防止便秘，益脾和胃，生津止渴，起到清肠利尿的作用。</DIV>
+  <DIV style="DISPLAY: block; COLOR: #8f8f8f" class=nfd_slidelink 
+  jquery16406123540756376562="117">&nbsp;</DIV></DIV>
+  <DIV class="nfd_con_div clearfix" sizcache="7" sizset="7">
+  <H2 id=nfd_ban>荷兰豆的食用禁忌</H2>
+  <DIV style="HEIGHT: auto" class=shicai_c sizcache="7" sizset="7">
+  <P>豌豆粒多食会腹胀，易产气，尿路结石，皮肤病和慢性胰腺炎患者不宜食。<BR><BR>消化不良，脾胃虚弱者慎食。<BR><BR>肾功能不全者不宜食用。<BR><BR>不宜食用过多，容易引起腹胀。</P></DIV>
+  <DIV style="DISPLAY: block; COLOR: #8f8f8f" class=nfd_slidelink 
+  jquery16406123540756376562="118">&nbsp;</DIV></DIV>
+  <DIV class="nfd_con_div clearfix" sizcache="58" sizset="8">
+  <H2 id=nfd_match>荷兰豆的搭配宜忌</H2>
+  <P><IMG alt="" src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/new_yi.gif"></P>
+  <P><IMG alt="" 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/253a53efa729f0dd31c44857a497bed9_70x70.jpg"><STRONG>荷兰豆</STRONG> 
+  <IMG alt="" 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/ab18145a0d11ace74cdf43257837de2a_70x70.jpg"><STRONG>虾仁（红）</STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  提高营养价值</P>
+  <P><IMG alt="" 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/253a53efa729f0dd31c44857a497bed9_70x70.jpg"><STRONG>荷兰豆</STRONG> 
+  <IMG alt="" 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/14aa34489cc61d8b326d04a502e5dfd8_70x70.jpg"><STRONG>蘑菇(鲜蘑)</STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  消除油脂引起的食欲不佳</P>
+  <P><IMG alt="" 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/253a53efa729f0dd31c44857a497bed9_70x70.jpg"><STRONG>荷兰豆</STRONG> 
+  <IMG alt="" 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/89bbaa9b1c5cadc3a850e8423fa8a05a_70x70.jpg"><STRONG>红糖</STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  健脾 通乳 利水</P>
+  <P>&nbsp;</P></DIV>
+  <DIV class=nfd_con_div sizcache="7" sizset="11">
+  <H2 id=nfd_buy>荷兰豆的选购</H2>
+  <DIV class=shicai_c sizcache="7" sizset="11">
+  <P>选购荷兰豆的时候，扁圆形表示成熟度最佳，若荚果正圆形就表示已经过老、筋凹陷也表示过老。手握豌豆若咔嚓作响，表示很新鲜，荷兰豆上市的早期要选择饱满的，后期要选择较嫩的。</P></DIV></DIV>
+  <DIV class=nfd_con_div sizcache="7" sizset="12">
+  <H2 id=nfd_store>荷兰豆的存储</H2>
+  <DIV class=shicai_c sizcache="7" sizset="12">
+  <P>买的青豌豆生的没吃，不要洗直接放冰箱冷藏，如果是剥出来的豌豆就适于冷冻，最好在一个月内吃完。</P></DIV></DIV>
+  <DIV class="nfd_con_div bb0" sizcache="7" sizset="13">
+  <H2 id=nfd_skill>荷兰豆的烹饪小技巧</H2>
+  <DIV class=shicai_c sizcache="7" sizset="13">
+  <P>做豌豆的时候不宜使用硬水（水中含有钙 镁离子浓度超标）否则豌豆咬不开、嚼不烂。</P></DIV></DIV></DIV>
+  <P>&nbsp;</P></BLOCKQUOTE>
+<BLOCKQUOTE>
+  <TABLE border=0 cellSpacing=1 cellPadding=3 width="100%" bgColor=#dddddd>
+    <TBODY></TBODY></TABLE></BLOCKQUOTE></DIV></DIV></DIV>
+<SCRIPT type=text/javascript>
+    <!--
+    reg("com");
+    //-->
+    </SCRIPT>
+
+<DIV class=blank></DIV>
+<DIV id=ECS_COMMENT>
+<DIV class=box>
+<DIV class=box_1>
+<H3><SPAN class=text>用户评论</SPAN>(共<FONT class=f1>0</FONT>条评论)</H3>
+<DIV style="HEIGHT: 1%" class="boxCenterList clearfix">
+<UL class=comments>
+  <LI>暂时还没有任何用户评论 </LI></UL>
+<DIV id=pagebar class=f_r>
+<FORM method=get name=selectPageForm action=/goods.php>
+<DIV id=pager>总计 0 个记录，共 1 页。 <SPAN><A 
+href="javascript:gotoPage(1,113,0)">第一页</A> <A href="javascript:;">上一页</A> <A 
+href="javascript:;">下一页</A> <A href="javascript:;">最末页</A> </SPAN></DIV></FORM>
+<SCRIPT language=JavaScript type=Text/Javascript>
+        <!--
+        
+        function selectPage(sel)
+        {
+          sel.form.submit();
+        }
+        
+        //-->
+        </SCRIPT>
+</DIV>
+<DIV class=blank5></DIV>
+<DIV class=commentsList>
+<FORM id=commentForm onsubmit=submitComment(this) method=post name=commentForm 
+action=javascript:;>
+<TABLE border=0 cellSpacing=5 cellPadding=0 width=710>
+  <TBODY>
+  <TR>
+    <TD width=64 align=right>用户名：</TD>
+    <TD width=631>匿名用户</TD></TR>
+  <TR>
+    <TD align=right>E-mail：</TD>
+    <TD><INPUT id=email class=inputBorder name=email maxLength=100> </TD></TR>
+  <TR>
+    <TD align=right>评价等级：</TD>
+    <TD><INPUT id=comment_rank1 name=comment_rank value=1 type=radio> <IMG 
+      src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/stars1.gif"> <INPUT 
+      id=comment_rank2 name=comment_rank value=2 type=radio> <IMG 
+      src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/stars2.gif"> <INPUT 
+      id=comment_rank3 name=comment_rank value=3 type=radio> <IMG 
+      src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/stars3.gif"> <INPUT 
+      id=comment_rank4 name=comment_rank value=4 type=radio> <IMG 
+      src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/stars4.gif"> <INPUT 
+      id=comment_rank5 name=comment_rank value=5 CHECKED type=radio> <IMG 
+      src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/stars5.gif"> </TD></TR>
+  <TR>
+    <TD vAlign=top align=right>评论内容：</TD>
+    <TD><TEXTAREA style="WIDTH: 620px; HEIGHT: 50px" class=inputBorder name=content></TEXTAREA> 
+      <INPUT name=cmt_type value=0 type=hidden> <INPUT name=id value=113 
+      type=hidden> </TD></TR>
+  <TR>
+    <TD colSpan=2>
+      <DIV style="TEXT-ALIGN: left; PADDING-LEFT: 15px; FLOAT: left">验证码：<INPUT 
+      style="WIDTH: 50px; MARGIN-LEFT: 5px" class=inputBorder name=captcha> <IMG 
+      class=captcha onclick="this.src='captcha.php?'+Math.random()" alt=captcha 
+      src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/captcha.png"> <BR><BR><INPUT style="BORDER-BOTTOM-STYLE: none; BORDER-LEFT-STYLE: none; WIDTH: 75px; BORDER-TOP-STYLE: none; BACKGROUND: url(themes/yihao2011/images/commentsBnt.gif); HEIGHT: 21px; BORDER-RIGHT-STYLE: none; MARGIN-RIGHT: 8px" class=f_r type=submit> 
+      </DIV></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV class=blank5></DIV>
+<SCRIPT type=text/javascript>
+//<![CDATA[
+var cmt_empty_username = "请输入您的用户名称";
+var cmt_empty_email = "请输入您的电子邮件地址";
+var cmt_error_email = "电子邮件地址格式不正确";
+var cmt_empty_content = "您没有输入评论的内容";
+var captcha_not_null = "验证码不能为空!";
+var cmt_invalid_comments = "无效的评论内容!";
+
+/**
+ * 提交评论信息
+*/
+function submitComment(frm)
+{
+  var cmt = new Object;
+
+  //cmt.username        = frm.elements['username'].value;
+  cmt.email           = frm.elements['email'].value;
+  cmt.content         = frm.elements['content'].value;
+  cmt.type            = frm.elements['cmt_type'].value;
+  cmt.id              = frm.elements['id'].value;
+  cmt.enabled_captcha = frm.elements['enabled_captcha'] ? frm.elements['enabled_captcha'].value : '0';
+  cmt.captcha         = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+  cmt.rank            = 0;
+
+  for (i = 0; i < frm.elements['comment_rank'].length; i++)
+  {
+    if (frm.elements['comment_rank'][i].checked)
+    {
+       cmt.rank = frm.elements['comment_rank'][i].value;
+     }
+  }
+
+//  if (cmt.username.length == 0)
+//  {
+//     alert(cmt_empty_username);
+//     return false;
+//  }
+
+  if (cmt.email.length > 0)
+  {
+     if (!(Utils.isEmail(cmt.email)))
+     {
+        alert(cmt_error_email);
+        return false;
+      }
+   }
+   else
+   {
+        alert(cmt_empty_email);
+        return false;
+   }
+
+   if (cmt.content.length == 0)
+   {
+      alert(cmt_empty_content);
+      return false;
+   }
+
+   if (cmt.enabled_captcha > 0 && cmt.captcha.length == 0 )
+   {
+      alert(captcha_not_null);
+      return false;
+   }
+
+   Ajax.call('comment.php', 'cmt=' + cmt.toJSONString(), commentResponse, 'POST', 'JSON');
+   return false;
+}
+
+/**
+ * 处理提交评论的反馈信息
+*/
+  function commentResponse(result)
+  {
+    if (result.message)
+    {
+      alert(result.message);
+    }
+
+    if (result.error == 0)
+    {
+      var layer = document.getElementById('ECS_COMMENT');
+
+      if (layer)
+      {
+        layer.innerHTML = result.content;
+      }
+    }
+  }
+
+//]]>
+</SCRIPT>
+</DIV></DIV></DIV>
+<DIV class=blank5></DIV>
+<DIV class=block>
+<DIV class=box>
+<DIV class="helpTitBg clearfix"></DIV></DIV></DIV>
+<DIV class=blank></DIV>
+<DIV class=blank></DIV>
+<DIV class=blank></DIV>
+<DIV class=footertop>
+<DIV class=footerlink>
+<DIV>消费资讯：<A href="http://www.3nsc.com/quotation.php" 
+target=_blank>报价单</A>&nbsp;|&nbsp;<A 
+href="http://www.3nsc.com/article.php?id=317" 
+target=_blank>企业采购</A>&nbsp;|&nbsp;<A 
+href="http://www.3nsc.com/article.php?id=316" 
+target=_blank>三农市场招商</A>&nbsp;|&nbsp;<A 
+href="http://www.3nsc.com/article.php?id=273" 
+target=_blank>商务水果配送</A>&nbsp;|&nbsp;</DIV></DIV>
+<DIV class=quicklink>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=新手上路 
+href="http://www.3nsc.com/article_cat.php?id=4">新手上路</A></DIV>
+<UL>
+  <LI><A title=售后服务 href="http://www.3nsc.com/article.php?id=34">售后服务</A> 
+  <LI><A title=购物流程 href="http://www.3nsc.com/article.php?id=35">购物流程</A> 
+  <LI><A title=新用户注册 href="http://www.3nsc.com/article.php?id=36">新用户注册</A> 
+  </LI></UL></DIV>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=生活常识 
+href="http://www.3nsc.com/article_cat.php?id=11">生活常识</A></DIV>
+<UL>
+  <LI><A title=夏季适宜 href="http://www.3nsc.com/article.php?id=46">夏季适宜</A> 
+  <LI><A title=推荐菜谱 href="http://www.3nsc.com/article.php?id=51">推荐菜谱</A> 
+  <LI><A title=配菜禁忌 href="http://www.3nsc.com/article.php?id=52">配菜禁忌</A> 
+  </LI></UL></DIV>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=配送与支付 
+href="http://www.3nsc.com/article_cat.php?id=5">配送与支付</A></DIV>
+<UL>
+  <LI><A title=支付方式 href="http://www.3nsc.com/article.php?id=37">支付方式</A> 
+  <LI><A title=订单说明 href="http://www.3nsc.com/article.php?id=39">订单说明</A> 
+  <LI><A title=配送区域 href="http://www.3nsc.com/article.php?id=58">配送区域</A> 
+  </LI></UL></DIV>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=会员中心 
+href="http://www.3nsc.com/article_cat.php?id=10">会员中心</A></DIV>
+<UL>
+  <LI><A title=会员规则 href="http://www.3nsc.com/article.php?id=346">会员规则</A> 
+  <LI><A title=三农市场积分规则 
+  href="http://www.3nsc.com/article.php?id=347">三农市场积分规则</A> 
+  <LI><A title=三农市场积分手册 
+  href="http://www.3nsc.com/article.php?id=348">三农市场积分手册</A> </LI></UL></DIV>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=服务保证 
+href="http://www.3nsc.com/article_cat.php?id=8">服务保证</A></DIV>
+<UL>
+  <LI><A title=服务优势 href="http://www.3nsc.com/article.php?id=40">服务优势</A> 
+  <LI><A title=公司宣言 href="http://www.3nsc.com/article.php?id=41">公司宣言</A> 
+  <LI><A title=质量保证 href="http://www.3nsc.com/article.php?id=44">质量保证</A> 
+  </LI></UL></DIV></DIV></DIV>
+<DIV class=blank></DIV>
+<DIV class=blank></DIV>
+<DIV align=center><IMG 
+src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/footer_pic.gif"> </DIV>
+<DIV id=footer>
+<DIV class=text>© 2005-2012 三农市场官方网站 版权所有，并保留所有权利。<BR>湖南长沙雨花区马王堆人民路口西子花苑9栋一单元201 
+Tel: 0731-88852000 <BR>ICP备案证书号:<A href="http://www.miibeian.gov.cn/" 
+target=_blank>湘ICP备11005092</A>&nbsp;&nbsp;
+<SCRIPT language=JavaScript 
+src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/stat.js"></SCRIPT>
+<BR>共执行 362 个查询，用时 0.262865 秒，在线 76 人，Gzip 已禁用，占用内存 3.812 MB<IMG 
+style="WIDTH: 0px; HEIGHT: 0px" alt="" 
+src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/cron.htm"> 
+<DIV align=center><IFRAME height=24 marginHeight=0 border=0 
+src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/followbutton.htm" frameBorder=0 
+width=280 allowTransparency marginWidth=0 scrolling=no></IFRAME></DIV>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV id=footerbanner2LazyLoad class=footerbanner2>
+<UL>
+  <LI><A href="http://www.3nsc.com/goods.php?id=113#" target=_blank><IMG 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/footer_pic_09.gif"></A> 
+  <LI><A href="http://www.3nsc.com/goods.php?id=113#" target=_blank><IMG 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/footer_pic_05.gif"></A> 
+  <LI><A href="http://www.3nsc.com/goods.php?id=113#" target=_blank><IMG 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/footer_pic_06.gif"></A> 
+  <LI><A href="http://www.3nsc.com/goods.php?id=113#" target=_blank><IMG 
+  src="荷兰豆-500g_豆荚类_精品蔬菜_新鲜蔬菜_三农市场官方网站_files/footer_pic_07.gif"></A> 
+</LI></UL></DIV>
+<SCRIPT type=text/javascript>
+var goods_id = 113;
+var goodsattr_style = 1;
+var gmt_end_time = 0;
+var day = "天";
+var hour = "小时";
+var minute = "分钟";
+var second = "秒";
+var end = "结束";
+var goodsId = 113;
+var now_time = 1353907923;
+onload = function(){
+  changePrice();
+  fixpng();
+  try {onload_leftTime();}
+  catch (e) {}
+}
+/**
+ * 点选可选属性或改变数量时修改商品价格的函数
+ */
+function changePrice()
+{
+  var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
+  var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
+  Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+}
+/**
+ * 接收返回的信息
+ */
+function changePriceResponse(res)
+{
+  if (res.err_msg.length > 0)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+    document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
+    if (document.getElementById('ECS_GOODS_AMOUNT'))
+      document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
+  }
+}
+//关闭购买提示
+  function closecart(id)
+  {
+  document.getElementById(id).style.display='none';
+  }
+</SCRIPT>
+</BODY></HTML>

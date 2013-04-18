@@ -238,6 +238,8 @@ $_LANG['shop_help'] = '网店帮助';
 $_LANG['vote_list'] = '在线调查';
 
 /* 会员管理 */
+$_LANG['001_cards_add'] = '生成会员卡';
+$_LANG['002_cards_list'] = '会员卡列表';
 $_LANG['08_unreply_msg'] = '会员留言';
 $_LANG['03_users_list'] = '会员列表';
 $_LANG['04_users_add'] = '添加会员';
@@ -351,4 +353,11 @@ $_LANG['brand_name_exist'] = '已存在相同的品牌名称!';
 
 $_LANG['alipay_login'] = '<a href="https://www.alipay.com/user/login.htm?goto=https%3A%2F%2Fwww.alipay.com%2Fhimalayas%2Fpracticality_profile_edit.htm%3Fmarket_type%3Dfrom_agent_contract%26customer_external_id%3D%2BC4335319945672464113" target="_blank">立即免费申请支付接口权限</a>';
 $_LANG['alipay_look'] = '<a href=\"https://www.alipay.com/himalayas/practicality.htm\" target=\"_blank\">请申请成功后登录支付宝账户查看</a>';
+
+/* 支付确认部分 */
+$_LANG['pay_status'] = '支付状态';
+$_LANG['pay_not_exist'] = '此支付方式不存在或者参数错误！';
+$_LANG['pay_disabled'] = '此支付方式还没有被启用！';
+$_LANG['pay_success'] = '您此次的支付操作已成功！';
+$_LANG['pay_fail'] = '支付操作失败，请返回重试！';
 ?>

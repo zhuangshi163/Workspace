@@ -30,6 +30,8 @@ if($act=='update_password')
 	if($cardRow['store_id']==$_SESSION['store']['store_id']){
 		if($cardRow['card_state'] == 0){
 			die($json->encode(array(code	=>	0)));
+		}elseif($cardRow['user_id'] == null||$cardRow['user_id'] == 0||$cardRow['store_id'] == null||$cardRow['store_id'] == 0){
+			die($json->encode(array(code	=>	0)));
 		}elseif($cardRow['card_state'] == 2){
 			die($json->encode(array(code	=>	2)));
 		}
@@ -77,7 +79,6 @@ if($act=='update_password')
 	
 	//分页函数
 	$pager = get_pager('shop_user.php', array('act' => $action), $record_count, $page , $size =5);
-	
 	if($pager['page']>1){
 		$pager['pre'] =$pager['page']-1;
 	}

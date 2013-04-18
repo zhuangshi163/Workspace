@@ -23,14 +23,11 @@
 </style>
 <script type="text/javascript">
 		function init(){
-//			var printer = new ActiveXObject("HsPayControl.CardReader");
-//			printer.ReadTrackData23(2);
-//			var data = printer.Track2Data;
-
-			//var printer = new ActiveXObject("HsPayControl.CardReader");
-			//printer.ReadTrackData23(2);
-			var data = "0vq93c1t6f00";
-
+			var printer = new ActiveXObject("HsPayControl.CardReader");
+			printer.ReadTrackData23(2);
+			var data = printer.Track2Data;
+			//var data = '121113566606';
+			
 			document.getElementById('card_no').value=data;
 			if(data.length !=0){
 				document.getElementById('myContext').className = 'none';

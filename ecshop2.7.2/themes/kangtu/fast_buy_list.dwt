@@ -101,7 +101,7 @@ document.getElementById('history_list').innerHTML = '{$lang.no_history}';
   <div class="AreaR">
 
 	 <!--组合搜索 开始-->
-	  <!--{if $brands.1 || $price_grade.1 || $filter_attr_list}-->
+	  <!--{if $brands.1 || $price_grade.1 || $filter_attr_list || $suppliers.1}-->
 	  <div class="box">
 		 <div class="box_1">
 			<h3><span>{$lang.goods_filter}</span></h3>

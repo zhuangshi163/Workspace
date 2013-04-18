@@ -14,23 +14,19 @@ body{
 
 <script type="text/javascript">
 		function init(){
-//			var printer = new ActiveXObject("HsPayControl.CardReader");
-//			printer.ReadTrackData23(2);
-//			var data = printer.Track2Data;
-
-			//var printer = new ActiveXObject("HsPayControl.CardReader");
-			//printer.ReadTrackData23(2);
-			var data = "0vq93c1t6f00";
-
+			var printer = new ActiveXObject("HsPayControl.CardReader");
+			printer.ReadTrackData23(2);
+			var data = printer.Track2Data;
 			//data = data.substring(2, data.indexOf("="));
 			document.getElementById('card_no').value=data;
+
 			if(data.length !=0){
 				//document.getElementById('card_submit').className = 'none';
 				document.forms[0].submit();
 			}else {
 				//alert('刷卡失败或超时，请再试一次');
 				//window.location = "/";
-				document.getElementById("card_submit").innerHTML='<div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">刷卡出现错误或超时</span></p><br/><br/><img src="../images/re_card.png" onclick ="window.history.go(0);" /><img src="../images/forget_card2.png" onmousedown="forget_su()" /></div>';				
+				document.getElementById("card_submit").innerHTML='<div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">刷卡出现错误或超时</span></p><br/><br/><img src="../img/re_card.png" onclick ="window.history.go(0);" /><img src="../img/forget_card2.png" onmousedown="forget_su()" /></div>';				
 
 				
 			}

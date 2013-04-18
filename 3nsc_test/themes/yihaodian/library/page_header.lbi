@@ -1,0 +1,281 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<?php
+ include_once('themes/' . $GLOBALS['_CFG']['template'].'/init.php');
+?>
+<script src="themes/<?php echo $GLOBALS['_CFG']['template']; ?>/js/transport.js"></script>
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+
+<div class="topNav">
+<div class="block " style=" position:relative;  ">
+ 
+
+
+<div class="f_l">
+   {insert_scripts files='utils.js'}
+   <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+ </div> 
+   
+   
+    <!--{if $navigator_list.top}-->
+    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav name=no} -->
+        
+            	<img src="../images/t{$smarty.foreach.no.iteration}.gif" />
+ <a style="color:#666" href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+           
+                <!-- {if !$smarty.foreach.no.last} -->
+               |   
+        <!-- {/if} -->
+     <!-- {/foreach} -->        
+   <!-- {/if} -->
+</div>
+</div>
+
+
+
+
+<div class="header_bg">
+
+
+
+
+
+
+  
+
+
+
+
+<div class="block clearfix" style="height:82px; position:relative">
+
+ 
+<div style="float:left; padding-top:12px;"><a href="../index.php" name="top"><img src="../images/logo.gif" /></a></div>
+ 
+ 
+ 
+ 
+ <div style=" float:left; padding:25px;">
+ <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_l"  >
+
+<div style="float:left; padding:3px 20px 0 10px">
+ <input name="keywords" type="text" id="keyword"  value="输入商品名称或商品货号..." onclick="javascript:this.value='';"   class="B_input" />
+  </div> 
+ 
+ 
+ 
+ 
+ 
+   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
+   </form>
+   
+   <img src="../images/jiamen.gif" style=" float: left; padding:0 10px;">
+   
+   
+   <img src="../images/xiazai.gif"style=" float: left">
+   
+ 
+ </div>
+ 
+ 
+ 
+</div>
+
+ 
+
+
+<div class="meun_bg">
+<div class="block" >
+
+
+<div class="search_box_a"   onmouseover="this.className='search_box_a search_box_ab '" onmouseout="this.className='search_box_a'">
+
+<a class="category_all">
+所有商品分类
+</a>
+ 
+<div class="my_left_category my_left_category2">
+     <!--{foreach from=$categories item=cat name=no}-->
+     <dl>
+     <dt onmouseover="this.className='category_over'" onmouseout="this.className=''">
+     <a class="a1" href="{$cat.url}" > 
+     <div class="biao">
+     <img style="float:left" src="../images/c{$smarty.foreach.no.iteration}.gif">
+     </div>
+     {$cat.name|escape:html}
+     
+     </a>
+       <div class="category_over_box">
+     <ul class="clearfix">
+     <div style="float:left">
+     <!--{foreach from=$cat.cat_id item=child}-->
+     <li>
+     <div style="clear:both"></div>
+      <div class="f_l">
+     <a class="over_2" href="{$child.url}">{$child.name|escape:html}</a>  
+     </div>
+     <div class="f_r">
+     <!--{foreach from=$child.cat_id item=childer}-->
+     <b>
+     | <a class="over_3" href="{$childer.url}">{$childer.name|escape:html}</a>
+     </b> 
+     <!--{/foreach}-->
+      </div>
+      
+       <div style="clear:both"></div>
+     </li>  
+     <!--{/foreach}-->
+      </div>  
+     </ul>
+     <div class="brand_r">
+     
+<dl>
+<dt>推荐品牌</dt>
+<dd>
+<a href="brand.php?id=22" target="_blank">可口可乐</a>
+<a href="brand.php?id=22" target="_blank">立顿</a>
+<a href="brand.php?id=22" target="_blank">雀巢</a>
+<a href="brand.php?id=22" target="_blank">奥利奥</a>
+<a href="brand.php?id=22" target="_blank">康师傅</a>
+<a href="brand.php?id=22" target="_blank">统一</a>
+<a href="brand.php?id=22" target="_blank">光明</a>
+<a href="brand.php?id=22" target="_blank">蒙牛</a>
+<a href="brand.php?id=22" target="_blank">伊利</a>
+<a href="brand.php?id=22" target="_blank">阿明</a>
+<a href="brand.php?id=22" target="_blank">立丰</a>
+<a href="brand.php?id=22" target="_blank">咏萄 Everwines</a>
+ 
+</dd>
+</dl>
+
+<dl>
+<dt>促销专题</dt>
+<dd>
+<a href="search.php" target="_blank">休闲零食特价买赠大酬...</a>
+<a href="search.php" target="_blank">买麦片、蜂蜜满28元送...</a>
+<a href="search.php" target="_blank">买方便面送咖啡</a>
+<a href="search.php" target="_blank">whisper活力薄荷糖买2...</a>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+     
+    
+     
+     </div>
+     </div>
+        <div class="dang" style="position: relative; left:-10px; float:left; background:#fff ; width:10px; height:33px;"></div>
+      </dt>
+    </dl>
+    <!--{/foreach}--> 
+<dl>
+ 
+</dl>
+
+</div>
+
+</div>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="mainNav" class="clearfix" style=" position:relative">
+
+<img src="../images/biao16.gif" style=" position:absolute;z-index:999999999; left:160px; top:-10px;">
+  <a href="../index.php"{if $navigator_list.config.index eq 1} class="cur"{/if}>{$lang.home}<span></span></a>
+  <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>{$nav.name}<span></span></a>
+ <!-- {/foreach} -->
+</div>
+
+
+
+
+<script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+             alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+ 
+   
+<div class="search_r">
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<div class="cart">
+<div class="f_l"  id="ECS_CARTINFO" style="padding-left:40px">
+ {insert name='cart_info'}
+</div> 
+<div class="f_r" style="padding:4px 5px 0 0">
+<a href="flow.php">
+<img style="float:right" src="../images/jiesuan.gif"></a>
+</div> 
+</div>
+
+
+
+
+</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+<div  class="blank"></div>

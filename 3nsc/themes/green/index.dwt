@@ -1,0 +1,1572 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type>
+<META name=Keywords content="{$keywords}">
+<META name=Description content="{$description}">
+<!-- TemplateBeginEditable name="doctitle" -->
+<TITLE>{$page_title}</TITLE>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<LINK rel="shortcut icon" href="favicon.ico">
+<LINK rel=icon type=image/gif href="animated_favicon.gif">
+<LINK rel=stylesheet type=text/css href="{$ecs_css_path}">
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+<STYLE type=text/css>.STYLE2 {
+	COLOR: #ffffff; FONT-WEIGHT: bold
+}
+</STYLE>
+
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js,pic.js'}
+</HEAD>
+<BODY>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+
+<DIV class="block clearfix">
+	<DIV class=AreaL>
+		<DIV class="index_b clearfix"><B></B><B></B><B></B><B></B><B></B><B></B><B></B><B></B><B></B><B></B><B></B><B></B><EM></EM></DIV>
+		<DIV id=index_grouponLoading class="group_purchase mt10 borderleft_solid borderbottom_solid borderright_solid clearfix">
+			<DIV class=top><H1><A>今日秒杀</A></H1></DIV>
+			<DIV style="TEXT-ALIGN: center; FONT-FAMILY: 微软雅黑,Tahoma, Geneva, sans-serif; HEIGHT: 210px; OVERFLOW: hidden">
+			<SCRIPT language=javascript type=text/javascript src=""></SCRIPT>	
+			<STYLE type=text/css>
+				TABLE {
+					BORDER-SPACING: 0; BORDER-COLLAPSE: collapse
+				}
+				FIELDSET {
+					BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+				}
+				IMG {
+					BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+				}
+				ADDRESS {
+					FONT-STYLE: normal; FONT-WEIGHT: normal
+				}
+				CAPTION {
+					FONT-STYLE: normal; FONT-WEIGHT: normal
+				}
+				CITE {
+					FONT-STYLE: normal; FONT-WEIGHT: normal
+				}
+				CODE {
+					FONT-STYLE: normal; FONT-WEIGHT: normal
+				}
+				DFN {
+					FONT-STYLE: normal; FONT-WEIGHT: normal
+				}
+				EM {
+					FONT-STYLE: normal; FONT-WEIGHT: normal
+				}
+				STRONG {
+					FONT-STYLE: normal; FONT-WEIGHT: normal
+				}
+				TH {
+					FONT-STYLE: normal; FONT-WEIGHT: normal
+				}
+				VAR {
+					FONT-STYLE: normal; FONT-WEIGHT: normal
+				}
+				OL {
+					LIST-STYLE-TYPE: none
+				}
+				UL {
+					LIST-STYLE-TYPE: none
+				}
+				CAPTION {
+					TEXT-ALIGN: left
+				}
+				TH {
+					TEXT-ALIGN: left
+				}
+				H1 {
+					FONT-SIZE: 100%; FONT-WEIGHT: normal
+				}
+				H2 {
+					FONT-SIZE: 100%; FONT-WEIGHT: normal
+				}
+				H3 {
+					FONT-SIZE: 100%; FONT-WEIGHT: normal
+				}
+				H4 {
+					FONT-SIZE: 100%; FONT-WEIGHT: normal
+				}
+				H5 {
+					FONT-SIZE: 100%; FONT-WEIGHT: normal
+				}
+				H6 {
+					FONT-SIZE: 100%; FONT-WEIGHT: normal
+				}
+				ABBR {
+					BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+				}
+				ACRONYM {
+					BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+				}
+				.clear {
+					CLEAR: both
+				}
+				.clearfix:after {
+					DISPLAY: block; HEIGHT: 0px; CLEAR: both; CONTENT: ""
+				}
+				.clearfix {
+					ZOOM: 1
+				}
+				.del {
+					TEXT-DECORATION: line-through
+				}
+				A {
+					TEXT-DECORATION: none
+				}
+				A:hover {
+					TEXT-DECORATION: none
+				}
+				.i_con_left {
+					WIDTH: 200px; FLOAT: left
+				}
+				.i_con_right_ul3 {
+					WIDTH: 255px; HEIGHT: 200px; MARGIN-LEFT: 10px
+				}
+				.i_con_right_ul3 LI {
+					BACKGROUND: #fee; FLOAT: left; OVERFLOW: hidden
+				}
+				.i_con_right_ul3 LI A {
+					DISPLAY: block
+				}
+				.i_con_right_ul3 LI A IMG {
+					DISPLAY: block
+				}
+				.tuan_title {
+					LINE-HEIGHT: 38px; PADDING-LEFT: 23px; BACKGROUND: url(http://css.meishij.net/images/nmsj_texts.gif) no-repeat 23px -715px; HEIGHT: 38px; FONT-SIZE: 16px
+				}
+				.tuan_title A {
+					TEXT-INDENT: -9999px; DISPLAY: block; FONT-FAMILY: 微软雅黑; COLOR: #000; FONT-WEIGHT: bold
+				}
+				.tuan_title A:hover {
+					COLOR: #666
+				}
+				.tuan_scroll_left {
+					WIDTH: 15px; DISPLAY: block; BACKGROUND: url(http://css.meishij.net/images/i_tuan_arrow.gif) no-repeat left center; FLOAT: left; HEIGHT: 160px; CURSOR: pointer
+				}
+				.tuan_scroll_right {
+					WIDTH: 15px; DISPLAY: block; BACKGROUND: url(http://css.meishij.net/images/i_tuan_arrow.gif) no-repeat right center; FLOAT: left; HEIGHT: 172px; CURSOR: pointer
+				}
+				.tuan_scroll_wraper {
+					MARGIN: 0px 8px; WIDTH: 150px; FLOAT: left; HEIGHT: 215px; OVERFLOW: hidden
+				}
+				.tuan_scroll_wraper UL {
+					WIDTH: 10000px; MARGIN-LEFT: -150px
+				}
+				.tuan_scroll_wraper UL LI {
+					WIDTH: 150px; FLOAT: left; HEIGHT: 210px
+				}
+				.tuan_scroll_wraper UL LI A IMG {
+					WIDTH: 150px; DISPLAY: block; HEIGHT: 115px
+				}
+				.tuan_scroll_wraper UL LI A STRONG {
+					PADDING-BOTTOM: 5px; LINE-HEIGHT: 20px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; DISPLAY: block; HEIGHT: 60px; COLOR: #3f3f3f; FONT-SIZE: 14px; FONT-WEIGHT: bold; PADDING-TOP: 5px
+				}
+				.tuan_scroll_wraper UL LI A SPAN {
+					LINE-HEIGHT: 29px; DISPLAY: block; BACKGROUND: url(http://css.meishij.net/images/con_right_ct.gif) no-repeat right 0px; HEIGHT: 29px; COLOR: #565656; OVERFLOW: hidden
+				}
+				.tuan_scroll_wraper UL LI A SPAN:hover {
+					TEXT-DECORATION: none
+				}
+				.tuan_scroll_wraper UL LI A:hover {
+					COLOR: #f60; TEXT-DECORATION: underline
+				}
+				.tuan_scroll_wraper UL LI A:hover STRONG {
+					COLOR: #ff732c; TEXT-DECORATION: underline
+				}
+				.tuan_scroll_wraper UL LI A:hover SPAN {
+					BACKGROUND-POSITION: right -29px; TEXT-DECORATION: none
+				}
+			</STYLE>
+			
+			<DIV id=i_tuan_wrapper class="i_con_left i_con_left_style1"><SPAN 
+			class=tuan_scroll_left></SPAN>
+			<DIV class=tuan_scroll_wraper>
+			<UL>
+			  <LI><A href="http://www.3nsc.com/team.php?id=5" target=_blank><IMG 
+			  alt=仅39.9元 
+			  src="themes/green/test_img/1323907700757271119.jpg"><STRONG>仅39.9元，享市价62元的新疆阿克苏糖心富士王苹果8个装！ 
+			  </STRONG><SPAN>163人参团</SPAN></A> </LI>
+			  <LI><A href="http://www.3nsc.com/team.php?id=7" target=_blank><IMG 
+			  alt=原价98元有机蔬菜组合装（任选8款，请下单时务必备注所选品种和数量），现仅需58元！ 
+			  src="themes/green/test_img/1326151209778763844.jpg"><STRONG>原价98元有机蔬菜组合装（现仅需58元）</STRONG><SPAN></SPAN></A> 
+			  </LI></UL></DIV><SPAN class=tuan_scroll_right></SPAN></DIV>
+		</DIV>
+	</DIV>
+</DIV>
+
+<DIV class=AreaR>
+	<DIV class=blank></DIV>
+	<DIV style="WIDTH: 980px; DISPLAY: block; HEIGHT: 60px; OVERFLOW: hidden">
+		<!-- TemplateBeginEditable name="站内导航下广告位" -->
+		<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+		{insert name='ads' id=$ads_id num=$ads_num}
+		 <!-- #EndLibraryItem -->
+		<!-- TemplateEndEditable -->
+		<DIV class=blank></DIV>
+	</DIV>
+	<DIV class=blank></DIV>
+	
+	<DIV class="box clearfix">
+	<DIV style="WIDTH: 550px; FLOAT: left">
+	<DIV class=clearfix>
+		<DIV id=focus>
+		<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+		</DIV>
+	</DIV>
+
+	<!-- START 焦点图下端轮动 -->	
+	<DIV class="lowarea mt10 clearfix">
+		<DIV id=prev_banner class="fl lowareanav pointer">
+			<A><IMG onmouseup=ISL_StopUp_1() onmouseout=ISL_StopUp_1() onmousedown=ISL_GoUp_1() src="themes/green/test_img/index_pr.gif"></A>
+		</DIV>
+		<DIV id=second_banner_slider class="fl lowareabox">
+			<DIV class=panel-container>
+			<DIV id=ISL_Cont_1 class=c_v>
+				<DIV class=ScrCont>
+				<DIV id=List1_1>
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD>
+						<A href="http://www.3nsc.com/affiche.php?ad_id=3&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D400" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339131831119064869.jpg" 
+						  width=120 height=140></A>
+						</TD>
+					   </TR>
+					  </TBODY>
+					</TABLE>
+					<DIV class=blank></DIV>
+					</DIV>
+					
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" 
+					class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD><A 
+						  href="http://www.3nsc.com/affiche.php?ad_id=4&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D416" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339131869021489119.jpg" 
+						  width=120 height=140></A></TD></TR></TBODY></TABLE>
+					<DIV class=blank></DIV></DIV>
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" 
+					class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD><A 
+						  href="http://www.3nsc.com/affiche.php?ad_id=5&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D409" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339131927824999648.jpg" 
+						  width=120 height=140></A></TD></TR></TBODY></TABLE>
+					<DIV class=blank></DIV></DIV>
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" 
+					class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD><A 
+						  href="http://www.3nsc.com/affiche.php?ad_id=6&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D442" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339131974351390072.jpg" 
+						  width=120 height=140></A></TD></TR></TBODY></TABLE>
+					<DIV class=blank></DIV></DIV>
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" 
+					class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD><A 
+						  href="http://www.3nsc.com/affiche.php?ad_id=7&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D405" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339132033175566281.jpg" 
+						  width=120 height=140></A></TD></TR></TBODY></TABLE>
+					<DIV class=blank></DIV></DIV>
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" 
+					class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD><A 
+						  href="http://www.3nsc.com/affiche.php?ad_id=8&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D439" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339132096762950583.jpg" 
+						  width=120 height=140></A></TD></TR></TBODY></TABLE>
+					<DIV class=blank></DIV></DIV>
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" 
+					class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD><A 
+						  href="http://www.3nsc.com/affiche.php?ad_id=9&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D441" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339132154825095022.jpg" 
+						  width=120 height=140></A></TD></TR></TBODY></TABLE>
+					<DIV class=blank></DIV></DIV>
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" 
+					class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD><A 
+						  href="http://www.3nsc.com/affiche.php?ad_id=10&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D468" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339132226402875833.jpg" 
+						  width=120 height=140></A></TD></TR></TBODY></TABLE>
+					<DIV class=blank></DIV></DIV>
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" 
+					class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD><A 
+						  href="http://www.3nsc.com/affiche.php?ad_id=51&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fsearch.php%3Fencode%3DYToyOntzOjg6ImtleXdvcmRzIjtzOjY6IuWNoeWjqyI7czoxODoic2VhcmNoX2VuY29kZV90aW1lIjtpOjEzMzkxMzIyNDY7fQ%3D%3D" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339132262658205677.jpg" 
+						  width=120 height=140></A></TD></TR></TBODY></TABLE>
+					<DIV class=blank></DIV></DIV>
+					<DIV style="WIDTH: 120px; HEIGHT: 140px; MARGIN-LEFT: 17px; OVERFLOW: hidden" 
+					class=f_l>
+					<TABLE cellSpacing=0 cellPadding=0>
+					  <TBODY>
+					  <TR>
+						<TD><A 
+						  href="http://www.3nsc.com/affiche.php?ad_id=52&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D443" 
+						  target=_blank><IMG border=0 src="themes/green/test_img/1339132312474332649.jpg" 
+						  width=120 height=140></A></TD></TR></TBODY></TABLE>
+					<DIV class=blank></DIV></DIV>
+				</DIV>
+				
+				<DIV id=List2_1></DIV></DIV>
+			</DIV></DIV>
+		</DIV>
+		<DIV id=next_banner class="fr lowareanav pointer">
+			<A><IMG onmouseup=ISL_StopDown_1() onmouseout=ISL_StopDown_1() onmousedown=ISL_GoDown_1() src="themes/green/test_img/index_next.gif"></A>
+		</DIV>
+	</DIV>
+	<SCRIPT type=text/javascript>
+	picrun_ini()
+	</SCRIPT>
+	<!-- END 焦点图下端轮动 -->	
+
+	<!-- START 特价 推荐 热卖 新品 -->	
+	<DIV class="buylimit mt10">
+	<DIV class="buylimitcard borderleft_solid bordertop_solid">
+	<UL id=buylimitcard_nav>
+	  <LI id=ECS_tree1 class=select><A onclick="javascript:window.location.href='search.php?intro=promotion'" href="javascript:void(0);">每日特价</A> </LI>
+	  <LI id=ECS_tree2><A  onclick="javascript:window.location.href='search.php?intro=best'" href="javascript:void(0);">精品推荐</A> </LI>
+	  <LI id=ECS_tree3><A  onclick="javascript:window.location.href='search.php?intro=hot'" href="javascript:void(0);">热卖推荐</A> </LI>
+	  <LI id=ECS_tree4><A onclick="javascript:window.location.href='search.php?intro=new'"  href="javascript:void(0);">新品上市</A> </LI>
+	</UL>
+	<DIV class=clear></DIV>
+	</DIV>
+	
+	<DIV style="POSITION: relative; OVERFLOW: hidden" id=me_slider class="buylimitproduce pt20 borderleft_solid borderright_solid borderbottom_solid">
+	<DIV class="panel-container produce_box">
+	<DIV id=ECS_tree1_BODY class=panel>
+	    <!--特价-->
+      	<!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=129"><IMG border=0 alt=新鲜香菇/500g src="themes/green/test_img/129_thumb_G_1332773900009.jpg"></A></DIV>
+		<DIV class=producename><A title=新鲜香菇/500g href="http://www.3nsc.com/goods.php?id=129">新鲜香菇/500g</A></DIV>
+		<DIV class=newprice2>促销价：<SPAN class=red9>￥7.50元</SPAN></DIV></DIV>
+		
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=434"><IMG border=0 alt=虾皮/500g src="themes/green/test_img/434_thumb_G_1332825062749.jpg"></A></DIV>
+		<DIV class=producename><A title=虾皮/500g href="http://www.3nsc.com/goods.php?id=434">虾皮/500g</A></DIV>
+		<DIV class=newprice2>促销价：<SPAN class=red9>￥27.50元</SPAN></DIV></DIV>		
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1267"><IMG border=0 alt=蜜柚 src="themes/green/test_img/1267_thumb_G_1348733877663.jpg"></A></DIV>
+		<DIV class=producename><A title=蜜柚 href="http://www.3nsc.com/goods.php?id=1267">蜜柚</A></DIV>
+		<DIV class=newprice2>促销价：<SPAN class=red9>￥3.58元</SPAN></DIV></DIV>		
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=70"><IMG border=0 alt=白萝卜/500g src="themes/green/test_img/70_thumb_G_1332564392298.jpg"></A></DIV>
+		<DIV class=producename><A title=白萝卜/500g href="http://www.3nsc.com/goods.php?id=70">白萝卜/500g</A></DIV>
+		<DIV class=newprice2>促销价：<SPAN class=red9>￥1.90元</SPAN></DIV></DIV>		
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1245"><IMG border=0 alt=香丝苗米24KG src="themes/green/test_img/1245_thumb_G_1346643422406.jpg"></A></DIV>
+		<DIV class=producename><A title=香丝苗米24KG href="http://www.3nsc.com/goods.php?id=1245">香丝苗米24KG</A></DIV>
+		<DIV class=newprice2>促销价：<SPAN class=red9>￥109.00元</SPAN></DIV></DIV>
+	</DIV>
+	
+	
+	<DIV style="DISPLAY: none" id=ECS_tree2_BODY class=panel>
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=369"><IMG alt=牛蛙（杀好）/500g src="themes/green/test_img/369_thumb_G_1346304379948.jpg"></A></DIV>
+		<DIV class=producename><A title=牛蛙（杀好）/500g href="http://www.3nsc.com/goods.php?id=369">牛蛙（杀好）/500g</A></DIV>
+		<DIV class=newprice2>本店售价：<SPAN class=red9>￥27.80元</SPAN> </DIV></DIV>
+		
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1258"><IMG alt=红心猕猴桃/个 src="themes/green/test_img/1258_thumb_G_1347242259692.jpg"></A></DIV>
+		<DIV class=producename><A title=红心猕猴桃/个 href="http://www.3nsc.com/goods.php?id=1258">红心猕猴桃/个</A></DIV>
+		<DIV class=newprice2>本店售价：<SPAN class=red9>￥5.00元</SPAN> </DIV></DIV>
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=724"><IMG alt=新西兰绿色奇异果/个 src="themes/green/test_img/724_thumb_G_1332912476389.jpg"></A></DIV>
+		<DIV class=producename><A title=新西兰绿色奇异果/个 href="http://www.3nsc.com/goods.php?id=724">新西兰绿色奇异果/个</A></DIV>
+		<DIV class=newprice2>本店售价：<SPAN class=red9>￥2.80元</SPAN> </DIV></DIV>
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=466"><IMG alt=金浩茶籽橄榄油5L/瓶 src="themes/green/test_img/466_thumb_G_1333110096933.jpg"></A></DIV>
+		<DIV class=producename><A title=金浩茶籽橄榄油5L/瓶 href="http://www.3nsc.com/goods.php?id=466">金浩茶籽橄榄油5L/瓶</A></DIV>
+		<DIV class=newprice2>本店售价：<SPAN class=red9>￥108.00元</SPAN> </DIV></DIV>
+		<DIV class=produce>
+		<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=920"><IMG alt=卡士鲜酪乳草莓味100g*3/条 src="themes/green/test_img/920_thumb_G_1333433145971.jpg"></A></DIV>
+		<DIV class=producename><A title=卡士鲜酪乳草莓味100g*3/条 href="http://www.3nsc.com/goods.php?id=920">卡士鲜酪乳草莓味100g*3/条</A></DIV>
+		<DIV class=newprice2>本店售价：<SPAN class=red9>￥12.80元</SPAN> </DIV></DIV>
+	</DIV>
+	
+	
+	<DIV style="DISPLAY: none" id=ECS_tree3_BODY class=panel>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=644"><IMG 
+	alt=鲜鸡蛋/500g src="themes/green/test_img/644_thumb_G_1332930513603.jpg"></A></DIV>
+	<DIV class=producename><A title=鲜鸡蛋/500g 
+	href="http://www.3nsc.com/goods.php?id=644">鲜鸡蛋/500g</A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥5.50元</SPAN> </DIV></DIV>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=714"><IMG 
+	alt=红提子/500g src="themes/green/test_img/714_thumb_G_1332910259146.jpg"></A></DIV>
+	<DIV class=producename><A title=红提子/500g 
+	href="http://www.3nsc.com/goods.php?id=714">红提子/500g</A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥4.80元</SPAN> </DIV></DIV>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=716"><IMG 
+	alt=红圣女果/500g src="themes/green/test_img/716_thumb_G_1347242481821.jpg"></A></DIV>
+	<DIV class=producename><A title=红圣女果/500g 
+	href="http://www.3nsc.com/goods.php?id=716">红圣女果/500g</A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥4.80元</SPAN> </DIV></DIV>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=729"><IMG 
+	alt=麒麟西瓜/500g src="themes/green/test_img/729_thumb_G_1333381327755.jpg"></A></DIV>
+	<DIV class=producename><A title=麒麟西瓜/500g 
+	href="http://www.3nsc.com/goods.php?id=729"><FONT 
+	color=#fe0000>麒麟西瓜/500g</FONT></A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥1.80元</SPAN> </DIV></DIV>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=457"><IMG 
+	alt=长康压榨菜籽油4.5L/瓶 src="themes/green/test_img/457_thumb_G_1333109020345.jpg"></A></DIV>
+	<DIV class=producename><A title=长康压榨菜籽油4.5L/瓶 
+	href="http://www.3nsc.com/goods.php?id=457">长康压榨菜籽油4.5L/瓶</A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥59.80元</SPAN> </DIV></DIV></DIV>
+	<DIV style="DISPLAY: none" id=ECS_tree4_BODY class=panel>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=693"><IMG 
+	alt=冰糖橙/500g src="themes/green/test_img/693_thumb_G_1332909562121.jpg"></A></DIV>
+	<DIV class=producename><A title=冰糖橙/500g 
+	href="http://www.3nsc.com/goods.php?id=693">冰糖橙/500g</A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥2.00元</SPAN> </DIV></DIV>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=321"><IMG 
+	alt=公鸡（杀好）/500g src="themes/green/test_img/321_thumb_G_1332927438656.jpg"></A></DIV>
+	<DIV class=producename><A title=公鸡（杀好）/500g 
+	href="http://www.3nsc.com/goods.php?id=321">公鸡（杀好）/500g</A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥17.50元</SPAN> </DIV></DIV>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=335"><IMG 
+	alt=乳鸽（杀好）/只 src="themes/green/test_img/335_thumb_G_1332928068949.jpg"></A></DIV>
+	<DIV class=producename><A title=乳鸽（杀好）/只 
+	href="http://www.3nsc.com/goods.php?id=335">乳鸽（杀好）/只</A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥24.00元</SPAN> </DIV></DIV>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=694"><IMG 
+	alt=赣南脐橙/500g src="themes/green/test_img/694_thumb_G_1348731334057.jpg"></A></DIV>
+	<DIV class=producename><A title=赣南脐橙/500g 
+	href="http://www.3nsc.com/goods.php?id=694">赣南脐橙/500g</A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥5.00元</SPAN> </DIV></DIV>
+	<DIV class=produce>
+	<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=866"><IMG 
+	alt=冰糖心苹果（大）/500g src="themes/green/test_img/866_thumb_G_1333189309531.jpg"></A></DIV>
+	<DIV class=producename><A title=冰糖心苹果（大）/500g 
+	href="http://www.3nsc.com/goods.php?id=866">冰糖心苹果（大）/500g</A></DIV>
+	<DIV class=newprice2>本店售价：<SPAN class=red9>￥7.80元</SPAN> 
+	</DIV></DIV></DIV></DIV></DIV></DIV>
+	<SCRIPT type=text/javascript>
+	//<![CDATA[
+	  var cycleList = ['ECS_tree1','ECS_tree2','ECS_tree3','ECS_tree4'];
+	  var tabFront = 'select';
+	  var tabBack = '';
+	  function cycleShow(obj)
+	  {
+		var curObj;
+		var curBody;
+		for (i=0; i < cycleList.length; i++)
+		{
+		  curObj = document.getElementById(cycleList[i]);
+		  curBody = document.getElementById(cycleList[i] + '_BODY');
+		  if (obj.id == curObj.id)
+		  {
+			curObj.className = tabFront;
+			curBody.style.display = "";
+		  }
+		  else
+		  {
+			curObj.className = tabBack;
+			curBody.style.display = "none";
+		  }
+		}
+	  }
+	  // 添加事件
+	  for (i=0; i< cycleList.length; i++)
+	  {
+		document.getElementById(cycleList[i]).onmousemove = function()
+		{
+		  cycleShow(this);
+		};
+	  }
+	//]]>
+	</SCRIPT>
+	</DIV>
+	<DIV style="WIDTH: 205px; FLOAT: right">
+	<DIV class="loginbox mb10">
+	<DIV id=index_login_box class=logincon>
+	<H1><A href="http://www.3nsc.com/user.php?act=register" 
+	target=_blank>免费注册</A></H1>
+	<H1><A href="http://www.3nsc.com/user.php" target=_blank>用户登录</A></H1></DIV>
+	<DIV class="dailylist borderleft_solid borderright_solid">
+	<UL>
+	  <LI class="fl blod pl5">最新动态 </LI>
+	  <LI class="fl tr color_gary "><A 
+	  href="http://www.3nsc.com/article_cat.php?id=1" target=_blank>更多</A> 
+	</LI></UL>
+	<DIV class=clear></DIV></DIV>
+	<DIV 
+	class="dailycontent pl10 pt10 borderleft_solid borderright_solid borderbottom_solid">
+	<UL>
+	  <LI class=color_gary><A title=买菜网星沙苹果社区店隆重开业 
+	  href="http://www.3nsc.com/article.php?id=341" 
+	  target=_blank>买菜网星沙苹果社区店隆重...</A> 
+	  <LI class=color_gary><A title=买菜网雅致名园店隆重开业 
+	  href="http://www.3nsc.com/article.php?id=339" 
+	  target=_blank>买菜网雅致名园店隆重开业</A> 
+	  <LI class=color_gary><A title=买菜网山水豪园店隆重开业 
+	  href="http://www.3nsc.com/article.php?id=320" 
+	  target=_blank>买菜网山水豪园店隆重开业</A> 
+	  <LI class=color_gary><A title=买菜网三万英尺店隆重开业 
+	  href="http://www.3nsc.com/article.php?id=313" 
+	  target=_blank>买菜网三万英尺店隆重开业</A> </LI></UL>
+	<DIV class=clear></DIV></DIV></DIV>
+	<DIV id=trainMobileAirticket_container class="mobile mt10">
+	<DIV class="list ">特别推荐</DIV>
+	<DIV style="HEIGHT: 123px; OVERFLOW: hidden" id=airticket_panel class="tab ">
+	<TABLE cellSpacing=0 cellPadding=0>
+	  <TBODY>
+	  <TR>
+		<TD><A 
+		  href="http://www.3nsc.com/affiche.php?ad_id=11&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fcategory.php%3Fid%3D405" 
+		  target=_blank><IMG border=0 src="themes/green/test_img/1349750693944057570.jpg" 
+		  width=203 height=123></A></TD></TR></TBODY></TABLE>
+	<DIV class=blank></DIV></DIV></DIV>
+	<DIV class="yqtj mt10">
+	<DIV class=title>本店友情推荐</DIV>
+	<DIV id=friendlyRecommendList class=tab>
+	<DIV class=nav>
+	<DIV style="HEIGHT: 213px; OVERFLOW: hidden" class=tabbox>
+	<DIV 
+	style="TEXT-ALIGN: center; MARGIN: 0px auto; WIDTH: 198px; BACKGROUND: url(themes/yihao2011/images/com_bai.jpg) repeat-x; HEIGHT: 25px">
+	<DIV 
+	style="WIDTH: 66px; BACKGROUND: url(themes/green/images/com_red.jpg) no-repeat; FLOAT: left; HEIGHT: 25px; CURSOR: pointer" 
+	id=com1 
+	onmouseover="document.getElementById('com1').style.background='url(themes/green/images/com_red.jpg)';document.getElementById('com2').style.background='url()';document.getElementById('com3').style.background='url()';document.getElementById('com3_1').style.display='block';document.getElementById('com3_2').style.display='none';document.getElementById('com3_3').style.display='none';">应季水果</DIV>
+	<DIV style="WIDTH: 66px; FLOAT: left; HEIGHT: 25px; CURSOR: pointer" id=com2 
+	onmouseover="document.getElementById('com2').style.background='url(themes/green/images/com_red.jpg)';document.getElementById('com1').style.background='url()';document.getElementById('com3').style.background='url()';document.getElementById('com3_2').style.display='block';document.getElementById('com3_1').style.display='none';document.getElementById('com3_3').style.display='none';">营养肉禽</DIV>
+	<DIV style="WIDTH: 66px; FLOAT: left; HEIGHT: 25px; CURSOR: pointer" id=com3 
+	onmouseover="document.getElementById('com3').style.background='url(themes/green/images/com_red.jpg)';document.getElementById('com2').style.background='url()';document.getElementById('com1').style.background='url()';document.getElementById('com3_3').style.display='block';document.getElementById('com3_2').style.display='none';document.getElementById('com3_1').style.display='none';">精品蔬菜</DIV></DIV>
+	<DIV style="WIDTH: 198px; DISPLAY: block; HEIGHT: 195px" id=com3_1>
+	<DIV id=right_tab_con1>
+	<UL class=list>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=苹果 href="http://www.3nsc.com/goods.php?id=682" target=_blank><IMG 
+	  alt=苹果 src="themes/green/test_img/pg.jpg" width=65 height=65><STRONG>苹果</STRONG></A> 
+	  </LI>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=甘蔗 href="http://www.3nsc.com/goods.php?id=890" target=_blank><IMG 
+	  alt=甘蔗 src="themes/green/test_img/gz.jpg" width=65 height=65><STRONG>甘蔗</STRONG></A> 
+	  </LI>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=奇异果 href="http://www.3nsc.com/goods.php?id=752" target=_blank><IMG 
+	  alt=奇异果 src="themes/green/test_img/mht.jpg" width=65 
+	  height=65><STRONG>奇异果</STRONG></A> </LI>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=香蕉 href="http://www.3nsc.com/goods.php?id=676" target=_blank><IMG 
+	  alt=香蕉 src="themes/green/test_img/xj.jpg" width=65 height=65><STRONG>香蕉</STRONG></A> 
+	  </LI></UL></DIV></DIV>
+	<DIV style="WIDTH: 198px; DISPLAY: none; HEIGHT: 195px" id=com3_2>
+	<UL class=list>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=鲈鱼 href="http://www.3nsc.com/goods.php?id=359" target=_blank><IMG 
+	  alt=鲈鱼 src="themes/green/test_img/ly.jpg" width=65 height=65><STRONG>鲈鱼</STRONG></A> 
+	  </LI>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=牛肉 href="http://www.3nsc.com/goods.php?id=279" target=_blank><IMG 
+	  alt=牛肉 src="themes/green/test_img/nr.jpg" width=65 height=65><STRONG>牛肉</STRONG></A> 
+	  </LI>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=鲫鱼 href="http://www.3nsc.com/goods.php?id=348" target=_blank><IMG 
+	  alt=鲫鱼 src="themes/green/test_img/jy.jpg" width=65 height=65><STRONG>鲫鱼</STRONG></A> 
+	  </LI>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=鹧鸪蛋 href="http://www.3nsc.com/goods.php?id=648" target=_blank><IMG 
+	  alt=鹧鸪蛋 src="themes/green/test_img/zgd.jpg" width=65 
+	  height=65><STRONG>鹧鸪蛋</STRONG></A> </LI></UL></DIV>
+	<DIV style="WIDTH: 198px; DISPLAY: none; HEIGHT: 195px" id=com3_3>
+	<UL class=list>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=韭菜 href="http://www.3nsc.com/goods.php?id=187" target=_blank><IMG 
+	  alt=韭菜 src="themes/green/test_img/jc.jpg" width=65 height=65><STRONG>韭菜</STRONG></A> 
+	  </LI>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=洋葱 href="http://www.3nsc.com/goods.php?id=118" target=_blank><IMG 
+	  alt=洋葱 src="themes/green/test_img/yc.jpg" width=65 height=65><STRONG>洋葱</STRONG></A> 
+	  </LI>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=彩椒 href="http://www.3nsc.com/goods.php?id=62" target=_blank><IMG 
+	  alt=彩椒 src="themes/green/test_img/cj.jpg" width=65 height=65><STRONG>彩椒</STRONG></A> 
+	  </LI>
+	  <LI 
+	  style="WIDTH: 65px; FLOAT: left; HEIGHT: 93px; MARGIN-LEFT: 15px; MARGIN-RIGHT: 15px"><A 
+	  title=干木耳 href="http://www.3nsc.com/goods.php?id=481" target=_blank><IMG 
+	  alt=干木耳 src="themes/green/test_img/gmr.jpg" width=65 
+	  height=65><STRONG>干木耳</STRONG></A> 
+	</LI></UL></DIV></DIV></DIV></DIV></DIV></DIV></DIV>
+</DIV>
+</DIV>
+<!-- END 特价 推荐 热卖 新品 -->
+
+
+
+<DIV class="block clearfix">
+<DIV id=banner980_1 class="banner980 pt10 in_p980">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=14&amp;uri=http%3A%2F%2Fe.weibo.com%2F2215264224" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1349851308917334025.jpg" 
+      width=1200 height=62></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV id=channel_1 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=399" 
+target=_blank>新鲜蔬菜</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=18&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D113" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1348815389161360378.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><SPAN id=more><A 
+href="http://www.3nsc.com/category.php?id=399" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=43"><IMG 
+alt=西红柿/500g src="themes/green/test_img/43_thumb_G_1332321918639.jpg"></A></DIV>
+<DIV class=producename><A title=西红柿/500g 
+href="http://www.3nsc.com/goods.php?id=43">西红柿/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥2.98元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=20"><IMG 
+alt=上海青/500g src="themes/green/test_img/20_thumb_G_1332147307189.jpg"></A></DIV>
+<DIV class=producename><A title=上海青/500g 
+href="http://www.3nsc.com/goods.php?id=20">上海青/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥2.58元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=18"><IMG 
+alt=蒜苗/500g src="themes/green/test_img/18_thumb_G_1332143758185.jpg"></A></DIV>
+<DIV class=producename><A title=蒜苗/500g 
+href="http://www.3nsc.com/goods.php?id=18">蒜苗/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥3.98元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=71"><IMG 
+alt=小南瓜/500g src="themes/green/test_img/71_thumb_G_1343804986274.jpg"></A></DIV>
+<DIV class=producename><A title=小南瓜/500g 
+href="http://www.3nsc.com/goods.php?id=71">小南瓜/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥3.98元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=136"><IMG 
+alt=金针菇/500g src="themes/green/test_img/136_thumb_G_1332222424179.jpg"></A></DIV>
+<DIV class=producename><A title=金针菇/500g 
+href="http://www.3nsc.com/goods.php?id=136">金针菇/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥6.88元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=酥鲫鱼 
+href="http://www.3nsc.com/article.php?id=345">酥鲫鱼</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=下入韭菜爆炒 
+href="http://www.3nsc.com/article.php?id=285">下入韭菜爆炒</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=外婆菜炒豆角 
+href="http://www.3nsc.com/article.php?id=284">外婆菜炒豆角</A> </DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=19&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D80" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1342833793347714834.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=20&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D33" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1342833688164649600.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=channel_2 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=400" 
+target=_blank>精品水果</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=21&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D862" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1349751656522138631.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><SPAN id=more><A 
+href="http://www.3nsc.com/category.php?id=400" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1258"><IMG 
+alt=红心猕猴桃/个 src="themes/green/test_img/1258_thumb_G_1347242259692.jpg"></A></DIV>
+<DIV class=producename><A title=红心猕猴桃/个 
+href="http://www.3nsc.com/goods.php?id=1258">红心猕猴桃/个</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥5.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1243"><IMG 
+alt=脆柿子 src="themes/green/test_img/1243_thumb_G_1346642698624.jpg"></A></DIV>
+<DIV class=producename><A title=脆柿子 
+href="http://www.3nsc.com/goods.php?id=1243">脆柿子</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥4.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1240"><IMG 
+alt=水晶苹果/斤 src="themes/green/test_img/1240_thumb_G_1346562197754.jpg"></A></DIV>
+<DIV class=producename><A title=水晶苹果/斤 
+href="http://www.3nsc.com/goods.php?id=1240">水晶苹果/斤</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥5.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=866"><IMG 
+alt=冰糖心苹果（大）/500g src="themes/green/test_img/866_thumb_G_1333189309531.jpg"></A></DIV>
+<DIV class=producename><A title=冰糖心苹果（大）/500g 
+href="http://www.3nsc.com/goods.php?id=866">冰糖心苹果（大）/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥7.80元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=862"><IMG 
+alt=正宗烟台红富士（特级）/500g 
+src="themes/green/test_img/862_thumb_G_1333187799108.jpg"></A></DIV>
+<DIV class=producename><A title=正宗烟台红富士（特级）/500g 
+href="http://www.3nsc.com/goods.php?id=862">正宗烟台红富士（特级）/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥8.80元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=入秋适宜吃什么水果 
+href="http://www.3nsc.com/article.php?id=344">入秋适宜吃什么水果</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=入夏适宜吃什么水果 
+href="http://www.3nsc.com/article.php?id=289">入夏适宜吃什么水果</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A 
+title="只需两天 苹果牛奶瘦腹法 " href="http://www.3nsc.com/article.php?id=288">只需两天 
+苹果牛奶瘦腹法</A> </DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=22&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D733" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1342834267082011341.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=23&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D726" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1342834209226540858.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=channel_0 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=398" 
+target=_blank>隆平有机</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=15&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D1117" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1348817003097554790.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><A href="http://www.3nsc.com/category.php?id=398" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1267"><IMG 
+alt=蜜柚 src="themes/green/test_img/1267_thumb_G_1348733877663.jpg"></A></DIV>
+<DIV class=producename><A title=蜜柚 
+href="http://www.3nsc.com/goods.php?id=1267">蜜柚</A></DIV>
+<DIV class=newprice2>促销价：<SPAN class=red9>￥3.58元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1179"><IMG 
+alt=有机苦瓜 src="themes/green/test_img/1179_thumb_G_1340893653098.jpg"></A></DIV>
+<DIV class=producename><A title=有机苦瓜 
+href="http://www.3nsc.com/goods.php?id=1179">有机苦瓜</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥8.40元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1177"><IMG 
+alt=有机栗本南瓜 src="themes/green/test_img/1177_thumb_G_1340893701793.jpg"></A></DIV>
+<DIV class=producename><A title=有机栗本南瓜 
+href="http://www.3nsc.com/goods.php?id=1177">有机栗本南瓜</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥6.90元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1176"><IMG 
+alt=有机紫苏 src="themes/green/test_img/1176_thumb_G_1340893720977.jpg"></A></DIV>
+<DIV class=producename><A title=有机紫苏 
+href="http://www.3nsc.com/goods.php?id=1176">有机紫苏</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥10.40元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1175"><IMG 
+alt=有机尖椒 src="themes/green/test_img/1175_thumb_G_1340893733680.jpg"></A></DIV>
+<DIV class=producename><A title=有机尖椒 
+href="http://www.3nsc.com/goods.php?id=1175">有机尖椒</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥11.40元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=湘村有机蔬菜 
+href="http://www.3nsc.com/article.php?id=281">湘村有机蔬菜</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=有机蔬菜进买菜网 
+href="http://www.3nsc.com/article.php?id=280">有机蔬菜进买菜网</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=凉拌苦菊 
+href="http://www.3nsc.com/article.php?id=278">凉拌苦菊</A> </DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=16&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D217" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1342834864267179374.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=17&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D185" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1342834806574620846.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=banner980_2 class="banner980 pt10 in_p980" index="2">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=24&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1349851243378617064.jpg" 
+      width=1200 height=62></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=channel_3 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=401" 
+target=_blank>营养肉禽</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=25&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D421" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1349318121197560688.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><SPAN id=more><A 
+href="http://www.3nsc.com/category.php?id=401" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=238"><IMG 
+alt=去皮五花肉/500g src="themes/green/test_img/238_thumb_G_1343806801641.jpg"></A></DIV>
+<DIV class=producename><A title=去皮五花肉/500g 
+href="http://www.3nsc.com/goods.php?id=238">去皮五花肉/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥13.58元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=248"><IMG 
+alt=子排/500g src="themes/green/test_img/248_thumb_G_1332920790574.jpg"></A></DIV>
+<DIV class=producename><A title=子排/500g 
+href="http://www.3nsc.com/goods.php?id=248">子排/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥22.80元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=313"><IMG 
+alt=三黄鸡（杀好）/500g src="themes/green/test_img/313_thumb_G_1332927236352.jpg"></A></DIV>
+<DIV class=producename><A title=三黄鸡（杀好）/500g 
+href="http://www.3nsc.com/goods.php?id=313">三黄鸡（杀好）/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥11.98元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=236"><IMG 
+alt=去皮后腿肉/500g src="themes/green/test_img/236_thumb_G_1343807457090.jpg"></A></DIV>
+<DIV class=producename><A title=去皮后腿肉/500g 
+href="http://www.3nsc.com/goods.php?id=236">去皮后腿肉/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥12.98元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=304"><IMG 
+alt=水鸭（杀好）/500g src="themes/green/test_img/304_thumb_G_1346302521717.jpg"></A></DIV>
+<DIV class=producename><A title=水鸭（杀好）/500g 
+href="http://www.3nsc.com/goods.php?id=304">水鸭（杀好）/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥22.80元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=肉禽食物的食用禁忌 
+href="http://www.3nsc.com/article.php?id=291">肉禽食物的食用禁忌</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A 
+title="适宜准妈妈食用的肉禽有哪些 " 
+href="http://www.3nsc.com/article.php?id=290">适宜准妈妈食用的肉禽有哪些</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=倒春寒时炖上一锅羊肉 
+href="http://www.3nsc.com/article.php?id=286">倒春寒时炖上一锅羊肉</A> </DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=26&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D251" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1335320101357872706.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=27&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D303" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1335320154183042869.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=channel_5 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=403" 
+target=_blank>水产海鲜</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=31&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D356" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1349753706919145052.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><SPAN id=more><A 
+href="http://www.3nsc.com/category.php?id=403" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=348"><IMG 
+alt=鲫鱼（杀好）/500g src="themes/green/test_img/348_thumb_G_1346302646468.jpg"></A></DIV>
+<DIV class=producename><A title=鲫鱼（杀好）/500g 
+href="http://www.3nsc.com/goods.php?id=348">鲫鱼（杀好）/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥13.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=352"><IMG 
+alt=雄鱼（杀好）/500g src="themes/green/test_img/352_thumb_G_1333003261477.jpg"></A></DIV>
+<DIV class=producename><A title=雄鱼（杀好）/500g 
+href="http://www.3nsc.com/goods.php?id=352">雄鱼（杀好）/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥9.88元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=351"><IMG 
+alt=草鱼/500g（杀好净重） src="themes/green/test_img/351_thumb_G_1346303957627.jpg"></A></DIV>
+<DIV class=producename><A title=草鱼/500g（杀好净重） 
+href="http://www.3nsc.com/goods.php?id=351">草鱼/500g（杀好净重）</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥11.88元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=356"><IMG 
+alt=黄鸭叫（杀好）/500g src="themes/green/test_img/356_thumb_G_1346304166447.jpg"></A></DIV>
+<DIV class=producename><A title=黄鸭叫（杀好）/500g 
+href="http://www.3nsc.com/goods.php?id=356">黄鸭叫（杀好）/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥19.88元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=369"><IMG 
+alt=牛蛙（杀好）/500g src="themes/green/test_img/369_thumb_G_1346304379948.jpg"></A></DIV>
+<DIV class=producename><A title=牛蛙（杀好）/500g 
+href="http://www.3nsc.com/goods.php?id=369">牛蛙（杀好）/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥27.80元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=日常饮食最易犯的5大错误 
+href="http://www.3nsc.com/article.php?id=298">日常饮食最易犯的5大错误</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=八个海鲜食用禁忌 
+href="http://www.3nsc.com/article.php?id=296">八个海鲜食用禁忌</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A 
+title="水产品怎样安全食用？ - 什么可以吃 " 
+href="http://www.3nsc.com/article.php?id=295">水产品怎样安全食用？ - 什么可...</A> 
+</DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=32&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D368" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1335321826490193106.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=33&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D349" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1335321627366099473.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=channel_4 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=402" 
+target=_blank>禽蛋奶品</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=28&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D472" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1341205670368238337.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><SPAN id=more><A 
+href="http://www.3nsc.com/category.php?id=402" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=922"><IMG 
+alt=卡士鲜酪乳玉米味100g*3/条 
+src="themes/green/test_img/922_thumb_G_1333432757939.jpg"></A></DIV>
+<DIV class=producename><A title=卡士鲜酪乳玉米味100g*3/条 
+href="http://www.3nsc.com/goods.php?id=922">卡士鲜酪乳玉米味100g*3/条</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥13.80元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=644"><IMG 
+alt=鲜鸡蛋/500g src="themes/green/test_img/644_thumb_G_1332930513603.jpg"></A></DIV>
+<DIV class=producename><A title=鲜鸡蛋/500g 
+href="http://www.3nsc.com/goods.php?id=644">鲜鸡蛋/500g</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥5.50元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=918"><IMG 
+alt=卡士酸牛奶红枣味200ml*3/条 
+src="themes/green/test_img/918_thumb_G_1333433337066.jpg"></A></DIV>
+<DIV class=producename><A title=卡士酸牛奶红枣味200ml*3/条 
+href="http://www.3nsc.com/goods.php?id=918">卡士酸牛奶红枣味200ml*3/...</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥17.50元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=935"><IMG 
+alt=伊利纯牛奶250ml*16/件 src="themes/green/test_img/935_thumb_G_1333512044046.jpg"></A></DIV>
+<DIV class=producename><A title=伊利纯牛奶250ml*16/件 
+href="http://www.3nsc.com/goods.php?id=935">伊利纯牛奶250ml*16/件</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥38.80元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=915"><IMG 
+alt=卡士活均奶720ml/瓶 src="themes/green/test_img/915_thumb_G_1333434288612.jpg"></A></DIV>
+<DIV class=producename><A title=卡士活均奶720ml/瓶 
+href="http://www.3nsc.com/goods.php?id=915">卡士活均奶720ml/瓶</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥18.80元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=这六类患者不适宜喝牛奶 
+href="http://www.3nsc.com/article.php?id=297">这六类患者不适宜喝牛奶</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=五种酸奶大对比，卡士最好 
+href="http://www.3nsc.com/article.php?id=294">五种酸奶大对比，卡士最好</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=牛奶食用要注意的细节 
+href="http://www.3nsc.com/article.php?id=293">牛奶食用要注意的细节</A> </DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=29&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333213908545878178.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=30&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333213885864853811.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=banner980_2 class="banner980 pt10 in_p980" index="2">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=34&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333273564841139438.gif" 
+      width=1200 height=62></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=channel_6 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=404" 
+target=_blank>粮油副食</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=35&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fsearch.php%3Fencode%3DYToyOntzOjg6ImtleXdvcmRzIjtzOjY6IumHkea1qSI7czoxODoic2VhcmNoX2VuY29kZV90aW1lIjtpOjEzNDE1NTc2NzU7fQ%3D%3D" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1341557756374281576.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><SPAN id=more><A 
+href="http://www.3nsc.com/category.php?id=404" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=835"><IMG 
+alt=北大荒珍珠米10kg/袋 src="themes/green/test_img/835_thumb_G_1333122683750.jpg"></A></DIV>
+<DIV class=producename><A title=北大荒珍珠米10kg/袋 
+href="http://www.3nsc.com/goods.php?id=835">北大荒珍珠米10kg/袋</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥62.80元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=441"><IMG 
+alt=红花红灿稻花香米25kg/袋 src="themes/green/test_img/441_thumb_G_1333106548319.jpg"></A></DIV>
+<DIV class=producename><A title=红花红灿稻花香米25kg/袋 
+href="http://www.3nsc.com/goods.php?id=441">红花红灿稻花香米25kg/袋</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥117.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1246"><IMG 
+alt=甜酒 src="themes/green/test_img/1246_thumb_G_1346643599585.jpg"></A></DIV>
+<DIV class=producename><A title=甜酒 
+href="http://www.3nsc.com/goods.php?id=1246">甜酒</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥10.50元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1245"><IMG 
+alt=香丝苗米24KG src="themes/green/test_img/1245_thumb_G_1346643422406.jpg"></A></DIV>
+<DIV class=producename><A title=香丝苗米24KG 
+href="http://www.3nsc.com/goods.php?id=1245">香丝苗米24KG</A></DIV>
+<DIV class=newprice2>促销价：<SPAN class=red9>￥109.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1244"><IMG 
+alt=泰国香米15KG src="themes/green/test_img/1244_thumb_G_1346643351700.jpg"></A></DIV>
+<DIV class=producename><A title=泰国香米15KG 
+href="http://www.3nsc.com/goods.php?id=1244">泰国香米15KG</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥78.00元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title="炒菜时各种调料的作用 ！" 
+href="http://www.3nsc.com/article.php?id=301">炒菜时各种调料的作用 ！</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A 
+title="怎样评价大米的食用品质？ " 
+href="http://www.3nsc.com/article.php?id=300">怎样评价大米的食用品质？</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=金龙鱼—金龙鱼的大家庭 
+href="http://www.3nsc.com/article.php?id=299">金龙鱼—金龙鱼的大家庭</A> </DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=36&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333265417172668340.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=37&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333265394402413754.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=channel_8 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=406" 
+target=_blank>酒水饮料</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=41&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D778" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1349757025591750774.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><SPAN id=more><A 
+href="http://www.3nsc.com/category.php?id=406" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=786"><IMG 
+alt=娃哈哈营养快线原味500ml/瓶 
+src="themes/green/test_img/786_thumb_G_1333089259538.jpg"></A></DIV>
+<DIV class=producename><A title=娃哈哈营养快线原味500ml/瓶 
+href="http://www.3nsc.com/goods.php?id=786">娃哈哈营养快线原味500ml/瓶</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥4.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=781"><IMG 
+alt=阿萨姆奶茶500ml/瓶 src="themes/green/test_img/781_thumb_G_1333089125170.jpg"></A></DIV>
+<DIV class=producename><A title=阿萨姆奶茶500ml/瓶 
+href="http://www.3nsc.com/goods.php?id=781">阿萨姆奶茶500ml/瓶</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥4.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=780"><IMG 
+alt=雪碧330ml/厅 src="themes/green/test_img/780_thumb_G_1333089062917.jpg"></A></DIV>
+<DIV class=producename><A title=雪碧330ml/厅 
+href="http://www.3nsc.com/goods.php?id=780">雪碧330ml/厅</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥2.50元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=779"><IMG 
+alt=王老吉凉茶310ml/厅 src="themes/green/test_img/779_thumb_G_1333088901768.jpg"></A></DIV>
+<DIV class=producename><A title=王老吉凉茶310ml/厅 
+href="http://www.3nsc.com/goods.php?id=779">王老吉凉茶310ml/厅</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥4.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=778"><IMG 
+alt=红牛维生素功能饮料250ml/厅 
+src="themes/green/test_img/778_thumb_G_1333088855522.jpg"></A></DIV>
+<DIV class=producename><A title=红牛维生素功能饮料250ml/厅 
+href="http://www.3nsc.com/goods.php?id=778">红牛维生素功能饮料250ml/厅</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥6.00元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=营养早餐饮品搭配大比拼 
+href="http://www.3nsc.com/article.php?id=304">营养早餐饮品搭配大比拼</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=现在饮料喝什么好呢?? 
+href="http://www.3nsc.com/article.php?id=303">现在饮料喝什么好呢??</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=果汁喝多会致贫血损智商 
+href="http://www.3nsc.com/article.php?id=302">果汁喝多会致贫血损智商</A> </DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=42&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333191188057079622.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=43&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333191207923245161.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=banner980_2 class="banner980 pt10 in_p980" index="2">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=44&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1336525756924456546.jpg" 
+      width=1200 height=62></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=channel_9 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=443" 
+target=_blank>特色原料</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A 
+      href="http://www.3nsc.com/affiche.php?ad_id=45&amp;uri=http%3A%2F%2Fwww.3nsc.com%2Fgoods.php%3Fid%3D516" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1336353238378586732.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><SPAN id=more><A 
+href="http://www.3nsc.com/category.php?id=443" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=1218"><IMG 
+alt=一品江南蒸肉粉/包 src="themes/green/test_img/1218_thumb_G_1341474725587.jpg"></A></DIV>
+<DIV class=producename><A title=一品江南蒸肉粉/包 
+href="http://www.3nsc.com/goods.php?id=1218">一品江南蒸肉粉/包</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥2.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=852"><IMG 
+alt=长康纯芝麻油200ml/瓶 src="themes/green/test_img/852_thumb_G_1333167698447.jpg"></A></DIV>
+<DIV class=producename><A title=长康纯芝麻油200ml/瓶 
+href="http://www.3nsc.com/goods.php?id=852">长康纯芝麻油200ml/瓶</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥10.80元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=851"><IMG 
+alt=家乐鸡精900g/包 src="themes/green/test_img/851_thumb_G_1333168136205.jpg"></A></DIV>
+<DIV class=producename><A title=家乐鸡精900g/包 
+href="http://www.3nsc.com/goods.php?id=851">家乐鸡精900g/包</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥25.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=849"><IMG 
+alt=郫县豆瓣酱250g/包 src="themes/green/test_img/849_thumb_G_1333123215265.jpg"></A></DIV>
+<DIV class=producename><A title=郫县豆瓣酱250g/包 
+href="http://www.3nsc.com/goods.php?id=849">郫县豆瓣酱250g/包</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥2.20元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=848"><IMG 
+alt=加加味精125g/包 src="themes/green/test_img/848_thumb_G_1333123190830.jpg"></A></DIV>
+<DIV class=producename><A title=加加味精125g/包 
+href="http://www.3nsc.com/goods.php?id=848">加加味精125g/包</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥5.80元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=买菜网星沙苹果社区店隆重开业 
+href="http://www.3nsc.com/article.php?id=341">买菜网星沙苹果社区店隆重开业</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=买菜网雅致名园店隆重开业 
+href="http://www.3nsc.com/article.php?id=339">买菜网雅致名园店隆重开业</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=买菜网山水豪园店隆重开业 
+href="http://www.3nsc.com/article.php?id=320">买菜网山水豪园店隆重开业</A> </DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=46&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333270432786186210.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=47&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333270404034185269.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=channel_10 class=channels>
+<DIV class=channelsleft>
+<DIV class=title>
+<H1 class=foodtitle><A href="http://www.3nsc.com/category.php?id=408" 
+target=_blank>礼品卡券</A></H1></DIV>
+<DIV class="channelspic in_p203">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=48&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1346304951062085475.jpg" 
+      width=203 height=203></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV class=channelsright>
+<DIV class=morelist><SPAN id=more><A 
+href="http://www.3nsc.com/category.php?id=408" 
+target=_blank>更多&gt;&gt;</A></SPAN></DIV>
+<DIV class=channelslist>
+<DIV class=channelslistleft>
+<DIV class=produce_box>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=789"><IMG 
+alt=1000元电子储值卡 src="themes/green/test_img/789_thumb_G_1333090121523.jpg"></A></DIV>
+<DIV class=producename><A title=1000元电子储值卡 
+href="http://www.3nsc.com/goods.php?id=789">1000元电子储值卡</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥1000.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=788"><IMG 
+alt=500元电子储值卡 src="themes/green/test_img/788_thumb_G_1333090155586.jpg"></A></DIV>
+<DIV class=producename><A title=500元电子储值卡 
+href="http://www.3nsc.com/goods.php?id=788">500元电子储值卡</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥500.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=787"><IMG 
+alt=200元电子储值卡 src="themes/green/test_img/787_thumb_G_1333090171427.jpg"></A></DIV>
+<DIV class=producename><A title=200元电子储值卡 
+href="http://www.3nsc.com/goods.php?id=787">200元电子储值卡</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥200.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=791"><IMG 
+alt=198实体商品提货券 src="themes/green/test_img/791_thumb_G_1333089993071.jpg"></A></DIV>
+<DIV class=producename><A title=198实体商品提货券 
+href="http://www.3nsc.com/goods.php?id=791">198实体商品提货券</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥198.00元</SPAN> </DIV></DIV>
+<DIV class=produce>
+<DIV class=producepic><A href="http://www.3nsc.com/goods.php?id=793"><IMG 
+alt=688元实体提货券 src="themes/green/test_img/793_thumb_G_1333089850207.jpg"></A></DIV>
+<DIV class=producename><A title=688元实体提货券 
+href="http://www.3nsc.com/goods.php?id=793">688元实体提货券</A></DIV>
+<DIV class=newprice2>本店售价：<SPAN class=red9>￥688.00元</SPAN> 
+</DIV></DIV></DIV></DIV>
+<DIV class=channelslistright>
+<DIV class=bannertop_text>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=搞定情人还缺什么?惊喜！ 
+href="http://www.3nsc.com/article.php?id=307">搞定情人还缺什么?惊喜！</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=偷偷告诉大家买菜优惠秘诀！ 
+href="http://www.3nsc.com/article.php?id=306">偷偷告诉大家买菜优惠秘诀！</A> </DIV>
+<DIV class="text color_gary"><SPAN class=pink>[关注]</SPAN><A title=礼品卡过节送亲友！ 
+href="http://www.3nsc.com/article.php?id=305">礼品卡过节送亲友！</A> </DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=49&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333214222398563589.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV>
+<DIV class="bannerpic in_p63">
+<TABLE cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD><A href="http://www.3nsc.com/affiche.php?ad_id=50&amp;uri=" 
+      target=_blank><IMG border=0 src="themes/green/test_img/1333272003277312411.jpg" 
+      width=208 height=63></A></TD></TR></TBODY></TABLE>
+<DIV class=blank></DIV></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class=blank></DIV>
+<DIV class=footertop>
+<DIV class=footerlink>
+<DIV>消费资讯：<A href="http://www.3nsc.com/quotation.php" 
+target=_blank>报价单</A>&nbsp;|&nbsp;<A 
+href="http://www.3nsc.com/article.php?id=317" 
+target=_blank>企业采购</A>&nbsp;|&nbsp;<A 
+href="http://www.3nsc.com/article.php?id=316" 
+target=_blank>买菜网招商</A>&nbsp;|&nbsp;<A 
+href="http://www.3nsc.com/article.php?id=273" 
+target=_blank>商务水果配送</A>&nbsp;|&nbsp;</DIV></DIV>
+<DIV class=quicklink>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=新手上路 
+href="http://www.3nsc.com/article_cat.php?id=4">新手上路</A></DIV>
+<UL>
+  <LI><A title=售后服务 href="http://www.3nsc.com/article.php?id=34">售后服务</A> 
+  <LI><A title=购物流程 href="http://www.3nsc.com/article.php?id=35">购物流程</A> 
+  <LI><A title=新用户注册 href="http://www.3nsc.com/article.php?id=36">新用户注册</A> 
+  </LI></UL></DIV>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=生活常识 
+href="http://www.3nsc.com/article_cat.php?id=11">生活常识</A></DIV>
+<UL>
+  <LI><A title=夏季适宜 href="http://www.3nsc.com/article.php?id=46">夏季适宜</A> 
+  <LI><A title=推荐菜谱 href="http://www.3nsc.com/article.php?id=51">推荐菜谱</A> 
+  <LI><A title=配菜禁忌 href="http://www.3nsc.com/article.php?id=52">配菜禁忌</A> 
+  </LI></UL></DIV>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=配送与支付 
+href="http://www.3nsc.com/article_cat.php?id=5">配送与支付</A></DIV>
+<UL>
+  <LI><A title=支付方式 href="http://www.3nsc.com/article.php?id=37">支付方式</A> 
+  <LI><A title=订单说明 href="http://www.3nsc.com/article.php?id=39">订单说明</A> 
+  <LI><A title=配送区域 href="http://www.3nsc.com/article.php?id=58">配送区域</A> 
+  </LI></UL></DIV>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=会员中心 
+href="http://www.3nsc.com/article_cat.php?id=10">会员中心</A></DIV>
+<UL>
+  <LI><A title=会员规则 href="http://www.3nsc.com/article.php?id=346">会员规则</A> 
+  <LI><A title=买菜网积分规则 
+  href="http://www.3nsc.com/article.php?id=347">买菜网积分规则</A> 
+  <LI><A title=买菜网积分手册 
+  href="http://www.3nsc.com/article.php?id=348">买菜网积分手册</A> </LI></UL></DIV>
+<DIV class=quicklinkbox>
+<DIV class=quicklinkboxtitle><A title=服务保证 
+href="http://www.3nsc.com/article_cat.php?id=8">服务保证</A></DIV>
+<UL>
+  <LI><A title=服务优势 href="http://www.3nsc.com/article.php?id=40">服务优势</A> 
+  <LI><A title=公司宣言 href="http://www.3nsc.com/article.php?id=41">公司宣言</A> 
+  <LI><A title=质量保证 href="http://www.3nsc.com/article.php?id=44">质量保证</A> 
+  </LI></UL></DIV></DIV></DIV>
+<DIV class=blank></DIV>
+<DIV id=bottomNav class=box>
+<DIV class=box_1>
+<DIV class="links clearfix">[<A title=网上订餐 href="http://www.gafan.cn/" 
+target=_blank>网上订餐</A>] [<A title=美食速递网 href="http://www.cookex.cn/" 
+target=_blank>美食速递网</A>] [<A title=买菜网 href="http://www.3nsc.com/" 
+target=_blank>买菜网</A>] [<A title=广州特产 href="http://www.chby580.com/" 
+target=_blank>广州特产</A>] [<A title=广州网站建设 href="http://www.imjiely.com/" 
+target=_blank>广州网站建设</A>] [<A title=家菜菜谱大全 href="http://www.meishilife.com/" 
+target=_blank>家菜菜谱大全</A>] [<A title=美食网 href="http://91chihe.shangdu.com/" 
+target=_blank>美食网</A>] [<A title=中奢网美食 href="http://taste.chinaluxus.com/" 
+target=_blank>中奢网美食</A>] [<A title=衡阳论坛 href="http://www.d0734.com/" 
+target=_blank>衡阳论坛</A>] [<A title=特色湘菜网 href="http://www.tesexiangcai.com/" 
+target=_blank>特色湘菜网</A>] [<A title=厨师论坛 href="http://www.hnc360.com/" 
+target=_blank>厨师论坛</A>] [<A title=广州网上超市 href="http://www.xt365.cc/" 
+target=_blank>广州网上超市</A>] [<A title=富强办公网 href="http://www.fqoffice.com/" 
+target=_blank>富强办公网</A>] [<A title=安利生活馆 href="http://www.usaamway.com/" 
+target=_blank>安利生活馆</A>] [<A title=烟村美食 href="http://www.ycms.com.cn/" 
+target=_blank>烟村美食</A>] [<A title=流行女装 href="http://www.yisland.net/" 
+target=_blank>流行女装</A>] [<A title=成都阳澄湖大闸蟹 href="http://www.laoyangchenghu.com/" 
+target=_blank>成都阳澄湖大闸蟹</A>] [<A title=菜到家 href="http://www.caidaojia.com/" 
+target=_blank>菜到家</A>] [<A title=浙江食品 href="http://www.zhejiangfood.net/" 
+target=_blank>浙江食品</A>] </DIV></DIV></DIV>
+<DIV class=blank></DIV>
+<DIV align=center><IMG src="themes/green/test_img/footer_pic.gif"> </DIV>
+<DIV id=footer>
+<DIV class=text>© 2005-2012 三农市场官方网站 版权所有，并保留所有权利。<BR>湖南广州雨花区马王堆人民路口西子花苑9栋一单元201 
+Tel: 0731-88852000 <BR>ICP备案证书号:<A href="http://www.miibeian.gov.cn/" 
+target=_blank>湘ICP备11005092</A>&nbsp;&nbsp;
+<SCRIPT language=JavaScript src="themes/green/js/stat.js"></SCRIPT>
+<BR>共执行 592 个查询，用时 0.950784 秒，在线 82 人，Gzip 已禁用，占用内存 4.168 MB<IMG 
+style="WIDTH: 0px; HEIGHT: 0px" alt="" src="themes/green/test_img/cron.htm"> 
+<DIV align=center><IFRAME height=24 marginHeight=0 border=0 
+src="themes/green/test_img/followbutton.htm" frameBorder=0 width=280 allowTransparency 
+marginWidth=0 scrolling=no></IFRAME></DIV>
+<DIV class=blank></DIV></DIV></DIV>
+<DIV id=footerbanner2LazyLoad class=footerbanner2>
+<UL>
+  <LI><A href="http://www.3nsc.com/#" target=_blank><IMG 
+  src="themes/green/test_img/footer_pic_09.gif"></A> 
+  <LI><A href="http://www.3nsc.com/#" target=_blank><IMG 
+  src="themes/green/test_img/footer_pic_05.gif"></A> 
+  <LI><A href="http://www.3nsc.com/#" target=_blank><IMG 
+  src="themes/green/test_img/footer_pic_06.gif"></A> 
+  <LI><A href="http://www.3nsc.com/#" target=_blank><IMG 
+  src="themes/green/test_img/footer_pic_07.gif"></A> </LI></UL></DIV>
+<SCRIPT type=text/javascript src="themes/green/js/my_lefttime.js"></SCRIPT>
+</BODY></HTML>

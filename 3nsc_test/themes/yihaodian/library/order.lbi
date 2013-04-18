@@ -1,0 +1,416 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<?php
+$_CFG = load_config();
+require_once(ROOT_PATH . 'includes/lib_order.php');
+require_once(ROOT_PATH . 'languages/' . $_CFG['lang'] . '/common.php');
+require_once(ROOT_PATH . 'languages/' .$_CFG['lang']. '/user.php');
+require_once(ROOT_PATH . 'languages/' .$_CFG['lang']. '/shopping_flow.php');
+$_LANG['require_field'] = '必填';
+$this->assign('lang',             $_LANG);
+$this->assign('country_list',       get_regions());
+$this->assign('shop_country',       $_CFG['shop_country']);
+$this->assign('shop_province_list', get_regions(1, $_CFG['shop_country']));
+$order = flow_order_info();
+if ($order['shipping_id'] == 0)
+{
+		$cod        = true;
+		$cod_fee    = 0;
+}
+else
+{
+		$shipping = shipping_info($order['shipping_id']);
+		$cod = $shipping['support_cod'];
+
+		if ($cod)
+		{
+				/* 如果是团购，且保证金大于0，不能使用货到付款 */
+				if ($flow_type == CART_GROUP_BUY_GOODS)
+				{
+						$group_buy_id = $_SESSION['extension_id'];
+						if ($group_buy_id <= 0)
+						{
+								show_message('error group_buy_id');
+						}
+						$group_buy = group_buy_info($group_buy_id);
+						if (empty($group_buy))
+						{
+								show_message('group buy not exists: ' . $group_buy_id);
+						}
+
+						if ($group_buy['deposit'] > 0)
+						{
+								$cod = false;
+								$cod_fee = 0;
+
+								/* 赋值保证金 */
+								$smarty->assign('gb_deposit', $group_buy['deposit']);
+						}
+				}
+
+				if ($cod)
+				{
+						$shipping_area_info = shipping_area_info($order['shipping_id'], $region);
+						$cod_fee            = $shipping_area_info['pay_fee'];
+				}
+		}
+		else
+		{
+				$cod_fee = 0;
+		}
+}
+
+// 给货到付款的手续费加<span id>，以便改变配送的时候动态显示
+$payment_list = available_payment_list(1, $cod_fee);
+if(isset($payment_list))
+{
+		foreach ($payment_list as $key => $payment)
+		{
+				if ($payment['is_cod'] == '1')
+				{
+						$payment_list[$key]['format_pay_fee'] = '<span id="ECS_CODFEE">' . $payment['format_pay_fee'] . '</span>';
+				}
+				/* 如果有易宝神州行支付 如果订单金额大于300 则不显示 */
+				if ($payment['pay_code'] == 'yeepayszx' && $total['amount'] > 300)
+				{
+						unset($payment_list[$key]);
+				}
+				/* 如果有余额支付 */
+				if ($payment['pay_code'] == 'balance')
+				{
+						/* 如果未登录，不显示 */
+						if ($_SESSION['user_id'] == 0)
+						{
+								unset($payment_list[$key]);
+						}
+						else
+						{
+								if ($_SESSION['flow_order']['pay_id'] == $payment['pay_id'])
+								{
+										$this->assign('disable_surplus', 1);
+								}
+						}
+				}
+		}
+}
+$this->assign('payment_list', $payment_list);
+?>
+ 
+<div id="order">
+<div>
+</div>
+{insert_scripts files='utils.js,region.js,transport.js'}
+    <script type="text/javascript">
+      region.isAdmin = false;
+      {foreach from=$lang.flow_js item=item key=key}
+      var {$key} = "{$item}";
+      {/foreach}
+
+      {literal}
+      onload = function() {
+        if (!document.all)
+        {
+          document.forms['ECS_FORMORDER'].reset();
+        }
+      }
+      {/literal}
+    //]]>
+//<![CDATA[
+function checkConsignee(frm)
+{
+  var msg = new Array();
+  var err = false;
+  var paymentSelected = false;
+
+  for (i = 0; i < frm.elements.length; i ++ )
+  {
+    if (frm.elements[i].name == 'payment' && frm.elements[i].checked)
+    {
+      paymentSelected = true;
+    }
+  }
+  if (frm.elements['country'] && frm.elements['country'].value == 0)
+  {
+    msg.push(country_not_null);
+    err = true;
+  }
+
+  if (frm.elements['province'] && frm.elements['province'].value == 0 && frm.elements['province'].length > 1)
+  {
+    err = true;
+    msg.push(province_not_null);
+  }
+
+  if (frm.elements['city'] && frm.elements['city'].value == 0 && frm.elements['city'].length > 1)
+  {
+    err = true;
+    msg.push(city_not_null);
+  }
+
+  if (frm.elements['district'] && frm.elements['district'].length > 1)
+  {
+    if (frm.elements['district'].value == 0)
+    {
+      err = true;
+      msg.push(district_not_null);
+    }
+  }
+
+  if (Utils.isEmpty(frm.elements['consignee'].value))
+  {
+    err = true;
+    msg.push(consignee_not_null);
+  }
+
+  if ( ! Utils.isEmail(frm.elements['email'].value))
+  {
+    err = true;
+    msg.push(invalid_email);
+  }
+
+  if (frm.elements['address'] && Utils.isEmpty(frm.elements['address'].value))
+  {
+    err = true;
+    msg.push(address_not_null);
+  }
+
+  if (frm.elements['zipcode'] && frm.elements['zipcode'].value.length > 0 && (!Utils.isNumber(frm.elements['zipcode'].value)))
+  {
+    err = true;
+    msg.push(zip_not_num);
+  }
+
+  if (Utils.isEmpty(frm.elements['tel'].value))
+  {
+    err = true;
+    msg.push(tele_not_null);
+  }
+  else
+  {
+    if (!Utils.isTel(frm.elements['tel'].value))
+    {
+      err = true;
+      msg.push(tele_invaild);
+    }
+  }
+ 
+  if (frm.elements['mobile'] && frm.elements['mobile'].value.length > 0 && (!Utils.isTel(frm.elements['mobile'].value)))
+  {
+    err = true;
+    msg.push(mobile_invaild);
+  }
+
+  if (!paymentSelected)
+  {
+    msg.push(payment_not_null);
+    err = true;
+  }
+	
+  if (err)
+  {
+    message = msg.join("\n");
+    alert(message);
+  }
+  return ! err;
+}
+    </script>
+		
+<div id="ESC_ORDER" class="goods_mode_box">
+<div class="tel">电话订购 送货上门 400-800-800</div>
+
+<form action="javascript:orderQuick({$goods.goods_id})" method="post" name="ECS_FORMORDER" onsubmit="return checkConsignee(this)" id="ECS_FORMORDER">
+
+<div class="blank"></div>
+  <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" style="margin-top:10px;">
+    <tr>
+      <th>商品名：</th>
+      <td><b class="textStrong">{$goods.goods_name}</b> （货号：{$goods.goods_sn}）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$lang.shop_price}<b class="textStrong">{$goods.shop_price_formated}</b></td>
+    </tr>
+    <tr>
+      <th>{$lang.country_province}：</th>
+      <td ><select name="country" id="selCountries_{$sn}" onChange="region.changed(this, 1, 'selProvinces_{$sn}')" style="border:1px solid #ccc;">
+          <option value="0">{$lang.please_select}{$name_of_region[0]}</option>
+          <!-- {foreach from=$country_list item=country} -->
+          <option value="{$country.region_id}" {if $consignee.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+          <!-- {/foreach} -->
+        </select>
+          <select name="province" id="selProvinces_{$sn}" onChange="region.changed(this, 2, 'selCities_{$sn}')" style="border:1px solid #ccc;">
+            <option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+            <!-- {foreach from=$province_list.$sn item=province} -->
+            <option value="{$province.region_id}" {if $consignee.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+            <!-- {/foreach} -->
+          </select>
+          <select name="city" id="selCities_{$sn}" onChange="region.changed(this, 3, 'selDistricts_{$sn}')" style="border:1px solid #ccc;">
+            <option value="0">{$lang.please_select}{$name_of_region[2]}</option>
+            <!-- {foreach from=$city_list.$sn item=city} -->
+            <option value="{$city.region_id}" {if $consignee.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+            <!-- {/foreach} -->
+          </select>
+          <select name="district"  onChange="selShipping({$goods.goods_id})" id="selDistricts_{$sn}" {if !$district_list.$sn}style="display:none"{/if} style="border:1px solid #ccc;">
+            <option value="0">{$lang.please_select}{$name_of_region[3]}</option>
+            <!-- {foreach from=$district_list.$sn item=district} -->
+            <option value="{$district.region_id}" {if $consignee.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+            <!-- {/foreach} -->
+          </select>
+          <span class="textStrong">*{$lang.require_field}</span> </td>
+    </tr>
+    <tr>
+      <th>选择配送方式：</th>
+      <td ><select name="shipping" id="shipping_{$sn}" style="border:1px solid #ccc;">
+          <option value="0">{$lang.please_select}{$name_of_region[3]}</option>
+          <!-- {foreach from=$shipping_list.$sn item=shipping_list} -->
+          <option value="{$shipping_list.region_id}" {if $consignee.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+          <!-- {/foreach} -->
+        </select>
+          <span class="textStrong">请先选择配送区域</span> </td>
+    </tr>
+    <tr>
+      <th>{$lang.consignee_name}：</th>
+      <td><input name="consignee" type="text" class="inputBg" id="consignee_{$sn}" value="{$consignee.consignee|escape}" />
+          <span class="textStrong">*{$lang.require_field} </span></td>
+    </tr>
+    <tr>
+      <th>数量：</th>
+      <td><input name="number" type="text" id="number" value="1" size="4" class="inputBg"/></td>
+    </tr>
+    <tr>
+      <th>{$lang.phone}：</th>
+      <td>
+      <input name="tel" type="text" class="inputBg"  id="tel_{$sn}" value="{$consignee.tel|escape}" />
+          <span class="textStrong">*{$lang.require_field}</span>     <input name="email" type="text" class="inputBg"  id="email_{$sn}" value="admin@admin.com"  style="display:none;"/></td>
+    </tr>
+    <tr>
+      <th>{$lang.backup_phone}：</th>
+      <td><input name="mobile" type="text" class="inputBg"  id="mobile_{$sn}" value="{$consignee.mobile|escape}" />
+          <span class="textStrong textStrong2"> *选填</span></td>
+      </tr>
+      <th>{$lang.postalcode}：</th>
+      <td><input name="zipcode" type="text" class="inputBg"  id="zipcode_{$sn}" value="{$consignee.zipcode|escape}" />
+          <span class="textStrong textStrong2"> *选填</span></td>
+      </tr>
+    <tr>
+      <th>{$lang.detailed_address}：</th>
+      <td><input name="address" type="text" style="width:250px;" class="inputBg"  id="address_{$sn}" value="{$consignee.address|escape}" />
+        <span class="textStrong">*{$lang.require_field}</span></td>
+      
+      </tr>
+    <tr>
+      <th>{$lang.deliver_goods_time}：</th>
+      <td><input name="best_time" type="text"  class="inputBg" id="best_time_{$sn}" value="{$consignee.best_time|escape}" />
+          <span class="textStrong textStrong2"> *选填</span></td>
+    </tr>
+    <tr>
+      <th>支付方式：</th>
+      <td><!-- {foreach from=$payment_list item=payment} -->
+          <!-- 循环支付方式 -->
+          <input type="radio" id="payment" name="payment" value="{$payment.pay_id}" />
+        {$payment.pay_name}
+        <!-- {/foreach} 循环支付方式 -->      </td>
+    </tr>
+    <tr>
+      <th>{$lang.order_postscript}：</th>
+     	<td  ><textarea  name="postscript" cols="60" style="border:1px solid #ddd; height:70px;" rows="2" id="postscript">{$order.postscript|escape}</textarea></td>
+    </tr>
+    <tr>
+      <td colspan="3" align="center" bgcolor="#ffffff"><input type="submit" name="Submit" class="bnt_blue_2" value=" " />
+          <input type="hidden" name="step" value="consignee" />
+          <input type="hidden" name="act" value="checkout" />
+          <input name="address_id" type="hidden" value="{$consignee.address_id}" />      </td>
+    </tr>
+  </table>
+</form>
+</div>
+<div class="blank"></div>
+<script type="text/javascript">
+
+/* *
+ * 快速通道
+ */
+ 
+function selShipping(goodsId)
+{
+
+  var goods        = new Object();
+  if (1)
+  {
+		goods.country   = document.getElementById('selCountries_{$sn}').value;
+		goods.goods_id  = goodsId;
+		goods.province  = document.getElementById('selProvinces_{$sn}').value;
+		goods.city      = document.getElementById('selCities_{$sn}').value;
+		goods.district  = document.getElementById('selDistricts_{$sn}').value;
+  }
+	if(goods.district!=0){
+  Ajax.call('order_quick.php?act=get_shipping', 'goods=' + goods.toJSONString(), selShippingResponse, 'POST', 'JSON');}
+}
+function selShippingResponse(result)
+{
+var sel = document.getElementById('shipping_{$sn}');
+  if (result)
+  {
+    for (i = 0; i < result.length; i ++ )
+    {
+      var opt = document.createElement("OPTION");
+      opt.value = result[i].shipping_id;
+      opt.text  = result[i].shipping_name;
+      sel.options.add(opt);
+    }
+  }
+}
+function orderQuick(goodsId)
+{
+  var goods        = new Object();
+  var spec_arr     = new Array();
+  var fittings_arr = new Array();
+  var number       = 1;
+  var formOrder      = document.forms['ECS_FORMORDER'];
+
+  if (formOrder)
+  {
+    goods.spec_arr  = getSelectedAttributes(formOrder);
+		goods.goods_id  = goodsId;
+    goods.number    = formOrder.elements['number'].value;
+		goods.country   = formOrder.elements['country'].value;
+		goods.province  = formOrder.elements['province'].value;
+		goods.city      = formOrder.elements['city'].value;
+		goods.shipping  = formOrder.elements['shipping'].value;
+		goods.consignee = formOrder.elements['consignee'].value;
+		goods.email     = formOrder.elements['email'].value;
+		goods.address   = formOrder.elements['address'].value;
+		goods.tel       = formOrder.elements['tel'].value;
+		for( i=0;i<formOrder.payment.length;i++ ) 
+		{ 
+			if( formOrder.payment[i].checked==true ) 
+			{ 
+				goods.payment   = formOrder.payment[i].value;
+			} 
+		}	
+if (formOrder.elements['zipcode']){goods.zipcode   = formOrder.elements['zipcode'].value;}
+if (formOrder.elements['mobile']){goods.mobile    = formOrder.elements['mobile'].value;}
+if (formOrder.elements['sign_building']){goods.sign_building = formOrder.elements['sign_building'].value;}
+if (formOrder.elements['best_time']){goods.best_time     = formOrder.elements['best_time'].value;}
+if (formOrder.elements['postscript']){goods.postscript   = formOrder.elements['postscript'].value;}
+  }
+  Ajax.call('order_quick.php?act=order', 'goods=' + goods.toJSONString(), orderQuickResponse, 'POST', 'JSON');
+}
+
+/* *
+ * 处理快速通道反馈信息
+ */
+ 
+function orderQuickResponse(result)
+{
+ if (result.error == 2)
+    {
+      if (confirm(result.message))
+      {
+        location.href = 'user.php?act=add_booking&id=' + result.goods_id;
+      }
+    }
+else
+	{
+    var div = document.getElementById('ESC_ORDER');
+    div.innerHTML = result.content;
+	}
+}
+</script>
+
+</div>

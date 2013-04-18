@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta name="robots" content="noindex, nofollow" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+{if $type eq 'card_list'}
+<table width="100%" border="1" cellspacing="1" cellpadding="1">
+	<tr align="center" bgcolor="#eeeeee">
+		<td><b>编号</b></td>
+		<td><b>卡号</b></td>
+		<td><b>绑定门店</b></td>
+	</tr>
+	<!-- {foreach from=$card_list item=card} -->
+	<tr>
+    	<td>{$card.card_id}</td>
+			<td style="vnd.ms-excel.numberformat:@">{$card.card_number}</td>
+        	<td>{$card.store_remark}</td>
+	</tr>
+	<!-- {/foreach} -->
+</table>
+{elseif $type eq 'generate_card'}
+<table  width="100%" border="1" cellspacing="1" cellpadding="1">
+	<tr align="center" bgcolor="#eeeeee">
+		<td><b>卡号</b></td>
+		<td><b>绑定门店</b></td>
+	</tr>
+	<!-- {foreach from=$card_list item=card} -->
+	<tr>
+		<td style="vnd.ms-excel.numberformat:@">{$card.card_number}</td>
+		<td>{$card.store_remark}</td>
+	</tr>
+	<!-- {/foreach} -->
+</table>
+{/if}
+</body>
+</html>

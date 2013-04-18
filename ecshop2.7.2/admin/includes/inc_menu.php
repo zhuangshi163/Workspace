@@ -84,6 +84,8 @@ $modules['07_content']['article_auto']              = 'article_auto.php?act=list
 //$modules['07_content']['shop_info']                 = 'shopinfo.php?act=list';
 
 
+$modules['08_members']['001_cards_add']             = 'user_card.php?act=add';	//生成会员卡
+$modules['08_members']['002_cards_list']            = 'user_card.php?act=list';	//会员卡列表
 $modules['08_members']['03_users_list']             = 'users.php?act=list';
 $modules['08_members']['04_users_add']              = 'users.php?act=add';
 $modules['08_members']['05_user_rank_list']         = 'user_rank.php?act=list';

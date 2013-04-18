@@ -152,17 +152,17 @@ function register($username, $password, $email, $store_id,$realname,$other = arr
         		"VALUES ('$card_number', '$store_id', '$_SESSION[user_id]', '1', '$time')";
         $GLOBALS['db']->query($sql);
         
-        $sql = "SELECT country,province,city,district FROM " . $GLOBALS['ecs']->table('store') . " WHERE store_id = '$store_id'";
+        $sql = "SELECT country,province,city,district,complete_address FROM " . $GLOBALS['ecs']->table('store') . " WHERE store_id = '$store_id'";
         $rows = $GLOBALS['db']->getRow($sql);
-        //         $countryUA=$rows['country'];
-        //         $provinceUA=$rows['province'];
-        //         $cityUA=$rows['city'];
-        //         $districtUA=$rows['district'];
-        $sql = "INSERT INTO " .$GLOBALS['ecs']->table('user_address'). " (store_id,user_id,mobile,country,province,city,district,consignee)" .
-        		"VALUES ('$store_id', '$_SESSION[user_id]', '$username','$rows[country]','$rows[province]','$rows[city]','$rows[district]','$realname')";
+        $sql = "INSERT INTO " .$GLOBALS['ecs']->table('user_address'). " (store_id,user_id,consignee,mobile,country,province,city,district,tel,address)" .
+        		"VALUES ('$store_id', '$_SESSION[user_id]', '$realname','$username','$rows[country]','$rows[province]','$rows[city]','$rows[district]','$username','$rows[complete_address]')";
         $GLOBALS['db']->query($sql);
         
+        $sql = "SELECT address_id FROM " . $GLOBALS['ecs']->table('user_address') . " WHERE user_id = '$_SESSION[user_id]' and store_id='$store_id'";
+        $rows = $GLOBALS['db']->getRow($sql);
         
+        $sql = 'UPDATE '. $GLOBALS['ecs']->table('users') . ' SET address_id = ' . $rows['address_id'] . ' WHERE user_id = ' . $_SESSION['user_id'];
+        $GLOBALS['db']->query($sql);
 
         /* 注册送积分 */
         if (!empty($GLOBALS['_CFG']['register_points']))

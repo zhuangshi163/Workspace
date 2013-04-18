@@ -33,7 +33,7 @@ if($act=='add'){
 		$count += $old['goods_number'];
 	}else $rec_id_old = 0;
 	//检查：库存
-    if ($_CFG['use_storage'] == 1 && $count > $goods['goods_number']) show_msg('对不起，该商品当前库存量为 '.$goods['goods_number'].'， 不足您的购买数量。');
+    if ($_CFG['use_storage'] == 1 && $count > $goods['goods_number']) show_msg('对不起，该商品当前库存量为 '.$goods['goods_number'].'， 不足您的购买数量。','返回购物');
 	
 	
 	if($rec_id_old>0) $db->query("UPDATE " . $ecs->table('cart') . " SET goods_number = $count WHERE rec_id = ".$rec_id_old." and session_id='".SESS_ID."'");
@@ -138,7 +138,7 @@ if($act=='add'){
 	//检查：库存
     if ($_CFG['use_storage'] == 1 && $num > $goods_number){
 		$db->query("UPDATE " . $ecs->table('cart') . " SET goods_number = $goods_number WHERE rec_id = ".$rec_id);
-		show_msg('对不起，该商品当前库存量为 '.$goods_number.'， 不足您的购买数量。');
+		show_msg('对不起，该商品当前库存量为 '.$goods_number.'， 不足您的购买数量。','返回购物');
 	}
 	
 	$db->query("UPDATE " . $ecs->table('cart') . " SET goods_number = $num WHERE rec_id = ".$rec_id);
@@ -154,7 +154,7 @@ if($act=='add'){
 
 }elseif($act=='empty_goods'){
 	$db->query("DELETE FROM " . $ecs->table('cart') . " WHERE store_id = ".$_SESSION['store']['store_id']." and session_id='".SESS_ID."'");
-	 show_msg('购物车成功清空，现在返回商品导购。','商品导购','shop_category.php?act=default&top_cat_id=201');
+	 show_msg('购物车成功清空，现在返回商品导购。','商品导购','shop_convenient.php');
 
 }elseif($act=='order_confirm'){
 	$cart_count = $db->getOne('SELECT count(*) FROM '.$ecs->table('cart')." where store_id = ".$_SESSION['store']['store_id']." and session_id='".SESS_ID."'");
@@ -333,7 +333,8 @@ if($act=='add'){
 		'goods_amount'	=> $total['total'],
 		'order_amount'	=> $total['total'],
 		'add_time'	=> $time_now,
-		'user_money'=>$users_user_money-$total_price
+		'user_money'=>$users_user_money-$total_price,
+		'referer' => '终端机'	
 	);
 	$db->autoExecute($ecs->table('order_info'), $order, 'INSERT');
 	$order_id = $db->insert_id();
@@ -394,13 +395,19 @@ if($act=='add'){
 		$sql="select card.store_id from ". $GLOBALS ['ecs']->table ( 'user_card' ) . "as card where card.card_number='$card_number'";
 		$store_id=$db->getOne($sql);
 		if($store_id!=$_SESSION['store']['store_id']){
-			show_msg ( "请使用本店已激活的会员卡" , "返回会员空间", "shop_user.php ");
+			show_msg ( "请使用本店已激活的会员卡!" , "返回会员空间", "shop_user.php ");
 		}
 	}
 	if($card_number =='' && $mobile ==''){
 		show_msg ( "查询条件不能为空" , "返回会员空间", "shop_user.php ");
 	}
-	$where=' WHERE referer = \'web\' and shipping_status = 0 and pay_status = 0 ';	//订单查询条件
+	/*
+	 * pay_status`  '支付状态；0，未付款；1，付款中；2，已付款',
+	* shipping_status`  '商品配送情况，0，未发货；1，已发货；2，已收货；3，备货中',
+	* referer`  '订单的来源页面
+	* */
+	//$where=' WHERE shipping_status = 0 ';	//订单查询条件
+	$where = ' WHERE 1 ';
 	//card 
 	if($card_number != ''){
 		$sql = "SELECT  c.user_id " . " FROM " . $GLOBALS ['ecs']->table ( 'user_card' ) . " as c " .
@@ -432,7 +439,7 @@ if($act=='add'){
 	* referer`  '订单的来源页面
 	* */
 	$where .=" LIMIT " .($page-1)*$page_size. ", " . $page_size;
-	$order_list = $db->getAll('SELECT order_id,order_sn, from_unixtime(add_time) as add_time,order_amount,consignee FROM ' . $ecs->table('order_info') .$where);
+	$order_list = $db->getAll('SELECT order_id,order_sn, from_unixtime(add_time) as add_time,order_amount,consignee,referer FROM ' . $ecs->table('order_info') .$where);
 	
 	$page_number = ($page-1) * $page_size;
 	foreach ($order_list as $k => $v){
@@ -561,7 +568,7 @@ if($act=='add'){
 	$smarty->display('order_detail.html');
 }else{
 	$total = $db->getRow('SELECT count(*) as goods_count,SUM(goods_number) as goods_number,SUM(goods_number*goods_price) as total FROM ' . $ecs->table('cart') . ' WHERE store_id='.$_SESSION['store']['store_id']." and session_id='".SESS_ID."'");
-	if($total['goods_count']<1)show_msg('购物车暂无商品，请先购买。');
+	if($total['goods_count']<1)show_msg('购物车暂无商品，请先购买。','返回购物');
 	
 	$page_big = ceil($total['goods_count']/$page_size);
 	if($page_big<$page){

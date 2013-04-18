@@ -161,6 +161,7 @@
 			if(cardNo.length<12){
 				document.getElementById("error2").innerHTML = errorTips[0];
 				document.getElementById("card_id").value = "";
+				document.getElementById("message").style.display = "block";	
 				return;
 			}
 			if(formStatus == 0){
@@ -203,7 +204,9 @@
 		*/
 		function card_Response(data){
 			if(data.code == 0){
-				document.getElementById('myContext').className = '';
+				//document.getElementById('myContext').className = '';
+				document.getElementById("message").style.display = "block";
+				read_message()
 				document.getElementById("error2").innerHTML = errorTips[1];
 				formStatus = 0;
 				document.getElementById("card_id").value = "";
@@ -214,6 +217,7 @@
 				document.getElementById("card_id").value = "";
 			}else if(data.code == 3){
 				document.getElementById("message").style.display="block";
+				read_message()
 				document.getElementById("myContext").style.display="none";
 			}else{
 				document.getElementById('myContext').className = '';
@@ -235,7 +239,19 @@
 				user_id = data.user_id;
 			}
 		}
-		
+		//朗读错误信息
+		function read_message(){
+			var message = "请使用本店已激活的会员卡";
+			var speak_info = '';
+			if(speak_info.length>0){
+				message = speak_info;
+			}
+			window.clipboardData.setData("Text", message);	
+		}
+		//页面跳转时清空剪切板
+		window.onbeforeunload = function (){
+			window.clipboardData.setData("Text", ",");
+		}
 		function cleartext(){
 			if(formStatus==0){
 				document.getElementById("card_id").value = "";
@@ -320,19 +336,16 @@
 	
 	<script type="text/javascript">
 		function init(){
-//			var printer = new ActiveXObject("HsPayControl.CardReader");
-//			printer.ReadTrackData23(2);
-//			var data = printer.Track2Data;
-
-			var data = "0vq93c1t6f00";
-		
+			var printer = new ActiveXObject("HsPayControl.CardReader");
+			printer.ReadTrackData23(2);
+			var data = printer.Track2Data;
 			//data = data.substring(2, data.indexOf("="));
 			if(data.length !=0){
 				document.getElementById('card_id').value=data;
 				submitForm();
 				document.getElementById('card_message').className = 'none';
 			}else {		
-				document.getElementById("card_message").innerHTML='<div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">刷卡出现错误或超时</span></p><br/><br/><img src="img/re_card.png" onclick ="window.history.go(0);" /><img src="img/forget_card.png" onmousedown="toConvenient()" /></div>';				
+				document.getElementById("card_message").innerHTML='<div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">刷卡出现错误或超时</span></p><br/><br/><img src="../img/re_card.png" onclick ="window.history.go(0);" /><img src="../img/forget_card.png" onmousedown="toConvenient()" /></div>';				
 				
 			}
 		}

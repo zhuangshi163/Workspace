@@ -1,0 +1,26 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $brand_list} -->
+<div class="brands">
+<h3> </h3>
+
+
+<div class="brands_in_box">
+ <div class="blank" style="height:0px; overflow:hidden"></div>
+  <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+
+      <!-- {if $brand.brand_logo} -->
+        <a href="{$brand.url}"><img class="img_li" src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a>
+      <!-- {else} -->
+      <div style="clear:both;">
+        <a href="{$brand.url}">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+      </div>
+      <!-- {/if} -->
+
+  <!-- {/foreach} -->
+
+
+  </div>
+</div>
+<!-- {/if} -->
+
+<div class="blank"></div>

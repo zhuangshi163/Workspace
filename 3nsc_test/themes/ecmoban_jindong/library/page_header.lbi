@@ -1,0 +1,126 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="themes/ecmoban_jindong/qq/images/qq.css" rel="stylesheet" type="text/css" />
+<script language='javascript' src='themes/ecmoban_jindong/qq/ServiceQQ.js' type='text/javascript' charset='utf-8'></script>
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+
+
+
+
+
+
+<div id="globalHeader">
+
+<ul id="top_nav_ul">
+
+<div class="block"  style=" position:relative">
+
+			    
+<div style="float:right; _padding-top:9px; background: url(../images/nav_bg2.gif) 0 top no-repeat; height:29px; padding-left:28px;">
+		<!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+		<a href="{$nav.url}"  <!-- {if $nav.opennew eq 1} -->  target="_blank" <!-- {/if} -->>{$nav.name}</a> <img style="vertical-align:middle" src="../images/nav_li.gif">
+			
+			  <!-- {/foreach} -->
+			</div> 
+            
+<div  style="float:right; color:#acacac; padding-right:15px;">         
+   {insert_scripts files='transport.js,utils.js'}
+   <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font> 
+</div>     
+         <p id="logo"><a href="../index.php"><img style="float:left" src="./images/logo.gif" alt="logo" /></a>  </p>   
+            
+      </div>         
+
+   
+	</ul>
+
+
+
+
+    
+
+  
+  
+</div><!-- /globalHeader -->
+
+<div class="block" >
+
+   
+  
+
+ 
+<div id="globalNav">
+  <ul>
+<li><a href="../index.php"{if $navigator_list.config.index eq 1} class="cur"{/if}>{$lang.home}</a></li>
+  <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+<li><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>{$nav.name}</a></li>
+ <!-- {/foreach} -->
+  </ul>
+</div>
+
+
+<div id="globalSearch">
+<img style="position:absolute; left:0;" src="../images/search_box_l.gif">
+
+<img  style="position:absolute; right:0;" src="../images/search_box_r.gif">
+
+
+
+
+
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" style="background:#99CC00; padding-left:13px;">
+
+  
+  
+<div class="search_left">  
+<input style="float:left;" name="keywords" type="text" id="keyword" value="请输入商品关键字" onclick="javascript:this.value='';this.style.color='#333333';" />
+<input type="image" src="../images/search.gif" style="float:left" />
+
+<span class="key2">
+{if $searchkeywords}
+   {$lang.hot_search} ：
+   {foreach from=$searchkeywords item=val}
+   <a style=" color:#ffcccc" href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+</span>   
+</div>  
+
+
+
+
+
+
+
+
+<div class="search_right">  
+ {insert_scripts files='transport.js'}
+
+
+
+<div class="buy_car_bg clearfix" id="ECS_CARTINFO" >
+<a href="flow.php">{insert name='cart_info'}</a>
+</div> 
+	 
+
+
+
+
+
+
+
+<a href="flow.php?step=checkout"><img src="../images/jiesuan.gif"></a>
+
+
+
+
+</div>
+
+  </form>
+
+  
+  
+  
+  
+</div></div>

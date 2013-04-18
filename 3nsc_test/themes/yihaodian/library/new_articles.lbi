@@ -1,0 +1,19 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div id="mallNews" class="f_r">
+
+        <ul>
+        <div class="tit"><img src="../images/gonggao_tit.gif"></div>
+        <!--{foreach from=$new_articles item=article name=no}-->
+        <!-- {if $smarty.foreach.no.iteration<4}-->
+         <li class="red">
+       <a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:14:"...":true}</a>
+        </li>
+        <!-- {else} -->		
+        <li>
+       <a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:14:"...":true}</a>
+        </li>
+       <!-- {/if} -->		
+        <!--{/foreach}-->
+        </ul>
+ 
+</div>

@@ -1,0 +1,168 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+
+<!--[if IE 6]>
+<script type="text/javascript">
+try {document.execCommand('BackgroundImageCache', false, true);} catch(e) {}
+</script>
+<![endif]-->
+
+<DIV id=index_header>
+
+	<!-- 顶部  -->
+	<UL class="top pt5">
+	  <LI class=color_gary_none><A href="http://www.3nsc.com/message.php" target=_blank>留言板</A> </LI>
+	  <LI class=icon_home></LI>
+	  <LI class=color_gary_none><A href="http://www.3nsc.com/article_cat.php?id=3" target=_blank>帮助中心</A> </LI>
+	  <LI class=icon_help></LI>
+	  <LI class=color_gary_none><A href="http://www.3nsc.com/article.php?id=316" target=_blank>买菜网招商流程</A>
+	  							<A href="http://www.3nsc.com/user.php?act=collection_list" target=_blank></A> </LI>
+	  <LI class=icon_favorites></LI>
+	  <LI class=color_gary_none><A href="http://www.3nsc.com/user.php" target=_blank>我的管理中心</A> </LI>
+	  <LI class=icon_store></LI>
+	  <LI class=color_gary_none><A  href="http://www.3nsc.com/user.php?act=order_list" target=_blank>我的订单</A>  </LI>
+	  <LI class=icon_order></LI>
+	  <LI>| </LI>
+	  <LI class=none><A id=kx001_btn_login></A></LI>
+	  <LI class=color_gary_none>
+	  
+	  {insert_scripts files='transport.js,utils.js'}
+	  
+	  <!--<FONT id=ECS_MEMBERZONE><DIV id=append_parent></DIV>欢迎光临本店&nbsp; <A href="http://www.3nsc.com/user.php">登录</A> <A href="http://www.3nsc.com/user.php?act=register">注册</A> </FONT>-->
+	  <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+	  <!--[if IE 6]> 
+	  <!--[else]> 
+	    <li class="color_gary_none"><iframe width="100%" height="20" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=100%&height=24&uid=2215264224&style=3&btn=red&dpc=1"></iframe></li>
+		<![endif]--></LI>
+	</UL>
+	<DIV class=clear></DIV>
+	
+	<!-- 导航 --->
+	<UL class=center>
+	  <LI class="logo fl">
+	  	<A href="http://www.3nsc.com/"><IMG src="../images/logo.gif" /></A> 
+	  </LI>
+	  <LI class="provincebox fl">
+	  	<DIV id=currProvince class="provinceboxleft fl"></DIV>
+	  </LI>
+	  <LI id=global_menu class="nav fr">
+	  	<DIV align=center><IMG src="themes/green/test_img/topdh.gif"></DIV>
+	  	<SPAN class=select><A href="http://www.3nsc.com/">{$lang.home}</A></SPAN>
+	  	<!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+	  		<SPAN><A href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>{$nav.name}</A></SPAN>
+		<!-- {/foreach} -->	  	
+	  </LI>
+	</UL>	
+	<DIV class=clear></DIV>
+	
+	<!-- 导航下端 -->
+	<DIV class="bottom mt5">
+		<!-- 分类列表 -->
+		<DIV {if $index_cat_show eq 1}class="allsort fl allsorthover"{else}class="allsort fl" onmouseout="this.className='allsort fl'" onmouseover="this.className='allsort allsorthover fl'"{/if}>
+			<DIV id=allCategoryHeader class="category fl color_white_none">
+				<H2><A href="http://www.3nsc.com" target=_blank>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</A></H2>
+				<DIV id=ap_category class=ap_category>
+					<DIV style="PADDING-BOTTOM: 8px" class=mc>
+					
+					<!--{foreach from=$all_categories item=cat name='foo'}-->
+					<DIV class="item fore " onmouseover="this.className='item fore hover '" onmouseout="this.className='item fore '">
+						<SPAN class=icon{$smarty.foreach.foo.iteration}><H3><A href="http://www.3nsc.com/{$cat.url}">&nbsp;&nbsp;&nbsp;&nbsp;{$cat.name|escape:html}</A></H3><S></S></SPAN>
+						<DIV class=i-mc>
+							<DIV class=subitem>
+							
+								<!--{foreach from=$cat.cat_id item=child}-->
+								<DL class=fore>
+								  <DT><A href="http://www.3nsc.com/{$child.url}">{$child.name|escape:html}</A> </DT>								  
+								  <DD>
+								  {foreach from=$child.cat_id item=childer}
+								  	<EM><A href="http://www.3nsc.com/{$childer.url}">{$childer.name|escape:html}</A></EM>
+								   {/foreach}
+								  </DD>
+								</DL>
+								<!--{/foreach}-->
+							</DIV>
+							
+							<DIV id=JD_sort_a class=fr>
+								<DL class=brands>
+								  <DT>推荐品牌 </DT>
+								  <DD><EM><A href="http://www.3nsc.com/brand.php?id=1&amp;cat=398">汉寿桃花岛精品蔬菜基地</A></EM></DD>
+								</DL>
+								<DL class=promotion>
+								  <DT>促销活动 </DT>
+								  <DD>
+								  <UL></UL></DD>
+								</DL>
+							</DIV>
+														
+						</DIV>
+					</DIV>
+					<!--{/foreach}--> 
+					</DIV>
+					
+				</DIV>
+			</DIV>
+		</DIV>
+	
+		<!-- 搜索 -->
+		<DIV class="searchbox fl">
+			<FORM id=searchForm onsubmit="return checkSearchForm()" method=get name=searchForm action=search.php >
+				<DIV class="inputbox fl f14">
+				<DIV class=input_search>
+				<INPUT style="COLOR: #999" id=keyword onclick="javascript:this.value='';this.style.color='#999';" name=keywords value="{$search_keywords|escape}"  AUTOCOMPLETE="off"> 
+				</DIV></DIV>
+				<DIV class="search fl">
+				<A style="CURSOR: pointer" onclick=javascript:document.searchForm.submit();>
+				<IMG src="themes/green/images/btn_search.jpg"></A>
+				</DIV>
+			</FORM>
+		</DIV>		       
+   
+		<!-- 搜索关键词 -->
+		{if $searchkeywords}
+		<DIV id=hotKeywordsShow class="keyword fl color_white_none">&nbsp;
+		<SPAN class=STYLE2>{$lang.hot_search}：</SPAN>
+		{foreach from=$searchkeywords item=val}
+			<A href="http://www.3nsc.com/search.php?keywords={$val|escape:url}">{$val}</A>
+		{/foreach}
+		</DIV>
+		{/if}
+
+		<!-- 购物车 -->
+		<DIV class="shopcartbox fl">
+			<DIV id=miniCart class="shopcart fl">
+				<SPAN class=color_white_none>
+					<DIV id=ECS_CARTINFO>
+					<A title=查看购物车 href="http://www.3nsc.com/flow.php">
+						<SPAN class=gold>购物车：</SPAN>
+						<SPAN id=in_cart_num>0</SPAN>&nbsp;
+						<SPAN class=gold>件</SPAN>&nbsp;
+					</A>
+					</DIV>
+				</SPAN>
+				<DIV style="DISPLAY: none" id=showMiniCart class=ap_shopcartbox></DIV>
+			</DIV>
+			<DIV class="account fl"><A href="http://www.3nsc.com/flow.php">去结算</A></DIV>
+		</DIV>		    	
+	</DIV>
+</DIV>
+
+<script type="text/javascript">
+{literal}
+<!--
+function checkSearchForm()
+{
+    if(document.getElementById('keyword').value)
+    {
+        return true;
+    }
+    else
+    {
+        alert("{$lang.no_keywords}");
+        return false;
+    }
+}
+-->
+{/literal}
+</script>

@@ -59,6 +59,8 @@ if (!defined('IN_ECS'))
     $purview['vote_list']            = 'vote_priv';
 
 //会员管理权限
+    $purview['001_cards_add']        = 'users_manage';
+    $purview['002_cards_list']       = 'users_manage';
     $purview['03_users_list']        = 'users_manage';
     //$purview['04_users_add']         = 'users_manage';
     $purview['04_users_add']         = 'users_add';		//将“会员添加”从“会员管理”中抽离出来
@@ -156,4 +158,12 @@ if (!defined('IN_ECS'))
 //店家管理
     $purview['01_store_recharge']    = 'store_recharge';
     $purview['02_user_recharge']     = 'user_recharge';
+    
+//应用管理
+    $purview['customiz_app']         = 'app_manage';
+    $purview['extension_set']        = 'app_manage';
+    $purview['manage_app']           = 'app_manage';
+    $purview['u_client_upgrade']     = 'app_manage';
+    $purview['uninstall']            = 'app_manage';
+    $purview['zinstall']             = 'app_manage';
 ?>

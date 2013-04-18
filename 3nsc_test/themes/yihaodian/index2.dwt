@@ -1,0 +1,651 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js'}
+<script type="text/javascript">
+function $id(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$id(str+"_b").getElementsByTagName("h2");
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onmousemove=function(){
+      $id(this.subj+"_v").innerHTML=$id(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$id(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$id(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $id(str+"_h").className="none";
+  $id(str+"_v").innerHTML=$id(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+
+</script>
+
+
+</head>
+<body >
+
+
+<!-- #BeginLibraryItem "/library/page_header.lbi" -->
+ <!-- #EndLibraryItem -->
+
+<div class="block clearfix">
+<!-- TemplateBeginEditable name="首页顶部广告990_40" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+<div  class="blank"></div>
+<div class="AreaL">
+  <!-- TemplateBeginEditable name="左边区域上" -->
+<!-- #BeginLibraryItem "/library/category_tree.lbi" -->
+
+
+      <h3 class="tab2">
+        <div id="com1_b" class="clearfix">
+        <h2>商品分类</h2>
+        <h2 class="h2bg">品牌分类</h2>
+      
+         
+        </div>
+      </h3>
+      <div id="com1_v" class="my_left_box clearfix my_left_category"></div>
+      <div id="com1_h">
+       <blockquote>
+      
+        <!--{foreach from=$categories item=cat}-->
+            <h2><a href="{$cat.url}"> {$cat.name|escape:html} </a> </h2>
+            
+            <div class="cat_box">  
+            <!--{foreach from=$cat.cat_id item=child name=no}-->
+            <a href="{$child.url}">{$child.name|escape:html}</a>     <!-- {if !$smarty.foreach.no.last} -->
+             |
+            <!-- {/if} -->
+            <!--{/foreach}-->
+            </div>
+        <!--{/foreach}--> 
+       </blockquote>
+
+     <blockquote>
+
+   <h2><a href="#">化妆品</a></h2>
+             <div class="cat_box">  
+            <a href="#">欧莱雅</a> |
+            <a href="#">雅顿</a> |
+            <a href="#">兰蔻</a> |
+            <a href="#">碧欧泉</a> |
+            <a href="#">薇姿</a> |
+            <a href="#">雅漾</a> |
+            <a href="#">资生堂</a> |
+            <a href="#">兰芝</a> |
+            <a href="#">倩碧</a>
+            </div>
+            <h2><a href="#">香水</a></h2>
+             <div class="cat_box">  
+            <a href="#">佛莱格默</a> |
+            <a href="#">香奈儿</a> |
+            <a href="#">雅顿</a> |
+            <a href="#">大卫杜夫</a> |
+            <a href="#">巴宝莉</a> |
+            <a href="#">兰蔻</a> |
+            <a href="#">雅诗兰黛</a> |
+            <a href="#">安娜苏</a> |
+            <a href="#">迪奥</a>
+            </div>
+            <h2><a href="#">女装</a></h2>
+            <div class="cat_box">  
+            <a href="#">ONLY</a> |
+            <a href="#">LOYER</a> |
+            <a href="#">YOU.TOO</a> |
+            <a href="#">VIVICAM薇可</a> |
+            <a href="#">VERO MODA</a> |
+            <a href="#">韩国直运</a>
+
+     </blockquote>
+      
+      </div>
+
+
+
+<div class="blank"></div>
+
+
+
+
+
+
+    <script type="text/javascript">
+    <!--
+    reg("com1");
+    //-->
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/brands.lbi" -->
+
+<!-- {if $brand_list} -->
+<div class="box">
+<h3><div class="h3_l"><div class="h3_r"><span>厂家支持</span></div></div></h3>
+<div class="box_1">
+
+<div class="brands_in_box">
+ <div class="blank" style="height:0px; overflow:hidden"></div>
+  <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+    {if $smarty.foreach.brand_foreach.index <= 11}
+      <!-- {if $brand.brand_logo} -->
+        <a href="{$brand.url}"><img class="img_li" src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a>
+      <!-- {else} -->
+      <div style="clear:both;">
+        <a href="{$brand.url}">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+      </div>
+      <!-- {/if} -->
+    {/if}
+  <!-- {/foreach} -->
+  <div class="blank" style="height:5px; overflow:hidden"></div>
+  <div class="more"><a href="brand.php">更多</a>
+  <div class="blank" style="height:0px; overflow:hidden"></div>
+  </div>
+
+   </div>
+  </div>
+</div>
+<!-- {/if} -->
+
+<div class="blank"></div>
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/top10.lbi" -->
+
+<div class="box">
+<h3><div class="h3_l"><div class="h3_r"><span>热卖商品排行榜</span></div></div></h3>
+<div class="box_1">
+
+  <div class="left_hot_box boxCenterList clearfix top10List">
+ <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+  <ul class="clearfix" style="overflow:hidden" style="position:relative">
+	<span class="iteration">{$smarty.foreach.top_goods.iteration}</span>
+	<!-- {if $smarty.foreach.top_goods.iteration<2}-->
+      <li class="topimg">
+      <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="samllimg" /></a>
+      </li>
+       <li style="float:left; width:100px; padding:0; margin:0;">
+      <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a> <br />
+       <!--{if $goods.promote_price neq "" } -->
+            <font class="f1">促销价：{$goods.promote_price}</font><br />
+            <!--{else}-->
+            <font class="f1">本店价：{$goods.shop_price}</font><br />
+            <!--{/if}-->
+      </li>
+	<!-- {/if} -->	
+    
+    <!-- {if $smarty.foreach.top_goods.iteration>1}-->	
+      <li style=" width:153px; height:20px;" class="sandian">
+      <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a>
+      </li>
+      <!-- {/if} -->	
+    </ul>
+  <!-- {/foreach} -->
+
+  </div>
+    </div>
+</div>
+<div class="blank"></div>
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+<!-- #BeginLibraryItem "/library/index_comm.lbi" --><!-- #EndLibraryItem -->
+
+
+<div class="box">
+ <div class="box_1" style="padding-bottom:0">
+  <h3 class="h3_2"><span>{$lang.order_query}</span></h3>
+<!-- #BeginLibraryItem "/library/order_query.lbi" -->
+
+<!--{if $invoice_list}-->
+<style type="text/css">
+.boxCenterList form{display:inline;}
+.boxCenterList form a{color:#404040; text-decoration:underline;}
+</style>
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.shipping_query}</span></h3>
+  <div class="boxCenterList">
+    <!-- 发货单查询{foreach from=$invoice_list item=invoice} -->
+   {$lang.order_number} {$invoice.order_sn}<br />
+   {$lang.consignment} {$invoice.invoice_no}
+   <div class="blank"></div>
+   <!-- 结束发货单查询{/foreach}-->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+
+<!-- #BeginLibraryItem "/library/email_list.lbi" -->
+
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.email_subscribe}</span></h3>
+  <div class="boxCenterList RelaArticle">
+    <input type="text" id="user_email" class="inputBg" /><br />
+    <div class="blank5"></div>
+    <input type="button" class="bnt_blue" value="{$lang.email_list_ok}" onclick="add_email_list();" />
+    <input type="button" class="bnt_bonus"  value="{$lang.email_list_cancel}" onclick="cancel_email_list();" />
+  </div>
+ </div>
+</div>
+<div class="blank"></div>
+<script type="text/javascript">
+var email = document.getElementById('user_email');
+function add_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=add&email=' + email.value, '', rep_add_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_add_email_list(text)
+{
+  alert(text);
+}
+function cancel_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=del&email=' + email.value, '', rep_cancel_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_cancel_email_list(text)
+{
+  alert(text);
+}
+function check_email()
+{
+  if (Utils.isEmail(email.value))
+  {
+    return true;
+  }
+  else
+  {
+    alert('{$lang.email_invalid}');
+    return false;
+  }
+}
+</script>
+
+ <!-- #EndLibraryItem -->
+
+  </div>
+  </div>
+
+
+
+
+
+
+  
+  <div class="blank"></div>
+  <div>
+  <a href="user.php?act=message_list"><img style="float:left" src="images/kefu.gif" /></a>
+ </div>
+ 
+ 
+  </div>
+  <!--right start-->
+  <div class="AreaR">
+  
+  
+  <div style="float:left; width:558px;">
+
+ <!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+ 
+ 
+ 
+ 
+ <div class="blank"></div>
+ 
+ 
+ <div class="bf_xia">
+ <!-- TemplateBeginEditable name="播放器下广告一172_134" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+ <!-- #BeginLibraryItem "/library/bfxia1.lbi" --><!-- #EndLibraryItem -->
+
+
+</div>
+ 
+  <div class="bf_xia">
+ <!-- TemplateBeginEditable name="播放器下广告二172_134" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+ <!-- #BeginLibraryItem "/library/bfxia2.lbi" --><!-- #EndLibraryItem -->
+
+
+</div>
+ 
+   <div class="bf_xia" style="margin:0">
+ <!-- TemplateBeginEditable name="播放器下广告三172_134" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+ <!-- #BeginLibraryItem "/library/bfxia3.lbi" --><!-- #EndLibraryItem -->
+
+
+</div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</div>
+
+
+
+
+<div class="f_r" style="width:205px;">
+
+
+
+<div class="ff_1 ">
+    <h2 id="ECS_tree1" class=" tabFront">网站动态</h2>
+    <h2 id="ECS_tree2" class=" tabBack" ><img src="images/biao8.gif" style=" vertical-align:middle" /> 会员登录</h2>
+</div>   
+
+
+
+
+<div style="clear:both"></div>
+
+
+    <div id="ECS_tree1_BODY">
+        <div class="tab2_box RelaArticle">
+ 
+          <!--{foreach from=$new_articles item=article name=no}-->	
+        <li>
+       <a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:14:"...":true}</a>
+        </li>	
+        <!--{/foreach}-->
+        </div>
+    </div>
+   
+   
+   
+ <div id="ECS_tree2_BODY" style="display:none;">
+  <div class="tab2_box RelaArticle">
+
+  {insert_scripts files='utils.js'}
+<font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>  
+
+
+        </div>
+ </div>
+
+
+
+<div class="blank"></div>
+
+
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+{literal}
+  var cycleList = ['ECS_tree1','ECS_tree2'];
+  var tabFront = 'tabFront';
+  var tabBack = 'tabBack';
+  function cycleShow(obj)
+  {
+    var curObj;
+    var curBody;
+    for (i=0; i < cycleList.length; i++)
+    {
+      curObj = document.getElementById(cycleList[i]);
+      curBody = document.getElementById(cycleList[i] + '_BODY');
+      if (obj.id == curObj.id)
+      {
+        curObj.className = tabFront;
+        curBody.style.display = "";
+      }
+      else
+      {
+        curObj.className = tabBack;
+        curBody.style.display = "none";
+      }
+    }
+  }
+
+  // 添加事件
+  for (i=0; i< cycleList.length; i++)
+  {
+    document.getElementById(cycleList[i]).onmousemove = function()
+    {
+      cycleShow(this);
+    };
+  }
+{/literal}
+//]]>
+</script>
+
+
+
+
+
+
+
+ <!-- TemplateBeginEditable name="首页右侧广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+<div class="blank"></div>
+{$shop_notice}
+<div class="box_1" style="height:150px;">
+<h3><span>网站公告</span></h3>
+<div style="padding:2px 7px;" >
+<div id="brtup" style="overflow:hidden; height:117px; line-height:24px; font-size:12px;" class="" >
+<div id="brtup1">
+<ul  id="brtup1ul" >
+<li>
+{$shop_notice}{$shop_notice}
+</li> 
+</ul>
+</div>
+<div id="brtup2"> </div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+var speed=90;
+var brtup=document.getElementById('brtup');
+var brtup1=document.getElementById('brtup1');
+var brtup2=document.getElementById('brtup2');
+var brtup1ul=document.getElementById('brtup1ul');
+var result = "";
+for(var i=0; i<25; i++) result += brtup1ul.innerHTML;
+brtup1ul.innerHTML=result
+brtup2.innerHTML=brtup1.innerHTML
+function Marquee1(){
+if(brtup2.offsetHeight-brtup.scrollTop<=0)
+brtup.scrollTop-=brtup1.offsetHeight
+else{
+brtup.scrollTop++
+}
+}
+var MyMar1=setInterval(Marquee1,speed)
+brtup.onmouseover=function() {clearInterval(MyMar1)}
+brtup.onmouseout=function() {MyMar1=setInterval(Marquee1,speed)}
+</script>
+
+
+</div>
+         
+           <div class="blank"></div>
+           
+           
+           
+           
+           
+           
+            <!-- TemplateBeginEditable name="首页右侧商品区一" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!-- {if $cat_rec_sign neq 1} zhangyh_100322 -->
+<style>
+h3 span ul{float:left;margin:0;padding:5px 0 0 0;height:23px}
+h3 span ul a{text-decoration:none}
+h3 span ul li{float:left; height:25px; background:url(images/itemH2Bg.gif) repeat-x left top; border:1px solid #d6ecff;
+   font-size:12px; text-align:center; color:#3f3f3f; font-weight:100; padding:0px 10px 0 10px; line-height:23px; margin:0 6px 0 0;
+   border-bottom:2px solid #fff;  bottom:0px;white-space:nowrap;
+   }
+  h3 span .h2bg{height:23px; line-height:20px; border:none; background:none;
+   font-size:12px; text-align:center; color:#006ace; font-weight:100; padding:0px 10px;
+      white-space:nowrap;
+   }
+</style>
+<div class="box">
+ <div class="box_1">
+
+  <h3><span><ul id="itemCat{$goods_cat.id}"><li class="h2bg"><a href="{$goods_cat.url}" class="f6">{$goods_cat.name|escape:html}</a></li><li class="h2bg">&nbsp;&nbsp;&nbsp;</li>
+  <!--{foreach name=childlist from=$goods_cat.children item=children name=child}-->
+  <li {if !$smarty.foreach.child.first}class="h2bg"{/if}><a href="category.php?id={$children.cat_id}" onmouseover="change_tab_style('itemCat{$goods_cat.id}', 'li', this);get_cat_recommend(4, {$children.cat_id},{$goods_cat.id})">{$children.cat_name}</a></li>
+  <!--{/foreach}-->
+  </ul>
+  </span>
+  </h3>
+
+    <div class="clearfix goodsBox" style="border:none;" id="show_cat_area{$goods_cat.id}">
+    <!-- {/if} zhangyh_100322-->
+      <!--{foreach from=$cat_goods item=goods}-->
+			
+      <div class="goodsItem">
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+           <p class="name"><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+           
+    <p class="price"> 
+  
+  
+      <!--{if $goods.promote_price neq "" } -->
+    <font class="shop">{$goods.promote_price}</font> 
+    <!--{else}-->
+   <font class="shop">{$goods.shop_price}</font> 
+    <!--{/if}-->
+</p>
+          
+        </div> 
+      <!--{/foreach}-->
+    </div>
+    </div>
+ </div>
+</div>
+<div class="blank5"></div>
+
+  
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+             
+           
+      
+           
+           
+ 
+  </div>
+  <!--right end-->
+</div>
+
+
+
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+ 
+
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+
+</body>
+</html>

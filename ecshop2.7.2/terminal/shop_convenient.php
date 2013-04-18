@@ -16,8 +16,8 @@ if($cat_id==0) $cat_id = $_SESSION['store']['site_store_cat'];
 }*/
 $act = ! empty ( $_GET ['act'] ) ? trim ( $_GET ['act'] ) : 'default';
 if($act == "default"){
-	$cache_id = sprintf('%X', crc32($cat_id.'-'.$page.'-'.$_SESSION['user_rank'].'-'.$_CFG['lang'].'-'.$_SESSION['store']['store_id']));
-	if (!$smarty->is_cached('shop_convenient.html', $cache_id)){
+	//$cache_id = sprintf('%X', crc32($cat_id.'-'.$page.'-'.$_SESSION['user_rank'].'-'.$_CFG['lang'].'-'.$_SESSION['store']['store_id']));
+	//if (!$smarty->is_cached('shop_convenient.html', $cache_id)){
 		$res = $db->getAll('SELECT cat_id,cat_name FROM '.$ecs->table('category').' where parent_id='.$cat_id.' and is_show=1 order by sort_order');
 		$cat_list = array();
 		$i = 1;
@@ -65,8 +65,8 @@ if($act == "default"){
 		//$smarty->assign('goods_list',      array_merge($goods_list,$goods_list,$goods_list,$goods_list,$goods_list,$goods_list,$goods_list,$goods_list,$goods_list));
 		$page_big = $goods_count>0?ceil($goods_count/$page_size):1;
 		$smarty->assign('total',      array('count'=>$goods_count,'page_big'=>$page_big, 'page'=>$page, 'page_before'=>$page-1, 'page_after'=>($page_big>$page?$page+1:0),'cat_id'=>$cat_id,'i_cur'=>$i_cur-1));
-	}
-	$smarty->display('shop_convenient.html', $cache_id);
+	//}
+	$smarty->display('shop_convenient.html');
 }elseif($act == "goods_list"){
 	$children = get_children($cat_id);
 	$goods_count = $db->getOne('SELECT count(*) FROM ' . $ecs->table('goods') . ' AS g ' .

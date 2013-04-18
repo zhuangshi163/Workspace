@@ -17,12 +17,12 @@ if($act=='login'){
 }elseif($act=='login_submit'){	
 	$store_name = !empty($_REQUEST['store_name']) ? trim($_REQUEST['store_name']) : '';
 	$password = !empty($_REQUEST['password']) ? trim($_REQUEST['password']) : '';
-	if($store_name=='' || !preg_match("/^[a-zA-Z0-9]+$/",$store_name)) show_msg('请输入正确的用户名。');
+	if($store_name=='' || !preg_match("/^[a-zA-Z0-9]+$/",$store_name)) show_msg('请输入正确的用户名。','返回登录');
 	
 	$store = $db->getRow('SELECT * FROM ' . $ecs->table('store') . " WHERE store_name='$store_name'");
-	if(empty($store)) show_msg('用户名输入有误，请重新输入。');
-	if(md5($password)!=$store['password']) show_msg('密码输入有误，请重新输入。');
-	if($store['restraint']==1) show_msg('此店家已被限制使用，如有问题请联系网站管理员。');
+	if(empty($store)) show_msg('用户名输入有误，请重新输入。','返回登录');
+	if(md5($password)!=$store['password']) show_msg('密码输入有误，请重新输入。','返回登录');
+	if($store['restraint']==1) show_msg('此店家已被限制使用，如有问题请联系网站管理员。','返回登录');
 	
 	$ip = real_ip();
 	$time_now = time();

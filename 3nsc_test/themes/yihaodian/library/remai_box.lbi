@@ -1,0 +1,42 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $best_goods} -->
+<div class="remai_box">
+<div class="f_l">
+<div class="tit" style="padding-left:25px">热卖推荐</div>
+<div class="clearfix">
+  <!--{foreach from=$best_goods item=goods name=no}-->
+  	<!-- {if $smarty.foreach.no.iteration<3}-->
+  <div class="goodsItem" >
+           <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a> 
+           <ul>
+           <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+           今日特价：<font class="f1"><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}
+          <!--{/if}-->
+          <br/>
+          <div style="padding-top:7px">
+           <a href="javascript:addToCart({$goods.goods_id})"><img src="../images/bnt_cat1.gif"></a>
+           </div>
+           </font>
+            </ul>
+  </div>
+   <!--{/if}-->
+  <!--{/foreach}-->
+</div>
+</div>
+
+<div class="f_r">
+<div class="tit">促销活动</div>
+<div class="clearfix" style="padding-top:5px; line-height:22px">
+
+<p><a href="#">▪ 休闲零食特价买赠大酬</a></p> 
+<p><a href="#">▪ 买麦片、蜂蜜满28元</a></p>  
+<p><a href="#">▪ 买方便面送咖啡</a></p>  
+<p><a href="#">▪ whisper活力薄 </a></p> 
+
+
+</div>
+</div>
+
+</div>
+<div class="blank"></div>
+<!-- {/if} -->

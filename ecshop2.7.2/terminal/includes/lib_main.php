@@ -116,45 +116,48 @@ function get_footer()
  * @param   string  $auto_redirect      是否自动跳转
  * @return  void
  */
-function show_msg($content, $links = '', $hrefs = '', $type = 'info', $auto_redirect = true)
+function show_msg($content, $links = '', $hrefs = '', $type = 'info', $auto_redirect = true,$message_info ='',$speak_info='')
 {
-	assign_template();
+    assign_template();
 
-	$msg['content'] = $content;
-	if (is_array($links) && is_array($hrefs))
-	{
-		if (!empty($links) && count($links) == count($hrefs))
-		{
-			foreach($links as $key =>$val)
-			{
-				$msg['url_info'][$val] = $hrefs[$key];
-			}
-			$msg['back_url'] = $hrefs['0'];
-		}
-	}
-	else
-	{
-		$link   = empty($links) ? $GLOBALS['_LANG']['back_up_page'] : $links;
-		$href    = empty($hrefs) ? 'javascript:history.back()'       : $hrefs;
-		$msg['url_info'][$link] = $href;
-		$msg['back_url'] = $href;
-	}
+    $msg['content'] = $content;
+    if (is_array($links) && is_array($hrefs))
+    {
+        if (!empty($links) && count($links) == count($hrefs))
+        {
+            foreach($links as $key =>$val)
+            {
+                $msg['url_info'][$val] = $hrefs[$key];
+            }
+            $msg['back_url'] = $hrefs['0'];
+        }
+    }
+    else
+    {
+        $link   = empty($links) ? $GLOBALS['_LANG']['back_up_page'] : $links;
+        $href    = empty($hrefs) ? 'javascript:history.back()'       : $hrefs;
+        $msg['url_info'][$link] = $href;
+        $msg['back_url'] = $href;
+    }
 
-	$msg['type']    = $type;
-	$position = assign_ur_here(0, $GLOBALS['_LANG']['sys_msg']);
-	$GLOBALS['smarty']->assign('page_title', $position['title']);   // 页面标题
-	$GLOBALS['smarty']->assign('ur_here',    $position['ur_here']); // 当前位置
+    $msg['type']    = $type;
+    $position = assign_ur_here(0, $GLOBALS['_LANG']['sys_msg']);
+    $GLOBALS['smarty']->assign('page_title', $position['title']);   // 页面标题
+    $GLOBALS['smarty']->assign('ur_here',    $position['ur_here']); // 当前位置
 
-	if (is_null($GLOBALS['smarty']->get_template_vars('helps')))
-	{
-		$GLOBALS['smarty']->assign('helps', get_shop_help()); // 网店帮助
-	}
+    if (is_null($GLOBALS['smarty']->get_template_vars('helps')))
+    {
+        $GLOBALS['smarty']->assign('helps', get_shop_help()); // 网店帮助
+    }
 
-	$GLOBALS['smarty']->assign('auto_redirect', $auto_redirect);
-	$GLOBALS['smarty']->assign('message', $msg);
-	$GLOBALS['smarty']->display('message.html');
+    $GLOBALS['smarty']->assign('auto_redirect', $auto_redirect);
+    $GLOBALS['smarty']->assign('message', $msg);
+    $GLOBALS['smarty']->assign('message_info', $message_info);
+    $GLOBALS['smarty']->assign('speak_info', $speak_info);
+    
+    $GLOBALS['smarty']->display('message.html');
 
-	exit;
+    exit;
 }
 
 /**

@@ -56,5 +56,5 @@ if (!$smarty->is_cached('shop_specials.html', $cache_id)){
 	
 	
 }
-$smarty->display('shop_specials.html', $cache_id);
+$smarty->display('shop_specials.html');
 ?>

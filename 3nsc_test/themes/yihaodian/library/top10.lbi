@@ -1,0 +1,36 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="box">
+<div class="box_1">
+<h3><span>热卖商品排行榜</span></h3>
+
+
+  <div class="left_hot_box boxCenterList clearfix top10List">
+ <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+  <ul class="clearfix" style="overflow:hidden" style="position:relative">
+	<span class="iteration">{$smarty.foreach.top_goods.iteration}</span>
+	<!-- {if $smarty.foreach.top_goods.iteration<2}-->
+      <li class="topimg">
+      <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="samllimg" /></a>
+      </li>
+       <li style="float:left; width:100px; padding:0; margin:0;">
+      <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a> <br />
+       <!--{if $goods.promote_price neq "" } -->
+            <font class="f1">促销价：{$goods.promote_price}</font><br />
+            <!--{else}-->
+            <font class="f1">本店价：{$goods.shop_price}</font><br />
+            <!--{/if}-->
+      </li>
+	<!-- {/if} -->	
+    
+    <!-- {if $smarty.foreach.top_goods.iteration>1}-->	
+      <li style=" width:153px; height:20px;" class="sandian">
+      <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a>
+      </li>
+      <!-- {/if} -->	
+    </ul>
+  <!-- {/foreach} -->
+
+  </div>
+    </div>
+</div>
+<div class="blank"></div>

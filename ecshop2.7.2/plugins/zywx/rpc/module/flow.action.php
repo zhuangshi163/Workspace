@@ -779,7 +779,7 @@ class FlowAction {
 	    }
 	
 	    $order['from_ad']          = !empty($_SESSION['from_ad']) ? $_SESSION['from_ad'] : '0';
-	    $order['referer']          = !empty($_SESSION['referer']) ? addslashes($_SESSION['referer']) : '';
+	    $order['referer']          = !empty($_SESSION['referer']) ? addslashes($_SESSION['referer']) : 'Android';
 	
 	    /* 记录扩展信息 */
 	    if ($flow_type != CART_GENERAL_GOODS)

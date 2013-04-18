@@ -1,0 +1,104 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<?php
+ include_once('themes/' . $GLOBALS['_CFG']['template'].'/init.php');
+?>
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+
+<div class="topNav">
+<div class="block " style=" position:relative">
+   {insert_scripts files='transport.js,utils.js'}
+   <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+    <!--{if $navigator_list.top}-->
+    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+            | 
+            	<img src="../images/t{$smarty.foreach.nav_top_list.iteration}.gif" />
+             <a style="color:#666" href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+     <!-- {/foreach} -->        
+   <!-- {/if} -->
+</div>
+</div>
+
+
+
+
+<div class="header_bg">
+
+<div class="block clearfix" style="height:82px;">
+<div style="float:left"><a href="../index.php" name="top"><img src="../images/logo.gif" /></a></div>
+ <div id="mainNav">
+  <a href="../index.php"{if $navigator_list.config.index eq 1} class="cur"{/if}>{$lang.home}  </a>
+  <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>{$nav.name} </a>
+ <!-- {/foreach} -->
+</div>
+</div>
+
+ 
+
+<div class="block" >
+
+<a class="category_all">
+所有商品分类
+</a>
+
+
+<script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+             alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+<form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_l"  >
+
+<div style="float:left; padding:5px 0 0 10px">
+ <input name="keywords" type="text" id="keyword"  value="输入商品名称或商品货号..." onclick="javascript:this.value='';"   class="B_input" />
+  </div> 
+ 
+ 
+ 
+ 
+ 
+   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
+   </form>
+   
+<div class="search_r">
+<div class="keys f_l">  
+    {if $searchkeywords}
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+</div>
+
+{insert_scripts files='transport.js'}
+<div class="cart">
+<div class="f_l"  id="ECS_CARTINFO" style="padding-left:40px">
+ {insert name='cart_info'}
+</div> 
+<div class="f_r" style="padding:9px 2px 0 0">
+<a href="flow.php">
+ <img style="float:right" src="../images/jiesuan.gif"></a>
+ 
+</div> 
+</div>
+</div> 
+</div>
+</div>
+
+
+ 

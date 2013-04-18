@@ -1,0 +1,195 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="themes/ecmoban_jindong2012/qq/images/qq.css" rel="stylesheet" type="text/css" />
+<script language='javascript' src='themes/ecmoban_jindong2012/qq/ServiceQQ.js' type='text/javascript' charset='utf-8'></script>
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+
+
+ 
+
+
+ 
+<ul id="top_nav_ul">
+
+<div class="block"  style=" position:relative">
+
+			    
+<div style="float:right; height:31px; padding-left:28px;">
+		<!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+		<a href="{$nav.url}"  <!-- {if $nav.opennew eq 1} -->  target="_blank" <!-- {/if} -->>{$nav.name}</a> <img style="vertical-align:middle" src="../images/nav_li.gif">
+			
+			  <!-- {/foreach} -->
+			</div> 
+            
+<div  style="float:left; color:#acacac; padding-right:15px;">         
+   {insert_scripts files='transport.js,utils.js'}
+   <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font> 
+</div>     
+         
+            
+      </div>         
+
+   
+	</ul>
+
+
+
+
+    
+
+ 
+
+ <div class="block clearfix" style="position:relative; z-index:99999999; height:90px;">
+ <div class="logo  " ><a  href="../index.php" name="top"><img src="../images/logo.gif" /> </a></div>
+ 
+ 
+ 
+ 
+<div id="search" >
+ 
+   
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()"  >
+  <div class="B_input_box">
+   <input name="keywords" type="text" id="keyword" value="品名或商品号" onclick="javascript:this.value=''" class="B_input"/>
+   </div>
+   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
+  
+   </form>
+   <div class="keys  ">
+   <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+           alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+    {if $searchkeywords}
+  <b> 热门关键词：</b>
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+  </div>
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+</div>
+
+ 
+ 
+ <div style=" float:right; width:253px; padding-top:28px;">
+ 
+  
+ <div class="f_l log"  style="position:relative; z-index:99999999; ">
+  <ul class="ul1" onmouseover="this.className='ul1 ul1_on'" onmouseout="this.className='ul1'">
+ <a class="a1" href="user.php">我的账户</a>
+  <div class="ul1_float">
+ 
+  
+  <ul>
+  
+     <a href="user.php?act=order_list">我的订单</a>
+     <a href="user.php?act=message_list">我的留言</a>
+     <a href="user.php?act=collection_list">我的收藏</a>
+     <a href="user.php?act=affiliate">我的推荐</a>
+     <a href="user.php?act=profile">用户信息</a>
+     <a href="user.php?act=address_list">收货地址</a>
+     
+ </ul>    
+  </div>
+    <div class="dang"></div>
+ </ul>
+ 
+ 
+ 
+  
+  
+  
+ </div>
+
+ 
+ <div class="buy_car_bg_box" style="float:right;  ">  
+ 
+<div class="buy_car_bg " id="ECS_CARTINFO" onmouseover="this.className='buy_car_bg ul1_on'" onmouseout="this.className='buy_car_bg'">
+
+ 
+ <a   href="flow.php">{insert name='cart_info'}</a>
+   <div class="dang"></div>
+</div> 
+</div>
+ 
+ 
+ </div>
+  
+ 
+  
+ 
+ 
+</div>
+
+ 
+ <div style="clear:both"></div>
+
+<div   class="block clearfix" style=" position:relative; z-index:999; ">
+<div id="mainNav" class="clearfix">
+
+<div class="category_all2"  onmouseover="this.className='category_all2 category_all2_on'" onmouseout="this.className='category_all2'">
+<a class="all" href="catalog.php">全部商品分类</a>
+
+
+ 
+
+
+
+</div>
+
+
+  <a class="aa" href="../index.php"  {if $navigator_list.config.index eq 1} id="aa_on"   {/if}>{$lang.home} </a>
+  
+  
+  <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+ 
+  <a  class="aa" {if $nav.active eq 1}  id="aa_on" {/if}  href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a>
+ 
+ <!-- {/foreach} -->
+ 
+ 
+ <div class="mainNav_r">
+ <a href="message.php"><img src="../images/meun_r.gif"></a>
+ 
+ </div>
+  
+ 
+ </div>
+</div>
+ 
+
+
+
+
+
+
+ 
+
+<div class="blank"></div>

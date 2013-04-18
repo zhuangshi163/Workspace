@@ -52,9 +52,6 @@
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
     font-weight: bold;
 }
-.ui-accordion .ui-accordion-icons {
-    padding-left: 0.5em;
-}
 #category h3 {
 	border-bottom: 1px solid #ECECEC;
 	border-top: 1px solid #FFFFFF;

@@ -230,12 +230,13 @@
 	
 	<script type="text/javascript">
 		function init(){
-			//var printer = new ActiveXObject("HsPayControl.CardReader");
+			var printer = new ActiveXObject("HsPayControl.CardReader");
 			//printer.ReadTrackData23(2);
-			var data = "0vq93c1t6f";
+			//var data = printer.Track2Data;
+			//var data="121113218322";
 			try{
 				printer.ReadTrackData23(2);
-				data = printer.Track2Data;
+				var data = printer.Track2Data;
 			}catch(e){}
 			//data = data.substring(2, data.indexOf("="));			
 			
@@ -247,7 +248,7 @@
 			}else {
 				//alert('刷卡失败或超时，请再试一次');
 				//window.location = "/";
-				document.getElementById("myContext").innerHTML='<div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">刷卡出现错误或超时</span></p><br/><br/><img src="../images/re_card.png" onclick ="window.history.go(0);" /><img src="../images/forget_card.png" onmousedown="toConvenient()" /></div>';				
+				document.getElementById("myContext").innerHTML='<div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><p style="line-height:95px;"><span id="card_times1" style="color:#FF0000;font-size:50px;font-weight:700">刷卡出现错误或超时</span></p><br/><br/><img src="../img/re_card.png" onclick ="window.history.go(0);" /><img src="../img/forget_card.png" onmousedown="toConvenient()" /></div>';				
 				
 			}
 		}
@@ -314,6 +315,15 @@
 <form id="form1" name="form1" method="post" action="user_with_card.php?act=act_register">
    <input name="card_id" type="hidden" class="shuru readonly" id="card_id" /></td>
   <table width="709" border="0">
+  	 <tr>
+      <td>&nbsp;</td>
+      <td>类型:</td>
+      <td colspan="2">
+      		<input type="radio" name="r_style" id="r_reg" value="1" checked /><label for="r_reg">注册</label>
+        	<input type="radio" name="r_style" id="r_card" value="0"  /><label for="r_card">取卡</label>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
     <tr>
       <td>&nbsp;</td>
       <td>姓名:</td>
@@ -334,7 +344,14 @@
       <td>&nbsp;</td>
       <td>电话:</td>
       <td colspan="2"><label for="phone"></label>
-      <input name="phone" type="text" class="shuru" id="phoneId"  onfocus="showNumZone('phoneId', '手机号')" /></td>
+      <input name="phone" type="text" class="shuru" id="phone"  onfocus="showNumZone('phone', '手机号')" /></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>密码:</td>
+      <td colspan="2"><label for="phone"></label>
+      <input name="pass" type="password" class="shuru" id="pass"  onfocus="showNumZone('pass', '密码')" /></td>
       <td>&nbsp;</td>
     </tr>
     <tr>
@@ -347,9 +364,9 @@
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td width="227" align="left">
-      <input type="button" class="but submit" value=""  onclick="dosubmit()"></td>
+      <input type="button" class="but submit" value=""  onclick="dosubmit()" /></td>
       <td width="234" align="right">
-      <input type="button" class="but button" value="" name="clear" onClick="cleartext()"></td>
+      <input type="button" class="but button" value="" name="clear" onclick="cleartext()" /></td>
       <td>&nbsp;</td>
     </tr>
   </table>

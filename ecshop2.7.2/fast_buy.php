@@ -248,7 +248,8 @@ if (!$smarty->is_cached('fast_buy_list.dwt', $cache_id))
     $brands[0]['url'] = build_uri('fast_buy', array('cid' => $cat_id, 'bid' => 0, 'sid'=>$supplier, 'price_min'=>$price_min, 'price_max'=> $price_max, 'filter_attr'=>$filter_attr_str), $cat['cat_name']);
     $brands[0]['selected'] = empty($brand) ? 1 : 0;
 
-    $smarty->assign('brands', $brands);
+    //$smarty->assign('brands', $brands);		//隐藏快速下单的品牌属性筛选
+    $GLOBALS['smarty']->assign('brands', array());
 
     /* 供货商筛选 */
     $in_cate = db_create_in(array_unique(array_merge(array($cat_id), array_keys(cat_list($cat_id, 0, false)))));

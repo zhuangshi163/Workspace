@@ -1,0 +1,27 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<DIV id=categoriescon>
+	<DIV id=categoriescontitle>分类筛选</DIV>
+	<DIV id=categorieslist><!-- showMore: 0<br/> -->
+	<!--{foreach from=$categories item=cat}-->
+		<UL>
+		  <LI class=categorieslistlast><A class=mainmenuactive href="{$cat.url}">{$cat.name|escape:html}</A> </LI>
+		  {if $cat.cat_id}
+		  <!--{foreach from=$cat.cat_id item=child}-->
+		  	<ul>
+				<li><a class="selectedlist" href="{$child.url}">{$child.name|escape:html}</a></li>
+				{if $child.cat_id}
+				<!--{foreach from=$child.cat_id item=childer}-->
+				<ul>
+					<li>
+					<a href="{$childer.url}">{$childer.name|escape:html}</a>
+					</li>
+				</ul>				
+				 <!--{/foreach}-->
+				 {/if}
+			<ul>
+		  <!--{/foreach}-->
+		  {/if} 
+		</UL>
+	<!--{/foreach}--> 		
+	</DIV>
+</DIV>

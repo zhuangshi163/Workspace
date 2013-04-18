@@ -2873,5 +2873,42 @@ if (!function_exists('array_combine')) {
         return $combined;
     }
 }
+/**
+ * 记录店家帐户变动
+ * @param   int     $store_id        用户id
+ * @param   float   $store_money     可用余额变动
+ * @param   float   $frozen_money   冻结余额变动
+ * @param   int     $rank_points    等级积分变动
+ * @param   int     $pay_points     消费积分变动
+ * @param   string  $change_desc    变动说明
+ * @param   int     $change_type    变动类型：参见常量文件
+ * @return  void
+ */
+function store_account_change($store_id, $store_money = 0, $frozen_money = 0, $rank_points = 0, $pay_points = 0, $change_desc = '', $change_type = ACT_OTHER)
+{
+	/* 插入店家帐户变动记录 */
+	$account_log = array(
+			'store_id'       => $store_id,
+			'store_money'    => $store_money,
+			'frozen_money'  => $frozen_money,
+			'rank_points'   => $rank_points,
+			'pay_points'    => $pay_points,
+			'change_time'   => gmtime(),
+			'change_desc'   => $change_desc,
+			'change_type'   => $change_type
+	);
+
+	$GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('store_account_log'), $account_log, 'INSERT');
+
+	/* 更新店家信息 */
+	$sql = "UPDATE " . $GLOBALS['ecs']->table('store') .
+	" SET store_money = store_money + ('$store_money')," .
+	" frozen_money = frozen_money + ('$frozen_money')," .
+	" rank_points = rank_points + ('$rank_points')," .
+	" pay_points = pay_points + ('$pay_points')" .
+	" WHERE store_id = '$store_id' LIMIT 1";
+	$GLOBALS['db']->query($sql);
+}
+
 
 ?>

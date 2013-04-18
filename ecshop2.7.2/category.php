@@ -246,8 +246,8 @@ if (!$smarty->is_cached('category.dwt', $cache_id))
     $brands[0]['url'] = build_uri('category', array('cid' => $cat_id, 'bid' => 0, 'sid'=>$supplier, 'price_min'=>$price_min, 'price_max'=> $price_max, 'filter_attr'=>$filter_attr_str), $cat['cat_name']);
     $brands[0]['selected'] = empty($brand) ? 1 : 0;
 
-    $smarty->assign('brands', $brands);
-	
+    //$smarty->assign('brands', $brands);
+	$GLOBALS['smarty']->assign('brands', array());		//分类页隐藏品牌筛选
 
     /* 供货商筛选 */
     $in_cate = db_create_in(array_unique(array_merge(array($cat_id), array_keys(cat_list($cat_id, 0, false)))));
