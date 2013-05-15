@@ -50,8 +50,12 @@
     <input type="reset" value="{$lang.button_reset}" class="button" />
     <input type="hidden" name="act" value="submit_update" />
     <input type="hidden" name="delivery_id" value="{$delivery.delivery_id}" />
+    {if $operation neq 'view'}
+    <input type="hidden" name="operation" value="{$operation}"/>
+    {/if}
   </div>
 </form>
+{if $operation eq 'view'}
 	<form name="theForm" action="suppliers_delivery.php?act=operate" method="post">
 		<table cellpadding="3" cellspacing="1">
 		  	<tr>
@@ -72,6 +76,7 @@
 		    </tr>
 		</table>
 	</form>
+{/if}
 </div>
 
 <script language="JavaScript">

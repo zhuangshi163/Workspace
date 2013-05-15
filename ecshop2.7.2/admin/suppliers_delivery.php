@@ -118,13 +118,25 @@ elseif ($_REQUEST['act'] == 'view')
 	}
 	$GLOBALS['smarty']->assign('operable_list', $operable_list);
 	/* 页面按钮*/
-	$GLOBALS['smarty']->assign('ur_here', $GLOBALS['_LANG']['view_delivery']);
 	$type = isset($_REQUEST['type']) ? isset($_REQUEST['type']):'default';
 	if($type == 'ship'){
 		$GLOBALS['smarty']->assign('action_link', array('text' => $GLOBALS['_LANG']['store_ship'], 'href' => 'suppliers_delivery.php?act=store_ship'));
 	}elseif ($type == 'default'){
 		$GLOBALS['smarty']->assign('action_link', array('text' => $GLOBALS['_LANG']['delivery_record'], 'href' => 'suppliers_delivery.php?act=list'));
 	}
+	/* 操作类型*/
+	if(!isset($_REQUEST['operation'])){
+		$operation = "view";
+		$ur_here = $GLOBALS['_LANG']['view_delivery'];
+	}elseif ($_REQUEST['operation'] == 'ship'){
+		$operation = "ship";
+		$ur_here = $GLOBALS['_LANG']['ship_delivery'];
+	}elseif ($_REQUEST['operation'] == 'confirm'){
+		$operation = "confirm";
+		$ur_here = $GLOBALS['_LANG']['confirm_delivery'];
+	}
+	$GLOBALS['smarty']->assign('operation', $operation);
+	$GLOBALS['smarty']->assign('ur_here', $ur_here);
 	/* 显示模板 */
 	assign_query_info();
 	$GLOBALS['smarty']->display("suppliers_delivery_view.htm");
@@ -205,9 +217,30 @@ elseif ($_REQUEST['act'] == 'submit_update')
 			" '$driver_name', driver_phone = '$driver_phone', admin_id='".$_SESSION['admin_id']."' ".
 			" WHERE delivery_id=$delivery_id";
 	$GLOBALS['db']->query($sql);
+	$label_result = $GLOBALS['_LANG']['update_success'];
+	/* 确认发货单或者发货*/
+	if(isset($_REQUEST['operation'])){
+		if($_REQUEST['operation'] == 'confirm'){
+			$confirmed = SDS_CONFIRMED;
+			$sql = "UPDATE ".$GLOBALS['ecs']->table('suppliers_delivery')." SET `status`=$confirmed, admin_id='".$_SESSION['admin_id']."' WHERE delivery_id=$delivery_id";
+			$GLOBALS['db']->query($sql);
+			$label_result = $GLOBALS['_LANG']['confirm_success'];
+		}elseif ($_REQUEST['operation'] == 'ship'){
+			/* 将供货商拆分订单设为发货状态*/
+			$shipped_status = SOSS_SHIPPED;
+			$sql = "UPDATE ".$GLOBALS['ecs']->table('split_order_info')." SET shipping_status=$shipped_status WHERE stock_id=".$delivery['stock_id'];
+			$GLOBALS['db']->query($sql);
+			
+			/* 将订货单设为发货状态*/
+			$shipped_status = SDS_SHIPPED;
+			$sql = "UPDATE ".$GLOBALS['ecs']->table('suppliers_delivery')." SET `status`=$shipped_status, admin_id='".$_SESSION['admin_id']."' WHERE delivery_id=$delivery_id";
+			$GLOBALS['db']->query($sql);
+			$label_result = $GLOBALS['_LANG']['ship_success'];
+		}
+	}
 	$links[0]['text'] = $GLOBALS['_LANG']['delivery_record'];
 	$links[0]['href'] = 'suppliers_delivery.php?act=list';
-	sys_msg($GLOBALS['_LANG']['update_success'], 0, $links);
+	sys_msg($label_result, 0, $links);
 }
 
 /*------------------------------------------------------ */
@@ -218,7 +251,7 @@ elseif ($_REQUEST['act'] == 'store_ship')
 	/* 检查权限 */
 	admin_priv('store_ship');
 	/* 获取可以送货的送货单*/
-	$sql = "SELECT store.store_remark, sup.suppliers_name, sd.delivery_sn, sd.delivery_id ".
+	$sql = "SELECT store.store_remark, sup.suppliers_name, sd.delivery_sn, sd.delivery_id, sd.driver_name, sd.driver_phone".
 			" FROM ".$GLOBALS['ecs']->table('suppliers_delivery')." AS sd ". 
 			" LEFT JOIN ".$GLOBALS['ecs']->table('suppliers')." AS sup ON sup.suppliers_id=sd.suppliers_id ".
 			" LEFT JOIN ".$GLOBALS['ecs']->table('store')." AS store ON store.store_id=sd.store_id ".
@@ -268,8 +301,8 @@ elseif ($_REQUEST['act'] == 'submit_store_ship')
 			" $driver_name_sql END, driver_phone = CASE delivery_id $driver_phone_sql END, ".
 			" driver_confirm_time=$now, `status`=".SDS_SHIPPED.", admin_id='".$_SESSION['admin_id']."' WHERE delivery_id in ($ids)";
 	$GLOBALS['db']->query($sql);
-	$links[0]['text'] = $GLOBALS['_LANG']['delivery_record'];
-	$links[0]['href'] = 'suppliers_delivery.php?act=list';
+	$links[0]['text'] = $GLOBALS['_LANG']['ship_delivery'];
+	$links[0]['href'] = 'suppliers_delivery.php?act=store_ship';
 	sys_msg($GLOBALS['_LANG']['update_success'], 0, $links);
 }
 

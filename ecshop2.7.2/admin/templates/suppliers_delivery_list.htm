@@ -73,10 +73,10 @@
     <td align="center" valign="top"  nowrap="nowrap">
     	<a href="suppliers_delivery.php?act=view&delivery_id={$delivery.delivery_id}">{$lang.view}</a>
     	{if $delivery.can_confirm}
-    	<a href="suppliers_delivery.php?act=operate&operation=confirm&delivery_id={$delivery.delivery_id}">{$lang.confirm}</a>
+    	<a href="suppliers_delivery.php?act=view&operation=confirm&delivery_id={$delivery.delivery_id}">{$lang.confirm}</a>
 	    {/if}
 	    {if $delivery.can_ship}
-    	<a href="suppliers_delivery.php?act=operate&operation=ship&delivery_id={$delivery.delivery_id}">{$lang.ship}</a>
+    	<a href="suppliers_delivery.php?act=view&operation=ship&delivery_id={$delivery.delivery_id}">{$lang.ship}</a>
 	    {/if}
     	{if $delivery.can_remove}
     	<a href="javascript:;" onclick="listTable.remove({$delivery.delivery_id}, '{$lang.remove_confirm}', 'remove_order')">{$lang.remove}</a>

@@ -52,6 +52,8 @@ $_LANG['label_operable_act'] = '当前可执行操作：';
 $_LANG['op_confirm'] = '确认发货单';
 $_LANG['op_ship'] = '发货';
 $_LANG['confirm_success'] = '确认放货单成功';
+$_LANG['ship_delivery'] = '门店发货';
+$_LANG['confirm_delivery'] = '确认发货单';
 
 /* 门店发货 */
 $_LANG['store_ship'] = '门店发货';

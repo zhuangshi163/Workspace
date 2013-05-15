@@ -7,7 +7,7 @@
   <table width="100%" cellpadding="3" cellspacing="1">
   <tr>
     <th>{$lang.label_number}</th>
-    <th>{$lang.label_verify_delivery_sn}</th>
+    <th>{$lang.label_delivery_sn}</th>
     <th>{$lang.label_store_name}</th>
     <th>{$lang.label_delivery_driver_name}</th>
     <th>{$lang.label_delivery_driver_phone}</th>
@@ -20,13 +20,13 @@
     <td align="center">{$delivery.delivery_sn}</td>
     <td align="center">{$delivery.store_remark}</td>
     <td align="center">
-    	<input id="driver_name{$smarty.foreach.g.index}" type="text" name="driver_name[{$delivery.delivery_id}]" size="10" onfocus="driver_name_input_event(this, {$smarty.foreach.g.index})"/>
+    	<input id="driver_name{$smarty.foreach.g.index}" value="{$delivery.driver_name}" type="text" name="driver_name[{$delivery.delivery_id}]" size="10" onfocus="driver_name_input_event(this, {$smarty.foreach.g.index})"/>
     </td>
     <td align="center">
-    	<input id="driver_phone{$smarty.foreach.g.index}" type="text" name="driver_phone[{$delivery.delivery_id}]" size="16" onfocus="driver_phone_input_focus_event(this, {$smarty.foreach.g.index})"/>
+    	<input id="driver_phone{$smarty.foreach.g.index}" value="{$delivery.driver_phone}" type="text" name="driver_phone[{$delivery.delivery_id}]" size="16" onfocus="driver_phone_input_focus_event(this, {$smarty.foreach.g.index})"/>
     </td>
     <td id="result{$smarty.foreach.g.index}" align="center">
-    	<a href="suppliers_delivery.php?act=view&delivery_id={$delivery.delivery_id}&type=ship">{$lang.detail_info}</a>
+    	<a href="suppliers_delivery.php?act=view&delivery_id={$delivery.delivery_id}&type=ship&operation=ship">{$lang.detail_info}</a>
     </td>
   </tr>
   {foreachelse}
@@ -172,7 +172,9 @@
 	function submit_form(){
 		var validator = new Validator('theForm');
 		for(var i=0; i<driver_name_input.length; i++){
-			if(driver_name_input[i]!=SUCC_OPERATION && driver_phone_input[i]!=SUCC_OPERATION){
+			var driver_name = document.getElementById("driver_name"+i).value;
+			var driver_phone = document.getElementById("driver_phone"+i).value;
+			if(!Utils.isTel(driver_phone) && Utils.trim(driver_name).length<=0){
 				validator.addErrorMsg(fill_ship_form_righ);
 				break;
 			}
