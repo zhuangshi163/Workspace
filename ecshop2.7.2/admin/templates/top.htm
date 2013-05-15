@@ -187,11 +187,11 @@ var adminId = "{$admin_id}";
 </head>
 <body>
 <div id="header-div">
-  <div id="logo-div" style="bgcolor:#000000;"><img src="images/ecshop_logo.gif" alt="ECSHOP - power for e-commerce" /></div>
+  <div id="logo-div" style="bgcolor:#000000;"><img src="images/Logo.png" alt="JKDUN - power for e-commerce" /></div>
   <div id="license-div" style="bgcolor:#000000;"></div>
   <div id="submenu-div">
     <ul>
-    {if $store_id eq 0}
+    {if $admin_name eq 'admin'}
       <li><a href="index.php?act=about_us" target="main-frame">{$lang.about}</a></li>
       <li><a href="javascript:web_address();">{$lang.help}</a></li>
       <li><a href="javascript:modalDialog('index.php?act=calculator', 'calculator', 340, 250)">{$lang.toggle_calculator}</a></li>
@@ -402,7 +402,13 @@ var adminId = "{$admin_id}";
   </div>
 </div>
 <div id="menu-div">
-	{if $store_id eq 0}
+	{if $suppliers_id neq 0}
+	<ul>
+	    <li class="fix-spacel">&nbsp;</li>
+	    <li><a href="sale_list.php?act=list" target="main-frame">{$lang.admin_home}</a></li>
+	    <li class="fix-spacer">&nbsp;</li>
+  	</ul>
+	{elseif $store_id eq 0}
   <ul>
     <li class="fix-spacel">&nbsp;</li>
     <li><a href="index.php?act=main" target="main-frame">{$lang.admin_home}</a></li>

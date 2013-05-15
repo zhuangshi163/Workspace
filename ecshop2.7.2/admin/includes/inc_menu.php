@@ -153,4 +153,10 @@ $modules['16_email_manage']['view_sendlist']        = 'view_sendlist.php?act=lis
 
 $modules['17_recharge_manage']['01_store_recharge']		= 'store_account.php?act=list';
 $modules['17_recharge_manage']['02_user_recharge']		= 'user_account.php?act=list';
+
+$modules['18_suppliers_manage']['00_stock_record_order']		= 'suppliers_order.php?act=list';
+$modules['18_suppliers_manage']['01_stock_record_list']		= 'suppliers_stock.php?act=list';
+$modules['18_suppliers_manage']['02_sort_record']		= 'suppliers_sort.php';
+$modules['18_suppliers_manage']['03_delivery_record']	= 'suppliers_delivery.php?act=list';
+$modules['18_suppliers_manage']['04_store_ship']	= 'suppliers_delivery.php?act=store_ship';
 ?>

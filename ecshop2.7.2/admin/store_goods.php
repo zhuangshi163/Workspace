@@ -200,7 +200,86 @@ elseif ($_REQUEST['act'] == 'edit_goods_sale_price')
 	}
 
 }
+/*------------------------------------------------------ */
+//-- 批量修改商品的门店价格
+/*------------------------------------------------------ */
+elseif ($_REQUEST['act'] == 'store_change_price_all')
+{
+	check_authz_json('store_change_price');
+	$store_id = (isset($_SESSION['store_id'])&&$_SESSION['store_id']!=0) ?$_SESSION['store_id']: (empty($_POST['store_id']) ? '' : trim($_POST['store_id']));
+	
+	$changePrices = $_POST['changePrices'];
+	foreach ($changePrices as $key=>$value){
+		if($value==''||$value==null){
+			
+		}else{
+			$goods_id=$key;
+			$goods_price = floatval($value);
+			if ($goods_price <=0 || $goods_price == 0 && $_POST['val'] != "$goods_price")
+			{
+				continue ;
+			}
+			
+			if(intval($db->getOne('SELECT count(*) FROM ' . $ecs->table('goods') . " WHERE goods_id=$goods_id"))==0) 	{
+				continue ;
+			}
+			 $price_id = intval($db->getOne('SELECT price_id FROM ' . $ecs->table('store_price') . " WHERE goods_id=$goods_id AND store_id=$store_id"));
+			$goods_price = number_format($goods_price, 2, '.', '');
+			if($price_id>0) {
+				$db->query("UPDATE " . $ecs->table('store_price') . " SET price='$goods_price' WHERE price_id=$price_id");
+				clear_cache_files();
+				//make_json_result(number_format($goods_price, 2, '.', ''));
+			}
+			else{
+				$sql = "INSERT INTO " . $ecs->table('store_price') . " (goods_id, store_id, price) " .
+						"VALUES ('$goods_id', '$store_id', '$goods_price')";
+				$db->query($sql);
+				clear_cache_files();
+				//make_json_result(number_format($goods_price, 2, '.', ''));
+			}
+		}
+	}
+    $link[] = array('href' => 'store_goods.php?act=list', 'text' => $_LANG['store_change_price']);
+    sys_msg($_LANG['batch_handle_ok'], 0, $link);
+	
+//	$goods_id       = intval($_POST['id']);
+//	$goods_price    = floatval($_POST['val']);
+//	$price_rate     = floatval($_CFG['market_price_rate'] * $goods_price);
+//	$store_id = (isset($_SESSION['store_id'])&&$_SESSION['store_id']!=0) ?$_SESSION['store_id']: (empty($_POST['store_id']) ? '' : trim($_POST['store_id']));
 
+// 	if ($goods_price < 0 || $goods_price == 0 && $_POST['val'] != "$goods_price")
+// 	{
+// 		make_json_error($_LANG['shop_price_invalid']);
+// 	}
+// 	if(intval($db->getOne('SELECT count(*) FROM ' . $ecs->table('goods') . " WHERE goods_id=$goods_id"))==0) 	{
+// 		make_json_error($_LANG['shop_price_invalid']);
+// 	}
+
+// 	$price_id = intval($db->getOne('SELECT price_id FROM ' . $ecs->table('store_price') . " WHERE goods_id=$goods_id AND store_id=$store_id"));
+
+// 	if($goods_price==0){
+// 		if($price_id>0){
+// 			$db->query("DELETE FROM " . $ecs->table('store_price') . " WHERE price_id=$price_id");
+// 			clear_cache_files();
+// 			make_json_result(number_format($goods_price, 2, '.', ''));
+// 		}
+// 	}else{
+// 		$goods_price = number_format($goods_price, 2, '.', '');
+// 		if($price_id>0) {
+// 			$db->query("UPDATE " . $ecs->table('store_price') . " SET price='$goods_price' WHERE price_id=$price_id");
+// 			clear_cache_files();
+// 			make_json_result(number_format($goods_price, 2, '.', ''));
+// 		}
+// 		else{
+// 			$sql = "INSERT INTO " . $ecs->table('store_price') . " (goods_id, store_id, price) " .
+// 					"VALUES ('$goods_id', '$store_id', '$goods_price')";
+// 			$db->query($sql);
+// 			clear_cache_files();
+// 			make_json_result(number_format($goods_price, 2, '.', ''));
+// 		}
+// 	}
+
+}
 
 /*------------------------------------------------------ */
 //-- 修改商品排序

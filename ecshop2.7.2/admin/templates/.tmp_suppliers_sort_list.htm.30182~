@@ -1,0 +1,38 @@
+{include file="pageheader.htm"}
+<!-- start备货单列表 -->
+<div class="form-div">
+  	<form action="" name="searchForm">
+  		<img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+  		<!-- 供货商 -->
+      	<select name="suppliers_stock_id">
+      		<option value="0">请选择未分拣备货单单号</option>
+			{foreach from=$suppliers_stock item=stock}
+				<option value="{$stock.stock_id}">{$stock.stock_sn}</option>
+			{/foreach}
+		</select>
+		<!-- 关键字 -->
+    	&nbsp;关键字 <input type="text" name="keyword" size="15" />
+		<input type="submit" value="{$lang.button_search}" class="button" />
+	</form>
+</div>  	
+<!-- end 备货单列表-->
+<!-- start sort list -->
+<div class="list-div" id="listDiv">
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>编号</th>
+    <th><a href="javascript:listTable.sort('store_id'); ">门店名称</a></th>
+    <th><a href="javascript:listTable.sort('status'); ">状态</a></th>
+    <th style="width:40%">{$lang.handler}</th>
+  </tr>
+  {foreach from=$sort_list item=s name=sort}
+  <tr>  	
+  	<th>{$smarty.foreach.sort.iteration}</th>
+	<th>{$s.store_remark}</th>
+	<th>{if $s.status eq 0}未分拣{else}已经分拣{/if}</th>
+	<th> <a title="查看"><img width="16" height="16" border="0" src="images/icon_view.gif"></a><a>打印</a><a>分箱核对</a></th>
+  </tr>
+  {/foreach}
+</table>
+</div>
+<!-- end sort list -->

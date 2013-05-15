@@ -1,0 +1,27 @@
+{literal}
+<style type="text/css">
+body,td { font-size:13px; }
+</style>
+{/literal}
+<!-- start 分箱核对 -->
+<table width="100%" border="1" style="border-collapse:collapse;border-color:#000;" >
+  <tr>
+    <th bgcolor="#cccccc">编号</th>
+	<th bgcolor="#cccccc">商品名称</th>
+    <th bgcolor="#cccccc">货号</th>
+	<th bgcolor="#cccccc">规格</th>
+    <th bgcolor="#cccccc">应备货数量</th>
+    <th bgcolor="#cccccc">实际备货数量</th>
+  </tr>	
+  {foreach from=$goods_list item=s name=stock}
+  <tr align="center">  	
+  	<td>{$smarty.foreach.stock.iteration}</td>
+  	<td>{$s.goods_name}</td>
+  	<td>{$s.goods_sn}</td>
+	<td>{$s.goods_specification}</td>
+	<td>{$s.need_goods_num}</td>
+	<td></td>
+  </tr>
+  {/foreach}
+</table>
+<!-- end 分箱核对 -->

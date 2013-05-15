@@ -54,6 +54,8 @@ elseif ($_REQUEST['act'] == 'top')
     $smarty->assign('admin_id', $_SESSION['admin_id']);
     $smarty->assign('certi', $_CFG['certi']);
 	$smarty->assign('store_id', $_SESSION['store_id']);
+	$smarty->assign('suppliers_id', $_SESSION['suppliers_id']);
+	$smarty->assign('admin_name', $_SESSION['admin_name']);
     
     $smarty->display('top.htm');
 }
@@ -160,6 +162,10 @@ elseif ($_REQUEST['act'] == 'clear_cache')
 /*------------------------------------------------------ */
 elseif ($_REQUEST['act'] == 'main')
 {
+	if(!empty($_SESSION['suppliers_id'])){
+		ecs_header("Location: ./sale_list.php?act=list\n");
+	}
+	
     //开店向导第一步
     if(isset($_SESSION['shop_guide']) && $_SESSION['shop_guide'] === true)
     {

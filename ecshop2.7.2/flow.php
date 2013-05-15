@@ -1635,6 +1635,55 @@ elseif ($_REQUEST['step'] == 'done')
             " FROM " .$ecs->table('cart') .
             " WHERE session_id = '".SESS_ID."' AND rec_type = '$flow_type'";
     $db->query($sql);
+    
+    $sql = "SELECT distinct g.suppliers_id FROM ".$ecs->table('cart') . " AS c, " . $ecs->table('goods') . " AS g " .
+    		"WHERE c.session_id = '" . SESS_ID . "' AND c.goods_id = g.goods_id";
+    //$res = $GLOBALS['db']->getAll($sql);
+    $res = $GLOBALS['db']->getAll($sql);
+    
+	foreach ($res AS $suppliers){
+		do
+		{
+			$order['order_sn'] = get_order_sn(); //获取新订单号
+			//$GLOBALS['db']->autoExecute($GLOBALS['ecs']->table('order_info'), $order, 'INSERT');
+			
+			$sql = "SELECT sum(c.goods_price)" .
+					" FROM " . $ecs->table('cart') ." as c,". $ecs->table('goods') ."as g".
+					" WHERE c.session_id = '" . SESS_ID . "' AND c.goods_id = g.goods_id AND g.suppliers_id=".$suppliers['suppliers_id'];
+			$order_count = $GLOBALS['db']->getOne($sql);
+			
+			$sql = "INSERT INTO " .$GLOBALS['ecs']->table('split_order_info'). 
+					" (order_sn,user_id,order_status,shipping_status,add_time,confirm_time,shipping_time,store_id,stock_id,order_amount,suppliers_id,main_order_id)" .
+                    "VALUES ($order[order_sn],'$_SESSION[user_id]','$order[order_status]','$order[shipping_status]','$order[add_time]', ".
+						"'$order[confirm_time]', '$order[shipping_time]', '$_SESSION[store_id]','0',$order_count,'$suppliers[suppliers_id]',$new_order_id)";
+			$GLOBALS['db']->query($sql);
+		
+			$error_no = $GLOBALS['db']->errno();
+		
+			if ($error_no > 0 && $error_no != 1062)
+			{
+				die($GLOBALS['db']->errorMsg());
+			}
+		}
+		while ($error_no == 1062); //如果是订单号重复则重新提交数据
+		
+		$new_split_order_id = $db->insert_id();
+		$order['split_order_id'] = $new_split_order_id;
+		
+		/* 插入订单商品 */
+		$sql = "INSERT INTO " . $ecs->table('split_order_goods') . "( " .
+				"order_id, goods_id, goods_name, goods_sn, goods_number, market_price, ".
+				"goods_price) ".
+				" SELECT '$new_split_order_id', c.goods_id, c.goods_name, c.goods_sn, c.goods_number, c.market_price, ".
+				"c.goods_price".
+				" FROM " .$ecs->table('cart') . " AS c, " . $ecs->table('goods') . " AS g " .
+				" WHERE session_id = '".SESS_ID."' AND c.goods_id = g.goods_id AND g.suppliers_id=".$suppliers['suppliers_id'];
+		$db->query($sql);
+	}
+    
+    
+    
+    
     /* 修改拍卖活动状态 */
     if ($order['extension_code']=='auction')
     {

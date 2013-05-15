@@ -103,6 +103,7 @@ $_LANG['tab_groupgoods'] = '配件';
 $_LANG['tab_article'] = '关联文章';
 
 $_LANG['lab_goods_name'] = '商品名称：';
+$_LANG['lab_goods_specification'] = '商品规格：';
 $_LANG['lab_goods_sn'] = '商品货号：';
 $_LANG['lab_goods_cat'] = '商品分类：';
 $_LANG['lab_other_cat'] = '扩展分类：';

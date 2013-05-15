@@ -238,4 +238,17 @@ define('LICENSE_VERSION', '1.0');
 /* 配送方式 */
 define('SHIP_LIST', 'cac|city_express|ems|flat|fpd|post_express|post_mail|presswork|sf_express|sto_express|yto|zto');
 
+/* 供货商发货状态 */
+define('SDS_UNCONFIRMED',				0); // 未确认
+define('SDS_CONFIRMED',					1); // 已确认
+define('SDS_SHIPPED',					2); // 已发货
+define('SDS_STORE_CONFIRMED',			3); // 门店确认
+
+/* 供货商拆分订单配送状态*/
+define('SOSS_UNSHIPED', 				0);	//	未发货
+define('SOSS_SHIPPED', 					1);	//	已发货
+define('SOSS_RECEIVED',   	            2); //	已收货
+define('SOSS_PREPARING',      	        3); //	备货中
+define('SOSS_SHIPPED_PART',       	    4); //	已发货(部分商品)
+define('SOSS_SHIPPED_ING',            	5); //	发货中(处理分单)
 ?>

@@ -103,6 +103,7 @@ elseif ($_REQUEST['act'] == 'signin')
         // 登录成功
         set_admin_session($row['user_id'], $row['user_name'], $row['action_list'], $row['last_login']);
         $_SESSION['suppliers_id'] = $row['suppliers_id'];
+        $_SESSION['suppliers_name'] = $row['user_name'];
         $_SESSION['store_id'] = $row['store_id'];
 
         if($row['action_list'] == 'all' && empty($row['last_login']))

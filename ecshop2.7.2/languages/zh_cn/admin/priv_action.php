@@ -25,6 +25,7 @@ $_LANG['templates_manage'] = '模板管理';
 $_LANG['db_manage'] = '数据库管理';
 $_LANG['sms_manage'] = '短信管理';
 $_LANG['recharge_manage'] = '充值管理';
+$_LANG['sup_order_manage'] = '供货商管理';
 
 //商品管理部分的权限
 $_LANG['goods_manage'] = '商品添加/编辑';
@@ -72,7 +73,7 @@ $_LANG['logs_manage'] = '管理日志列表';
 $_LANG['logs_drop'] = '删除管理日志';
 $_LANG['template_manage'] = '模板管理';
 $_LANG['agency_manage'] = '办事处管理';
-$_LANG['suppliers_manage'] = '供货商管理';
+$_LANG['suppliers_manage'] = '供货商账号管理';
 $_LANG['role_manage'] = '角色管理';
 $_LANG['store_manage'] = '店家管理';
 
@@ -158,4 +159,10 @@ $_LANG['charge_history']  = '充值记录 ';
 $_LANG['store_recharge'] = '店家充值';
 $_LANG['user_recharge']  = '会员充值';
 
+//供货商管理
+$_LANG['delivery_list'] = '发货记录';
+$_LANG['store_ship'] = '门店发货';
+$_LANG['stock_order_list'] = '生成备货单';
+$_LANG['stock_list'] = '备货单列表';
+$_LANG['sort_list'] = '门店分拣';
 ?>

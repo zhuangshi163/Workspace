@@ -1,0 +1,185 @@
+<!-- $Id: template_setup.htm 16144 2009-06-01 09:21:21Z sxc_shop $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+
+<div class="list-div">
+<form name="theForm" action="suppliers_delivery.php" method="post">
+  <table width="100%" cellpadding="3" cellspacing="1">
+  <tr>
+    <th>{$lang.label_number}</th>
+    <th>{$lang.label_verify_delivery_sn}</th>
+    <th>{$lang.label_store_name}</th>
+    <th>{$lang.label_delivery_driver_name}</th>
+    <th>{$lang.label_delivery_driver_phone}</th>
+    <th>{$lang.label_operation}</th>
+  </tr>
+
+  {foreach from=$delivery_list item=delivery name=g}
+  <tr>
+    <td class="first-cell" align="center">{$smarty.foreach.g.iteration}</td>
+    <td align="center">{$delivery.delivery_sn}</td>
+    <td align="center">{$delivery.store_remark}</td>
+    <td align="center">
+    	<input id="driver_name{$smarty.foreach.g.index}" type="text" name="driver_name[{$delivery.delivery_id}]" size="10" onfocus="driver_name_input_event(this, {$smarty.foreach.g.index})"/>
+    </td>
+    <td align="center">
+    	<input id="driver_phone{$smarty.foreach.g.index}" type="text" name="driver_phone[{$delivery.delivery_id}]" size="16" onfocus="driver_phone_input_focus_event(this, {$smarty.foreach.g.index})"/>
+    </td>
+    <td id="result{$smarty.foreach.g.index}" align="center">
+    	<a href="suppliers_delivery.php?act=view&delivery_id={$delivery.delivery_id}&type=ship">{$lang.detail_info}</a>
+    </td>
+  </tr>
+  {foreachelse}
+    <tr><td class="no-records" colspan="6">{$lang.no_records}</td></tr>
+  {/foreach}
+  </table>
+  {if $delivery_count neq 0}
+  <div class="button-div ">
+    <input type="button" value="{$lang.button_submit}" class="button" onclick="submit_form()" />
+    <input type="reset" value="{$lang.button_reset}" class="button" />
+    <input type="hidden" name="act" value="submit_store_ship" />
+  </div>
+  {/if}
+</form>
+</div>
+
+<script language="JavaScript">
+	var driver_name_input = new Array();
+	var driver_phone_input = new Array();
+	var NO_OPERATION = 0;		//未操作
+	var FAILE_OPERATION = 1;	//操作失败
+	var SUCC_OPERATION = 2;		//操作成功
+	var input_index = -1;
+	
+	/**
+	*	初始化输入
+	*/
+	function init_verify(){
+		var count = {$delivery_count};
+		for(var i=0; i<count; i++){
+			driver_name_input.push(NO_OPERATION);
+			driver_phone_input.push(NO_OPERATION);
+		}
+	}
+	init_verify();
+	
+	var eventUtil = new Object();
+	//oTarget:目标 sEventType:事件名称 fnHandler:事件触发的函数名
+	//事件绑定
+	eventUtil.addEventHandler = function(oTarget,sEventType,fnHandler){
+		//IE和FF的兼容性处理 
+		if(oTarget.addEventListener){//如果是FF
+	   		oTarget.addEventListener(sEventType,fnHandler,false);
+		} else if(oTarget.attachEvent){//如果是IE
+   			oTarget.attachEvent('on'+sEventType,fnHandler);
+		} else{
+   			oTarget['on'+sEventType] = fnHandler;
+		}
+	};
+	//事件移除
+	eventUtil.removeEventHandler = function(oTarget,sEventType,fnHandler) {
+		if(oTarget.removeEventListener) {//如果是FF
+   			oTarget.removeEventListener(sEventType,fnHandler,false);
+		} else if (oTarget.detachEvent) {//如果是IE
+   			oTarget.detachEvent('on'+sEventType,fnHandler);
+		} else {
+   			oTarget['on'+sEventType] = null;
+		}
+	};
+	
+	/*
+	*  编辑发货司机姓名事件
+	*/
+	function driver_name_input_event(obj, index){
+		input_index = index;
+		/* 编辑区输入事件处理函数 */
+		eventUtil.addEventHandler(obj, 'keypress', driver_name_input_keypress_event);
+		eventUtil.addEventHandler(obj, 'blur', driver_name_input_check);
+	}
+	/*
+	*	发货司机姓名键盘输入事件
+	*/
+	function driver_name_input_keypress_event(e){
+		var evt = Utils.fixEvent(e);
+		var o = Utils.srcElement(e);
+		if (evt.keyCode == 13){
+			eventUtil.removeEventHandler(o, 'blur', driver_name_input_check);
+			o.blur();
+			driver_name_input_check(e);
+		}
+	}
+	
+	/*
+	*  检查发货司机姓名输入框是否为空
+	*/
+	function driver_name_input_check(e){
+		real_goods_num = Utils.srcElement(e).value;
+		var evt = Utils.fixEvent(e);
+		var obj = Utils.srcElement(e);
+		var validator = new Validator('theForm');
+		validator.required(obj.name, driver_name_not_null);
+		if(validator.passed()){
+			driver_name_input[input_index] = SUCC_OPERATION;
+		}else{
+			driver_name_input[input_index] = FAILE_OPERATION;
+		}
+	}
+	
+	/*
+	*  发货司机电话输入框获取焦点事件
+	*/
+	function driver_phone_input_focus_event(obj, index_id){
+		input_index = index_id;
+		/* 编辑区输入事件处理函数 */
+		eventUtil.addEventHandler(obj, 'keypress', driver_phone_input_keypress_event);
+		eventUtil.addEventHandler(obj, 'blur', driver_phone_input_check);
+	}
+	
+	/**
+	*	发货司机电话输入框键盘事件
+	*/
+	function driver_phone_input_keypress_event(e){
+		var evt = Utils.fixEvent(e);
+		var obj = Utils.srcElement(e);
+		if (evt.keyCode == 13){
+			eventUtil.removeEventHandler(obj, 'blur', driver_phone_input_check);
+			obj.blur();
+			driver_phone_input_check(e);
+		}
+	}
+	
+	/*
+	*  检查输入发货司机电话
+	*/
+	function driver_phone_input_check(e){
+		var evt = Utils.fixEvent(e);
+		var obj = Utils.srcElement(e);
+		var driver_phone = obj.value;
+		var validator = new Validator('theForm');
+		if(!Utils.isTel(driver_phone)){
+			validator.addErrorMsg(driver_phone_error);
+		}
+		if(validator.passed()){
+			driver_phone_input[input_index] = SUCC_OPERATION;
+		}else{
+			driver_phone_input[input_index] = FAILE_OPERATION;
+		}
+	}
+	
+	/*
+	*	检查、提交发货单编辑表单
+	*/
+	function submit_form(){
+		var validator = new Validator('theForm');
+		for(var i=0; i<driver_name_input.length; i++){
+			if(driver_name_input[i]!=SUCC_OPERATION && driver_phone_input[i]!=SUCC_OPERATION){
+				validator.addErrorMsg(fill_ship_form_righ);
+				break;
+			}
+		}
+		if(validator.passed()){
+			document.forms[0].submit();
+		}
+	}
+</script>
+{include file="pagefooter.htm"}

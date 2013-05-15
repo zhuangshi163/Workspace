@@ -67,8 +67,10 @@ $_LANG['sort_order'] = '推荐排序';
 
 $_LANG['goods_name'] = '商品名称';
 $_LANG['goods_sn'] = '货号';
+$_LANG['goods_specification'] = '商品规格';
 $_LANG['shop_price'] = '建议售价';
-$_LANG['sale_price'] = '本店售价';
+$_LANG['sale_price'] = '本店当前售价';
+$_LANG['change_price'] = '修改本店售价';
 $_LANG['is_on_sale'] = '上架';
 $_LANG['goods_number'] = '库存';
 
@@ -106,6 +108,7 @@ $_LANG['tab_groupgoods'] = '配件';
 $_LANG['tab_article'] = '关联文章';
 
 $_LANG['lab_goods_name'] = '商品名称：';
+$_LANG['lab_goods_specification'] = '商品规格：';
 $_LANG['lab_goods_sn'] = '商品货号：';
 $_LANG['lab_goods_cat'] = '商品分类：';
 $_LANG['lab_other_cat'] = '扩展分类：';

@@ -1,0 +1,36 @@
+{include file="pageheader.htm"}
+<!-- start 分箱核对 -->
+<div class="list-div" id="listDiv">
+<table cellpadding="3" cellspacing="1" >
+  <tr>
+    <th>编号</th>
+	<th>商品名称</th>
+    <th>规格</th>
+    <th>应分拣数量</th>
+	<th>实分拣数量</th>
+	<th>箱号</th>
+  </tr>
+  <form method="get" action="suppliers_sort.php">  	
+	  {foreach from=$sortGoods item=s name=sort}
+	  <tr align="center">  	
+	  	<td>{$smarty.foreach.sort.iteration}</td>
+		<td>{$s.goods_name}</td>
+		<td>{$s.goods_specification}</td>
+		<td>{$s.need_goods_num}</td>
+		<td><input type="text" name="sGoods[{$s.rec_id}][real_goods_num]" value="{$s.real_goods_num}"></td>
+		<td><input type="text" name="sGoods[{$s.rec_id}][box_name]" value="{$s.box_name}"></td>
+	  </tr>
+	  {/foreach}
+	  <tr>
+	  	<td colspan="6" align="center">
+	  		<br/>
+			<input type="hidden" name="act" value="check_submit">
+			<input type="hidden" name="suppliers_stock_id" value="{$suppliers_stock_id}">	
+		  	<input class="button" type="submit" value="确认">
+			<input class="button" type="button" value="返回" onclick="javascript:history.go(-1)">
+	  	</td>	  	
+	  </tr>
+  </form>
+</table>
+</div>
+<!-- end 分箱核对 -->

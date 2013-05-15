@@ -56,6 +56,7 @@ $_LANG['not_writable_warning'] = '目录 %s 不可写，您需要把该目录设
 /*------------------------------------------------------ */
 $_LANG['goods_cat'] = '所有分类';
 $_LANG['goods_brand'] = '所有品牌';
+$_LANG['goods_suppliers'] = '所有供货商';
 $_LANG['intro_type'] = '全部';
 $_LANG['keyword'] = '关键字';
 $_LANG['is_best'] = '精品';
@@ -105,6 +106,7 @@ $_LANG['tab_groupgoods'] = '配件';
 $_LANG['tab_article'] = '关联文章';
 
 $_LANG['lab_goods_name'] = '商品名称：';
+$_LANG['lab_goods_specification'] = '商品规格：';
 $_LANG['lab_goods_sn'] = '商品货号：';
 $_LANG['lab_goods_cat'] = '商品分类：';
 $_LANG['lab_other_cat'] = '扩展分类：';
@@ -228,6 +230,7 @@ $_LANG['js_languages']['brand_cat_not_null'] = '品牌名称不能为空';
 $_LANG['js_languages']['goods_cat_not_leaf'] = '您选择的商品分类不是底级分类，请选择底级分类。';
 $_LANG['js_languages']['shop_price_not_null'] = '本店售价不能为空。';
 $_LANG['js_languages']['shop_price_not_number'] = '本店售价不是数值。';
+$_LANG['js_languages']['goods_specification_null'] = '商品规格不能为空。';
 
 $_LANG['js_languages']['select_please'] = '请选择...';
 $_LANG['js_languages']['button_add'] = '添加';

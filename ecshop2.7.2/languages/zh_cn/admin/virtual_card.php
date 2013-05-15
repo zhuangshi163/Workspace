@@ -18,6 +18,7 @@
 /*------------------------------------------------------ */
 $_LANG['virtual_card_list'] = '虚拟商品列表';
 $_LANG['lab_goods_name'] = '商品名称';
+$_LANG['lab_goods_specification'] = '商品规格：';
 $_LANG['replenish'] = '补货';
 $_LANG['lab_card_id'] = '编号';
 $_LANG['lab_card_sn'] = '卡片序号';

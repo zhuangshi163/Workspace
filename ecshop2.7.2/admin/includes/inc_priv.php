@@ -166,4 +166,11 @@ if (!defined('IN_ECS'))
     $purview['u_client_upgrade']     = 'app_manage';
     $purview['uninstall']            = 'app_manage';
     $purview['zinstall']             = 'app_manage';
+    
+//供货商管理
+    $purview['00_stock_record_order']		 = 'stock_order_list';
+	$purview['01_stock_record_list']		 = 'stock_list';
+	$purview['02_sort_record']		 = 'sort_list';
+	$purview['03_delivery_record']	 = 'delivery_list';
+	$purview['04_store_ship']	 = 'store_ship';
 ?>

@@ -1,0 +1,27 @@
+{include file="pageheader.htm"}
+<!-- start 分箱核对 -->
+<div class="list-div" id="listDiv">
+<table cellpadding="3" cellspacing="1" >
+  <tr>
+    <th>编号</th>
+	<th>商品名称</th>
+    <th>规格</th>
+	<th>门店名称</th>
+    <th>应分拣数量</th>
+	<th>实分拣数量</th>
+	<th>箱号</th>
+  </tr>	
+  {foreach from=$sortGoods item=s name=sort}
+  <tr align="center">  	
+  	<td>{$smarty.foreach.sort.iteration}</td>
+	<td>{$s.goods_name}</td>
+	<td>{$s.goods_specification}</td>
+	<td>{$s.store_name}</td>
+	<td>{$s.need_goods_num}</td>
+	<td>{$s.real_goods_num}</td>
+	<td>{$s.box_name}</td>
+  </tr>
+  {/foreach}
+</table>
+</div>
+<!-- end 分箱核对 -->

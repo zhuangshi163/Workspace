@@ -145,6 +145,7 @@ $_LANG['14_sms'] = '短信管理';
 $_LANG['15_rec'] = '推荐管理';
 $_LANG['16_email_manage'] = '邮件群发管理';
 $_LANG['17_recharge_manage'] = '充值管理';
+$_LANG['18_suppliers_manage'] = '供货商管理';
 
 /* 商品管理 */
 $_LANG['01_goods_list'] = '商品列表';
@@ -168,6 +169,7 @@ $_LANG['52_attribute_add'] = '编辑属性';
 $_LANG['53_suppliers_goods'] = '供货商商品管理';
 $_LANG['25_store_change_goods_price'] = '供货商商品管理';
 $_LANG['store_change_price'] = '店家价格修改';
+$_LANG['55_stock_list'] = '配货单列表';
 
 
 $_LANG['14_goods_export'] = '商品批量导出';
@@ -317,6 +319,13 @@ $_LANG['exchange_goods_add'] = '添加新商品';
 /* 店家管理*/
 $_LANG['01_store_recharge'] = '店家充值';
 $_LANG['02_user_recharge'] = '会员充值';
+
+/* 供货商管理*/
+$_LANG['00_stock_record_order'] = '生成备货单';
+$_LANG['01_stock_record_list'] = '备货单列表';
+$_LANG['02_sort_record'] = '门店分拣';
+$_LANG['03_delivery_record'] = '发货记录';
+$_LANG['04_store_ship'] = '门店发货';
 
 /* cls_image类的语言项 */
 $_LANG['directory_readonly'] = '目录 % 不存在或不可写';

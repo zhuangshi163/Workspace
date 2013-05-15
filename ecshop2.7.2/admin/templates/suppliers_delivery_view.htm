@@ -1,0 +1,253 @@
+<!-- $Id: template_setup.htm 16144 2009-06-01 09:21:21Z sxc_shop $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js"}
+
+<div class="form-div">
+	{$lang.label_verify_delivery_sn}{$delivery.delivery_sn}
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	{$lang.label_verify_delivery_store}{$delivery.store_name}
+</div>
+
+<div class="list-div">
+<form name="theForm" action="suppliers_delivery.php" method="post">
+  <table width="100%" cellpadding="3" cellspacing="1">
+  <tr>
+    <th>{$lang.label_goods_name}</th>
+    <th>{$lang.label_goods_specification}</th>
+    <th>{$lang.label_need_goods_number}</th>
+    <th>{$lang.label_real_goods_number}</th>
+    <th>{$lang.label_box_name}</th>
+    <th>{$lang.label_result}</th>
+  </tr>
+
+  {foreach from=$goods_list item=goods name=g}
+  <tr>
+    <td class="first-cell" align="center">{$goods.goods_name}</td>
+    <td align="center">{$goods.goods_specification}</td>
+    <td align="center">{$goods.need_goods_num}</td>
+    <td align="center">
+    	<input id="real_goods_num{$smarty.foreach.g.index}" value="{$goods.real_goods_num}" type="text" name="real_goods_num[{$goods.rec_id}]" size="4" onfocus="real_goods_num_event(this, {$goods.need_goods_num}, {$smarty.foreach.g.index})"/>
+    </td>
+    <td align="center">
+    	<input id="box_name{$smarty.foreach.g.index}" value="{$goods.box_name}" type="text" name="box_name[{$goods.rec_id}]" size="6" onfocus="box_input_focus_event(this, {$smarty.foreach.g.index})"/>
+    </td>
+    <td id="result{$smarty.foreach.g.index}" align="center"></td>
+  </tr>
+  {/foreach}
+  </table>
+	<table width="100%" id="mix-table" align="center">
+		<tr>
+			<td class="label" style="width: 50%;">{$lang.label_driver_name}</td>
+			<td><input type="text" name="driver_name" size="20" value="{$delivery.driver_name}" /></td>
+		</tr>
+		<tr>
+			<td class="label" style="width: 50%;">{$lang.label_driver_phone}</td>
+			<td><input type="text" name="driver_phone" size="20" value="{$delivery.driver_phone}" /></td>
+		</tr>
+	</table>
+  <div class="button-div ">
+    <input type="button" value="{$lang.button_submit}" class="button" onclick="submit_form()" />
+    <input type="reset" value="{$lang.button_reset}" class="button" />
+    <input type="hidden" name="act" value="submit_update" />
+    <input type="hidden" name="delivery_id" value="{$delivery.delivery_id}" />
+  </div>
+</form>
+	<form name="theForm" action="suppliers_delivery.php?act=operate" method="post">
+		<table cellpadding="3" cellspacing="1">
+		  	<tr>
+			    <th colspan="2">{$lang.action_info}</th>
+	  		</tr>
+			<tr>
+    			<td align="right" width="50%">
+      				<strong>{$lang.label_operable_act}</strong>
+      			</td>
+		    	<td align="left" width="50%">
+    				{if $operable_list.confirm}
+			      	<input name="confirm" type="submit" value="{$lang.op_confirm}" class="button" />
+    			    {/if} {if $operable_list.ship}
+		        	<input name="ship" type="submit" value="{$lang.op_ship}" class="button" />
+	    		    {/if}
+	    		    <input type="hidden" name="delivery_id" value="{$delivery.delivery_id}" />
+				</td>
+		    </tr>
+		</table>
+	</form>
+</div>
+
+<script language="JavaScript">
+	var num_input = new Array();
+	var box_input = new Array();
+	var NO_OPERATION = 0;		//未操作
+	var FAILE_OPERATION = 1;	//操作失败
+	var SUCC_OPERATION = 2;		//操作成功
+	var real_goods_num = -1; 
+	var need_goods_num = -1;
+	var input_index = -1;
+	
+	/**
+	*	初始化输入
+	*/
+	function init_verify(){
+		var count = {$goods_list_length};
+		for(var i=0; i<count; i++){
+			num_input.push(NO_OPERATION);
+			box_input.push(NO_OPERATION);
+		}
+	}
+	init_verify();
+	
+	var eventUtil = new Object();
+	//oTarget:目标 sEventType:事件名称 fnHandler:事件触发的函数名
+	//事件绑定
+	eventUtil.addEventHandler = function(oTarget,sEventType,fnHandler){
+		//IE和FF的兼容性处理 
+		if(oTarget.addEventListener){//如果是FF
+	   		oTarget.addEventListener(sEventType,fnHandler,false);
+		} else if(oTarget.attachEvent){//如果是IE
+   			oTarget.attachEvent('on'+sEventType,fnHandler);
+		} else{
+   			oTarget['on'+sEventType] = fnHandler;
+		}
+	};
+	//事件移除
+	eventUtil.removeEventHandler = function(oTarget,sEventType,fnHandler) {
+		if(oTarget.removeEventListener) {//如果是FF
+   			oTarget.removeEventListener(sEventType,fnHandler,false);
+		} else if (oTarget.detachEvent) {//如果是IE
+   			oTarget.detachEvent('on'+sEventType,fnHandler);
+		} else {
+   			oTarget['on'+sEventType] = null;
+		}
+	};
+	
+	/*
+	*  编辑商品数量事件
+	*/
+	function real_goods_num_event(obj, num, index){
+		need_goods_num = num;
+		input_index = index;
+		/* 编辑区输入事件处理函数 */
+		eventUtil.addEventHandler(obj, 'keypress', num_input_keypress_event);
+		eventUtil.addEventHandler(obj, 'blur', check_input_num);
+	}
+	/*
+	*	实际发货商品数量键盘输入事件
+	*/
+	function num_input_keypress_event(e){
+		var evt = Utils.fixEvent(e);
+		var o = Utils.srcElement(e);
+		if (evt.keyCode == 13){
+			eventUtil.removeEventHandler(o, 'blur', check_input_num);
+			o.blur();
+			check_input_num(e);
+		}
+	}
+	
+	/*
+	*  检查输入商品数量
+	*/
+	function check_input_num(e){
+		real_goods_num = Utils.srcElement(e).value;
+		var evt = Utils.fixEvent(e);
+		var obj = Utils.srcElement(e);
+		if(!real_goods_num.match(/^\d+$/)){
+			alert(real_goods_number_not_digie_error);
+			num_input[input_index] = FAILE_OPERATION;
+			obj.value = "";
+			check_operation(input_index);
+			return;
+		}
+		if(real_goods_num > need_goods_num){
+			alert(real_goods_number_gt_need_num);
+			obj.value = "";
+			num_input[input_index] = FAILE_OPERATION;
+		}else{
+			num_input[input_index] = SUCC_OPERATION;
+		}
+		check_operation(input_index);
+	}
+	
+	/*
+	*  编辑箱号事件
+	*/
+	function box_input_focus_event(obj, index_id){
+		input_index = index_id;
+		/* 编辑区输入事件处理函数 */
+		eventUtil.addEventHandler(obj, 'keypress', box_input_keypress_event);
+		eventUtil.addEventHandler(obj, 'blur', check_input_box);
+	}
+	
+	/**
+	*	键盘编辑箱号事件
+	*/
+	function box_input_keypress_event(e){
+		var evt = Utils.fixEvent(e);
+		var obj = Utils.srcElement(e);
+		if (evt.keyCode == 13){
+			eventUtil.removeEventHandler(obj, 'blur', check_input_box);
+			obj.blur();
+			check_input_box(e);
+		}
+	}
+	
+	/*
+	*  检查输入箱号
+	*/
+	function check_input_box(e){
+		var evt = Utils.fixEvent(e);
+		var obj = Utils.srcElement(e);
+		var box_input_value = obj.value;
+		if(box_input_value.length == 0){
+			alert(box_not_empty);
+			box_input[input_index] = FAILE_OPERATION;
+		}else{
+			box_input[input_index] = SUCC_OPERATION;
+		}
+		check_operation(input_index);
+	}
+	
+	/*
+	*  检查记录操作是否完成
+	*/
+	function check_operation(input_index){
+		var num = num_input[input_index];
+		var box = box_input[input_index];
+		var result = document.getElementById("result"+input_index);
+		if(num==NO_OPERATION || box==NO_OPERATION){
+			return;
+		}
+		if(num==FAILE_OPERATION || box==FAILE_OPERATION){
+			result.innerHTML = "<image src='images/no.gif' />";
+			return;
+		}
+		if(num==SUCC_OPERATION || box==SUCC_OPERATION){
+			result.innerHTML = "<image src='images/yes.gif' />";
+			return;
+		}
+	}
+	
+	/*
+	*	检查、提交商品编辑表单
+	*/
+	function submit_form(){
+		var validator = new Validator('theForm');
+		for(var i=0; i<num_input.length; i++){
+			if(num_input[i]==NO_OPERATION && box_input[i]==NO_OPERATION){
+				continue;
+			}
+			if(num_input[i]!=SUCC_OPERATION && box_input[i]!=SUCC_OPERATION){
+				validator.addErrorMsg(fill_form_righ);
+				break;
+			}
+		}
+		validator.required('driver_name', driver_name_not_null);
+		var driver_phone = document.forms["theForm"].elements["driver_phone"].value;
+		if(!Utils.isTel(driver_phone)){
+			validator.addErrorMsg(driver_phone_error);
+		}
+		if(validator.passed()){
+			document.forms[0].submit();
+		} 
+	}
+</script>
+{include file="pagefooter.htm"}

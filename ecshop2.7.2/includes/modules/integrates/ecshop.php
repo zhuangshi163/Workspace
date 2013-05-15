@@ -108,18 +108,18 @@ class ecshop extends integrate
         }
         else
         {
-            $sql = "SELECT user_id, password, salt " .
+            $sql = "SELECT user_id, password,store_id, salt " .
                    " FROM " . $this->table($this->user_table).
                    " WHERE user_name='$post_username'";
             $row = $this->db->getRow($sql);
             if (empty($row)){
-            	$sql = "SELECT u.user_id, u.password, u.salt " .
+            	$sql = "SELECT u.user_id, u.password, u.store_id,u.salt " .
             			" FROM " . $this->table($this->user_table).
             			"AS u,". $this->table($this->card_table)." AS c WHERE c.user_id=u.user_id and c.card_state and c.card_number='$post_username'";
             	$row = $this->db->getRow($sql);
             }
             if (empty($row)){
-            	$sql = "SELECT user_id, password, salt " .
+            	$sql = "SELECT user_id, password,store_id, salt " .
                    " FROM " . $this->table($this->user_table).
                    " WHERE email='$post_username'";
             	$row = $this->db->getRow($sql);
@@ -137,6 +137,7 @@ class ecshop extends integrate
                 }
                 else
                 {
+                	$_SESSION['store_id']=$row['store_id'];
                     return $row['user_id'];
                 }
             }
